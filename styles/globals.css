@@ -1,0 +1,109 @@
+/* styles/globals.css */
+@import "tailwindcss";
+
+/* Custom styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  
+  /* Smooth gradients */
+  .bg-gradient-animate {
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  /* Floating animation */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Pulse animation for blobs */
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  /* Grid background pattern */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgb(0 0 0 / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(0 0 0 / 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* Text gradient */
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Custom animations */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgb(255 255 255 / 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(255 255 255 / 0.2);
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease, 
+              transform 0.3s ease,
+              opacity 0.3s ease;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgb(59 130 246 / 0.3);
+  color: rgb(30 58 138);
+}
