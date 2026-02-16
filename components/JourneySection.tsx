@@ -165,7 +165,9 @@ export default function JourneySection() {
                 <div
                   key={step.id}
                   data-id={step.id}
-                  ref={(el) => (refs.current[index] = el)}
+                  ref={(el) => {
+                    refs.current[index] = el;
+                  }}
                   className={`flex items-center ${
                     isLeft ? "flex-row" : "flex-row-reverse"
                   }`}

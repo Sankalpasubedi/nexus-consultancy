@@ -393,7 +393,7 @@ export default function DestinationDetail() {
         {/* All Sections Content - with proper scroll margin for navbar */}
         <div className="mx-auto py-16 space-y-32 flex flex-col justify-center items-center">
           <div
-            ref={(el) => (sectionRefs.current["universities"] = el)}
+            ref={(el) => {sectionRefs.current["universities"] = el}}
             id="universities"
             className="scroll-mt-40 max-w-7xl px-4 sm:px-6 lg:px-8 "
           >
@@ -401,7 +401,7 @@ export default function DestinationDetail() {
           </div>
 
           <div
-            ref={(el) => (sectionRefs.current["why-study"] = el)}
+            ref={(el) => {sectionRefs.current["why-study"] = el}}
             id="why-study"
             className="scroll-mt-40 max-w-7xl px-4 sm:px-6 lg:px-8 "
           >
@@ -409,7 +409,7 @@ export default function DestinationDetail() {
           </div>
 
           <div
-            ref={(el) => (sectionRefs.current["admission-requirement"] = el)}
+            ref={(el) => {sectionRefs.current["admission-requirement"] = el}}
             id="admission-requirement"
             className="scroll-mt-40"
           >
@@ -417,7 +417,7 @@ export default function DestinationDetail() {
           </div>
 
           <div
-            ref={(el) => (sectionRefs.current["living-cost"] = el)}
+            ref={(el) => {sectionRefs.current["living-cost"] = el}}
             id="living-cost"
             className="scroll-mt-40 w-full px-4 sm:px-6 lg:px-8 "
           >
@@ -425,7 +425,7 @@ export default function DestinationDetail() {
           </div>
 
           <div
-            ref={(el) => (sectionRefs.current["student-visa"] = el)}
+            ref={(el) => {sectionRefs.current["student-visa"] = el}}
             id="student-visa"
             className="scroll-mt-40 px-4 sm:px-6 lg:px-8"
           >
