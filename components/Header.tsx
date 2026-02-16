@@ -7,9 +7,9 @@ export default function Header() {
   const { showSidebar } = useHeader();
   console.log('sidebarstatus',showSidebar);
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 z-[99999] ${
       showSidebar === false
-        ? 'bg-transparent border-b border-transparent'
+        ? 'bg-transparent border-b border-transparent backdrop-blur-sm shadow-sm'
         : 'bg-white border-b border-slate-200' 
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">

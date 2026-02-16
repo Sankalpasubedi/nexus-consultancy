@@ -147,15 +147,56 @@ export default function JourneySection() {
           </p>
         </div>
 
-        {/* Timeline */}
         <div className="relative">
-
-          {/* Gradient Vertical Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] 
-          bg-gradient-to-b from-[#BEDBFF] via-[#E9D4FF] to-[#FCCEE8] 
-          -translate-x-1/2"></div>
-
-
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2">
+            <div
+              className="absolute inset-0 w-0.5"
+              style={{
+                background:
+                  "linear-gradient(to bottom, #BEDBFF, #E9D4FF, #FCCEE8)",
+              }}
+            />
+            <div className="absolute inset-0 w-1 left-[1.1px] -translate-x-1/2 overflow-hidden">
+              <div
+                className="w-full h-[200%] rounded-full overflow-hidden"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, #BEDBFF, #E9D4FF, #FCCEE8)",
+                  WebkitMaskImage: `
+                    repeating-linear-gradient(
+                      to bottom,
+                      black 0px,
+                      black 14px,
+                      transparent 14px,
+                      transparent 28px
+                    )
+                  `,
+                  maskImage: `
+                    repeating-linear-gradient(
+                      to bottom,
+                      black 0px,
+                      black 14px,
+                      transparent 14px,
+                      transparent 28px
+                    )
+                  `,
+                  animation: "moveDown 17s linear infinite",
+                }}
+              />
+            </div>
+            <style>
+              {`
+                @keyframes moveDown {
+                  from {
+                    transform: translateY(-50%);
+                  }
+                  to {
+                    transform: translateY(0%);
+                  }
+                }
+              `}
+            </style>
+          </div>
           <div className="space-y-24">
             {steps.map((step, index) => {
               const isLeft = index % 2 === 0;

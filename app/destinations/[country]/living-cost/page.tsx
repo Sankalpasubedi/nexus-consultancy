@@ -132,12 +132,24 @@ export default function LivingCostDetail() {
   const itemsPerPage = 9;
   const handleCityPrev = () => {
     setCurrentCityIndex((prev) => Math.max(0, prev - itemsPerPage));
+    setTimeout(() => {
+      const detailedCitySection = document.querySelector('.detailed-city-section');
+      if (detailedCitySection) {
+        detailedCitySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
   };
   const handleCityNext = () => {
     setCurrentCityIndex((prev) => {
       const newIndex = prev + itemsPerPage;
       return newIndex < cities.length ? newIndex : prev;
     });
+    setTimeout(() => {
+      const detailedCitySection = document.querySelector('.detailed-city-section');
+      if (detailedCitySection) {
+        detailedCitySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
   };
   const visibleCities = cities.slice(currentCityIndex, currentCityIndex + itemsPerPage);
   const isCityNextDisabled = currentCityIndex + itemsPerPage >= cities.length;
@@ -222,7 +234,7 @@ export default function LivingCostDetail() {
       </section>
 
       {/* City Breakdown Section with Carousel */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="detailed-city-section py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-full mb-4">

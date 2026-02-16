@@ -60,6 +60,10 @@ export default function DestinationDetail() {
   const destination = country ? destinationData[country.toLowerCase()] : null;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     setShowSidebar(false);
     return () => {
       setShowSidebar(true);
@@ -81,10 +85,12 @@ export default function DestinationDetail() {
     const handleFirstScroll = (e: Event) => {
       if (hasTriggered) return;
       if (window.scrollY <= 5) {
-        hasTriggered = true;
         e.preventDefault();
-        document.body.style.overflow = "hidden";
+        // document.body.style.overflow = "hidden";
         setShowSidebar(true); // This now updates the context
+        setTimeout(() => {
+          hasTriggered = true;
+        }, 200);
         setTimeout(() => {
           setSidebarFullyOpen(true);
           document.body.style.overflow = "";
@@ -104,8 +110,11 @@ export default function DestinationDetail() {
 
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId);
+  
     const element = sectionRefs.current[tabId];
     if (element) {
+      setShowSidebar(true);
+      setSidebarFullyOpen(true);
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
@@ -193,8 +202,9 @@ export default function DestinationDetail() {
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4">
                 <button className="bg-white text-black px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-gray-100 transition-all hover:scale-105 shadow-lg flex items-center justify-center gap-2 text-sm md:text-base">
                   Start Your Application
-                  <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.16602 10H15.8327" stroke="#101828" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 4.16699L15.8333 10.0003L10 15.8337" stroke="#101828" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
                 <button className="bg-white/10 backdrop-blur-sm border-2 border-white/50 text-white px-6 md:px-8 py-3 md:py-4 rounded-full hover:bg-white/20 transition-all text-sm md:text-base">
@@ -395,7 +405,7 @@ export default function DestinationDetail() {
           <div
             ref={(el) => {sectionRefs.current["universities"] = el}}
             id="universities"
-            className="scroll-mt-40 max-w-7xl px-4 sm:px-6 lg:px-8 "
+            className="scroll-mt-40 w-full"
           >
             <UniversitiesSection />
           </div>
@@ -403,7 +413,7 @@ export default function DestinationDetail() {
           <div
             ref={(el) => {sectionRefs.current["why-study"] = el}}
             id="why-study"
-            className="scroll-mt-40 max-w-7xl px-4 sm:px-6 lg:px-8 "
+            className="scroll-mt-40 w-full"
           >
             <WhyStudyHereSection />
           </div>
@@ -411,7 +421,7 @@ export default function DestinationDetail() {
           <div
             ref={(el) => {sectionRefs.current["admission-requirement"] = el}}
             id="admission-requirement"
-            className="scroll-mt-40"
+            className="scroll-mt-40 w-full"
           >
             <AdmissionRequirements />
           </div>
@@ -419,7 +429,7 @@ export default function DestinationDetail() {
           <div
             ref={(el) => {sectionRefs.current["living-cost"] = el}}
             id="living-cost"
-            className="scroll-mt-40 w-full px-4 sm:px-6 lg:px-8 "
+            className="scroll-mt-40 w-full "
           >
             <LivingCostSection />
           </div>
@@ -427,7 +437,7 @@ export default function DestinationDetail() {
           <div
             ref={(el) => {sectionRefs.current["student-visa"] = el}}
             id="student-visa"
-            className="scroll-mt-40 px-4 sm:px-6 lg:px-8"
+            className="scroll-mt-40 w-full"
           >
             <StudentVisaSection />
           </div>
@@ -459,7 +469,7 @@ function WhyStudyHereSection() {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative p-8 md:p-12 lg:p-16">
       <div className="absolute w-[372.61px] h-[443.31px] -left-70 -top-10 opacity-30 blur-64 rounded-[3.30382e+07px]">
         <div className="absolute top-8 right-1 w-60 h-60 bg-[#155DFC] blur-3xl rounded-full opacity-30 transform rotate-15"></div>
         <div className="absolute bottom-4 right-2 w-24 h-28 bg-[#155DFC] blur-3xl rounded-full transform -rotate-30"></div>
@@ -611,7 +621,11 @@ function AdmissionRequirements() {
 
 
 function UniversitiesSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const scrollAmount = 400; // Adjust based on card width
 
   const universities = [
     {
@@ -624,156 +638,172 @@ function UniversitiesSection() {
       programs: ["Business", "Engineering", "Medicine"],
     },
     {
-      rank: "#14 Global",
-      name: "University of Melbourne",
-      location: "Melbourne, VIC",
-      scholarships: "30% Scholarship",
-      accreditation: "Accredited by ABC Board",
-      network: "Strong global alumni network",
-      programs: ["Business", "Engineering", "Medicine"],
+      rank: "#19 Global",
+      name: "University of Sydney",
+      location: "Sydney, NSW",
+      scholarships: "25% Scholarship",
+      accreditation: "Accredited by TEQSA",
+      network: "Global research partnerships",
+      programs: ["Law", "Arts", "Science"],
     },
     {
-      rank: "#14 Global",
-      name: "University of Melbourne",
-      location: "Melbourne, VIC",
-      scholarships: "30% Scholarship",
-      accreditation: "Accredited by ABC Board",
-      network: "Strong global alumni network",
-      programs: ["Business", "Engineering", "Medicine"],
+      rank: "#42 Global",
+      name: "University of Queensland",
+      location: "Brisbane, QLD",
+      scholarships: "35% Scholarship",
+      accreditation: "Accredited by AACSB",
+      network: "Industry connections worldwide",
+      programs: ["Engineering", "Medicine", "Business"],
     },
     {
-      rank: "#14 Global",
-      name: "University of Melbourne",
+      rank: "#45 Global",
+      name: "Monash University",
       location: "Melbourne, VIC",
       scholarships: "30% Scholarship",
-      accreditation: "Accredited by ABC Board",
-      network: "Strong global alumni network",
-      programs: ["Business", "Engineering", "Medicine"],
+      accreditation: "Accredited by EQUIS",
+      network: "International campus network",
+      programs: ["Pharmacy", "Engineering", "IT"],
+    },
+    {
+      rank: "#50 Global",
+      name: "UNSW Sydney",
+      location: "Sydney, NSW",
+      scholarships: "20% Scholarship",
+      accreditation: "Accredited by ABET",
+      network: "Strong industry connections",
+      programs: ["Engineering", "Business", "Design"],
+    },
+    {
+      rank: "#90 Global",
+      name: "University of Adelaide",
+      location: "Adelaide, SA",
+      scholarships: "25% Scholarship",
+      accreditation: "Accredited by TEQSA",
+      network: "Research intensive network",
+      programs: ["Mining", "Engineering", "Medicine"],
     },
   ];
 
-  const itemsPerPage = 3;
-  const maxIndex = Math.max(0, universities.length - itemsPerPage);
+  useEffect(() => {
+    const updateMaxScroll = () => {
+      if (containerRef.current && contentRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const contentWidth = contentRef.current.scrollWidth;
+        const max = Math.max(0, contentWidth - containerWidth);
+        setMaxScroll(max);
+      }
+    };
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
-  };
+    updateMaxScroll();
+    window.addEventListener("resize", updateMaxScroll);
+    return () => window.removeEventListener("resize", updateMaxScroll);
+  }, []);
 
   const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+    setScrollPosition((prev) => Math.min(prev + scrollAmount, maxScroll));
+  };
+
+  const handlePrev = () => {
+    setScrollPosition((prev) => Math.max(0, prev - scrollAmount));
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full px-1 mx-auto py-8 md:py-12 lg:py-16">
       {/* Header */}
-      <div className="flex items-start justify-between mb-12">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-8 md:mb-12 gap-4 px-8 md:px-12 lg:px-16">
         <div>
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M35.7006 18.2036C35.999 18.072 36.2522 17.8557 36.4289 17.5816C36.6055 17.3075 36.6979 16.9876 36.6945 16.6615C36.6911 16.3354 36.5922 16.0175 36.4099 15.7471C36.2276 15.4767 35.97 15.2657 35.669 15.1403L21.384 8.6336C20.9497 8.43552 20.478 8.33301 20.0006 8.33301C19.5233 8.33301 19.0516 8.43552 18.6173 8.6336L4.33397 15.1336C4.03725 15.2636 3.78483 15.4772 3.60758 15.7483C3.43033 16.0194 3.33594 16.3363 3.33594 16.6603C3.33594 16.9842 3.43033 17.3011 3.60758 17.5722C3.78483 17.8434 4.03725 18.057 4.33397 18.1869L18.6173 24.7003C19.0516 24.8984 19.5233 25.0009 20.0006 25.0009C20.478 25.0009 20.9497 24.8984 21.384 24.7003L35.7006 18.2036Z" stroke="#003975" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M36.666 16.667V26.667" stroke="#003975" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M10 20V25.8333C10 27.1594 11.0536 28.4312 12.9289 29.3689C14.8043 30.3065 17.3478 30.8333 20 30.8333C22.6522 30.8333 25.1957 30.3065 27.0711 29.3689C28.9464 28.4312 30 27.1594 30 25.8333V20" stroke="#003975" stroke-width="3.33333" stroke-linecap="round" stroke-linejoin="round"/>
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+              <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-10 md:h-10">
+                <path d="M35.7006 18.2036C35.999 18.072 36.2522 17.8557 36.4289 17.5816C36.6055 17.3075 36.6979 16.9876 36.6945 16.6615C36.6911 16.3354 36.5922 16.0175 36.4099 15.7471C36.2276 15.4767 35.97 15.2657 35.669 15.1403L21.384 8.6336C20.9497 8.43552 20.478 8.33301 20.0006 8.33301C19.5233 8.33301 19.0516 8.43552 18.6173 8.6336L4.33397 15.1336C4.03725 15.2636 3.78483 15.4772 3.60758 15.7483C3.43033 16.0194 3.33594 16.3363 3.33594 16.6603C3.33594 16.9842 3.43033 17.3011 3.60758 17.5722C3.78483 17.8434 4.03725 18.057 4.33397 18.1869L18.6173 24.7003C19.0516 24.8984 19.5233 25.0009 20.0006 25.0009C20.478 25.0009 20.9497 24.8984 21.384 24.7003L35.7006 18.2036Z" stroke="#003975" strokeWidth="3.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M36.666 16.667V26.667" stroke="#003975" strokeWidth="3.33333" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M10 20V25.8333C10 27.1594 11.0536 28.4312 12.9289 29.3689C14.8043 30.3065 17.3478 30.8333 20 30.8333C22.6522 30.8333 25.1957 30.3065 27.0711 29.3689C28.9464 28.4312 30 27.1594 30 25.8333V20" stroke="#003975" strokeWidth="3.33333" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <h3 className="text-4xl font-semtbold text-[48px] text-[#0A0A0A]">Top Universities</h3>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#0A0A0A]">Top Universities</h3>
           </div>
-          <p className="text-[#4A5565] text-[20px]">
+          <p className="text-sm md:text-base lg:text-lg text-[#4A5565]">
             World-class institutions to shape your future
           </p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 text-[#0A0A0A] rounded-full border border-gray-200 hover:bg-gray-50 transition-all">
+        <button className="flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 text-sm md:text-base text-[#0A0A0A] rounded-full border border-gray-200 hover:bg-gray-50 transition-all self-start whitespace-nowrap">
           View All Rankings
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.33301 8H12.6663" stroke="#0A0A0A" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M8 3.33301L12.6667 7.99967L8 12.6663" stroke="#0A0A0A" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.33301 8H12.6663" stroke="#0A0A0A" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M8 3.33301L12.6667 7.99967L8 12.6663" stroke="#0A0A0A" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
       </div>
 
       {/* Carousel Container */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden" ref={containerRef}>
         <div
+          ref={contentRef}
           className="flex transition-transform duration-500 ease-out gap-6"
           style={{
-            transform: `translateX(-${currentIndex * (100 / itemsPerPage + 2)}%)`,
+            transform: `translateX(-${scrollPosition}px)`,
           }}
         >
           {universities.map((uni, idx) => (
             <div
               key={idx}
               className="flex-shrink-0 relative overflow-hidden"
-              style={{ width: `calc(${100 / itemsPerPage}% - 16px)` }}
+              style={{ width: '380px' }} // Fixed width for cards
             >
-              <div className="border border-gray-200 rounded-3xl p-6 bg-white transition-all h-full">
-                <div className="absolute w-[172.61px] h-[243.31px] right-1 bottom-1 opacity-10 blur-64 rounded-[3.30382e+07px]">
+              <div className="border border-gray-200 rounded-xl md:rounded-2xl lg:rounded-3xl p-4 md:p-5 lg:p-6 bg-white transition-all h-full hover:shadow-lg">
+                <div className="absolute w-[172.61px] h-[243.31px] right-1 bottom-1 opacity-10 blur-64 rounded-[3.30382e+07px] pointer-events-none">
                   <div className="absolute top-8 right-1 w-20 h-20 bg-[#155DFC] blur-3xl rounded-full opacity-30 transform rotate-15"></div>
                   <div className="absolute bottom-4 right-2 w-24 h-28 bg-[#155DFC] blur-3xl rounded-full transform -rotate-30"></div>
                   <div className="absolute top-16 right-8 w-20 h-16 bg-[#155DFC] blur-2xl rounded-full transform rotate-30 opacity-20"></div>
                 </div>
 
                 {/* Header with Rank and Icon */}
-                <div className="flex items-start justify-between mb-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full border border-blue-200">
-                    <span className="text-sm font-medium text-blue-900">
+                <div className="flex items-start justify-between mb-4 md:mb-6">
+                  <div className="inline-flex items-center gap-2 px-2 md:px-3 py-1 bg-blue-50 rounded-full border border-blue-200">
+                    <span className="text-xs md:text-sm font-medium text-blue-900">
                       {uni.rank}
                     </span>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-[#4A5565]">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.8503 9.10131C17.9995 9.0355 18.1261 8.92737 18.2144 8.79032C18.3028 8.65326 18.3489 8.49331 18.3473 8.33026C18.3456 8.16722 18.2961 8.00825 18.2049 7.87305C18.1138 7.73785 17.985 7.63236 17.8345 7.56965L10.692 4.31631C10.4749 4.21727 10.239 4.16602 10.0003 4.16602C9.76166 4.16602 9.52579 4.21727 9.30865 4.31631L2.16699 7.56631C2.01863 7.63129 1.89242 7.73809 1.80379 7.87366C1.71517 8.00923 1.66797 8.16768 1.66797 8.32965C1.66797 8.49161 1.71517 8.65007 1.80379 8.78563C1.89242 8.9212 2.01863 9.028 2.16699 9.09298L9.30865 12.3496C9.52579 12.4487 9.76166 12.4999 10.0003 12.4999C10.239 12.4999 10.4749 12.4487 10.692 12.3496L17.8503 9.10131Z" stroke="#4A5565" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M18.334 8.33301V13.333" stroke="#4A5565" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M5 10.417V13.3337C5 13.9967 5.52678 14.6326 6.46447 15.1014C7.40215 15.5703 8.67392 15.8337 10 15.8337C11.3261 15.8337 12.5979 15.5703 13.5355 15.1014C14.4732 14.6326 15 13.9967 15 13.3337V10.417" stroke="#4A5565" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-50 flex items-center justify-center text-[#4A5565]">
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-5 md:h-5">
+                      <path d="M17.8503 9.10131C17.9995 9.0355 18.1261 8.92737 18.2144 8.79032C18.3028 8.65326 18.3489 8.49331 18.3473 8.33026C18.3456 8.16722 18.2961 8.00825 18.2049 7.87305C18.1138 7.73785 17.985 7.63236 17.8345 7.56965L10.692 4.31631C10.4749 4.21727 10.239 4.16602 10.0003 4.16602C9.76166 4.16602 9.52579 4.21727 9.30865 4.31631L2.16699 7.56631C2.01863 7.63129 1.89242 7.73809 1.80379 7.87366C1.71517 8.00923 1.66797 8.16768 1.66797 8.32965C1.66797 8.49161 1.71517 8.65007 1.80379 8.78563C1.89242 8.9212 2.01863 9.028 2.16699 9.09298L9.30865 12.3496C9.52579 12.4487 9.76166 12.4999 10.0003 12.4999C10.239 12.4999 10.4749 12.4487 10.692 12.3496L17.8503 9.10131Z" stroke="#4A5565" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M18.334 8.33301V13.333" stroke="#4A5565" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M5 10.417V13.3337C5 13.9967 5.52678 14.6326 6.46447 15.1014C7.40215 15.5703 8.67392 15.8337 10 15.8337C11.3261 15.8337 12.5979 15.5703 13.5355 15.1014C14.4732 14.6326 15 13.9967 15 13.3337V10.417" stroke="#4A5565" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                 </div>
 
                 {/* University Name */}
-                <h4 className="text-[24px] text-[#0A0A0A] mb-4">
+                <h4 className="text-lg md:text-xl lg:text-2xl text-[#0A0A0A] mb-3 md:mb-4 font-semibold">
                   {uni.name}
                 </h4>
 
                 {/* Location */}
-                <div className="flex items-center gap-2 text-[16px] text-[#4A5565] mb-6">
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
+                <div className="flex items-center gap-2 text-xs md:text-sm lg:text-base text-[#4A5565] mb-4 md:mb-6">
+                  <svg className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  {uni.location}
+                  <span className="truncate">{uni.location}</span>
                 </div>
 
                 {/* Info Section */}
-                <div className="text-end text-[11px] text-[#404040] leading-relaxed">
+                <div className="text-right text-[10px] md:text-xs text-[#404040] leading-relaxed space-y-1">
                   <p>{uni.scholarships}</p>
                   <p>{uni.accreditation}</p>
                   <p>{uni.network}</p>
                 </div>
 
                 {/* Popular Courses */}
-                <div className="pt-6">
-                  <p className="text-[14px] text-[#6A7282] mb-3">
+                <div className="pt-4 md:pt-6">
+                  <p className="text-xs md:text-sm text-[#6A7282] mb-2 md:mb-3">
                     Popular Courses:
                   </p>
-                  <div className="flex gap-2 flex-wrap">
+                  <div className="flex gap-1.5 md:gap-2 flex-wrap">
                     {uni.programs.map((prog, pidx) => (
                       <span
                         key={pidx}
-                        className="text-xs text-[#0A0A0A] px-3 py-1.5 rounded-[10px] border border-black/10 font-medium"
+                        className="text-[10px] md:text-xs text-[#0A0A0A] px-2 md:px-3 py-1 md:py-1.5 rounded-lg border border-black/10 font-medium"
                       >
                         {prog}
                       </span>
@@ -787,18 +817,18 @@ function UniversitiesSection() {
       </div>
 
       {/* Navigation Arrows */}
-      <div className="flex justify-end gap-3 mt-8">
+      <div className="flex justify-end gap-3 mt-8 px-4 sm:px-6 lg:px-8">
         <button
           onClick={handlePrev}
-          disabled={currentIndex === 0}
-          className={`w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
-            currentIndex === 0
+          disabled={scrollPosition === 0}
+          className={`w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
+            scrollPosition === 0
               ? "bg-gray-50 text-gray-300 cursor-not-allowed"
               : "bg-white text-gray-700 hover:bg-gray-50"
           }`}
         >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 md:w-5 md:h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -813,15 +843,15 @@ function UniversitiesSection() {
         </button>
         <button
           onClick={handleNext}
-          disabled={currentIndex === maxIndex}
-          className={`w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
-            currentIndex === maxIndex
+          disabled={scrollPosition >= maxScroll}
+          className={`w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
+            scrollPosition >= maxScroll
               ? "bg-gray-50 text-gray-300 cursor-not-allowed"
               : "bg-white text-gray-700 hover:bg-gray-50"
           }`}
         >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 md:w-5 md:h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -841,7 +871,11 @@ function UniversitiesSection() {
 
 
 function StudentVisaSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const scrollAmount = 490; // Adjust based on card width
 
   const requirements = [
     {
@@ -853,115 +887,153 @@ function StudentVisaSection() {
       ],
     },
     {
-      title: "Identity & Travel Documents",
+      title: "Financial Documents",
       items: [
-        "Valid passport (with sufficient validity)",
-        "Passport-size photographs (as per visa specifications)",
-        "National ID (if required)",
+        "Bank statements (last 3-6 months)",
+        "Tuition fee payment proof",
+        "Sponsorship letters (if applicable)",
       ],
     },
     {
-      title: "Identity & Travel Documents",
+      title: "Academic Documents",
       items: [
-        "Valid passport (with sufficient validity)",
-        "Passport-size photographs (as per visa specifications)",
-        "National ID (if required)",
+        "Academic transcripts and certificates",
+        "English proficiency test scores (IELTS/TOEFL)",
+        "Statement of Purpose",
       ],
     },
     {
-      title: "Identity & Travel Documents",
+      title: "Health Insurance",
       items: [
-        "Valid passport (with sufficient validity)",
-        "Passport-size photographs (as per visa specifications)",
-        "National ID (if required)",
+        "Overseas Student Health Cover (OSHC)",
+        "Health examination reports",
+        "Vaccination records",
+      ],
+    },
+    {
+      title: "Additional Documents",
+      items: [
+        "Confirmation of Enrollment (CoE)",
+        "Genuine Temporary Entrant (GTE) statement",
+        "Previous visa histories (if any)",
+      ],
+    },
+    {
+      title: "Additional Documents 1",
+      items: [
+        "Confirmation of Enrollment (CoE)",
+        "Genuine Temporary Entrant (GTE) statement",
+        "Previous visa histories (if any)",
+      ],
+    },
+    {
+      title: "Additional Documents 2",
+      items: [
+        "Confirmation of Enrollment (CoE)",
+        "Genuine Temporary Entrant (GTE) statement",
+        "Previous visa histories (if any)",
       ],
     },
   ];
 
-  const itemsPerPage = 3;
-  const maxIndex = Math.max(0, requirements.length - itemsPerPage);
+  useEffect(() => {
+    const updateMaxScroll = () => {
+      if (containerRef.current && contentRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const contentWidth = contentRef.current.scrollWidth;
+        const max = Math.max(0, contentWidth - containerWidth);
+        setMaxScroll(max);
+      }
+    };
+
+    updateMaxScroll();
+    window.addEventListener("resize", updateMaxScroll);
+    return () => window.removeEventListener("resize", updateMaxScroll);
+  }, []);
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
+    setScrollPosition((prev) => Math.max(0, prev - scrollAmount));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+    setScrollPosition((prev) => Math.min(prev + scrollAmount, maxScroll));
   };
 
   return (
-    <div className="relative">
-      <div className="absolute w-[372.61px] h-[443.31px] left-1 top-1 opacity-10 blur-64 rounded-[3.30382e+07px]">
+    <div className="relative w-full mx-auto px-1 py-8 md:py-12 lg:py-16">
+      <div className="absolute w-[372.61px] h-[443.31px] left-1 top-1 opacity-10 blur-64 rounded-[3.30382e+07px] pointer-events-none">
         <div className="absolute top-8 right-1 w-60 h-60 bg-[#155DFC] blur-3xl rounded-full opacity-80 transform rotate-15"></div>
         <div className="absolute top-10 right-10 w-60 h-60 bg-[#155DFC] blur-3xl rounded-full opacity-80 transform rotate-15"></div>
         <div className="absolute top-15 right-15 w-60 h-60 bg-[#155DFC] blur-3xl rounded-full opacity-80 transform rotate-15"></div>
         <div className="absolute bottom-4 right-2 w-24 h-28 bg-[#155DFC] blur-3xl rounded-full transform -rotate-30"></div>
         <div className="absolute top-16 right-8 w-20 h-16 bg-[#155DFC] blur-2xl rounded-full transform rotate-30 opacity-20"></div>
       </div>
+      
       {/* Header */}
-      <div className="flex items-start justify-between mb-12">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-8 md:mb-12 gap-4 px-8 md:px-12 lg:px-16">
         <div className="flex items-center gap-4">
           <div>
-            <h3 className="text-3xl md:text-4xl text-[#0A0A0A] mb-2 flex items-center">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21.6524 10.3467L19.247 17.5613C19.1161 17.9541 18.8956 18.311 18.6028 18.6038C18.31 18.8965 17.9531 19.1171 17.5604 19.248L10.3457 21.6533L12.751 14.4387C12.8819 14.0459 13.1025 13.689 13.3953 13.3962C13.688 13.1035 14.0449 12.8829 14.4377 12.752L21.6524 10.3467Z" stroke="#003975" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M15.9993 29.3332C23.3631 29.3332 29.3327 23.3636 29.3327 15.9998C29.3327 8.63604 23.3631 2.6665 15.9993 2.6665C8.63555 2.6665 2.66602 8.63604 2.66602 15.9998C2.66602 23.3636 8.63555 29.3332 15.9993 29.3332Z" stroke="#003975" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <h3 className="text-2xl md:text-3xl lg:text-4xl text-[#0A0A0A] mb-2 flex items-center gap-2">
+              <div className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-7 md:h-7 lg:w-8 lg:h-8">
+                  <path d="M21.6524 10.3467L19.247 17.5613C19.1161 17.9541 18.8956 18.311 18.6028 18.6038C18.31 18.8965 17.9531 19.1171 17.5604 19.248L10.3457 21.6533L12.751 14.4387C12.8819 14.0459 13.1025 13.689 13.3953 13.3962C13.688 13.1035 14.0449 12.8829 14.4377 12.752L21.6524 10.3467Z" stroke="#003975" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M15.9993 29.3332C23.3631 29.3332 29.3327 23.3636 29.3327 15.9998C29.3327 8.63604 23.3631 2.6665 15.9993 2.6665C8.63555 2.6665 2.66602 8.63604 2.66602 15.9998C2.66602 23.3636 8.63555 29.3332 15.9993 29.3332Z" stroke="#003975" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               Student Visa
             </h3>
-            <p className="text-[#4A5565] text-base md:text-lg">
+            <p className="text-sm md:text-base lg:text-lg text-[#4A5565]">
               Requirement Checklist for Visa Processing
             </p>
           </div>
         </div>
 
         {/* Processing Badge */}
-        <div className="flex items-center gap-2 px-4 py-2 bg-green-50 rounded-full border border-green-100">
-          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span className="text-sm font-medium text-green-700">
+        <div className="flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-green-50 rounded-full border border-green-100 self-start whitespace-nowrap">
+          <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-500 rounded-full"></div>
+          <span className="text-xs md:text-sm font-medium text-green-700">
             Processing: 4-6 weeks
           </span>
         </div>
       </div>
 
       {/* Carousel Container */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden" ref={containerRef}>
         <div
+          ref={contentRef}
           className="flex transition-transform duration-500 ease-out gap-6"
           style={{
-            transform: `translateX(-${currentIndex * (100 / itemsPerPage + 2)}%)`,
+            transform: `translateX(-${scrollPosition}px)`,
           }}
         >
           {requirements.map((req, idx) => (
             <div
               key={idx}
               className="flex-shrink-0"
-              style={{ width: `calc(${100 / itemsPerPage}% - 55px)` }}
+              style={{ width: '380px' }} // Fixed width for cards
             >
-              <div className="border border-gray-200 rounded-3xl p-8 bg-white transition-all h-full z-50">
+              <div className="border border-gray-200 rounded-xl md:rounded-2xl lg:rounded-3xl p-5 md:p-6 lg:p-8 bg-white transition-all h-full hover:shadow-lg z-50">
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-3xl bg-[#003975] flex items-center justify-center mb-6">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16.2398 7.75977L14.4358 13.1708C14.3376 13.4653 14.1722 13.733 13.9526 13.9526C13.733 14.1722 13.4653 14.3376 13.1708 14.4358L7.75977 16.2398L9.56377 10.8288C9.66195 10.5342 9.82737 10.2665 10.0469 10.0469C10.2665 9.82737 10.5342 9.66195 10.8288 9.56377L16.2398 7.75977Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-xl md:rounded-2xl lg:rounded-3xl bg-[#003975] flex items-center justify-center mb-4 md:mb-5 lg:mb-6">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="md:w-5 md:h-5 lg:w-6 lg:h-6">
+                    <path d="M16.2398 7.75977L14.4358 13.1708C14.3376 13.4653 14.1722 13.733 13.9526 13.9526C13.733 14.1722 13.4653 14.3376 13.1708 14.4358L7.75977 16.2398L9.56377 10.8288C9.66195 10.5342 9.82737 10.2665 10.0469 10.0469C10.2665 9.82737 10.5342 9.66195 10.8288 9.56377L16.2398 7.75977Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
 
                 {/* Title */}
-                <h5 className="text-[#003975] text-lg mb-6">
+                <h5 className="text-base md:text-lg lg:text-xl text-[#003975] font-semibold mb-4 md:mb-5 lg:mb-6">
                   {req.title}
                 </h5>
 
                 {/* List Items */}
-                <ul className="space-y-1">
+                <ul className="space-y-2 md:space-y-2.5">
                   {req.items.map((item, iidx) => (
                     <li
                       key={iidx}
-                      className="flex items-start gap-2 text-[15px] text-[#525252]"
+                      className="flex items-start gap-2 text-xs md:text-sm lg:text-base text-[#525252]"
                     >
-                      <span className="text-[#424242] text-lg leading-none">
+                      <span className="text-[#424242] text-sm md:text-base lg:text-lg leading-none flex-shrink-0">
                         •
                       </span>
                       <span className="leading-relaxed">{item}</span>
@@ -975,18 +1047,18 @@ function StudentVisaSection() {
       </div>
 
       {/* Navigation Arrows */}
-      <div className="flex justify-end gap-3 mt-8">
+      <div className="flex justify-end gap-3 mt-6 md:mt-8 px-4 sm:px-6 lg:px-8">
         <button
           onClick={handlePrev}
-          disabled={currentIndex === 0}
-          className={`w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
-            currentIndex === 0
+          disabled={scrollPosition === 0}
+          className={`w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
+            scrollPosition === 0
               ? "bg-gray-50 text-gray-300 cursor-not-allowed"
               : "bg-white text-gray-700 hover:bg-gray-50"
           }`}
         >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 md:w-5 md:h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -1001,15 +1073,15 @@ function StudentVisaSection() {
         </button>
         <button
           onClick={handleNext}
-          disabled={currentIndex === maxIndex}
-          className={`w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
-            currentIndex === maxIndex
+          disabled={scrollPosition >= maxScroll}
+          className={`w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all ${
+            scrollPosition >= maxScroll
               ? "bg-gray-50 text-gray-300 cursor-not-allowed"
               : "bg-white text-gray-700 hover:bg-gray-50"
           }`}
         >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 md:w-5 md:h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -1039,7 +1111,7 @@ function LivingCostSection() {
   ];
 
   return (
-    <div>
+    <div className="p-8 md:p-12 lg:p-16">
       {/* Header with Currency Dropdown */}
       <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-12 gap-6">
         <div className="flex items-center gap-4">

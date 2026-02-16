@@ -313,6 +313,12 @@ export default function ScholarshipsDetail() {
 
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(0, prev - itemsPerPage));
+    setTimeout(() => {
+      const scholarshipsSection = document.querySelector('.scholarships-section');
+      if (scholarshipsSection) {
+        scholarshipsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
   };
 
   const handleNext = () => {
@@ -320,6 +326,12 @@ export default function ScholarshipsDetail() {
       const newIndex = prev + itemsPerPage;
       return newIndex < scholarships.length ? newIndex : prev;
     });
+    setTimeout(() => {
+      const scholarshipsSection = document.querySelector('.scholarships-section');
+      if (scholarshipsSection) {
+        scholarshipsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 0);
   };
 
   const visibleScholarships = scholarships.slice(
@@ -373,7 +385,7 @@ export default function ScholarshipsDetail() {
       </section>
 
       {/* Scholarships Grid */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="scholarships-section py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {visibleScholarships.map((scholarship) => (

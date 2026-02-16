@@ -475,7 +475,7 @@ export default function UniversitiesDetail() {
       </section>
 
       {/* Featured Universities Section */}
-      <section id="featured-universities" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="featured-universities" className="featured-universities-section py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-5 text-center">
@@ -650,7 +650,15 @@ export default function UniversitiesDetail() {
           {filteredUniversities.length > 0 && (
             <div className="flex items-center justify-end gap-4 mt-8">
               <button 
-                onClick={() => setCurrentPage(prev => Math.max(0, prev - 1))}
+                onClick={() => {
+                  setCurrentPage(prev => Math.max(0, prev - 1))
+                  setTimeout(() => {
+                    const section = document.querySelector('.featured-universities-section');
+                    if (section) {
+                      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 0);
+                }}
                 disabled={currentPage === 0}
                 className={`w-[50px] h-[50px] rounded-full border border-slate-300 transition flex items-center justify-center ${
                   currentPage === 0 
@@ -664,7 +672,15 @@ export default function UniversitiesDetail() {
                 </svg>
               </button>
               <button 
-                onClick={() => setCurrentPage(prev => Math.min(totalPages - 1, prev + 1))}
+                onClick={() => {
+                  setCurrentPage(prev => Math.min(totalPages - 1, prev + 1))
+                  setTimeout(() => {
+                    const section = document.querySelector('.featured-universities-section');
+                    if (section) {
+                      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 0);
+                }}
                 disabled={currentPage === totalPages - 1}
                 className={`w-[50px] h-[50px] rounded-full border border-slate-300 transition flex items-center justify-center ${
                   currentPage === totalPages - 1 
