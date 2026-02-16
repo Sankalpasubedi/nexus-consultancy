@@ -13,12 +13,12 @@ const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
 export function HeaderProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
-  const isDestinationPage = pathname?.startsWith('/destinations/');
-  const [showSidebar, setShowSidebar] = useState(!isDestinationPage);
-
+  const isDestinationDetailPage = pathname ? /^\/destinations\/[^\/]+\/?$/.test(pathname) : false;
+  const [showSidebar, setShowSidebar] = useState(!isDestinationDetailPage);
+  
   useEffect(() => {
-    const isDestPage = pathname?.startsWith('/destinations/');
-    setShowSidebar(!isDestPage);
+    const isDestDetail = pathname ? /^\/destinations\/[^\/]+\/?$/.test(pathname) : false;
+    setShowSidebar(!isDestDetail);
   }, [pathname]);
 
   return (
