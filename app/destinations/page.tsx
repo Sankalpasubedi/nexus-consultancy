@@ -1,521 +1,323 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const destinations = [
   {
     id: 1,
     name: "United States",
-    slug: "australia",
-    description: "Pursue excellence at the world's leading universities",
+    slug: "united-states",
+    description:
+      "The United States remains the world's most popular study destination, home to prestigious Ivy League institutions and leading research universities. With over 4,000 accredited institutions offering diverse programs, students benefit from cutting-edge facilities, renowned faculty, and unparalleled research opportunities.",
+    shortDesc: "Pursue excellence at the world's leading universities",
     image: "/images/australia.jpg",
-    flag: "🇺🇸",
     location: "USA",
+    flag: "🇺🇸",
+    code: "US",
   },
   {
     id: 2,
     name: "Australia",
     slug: "australia",
-    description: "Experience world-class education in the land down under",
+    description:
+      "Australia offers world-class education with a relaxed lifestyle and stunning natural beauty. Home to several of the world's top 100 universities, Australia welcomes international students with open arms, offering post-study work rights and clear pathways to permanent residency.",
+    shortDesc: "Experience world-class education in the land down under",
     image: "/images/australia.jpg",
-    flag: "🇦🇺",
     location: "Australia",
+    flag: "🇦🇺",
+    code: "AU",
   },
   {
     id: 3,
     name: "New Zealand",
-    slug: "australia",
-    description: "Experience innovative education in stunning natural beauty",
+    slug: "new-zealand",
+    description:
+      "New Zealand provides an innovative education system surrounded by breathtaking landscapes. A safe, welcoming environment for global students, New Zealand universities are internationally recognized for research excellence and practical learning approaches.",
+    shortDesc: "Experience innovative education in stunning natural beauty",
     image: "/images/australia.jpg",
-    flag: "🇳🇿",
     location: "New Zealand",
+    flag: "🇳🇿",
+    code: "NZ",
   },
   {
     id: 4,
-    name: "Canada",
-    slug: "australia",
-    description: "Study in a welcoming country with excellent universities",
+    name: "United Kingdom",
+    slug: "united-kingdom",
+    description:
+      "The UK is home to some of the world's oldest and most prestigious universities including Oxford and Cambridge. With centuries of academic tradition combined with cutting-edge modern research, the UK offers an unparalleled educational experience.",
+    shortDesc: "Historic universities with cutting-edge research",
     image: "/images/australia.jpg",
-    flag: "🇨🇦",
-    location: "Canada",
+    location: "United Kingdom",
+    flag: "🇬🇧",
+    code: "GB",
   },
   {
     id: 5,
-    name: "United Kingdom",
-    slug: "australia",
-    description: "Historic universities with cutting-edge research",
+    name: "Canada",
+    slug: "canada",
+    description:
+      "Canada is a multicultural mosaic of opportunity with top-ranked universities and clear pathways to permanent residency. Known for its safe cities, high quality of life, and welcoming attitude toward immigrants, Canada is one of the top choices for international students.",
+    shortDesc: "Study in a welcoming country with excellent universities",
     image: "/images/australia.jpg",
-    flag: "🇬🇧",
-    location: "United Kingdom",
+    location: "Canada",
+    flag: "🇨🇦",
+    code: "CA",
   },
   {
     id: 6,
-    name: "Germany",
-    slug: "australia",
-    description: "World-class engineering and technical education",
+    name: "Japan",
+    slug: "japan",
+    description:
+      "Japan offers a unique blend of ancient tradition and cutting-edge innovation. Immerse yourself in innovation and timeless cultural traditions at world-class institutions, while experiencing one of the world's most fascinating cultures.",
+    shortDesc: "Immerse yourself in innovation and timeless cultural traditions",
     image: "/images/australia.jpg",
-    flag: "🇩🇪",
-    location: "Germany",
+    location: "Japan",
+    flag: "🇯🇵",
+    code: "JP",
   },
   {
     id: 7,
-    name: "Singapore",
-    slug: "australia",
-    description: "Gateway to Asia's best educational opportunities",
+    name: "South Korea",
+    slug: "south-korea",
+    description:
+      "South Korea has rapidly emerged as a dynamic study destination, combining world-class education with technological innovation and vibrant culture. Korean universities are known for their strong industry connections and cutting-edge research facilities.",
+    shortDesc: "Experience the dynamic fusion of technology and Korean culture",
     image: "/images/australia.jpg",
-    flag: "🇸🇬",
-    location: "Singapore",
-  },
-  {
-    id: 8,
-    name: "Switzerland",
-    slug: "australia",
-    description: "Excellence in business and hospitality education",
-    image: "/images/australia.jpg",
-    flag: "🇨🇭",
-    location: "Switzerland",
-  },
-  {
-    id: 9,
-    name: "Netherlands",
-    slug: "australia",
-    description: "Innovative education in a vibrant international community",
-    image: "/images/australia.jpg",
-    flag: "🇳🇱",
-    location: "Netherlands",
+    location: "South Korea",
+    flag: "🇰🇷",
+    code: "KR",
   },
 ];
 
-// Text array that will collapse into blobs
-const headerTexts = [
-  {
-    id: 1,
-    text: "9 Top Study Destinations",
-    type: "badge"
-  },
-  {
-    id: 2,
-    text: "Choose Your Destination",
-    type: "heading"
-  },
-  {
-    id: 3,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-  {
-    id: 4,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-  {
-    id: 5,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-  {
-    id: 6,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-  {
-    id: 7,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-  {
-    id: 8,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-  {
-    id: 9,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-  {
-    id: 10,
-    text: "Explore detailed information about the world's top study destinations, from universities to visa requirements",
-    type: "description"
-  },
-];
+const CARD_WIDTH = 400;
+const CARD_GAP = 16;
+const CARD_STRIDE = CARD_WIDTH + CARD_GAP;
 
 export default function Destinations() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [dragProgress, setDragProgress] = useState(0); // 0 to 1
-  const [isStacked, setIsStacked] = useState(false);
-  const lastScrollRatio = useRef(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollContainerRef.current) return;
-    setIsDragging(true);
-    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
-    setScrollLeft(scrollContainerRef.current.scrollLeft);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (!scrollContainerRef.current) return;
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);
-    setScrollLeft(scrollContainerRef.current.scrollLeft);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !scrollContainerRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
-    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
-    updateDragProgress();
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || !scrollContainerRef.current) return;
-    const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
-    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
-    updateDragProgress();
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  const updateDragProgress = () => {
-    if (!scrollContainerRef.current) return;
-
-    const container = scrollContainerRef.current;
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    const currentScroll = container.scrollLeft;
-
-    const ratio = maxScroll > 0 ? currentScroll / maxScroll : 0;
-
-    lastScrollRatio.current = ratio;
-
-    const progress = Math.min(ratio * 2, 1);
-    setDragProgress(progress);
-  };
-
-
-  const handleScroll = () => {
-    updateDragProgress();
-  };
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener('scroll', handleScroll);
-      return () => container.removeEventListener('scroll', handleScroll);
-    }
+  const onScroll = useCallback(() => {
+    const c = scrollRef.current;
+    if (!c) return;
+    // With scroll-snap-align: center + equal padding on both sides,
+    // scrollLeft=0 means card[0] is centered, scrollLeft=CARD_STRIDE means card[1] is centered, etc.
+    const raw = c.scrollLeft / CARD_STRIDE;
+    setScrollProgress(raw);
+    setActiveIndex(Math.round(raw));
   }, []);
-  
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const maxScroll = container.scrollWidth - container.clientWidth;
-
-    container.scrollLeft = maxScroll * lastScrollRatio.current;
-  }, [isStacked]);
 
   useEffect(() => {
-    if (dragProgress > 0.05 && !isStacked) {
-      setIsStacked(true);
-    }
+    const c = scrollRef.current;
+    if (!c) return;
+    c.addEventListener("scroll", onScroll, { passive: true });
+    return () => c.removeEventListener("scroll", onScroll);
+  }, [onScroll]);
 
-    if (dragProgress <= 0.01 && isStacked) {
-      setIsStacked(false);
-    }
-  }, [dragProgress, isStacked]);
-
-  // Calculate individual text collapse progress
-  const getTextProgress = (index: number) => {
-    const maxIndex = headerTexts.length - 3;
-    const scrollIndex = dragProgress * maxIndex;
-    const baseIndex = Math.floor(scrollIndex);
-    const localProgress = scrollIndex - baseIndex;
-
-    if (index < baseIndex) return 1;
-    if (index === baseIndex) return localProgress;
-    if (index === baseIndex + 1) return 0;
-    if (index === baseIndex + 2) return 0;
-    if (index === baseIndex + 3 && localProgress > 0.5) {
-      return 0;
-    }
-    return index > baseIndex + 2 ? 0 : 1;
+  const snapTo = (index: number) => {
+    scrollRef.current?.scrollTo({ left: index * CARD_STRIDE, behavior: "smooth" });
   };
 
-  // Render text content based on type
-  const renderTextContent = (item: typeof headerTexts[0], progress: number, index: number, isFirstVisible: boolean, isSecondVisible: boolean, isThirdVisible: boolean) => {
-    if (item.type === "badge") {
-      return (
-        <div
-          className="transition-all duration-700 ease-in-out"
-          style={{
-            opacity: 1 - progress,
-            transform: `scale(${1 - progress * 0.2})`,
-          }}
-        >
-          <div className="px-4 py-2 bg-white rounded-full shadow-md border border-gray-200 w-fit flex justify-center items-center gap-3 transition-all duration-700 ease-in-out">
-            <span className="w-2 h-2 bg-[#00C950] rounded-full"></span>
-            <p
-              className="text-gray-600 transition-all duration-700 ease-in-out"
-              style={{
-                fontSize: isFirstVisible ? "14px" : "16px",
-              }}
-            >
-              {item.text}
-            </p>
-          </div>
-        </div>
-      );
-    }
+  // Mouse drag
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const didDrag = useRef(false);
 
-    if (item.type === "heading") {
-      const parts = item.text.split("Destination");
-      return (
-        <div
-          className="transition-all duration-700 ease-in-out overflow-hidden"
-          style={{
-            maxHeight: progress > 0.5 ? "0px" : "200px",
-            opacity: 1 - progress,
-            transform: `translateY(${progress * -20}px)`,
-          }}
-        >
-          <h1
-            className="font-semibold text-gray-900 mb-4 transition-all duration-700 ease-in-out"
-            style={{
-              fontSize: isFirstVisible ? "24px" : "56px",
-            }}
-          >
-            {parts[0]}
-            <span className="bg-gradient-to-r from-green-500 via-blue-500 to-blue-600 bg-clip-text text-transparent">
-              Destination
-            </span>
-            {parts[1]}
-          </h1>
-        </div>
-      );
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    didDrag.current = false;
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current?.scrollLeft ?? 0;
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = "grabbing";
+      // Disable snap so dragging feels fluid
+      scrollRef.current.style.scrollSnapType = "none";
     }
-
-    // Description type - third visible description goes next to carousel
-    if (isThirdVisible) {
-      return null; // We'll render this separately in the flex container
+  };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !scrollRef.current) return;
+    const dx = e.clientX - dragStartX.current;
+    if (Math.abs(dx) > 4) didDrag.current = true;
+    scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+  };
+  const onMouseUp = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    if (scrollRef.current) {
+      scrollRef.current.style.cursor = "grab";
+      // Re-enable snap then snap to nearest
+      scrollRef.current.style.scrollSnapType = "x mandatory";
     }
-
-    return (
-      <div
-        className="transition-all duration-700 ease-in-out overflow-hidden"
-        style={{
-          maxHeight: progress > 0.5 ? "0px" : "100px",
-          opacity: 1 - progress,
-          transform: `translateY(${progress * -10}px)`,
-        }}
-      >
-        <p
-          className="text-gray-600 mt-4 transition-all duration-700"
-          style={{
-            fontSize: isFirstVisible ? "16px" : "18px",
-          }}
-        >
-          {item.text}
-        </p>
-      </div>
-    );
+    const idx = Math.round((scrollRef.current?.scrollLeft ?? 0) / CARD_STRIDE);
+    snapTo(Math.max(0, Math.min(idx, destinations.length - 1)));
   };
 
-  // Get current visible indices
-  const maxIndex = headerTexts.length - 3;
-  const scrollIndex = dragProgress * maxIndex;
-  const baseIndex = Math.floor(scrollIndex);
-  const thirdVisibleIndex = baseIndex + 2;
-  const thirdVisibleItem = headerTexts[thirdVisibleIndex];
+  const dest = destinations[activeIndex] ?? destinations[0];
 
   return (
     <div className="w-full min-h-screen bg-gray-50">
       <main className="pt-24">
-        {/* Main Content Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 overflow-hidden">
-          <div className="max-w-7xl mx-auto">
-          {/* Background glow elements */}
-          <div className="absolute w-[372.61px] h-[443.31px] left-[90px] top-[38px] opacity-30 blur-64 rounded-[3.30382e+07px]">
-            <div className="absolute top-8 right-6 w-100 h-100 bg-[#155DFC] blur-3xl rounded-full opacity-30 transform rotate-15"></div>
-            <div className="absolute bottom-4 right-2 w-24 h-28 bg-[#155DFC] blur-3xl rounded-full transform -rotate-30"></div>
-            <div className="absolute top-16 right-8 w-20 h-16 bg-[#155DFC] blur-2xl rounded-full transform rotate-30 opacity-20"></div>
+        <section className="pb-16">
+
+          {/* Header */}
+          <div className="px-6 md:px-12 mb-8">
+            <p className="text-xl font-semibold tracking-widest text-gray-400 uppercase mb-3">
+              Destinations
+            </p>
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-3 leading-tight">
+              Choose Your{" "}
+              <span className="bg-gradient-to-r from-green-500 via-blue-500 to-blue-600 bg-clip-text text-transparent">
+                Destination
+              </span>
+            </h1>
+            <p className="text-gray-500 md:text-base max-w-5xl">
+              Explore detailed information about the world's top study destinations, from universities to visa requirements
+            </p>
           </div>
-            {/* Header - Transforms to blobs */}
-            <div className="relative min-h-[200px]">
-              {/* Blob Container - Fixed position for all blobs */}
-              <div className="absolute top-0 left-0 flex gap-3 items-start">
-                {headerTexts.map((item, index) => {
-                  const progress = getTextProgress(index);
-                  const isCollapsed = progress > 0.5;
-                  
-                  return (
-                    <div
-                      key={`blob-${item.id}`}
-                      className="transition-all duration-500 ease-out"
-                      style={{
-                        opacity: progress,
-                        transform: `scale(${0.5 + progress * 0.5})`,
-                        pointerEvents: !isCollapsed ? 'none' : 'auto',
-                      }}
-                    >
-                      <div className="px-4 py-2 bg-white rounded-full shadow-md border border-gray-200 whitespace-nowrap">
-                        <p className="text-xs font-medium text-gray-700"></p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
 
-              {/* Original Text Content (first two items) */}
-              <div className="space-y-6">
-                {headerTexts.map((item, index) => {
-                  const progress = getTextProgress(index);
-                  const isVisible =
-                    index === baseIndex ||
-                    index === baseIndex + 1 ||
-                    index === baseIndex + 2;
-
-                  const isFirstVisible = index === baseIndex;
-                  const isSecondVisible = index === baseIndex + 1;
-                  const isThirdVisible = index === baseIndex + 2;
-
-                  if (!isVisible || isThirdVisible) return null; // Skip third item here
-
-                  return (
-                    <div key={item.id} className="relative">
-                      {renderTextContent(item, progress, index, isFirstVisible, isSecondVisible, isThirdVisible)}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Third Text + Carousel Row */}
+          <div
+            ref={scrollRef}
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseUp}
+            className="overflow-x-auto select-none"
+            style={{
+              scrollbarWidth: "none",
+              scrollSnapType: "x mandatory",
+              WebkitOverflowScrolling: "touch",
+              cursor: "grab",
+              paddingLeft: `calc((100vw - ${CARD_WIDTH}px) / 2)`,
+              paddingRight: `calc((100vw - ${CARD_WIDTH}px) / 2)`,
+            } as React.CSSProperties}
+          >
             <div
-              className="flex items-start transition-all duration-700"
-              style={{
-                flexDirection: isStacked ? 'column' : 'row',
-                gap: dragProgress > 0 ? '1.25rem' : '5.75rem', // gap-5 (1.25rem) when scrolling, gap-23 when not
-              }}>
-              {/* Third visible text */}
-              {thirdVisibleItem && (
-                <div
-                  className="transition-all duration-700 ease-in-out" 
-                  style={{
-                    width: isStacked
-                      ? '100%'
-                      : `${365 - dragProgress * 200}px`,
-                    flexShrink: 0,
-                    opacity: 1 - getTextProgress(thirdVisibleIndex),
-                  }}
-                >
-                  <p
-                    className="text-gray-600 leading-relaxed transition-all duration-700"
+              className="flex"
+              style={{ gap: CARD_GAP, width: "max-content", padding: "4px 0 16px" }}
+            >
+              {destinations.map((d, i) => {
+                const dist = Math.abs(scrollProgress - i);
+                const isFocused = dist < 0.5;
+                const opacity = isFocused ? 1 : Math.max(0.4, 1 - dist * 0.6);
+                const scale = isFocused ? 1 : Math.max(0.9, 1 - dist * 0.05);
+                const blur = isFocused ? 0 : Math.min(3, dist * 1.5);
+
+                return (
+                  <div
+                    key={d.id}
+                    onClick={() => { if (!didDrag.current) snapTo(i); }}
                     style={{
-                      fontSize: `${16 - dragProgress * 9}px`,
+                      flexShrink: 0,
+                      width: CARD_WIDTH,
+                      height: CARD_WIDTH,
+                      scrollSnapAlign: "center",
+                      opacity,
+                      transform: `scale(${scale})`,
+                      filter: `blur(${blur}px) brightness(${isFocused ? 1 : 0.8})`,
+                      transition: "opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease",
+                      cursor: isFocused ? "grab" : "pointer",
                     }}
                   >
-                    {thirdVisibleItem.text}
-                  </p>
-                </div>
-              )}
-
-              {/* Draggable Carousel */}
-              <div
-                ref={scrollContainerRef}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
-                className={`overflow-x-auto pb-6 scrollbar-hide transition-all duration-700 ${
-                  isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'
-                }`}
-                style={{
-                  scrollbarWidth: 'none',
-                  msOverflowStyle: 'none',
-                  flex: 1,
-                }}
-              >
-                <div className="flex gap-6 w-max">
-                  {destinations.map((dest, index) => (
                     <div
-                      key={dest.id}
-                      className="flex-shrink-0 group"
+                      className="relative overflow-hidden h-full"
                       style={{
-                        width: '320px',
+                        borderRadius: 18,
                       }}
                     >
-                      <div className="relative h-80 rounded-3xl overflow-hidden shadow-lg transition-all duration-300 transform">
-                        {/* Background Image */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600">
-                          {/* Replace with actual image */}
-                          <img 
-                            src={dest.image} 
-                            alt={dest.name}
-                            className="w-full h-full object-cover"
-                          />
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-700">
+                        <img src={d.image} alt={d.name} draggable={false} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="relative h-full flex flex-col justify-end p-5 text-white">
+                        <div className="flex items-center gap-1 mb-1 opacity-80">
+                          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className="font-medium tracking-wide">{d.location}</span>
                         </div>
-
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-
-                        {/* Content */}
-                        <div className="relative h-full flex flex-col justify-end p-6 text-white pointer-events-none">
-                          {/* Bottom Content */}
-                          <div>
-                          {/* Location Badge */}
-                            <div className="flex items-center gap-2 text-sm">
-                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                              </svg>
-                              <span className="font-medium">{dest.location}</span>
-                            </div>
-
-                            <h3 className="text-3xl font-bold mb-2">{dest.name}</h3>
-                            <p className="text-sm text-white/90 mb-4 line-clamp-2">
-                              {dest.description}
-                            </p>
-                            <Link
-                              href={`/destinations/${dest.slug}`}
-                              className="flex items-center gap-2 text-sm font-semibold pointer-events-auto group-hover:gap-3 transition-all"
-                            >
-                              Explore
-                              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                              </svg>
-                            </Link>
-                          </div>
-                        </div>
+                        <h3 className="text-5xl font-bold mb-1 leading-tight">{d.name}</h3>
+                        <p className="text-white/75 mb-3 line-clamp-2 leading-relaxed">{d.shortDesc}</p>
+                        <Link
+                          href={`/destinations/${d.slug}`}
+                          className="inline-flex items-center gap-1.5 text-xl font-semibold text-white"
+                          style={{ pointerEvents: isFocused ? "auto" : "none" }}
+                        >
+                          Explore
+                          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
+
+          {/* Country detail */}
+          <div className="px-6 md:px-12 mt-8">
+            <div className="flex items-center gap-3 mb-2">
+              <h2 className="text-5xl font-bold text-gray-900">{dest.name}</h2>
+              <span className="text-xl font-semibold text-gray-400 tracking-widest uppercase bg-gray-100 px-2 py-1 rounded-full">
+                {dest.code}
+              </span>
+            </div>
+            <p className="text-gray-500 text-2xl leading-relaxed mb-4">{dest.description}</p>
+            <Link
+              href={`/destinations/${dest.slug}`}
+              className="inline-flex items-center gap-2 text-xl font-semibold text-blue-600 hover:gap-3 transition-all"
+            >
+              Explore {dest.name}
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+
+          {/* Flag strip */}
+          <div className="px-6 md:px-12 mt-8 flex flex-col items-center">
+            <div className="flex items-center gap-4 flex-wrap justify-center">
+              {destinations.map((d, i) => {
+                const isActive = i === activeIndex;
+                return (
+                  <button
+                  key={d.id}
+                  onClick={() => snapTo(i)}
+                  className="flex flex-col items-center gap-1 transition-all duration-200"
+                    style={{ opacity: isActive ? 1 : 0.4 }}
+                    >
+                    <span
+                      className="text-2xl block"
+                      style={{ transform: isActive ? "scale(1.15)" : "scale(1)", transition: "transform 0.2s" }}
+                      >
+                      {d.flag}
+                    </span>
+                    <span
+                      className="text-xs font-semibold tracking-widest"
+                      style={{ color: isActive ? "#1d4ed8" : "#9ca3af", transition: "color 0.2s" }}
+                      >
+                      {d.code}
+                    </span>
+                    {isActive && <div className="w-4 h-0.5 rounded-full bg-blue-600" />}
+                  </button>
+                );
+              })}
+              <span className="ml-auto text-xs text-gray-400 font-medium">
+                {String(activeIndex + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
         </section>
       </main>
+
       <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
+        *::-webkit-scrollbar { display: none; }
       `}</style>
     </div>
   );

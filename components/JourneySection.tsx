@@ -88,7 +88,7 @@ export default function JourneySection() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.4 }
     );
 
     refs.current.forEach((el) => el && observer.observe(el));
@@ -216,16 +216,18 @@ export default function JourneySection() {
                   {/* Card */}
                   <div className="w-1/2 px-8">
                     <div
-                      className={`relative bg-white rounded-3xl p-8 
-                      shadow-sm transition-all duration-700 overflow-hidden
-                      ${
-                        visibleSteps.includes(step.id)
-                          ? "opacity-100 translate-x-0"
+                      className="relative bg-white rounded-3xl p-8 shadow-sm overflow-hidden"
+                      style={{
+                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        opacity: visibleSteps.includes(step.id) ? 1 : 0,
+                        transform: visibleSteps.includes(step.id)
+                          ? 'translateX(0)'
                           : isLeft
-                          ? "opacity-0 -translate-x-16"
-                          : "opacity-0 translate-x-16"
-                      }`}
-                    >
+                            ? 'translateX(-50px)'
+                            : 'translateX(50px)'
+                      }}
+                      >
+
                       {/* Left Border Line */}
                       <div className={`absolute left-[-1px] top-0 bottom-0 w-[4px] ${style.border} z-50`}></div>
                       {/* Brush Splash Glow - Multiple overlapping ellipses for organic shape */}
