@@ -58,8 +58,8 @@ const destinations = [
 export default function DestinationsSection() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
-  const containerRef = useRef(null);
-  const contentRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const scrollAmount = 350;
 
   useEffect(() => {
