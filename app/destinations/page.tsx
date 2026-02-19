@@ -1,324 +1,284 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import Link from "next/link";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { motion, useMotionValue, AnimatePresence } from "framer-motion";
+import { Globe, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { destinations } from "@/data";
+import { FlagIcon } from "@/lib/icons";
+import { FadeUp, TextReveal } from "@/lib/animations";
 
-const destinations = [
-  {
-    id: 1,
-    name: "United States",
-    slug: "united-states",
-    description:
-      "The United States remains the world's most popular study destination, home to prestigious Ivy League institutions and leading research universities. With over 4,000 accredited institutions offering diverse programs, students benefit from cutting-edge facilities, renowned faculty, and unparalleled research opportunities.",
-    shortDesc: "Pursue excellence at the world's leading universities",
-    image: "/images/australia.jpg",
-    location: "USA",
-    flag: "🇺🇸",
-    code: "US",
-  },
-  {
-    id: 2,
-    name: "Australia",
-    slug: "australia",
-    description:
-      "Australia offers world-class education with a relaxed lifestyle and stunning natural beauty. Home to several of the world's top 100 universities, Australia welcomes international students with open arms, offering post-study work rights and clear pathways to permanent residency.",
-    shortDesc: "Experience world-class education in the land down under",
-    image: "/images/australia.jpg",
-    location: "Australia",
-    flag: "🇦🇺",
-    code: "AU",
-  },
-  {
-    id: 3,
-    name: "New Zealand",
-    slug: "new-zealand",
-    description:
-      "New Zealand provides an innovative education system surrounded by breathtaking landscapes. A safe, welcoming environment for global students, New Zealand universities are internationally recognized for research excellence and practical learning approaches.",
-    shortDesc: "Experience innovative education in stunning natural beauty",
-    image: "/images/australia.jpg",
-    location: "New Zealand",
-    flag: "🇳🇿",
-    code: "NZ",
-  },
-  {
-    id: 4,
-    name: "United Kingdom",
-    slug: "united-kingdom",
-    description:
-      "The UK is home to some of the world's oldest and most prestigious universities including Oxford and Cambridge. With centuries of academic tradition combined with cutting-edge modern research, the UK offers an unparalleled educational experience.",
-    shortDesc: "Historic universities with cutting-edge research",
-    image: "/images/australia.jpg",
-    location: "United Kingdom",
-    flag: "🇬🇧",
-    code: "GB",
-  },
-  {
-    id: 5,
-    name: "Canada",
-    slug: "canada",
-    description:
-      "Canada is a multicultural mosaic of opportunity with top-ranked universities and clear pathways to permanent residency. Known for its safe cities, high quality of life, and welcoming attitude toward immigrants, Canada is one of the top choices for international students.",
-    shortDesc: "Study in a welcoming country with excellent universities",
-    image: "/images/australia.jpg",
-    location: "Canada",
-    flag: "🇨🇦",
-    code: "CA",
-  },
-  {
-    id: 6,
-    name: "Japan",
-    slug: "japan",
-    description:
-      "Japan offers a unique blend of ancient tradition and cutting-edge innovation. Immerse yourself in innovation and timeless cultural traditions at world-class institutions, while experiencing one of the world's most fascinating cultures.",
-    shortDesc: "Immerse yourself in innovation and timeless cultural traditions",
-    image: "/images/australia.jpg",
-    location: "Japan",
-    flag: "🇯🇵",
-    code: "JP",
-  },
-  {
-    id: 7,
-    name: "South Korea",
-    slug: "south-korea",
-    description:
-      "South Korea has rapidly emerged as a dynamic study destination, combining world-class education with technological innovation and vibrant culture. Korean universities are known for their strong industry connections and cutting-edge research facilities.",
-    shortDesc: "Experience the dynamic fusion of technology and Korean culture",
-    image: "/images/australia.jpg",
-    location: "South Korea",
-    flag: "🇰🇷",
-    code: "KR",
-  },
-];
-
-const CARD_WIDTH = 400;
-const CARD_GAP = 16;
-const CARD_STRIDE = CARD_WIDTH + CARD_GAP;
+const IMAGE_WIDTH = 420;
+const IMAGE_HEIGHT = 440;
+const GAP = 28;
+const ITEM_WIDTH = IMAGE_WIDTH + GAP;
+const DRAG_THRESHOLD = 5;
 
 export default function Destinations() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const x = useMotionValue(0);
 
-  const onScroll = useCallback(() => {
-    const c = scrollRef.current;
-    if (!c) return;
-    // With scroll-snap-align: center + equal padding on both sides,
-    // scrollLeft=0 means card[0] is centered, scrollLeft=CARD_STRIDE means card[1] is centered, etc.
-    const raw = c.scrollLeft / CARD_STRIDE;
-    setScrollProgress(raw);
-    setActiveIndex(Math.round(raw));
-  }, []);
+  // Drag tracking refs
+  const isDragging = useRef(false);
+  const hasDragged = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartVal = useRef(0);
 
   useEffect(() => {
-    const c = scrollRef.current;
-    if (!c) return;
-    c.addEventListener("scroll", onScroll, { passive: true });
-    return () => c.removeEventListener("scroll", onScroll);
-  }, [onScroll]);
+    const update = () => {
+      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
-  const snapTo = (index: number) => {
-    scrollRef.current?.scrollTo({ left: index * CARD_STRIDE, behavior: "smooth" });
-  };
+  const centerOffset = containerWidth / 2 - IMAGE_WIDTH / 2;
 
-  // Mouse drag
-  const isDragging = useRef(false);
-  const dragStartX = useRef(0);
-  const dragScrollLeft = useRef(0);
-  const didDrag = useRef(false);
+  useEffect(() => {
+    const unsub = x.on("change", (latest) => {
+      const idx = Math.round((-latest + centerOffset) / ITEM_WIDTH);
+      setActiveIndex(Math.max(0, Math.min(destinations.length - 1, idx)));
+    });
+    return () => unsub();
+  }, [x, centerOffset]);
 
-  const onMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true;
-    didDrag.current = false;
-    dragStartX.current = e.clientX;
-    dragScrollLeft.current = scrollRef.current?.scrollLeft ?? 0;
-    if (scrollRef.current) {
-      scrollRef.current.style.cursor = "grabbing";
-      // Disable snap so dragging feels fluid
-      scrollRef.current.style.scrollSnapType = "none";
-    }
-  };
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current || !scrollRef.current) return;
-    const dx = e.clientX - dragStartX.current;
-    if (Math.abs(dx) > 4) didDrag.current = true;
-    scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
-  };
-  const onMouseUp = () => {
+  const goTo = useCallback(
+    (index: number) => {
+      const target = -index * ITEM_WIDTH + centerOffset;
+      const startX = x.get();
+      const diff = target - startX;
+      let start: number | null = null;
+      const duration = 500;
+      const step = (ts: number) => {
+        if (!start) start = ts;
+        const elapsed = ts - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        x.set(startX + diff * eased);
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    },
+    [x, centerOffset]
+  );
+
+  useEffect(() => {
+    if (containerWidth > 0) goTo(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [containerWidth]);
+
+  // --- Mouse drag handlers ---
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      isDragging.current = true;
+      hasDragged.current = false;
+      dragStartX.current = e.clientX;
+      dragStartVal.current = x.get();
+    },
+    [x]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging.current) return;
+      const delta = e.clientX - dragStartX.current;
+      if (Math.abs(delta) > DRAG_THRESHOLD) {
+        hasDragged.current = true;
+      }
+
+      const minX =
+        -(ITEM_WIDTH * (destinations.length - 1)) - centerOffset + containerWidth - IMAGE_WIDTH;
+      const maxX = centerOffset;
+      const raw = dragStartVal.current + delta;
+      const clamped = Math.max(minX, Math.min(maxX, raw));
+      x.set(clamped);
+    },
+    [x, centerOffset, containerWidth]
+  );
+
+  const handleMouseUp = useCallback(() => {
     if (!isDragging.current) return;
     isDragging.current = false;
-    if (scrollRef.current) {
-      scrollRef.current.style.cursor = "grab";
-      // Re-enable snap then snap to nearest
-      scrollRef.current.style.scrollSnapType = "x mandatory";
-    }
-    const idx = Math.round((scrollRef.current?.scrollLeft ?? 0) / CARD_STRIDE);
-    snapTo(Math.max(0, Math.min(idx, destinations.length - 1)));
-  };
+    // Snap to nearest card
+    const current = x.get();
+    const idx = Math.round((-current + centerOffset) / ITEM_WIDTH);
+    const snapped = Math.max(0, Math.min(destinations.length - 1, idx));
+    goTo(snapped);
+  }, [x, centerOffset, goTo]);
 
-  const dest = destinations[activeIndex] ?? destinations[0];
+  const handleMouseLeave = useCallback(() => {
+    if (isDragging.current) {
+      isDragging.current = false;
+      const current = x.get();
+      const idx = Math.round((-current + centerOffset) / ITEM_WIDTH);
+      const snapped = Math.max(0, Math.min(destinations.length - 1, idx));
+      goTo(snapped);
+    }
+  }, [x, centerOffset, goTo]);
+
+  // Card click handler - prevent navigation when dragged
+  const handleCardClick = useCallback(
+    (e: React.MouseEvent, slug: string) => {
+      if (hasDragged.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      router.push(`/destinations/${slug}`);
+    },
+    [router]
+  );
+
+  const dest = destinations[activeIndex];
 
   return (
-    <div className="w-full min-h-screen bg-gray-50">
-      <main className="pt-24">
-        <section className="pb-16">
-
-          {/* Header */}
-          <div className="px-6 md:px-12 mb-8">
-            <p className="text-xl font-semibold tracking-widest text-gray-400 uppercase mb-3">
-              Destinations
-            </p>
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-3 leading-tight">
-              Choose Your{" "}
-              <span className="bg-gradient-to-r from-green-500 via-blue-500 to-blue-600 bg-clip-text text-transparent">
-                Destination
-              </span>
-            </h1>
-            <p className="text-gray-500 md:text-base max-w-5xl">
-              Explore detailed information about the world's top study destinations, from universities to visa requirements
-            </p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-24 pb-16 overflow-hidden">
+      {/* Header */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-12">
+        <FadeUp>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm text-white/80 backdrop-blur mb-6">
+            <Globe size={16} className="text-white/80" /> {destinations.length} Top Study Destinations
           </div>
+        </FadeUp>
+        <FadeUp delay={0.1}>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
+            <TextReveal text="Choose Your Destination" className="text-4xl md:text-6xl lg:text-7xl font-bold text-white" />
+          </h1>
+        </FadeUp>
+        <FadeUp delay={0.2}>
+          <p className="text-lg text-slate-400 max-w-2xl">
+            Explore detailed information about the world&apos;s top study destinations, from universities to visa requirements
+          </p>
+        </FadeUp>
+      </div>
 
-          <div
-            ref={scrollRef}
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={onMouseUp}
-            onMouseLeave={onMouseUp}
-            className="overflow-x-auto select-none"
-            style={{
-              scrollbarWidth: "none",
-              scrollSnapType: "x mandatory",
-              WebkitOverflowScrolling: "touch",
-              cursor: "grab",
-              paddingLeft: `calc((100vw - ${CARD_WIDTH}px) / 2)`,
-              paddingRight: `calc((100vw - ${CARD_WIDTH}px) / 2)`,
-            } as React.CSSProperties}
-          >
-            <div
-              className="flex"
-              style={{ gap: CARD_GAP, width: "max-content", padding: "4px 0 16px" }}
-            >
-              {destinations.map((d, i) => {
-                const dist = Math.abs(scrollProgress - i);
-                const isFocused = dist < 0.5;
-                const opacity = isFocused ? 1 : Math.max(0.4, 1 - dist * 0.6);
-                const scale = isFocused ? 1 : Math.max(0.9, 1 - dist * 0.05);
-                const blur = isFocused ? 0 : Math.min(3, dist * 1.5);
-
-                return (
-                  <div
-                    key={d.id}
-                    onClick={() => { if (!didDrag.current) snapTo(i); }}
-                    style={{
-                      flexShrink: 0,
-                      width: CARD_WIDTH,
-                      height: CARD_WIDTH,
-                      scrollSnapAlign: "center",
-                      opacity,
-                      transform: `scale(${scale})`,
-                      filter: `blur(${blur}px) brightness(${isFocused ? 1 : 0.8})`,
-                      transition: "opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease",
-                      cursor: isFocused ? "grab" : "pointer",
-                    }}
-                  >
-                    <div
-                      className="relative overflow-hidden h-full"
-                      style={{
-                        borderRadius: 18,
-                      }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-700">
-                        <img src={d.image} alt={d.name} draggable={false} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <div className="relative h-full flex flex-col justify-end p-5 text-white">
-                        <div className="flex items-center gap-1 mb-1 opacity-80">
-                          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          <span className="font-medium tracking-wide">{d.location}</span>
-                        </div>
-                        <h3 className="text-5xl font-bold mb-1 leading-tight">{d.name}</h3>
-                        <p className="text-white/75 mb-3 line-clamp-2 leading-relaxed">{d.shortDesc}</p>
-                        <Link
-                          href={`/destinations/${d.slug}`}
-                          className="inline-flex items-center gap-1.5 text-xl font-semibold text-white"
-                          style={{ pointerEvents: isFocused ? "auto" : "none" }}
-                        >
-                          Explore
-                          <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </Link>
+      {/* Full-width Drag Carousel */}
+      <div
+        ref={containerRef}
+        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        style={{ height: IMAGE_HEIGHT + 40 }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+      >
+        <motion.div
+          style={{ x }}
+          className="flex items-center absolute top-0 left-0"
+        >
+          {destinations.map((d, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <motion.div
+                key={d.id}
+                className="flex-shrink-0 relative"
+                style={{ width: IMAGE_WIDTH, marginRight: GAP }}
+                animate={{
+                  scale: isActive ? 1 : 0.88,
+                  opacity: isActive ? 1 : 0.45,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
+                <div
+                  role="button"
+                  tabIndex={0}
+                  onClick={(e) => handleCardClick(e, d.slug)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") router.push(`/destinations/${d.slug}`);
+                  }}
+                  draggable={false}
+                  className="block"
+                >
+                  <div className="relative rounded-3xl overflow-hidden shadow-2xl group" style={{ height: IMAGE_HEIGHT }}>
+                    <Image src={d.image} alt={d.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute top-5 left-5 drop-shadow-lg">
+                      <FlagIcon code={d.flagCode} size={30} />
+                    </div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-2xl font-bold text-white mb-1">{d.name}</h3>
+                      <p className="text-sm text-white/70 line-clamp-2">{d.description}</p>
+                      <div className="mt-3 inline-flex items-center gap-2 text-sm text-white/90 font-medium group-hover:gap-3 transition-all">
+                        Explore <ArrowRight size={16} />
                       </div>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
 
-          {/* Country detail */}
-          <div className="px-6 md:px-12 mt-8">
-            <div className="flex items-center gap-3 mb-2">
-              <h2 className="text-5xl font-bold text-gray-900">{dest.name}</h2>
-              <span className="text-xl font-semibold text-gray-400 tracking-widest uppercase bg-gray-100 px-2 py-1 rounded-full">
-                {dest.code}
-              </span>
+      {/* Active Destination Info */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mt-10">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+          >
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                {dest && <FlagIcon code={dest.flagCode} size={28} />} {dest?.name}
+              </h2>
+              <p className="text-slate-400 max-w-xl">{dest?.description}</p>
             </div>
-            <p className="text-gray-500 text-2xl leading-relaxed mb-4">{dest.description}</p>
-            <Link
-              href={`/destinations/${dest.slug}`}
-              className="inline-flex items-center gap-2 text-xl font-semibold text-blue-600 hover:gap-3 transition-all"
+            <button
+              onClick={() => dest && router.push(`/destinations/${dest.slug}`)}
+              className="inline-flex items-center gap-2 bg-white text-slate-900 px-7 py-3.5 rounded-full font-semibold hover:bg-slate-200 transition shrink-0 text-sm"
             >
-              Explore {dest.name}
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
+              Explore {dest?.name} <ArrowRight size={16} />
+            </button>
+          </motion.div>
+        </AnimatePresence>
 
-          {/* Flag strip */}
-          <div className="px-6 md:px-12 mt-8 flex flex-col items-center">
-            <div className="flex items-center gap-4 flex-wrap justify-center">
-              {destinations.map((d, i) => {
-                const isActive = i === activeIndex;
-                return (
-                  <button
-                  key={d.id}
-                  onClick={() => snapTo(i)}
-                  className="flex flex-col items-center gap-1 transition-all duration-200"
-                    style={{ opacity: isActive ? 1 : 0.4 }}
-                    >
-                    <span
-                      className="text-2xl block"
-                      style={{ transform: isActive ? "scale(1.15)" : "scale(1)", transition: "transform 0.2s" }}
-                      >
-                      {d.flag}
-                    </span>
-                    <span
-                      className="text-xs font-semibold tracking-widest"
-                      style={{ color: isActive ? "#1d4ed8" : "#9ca3af", transition: "color 0.2s" }}
-                      >
-                      {d.code}
-                    </span>
-                    {isActive && <div className="w-4 h-0.5 rounded-full bg-blue-600" />}
-                  </button>
-                );
-              })}
-              <span className="ml-auto text-xs text-gray-400 font-medium">
-                {String(activeIndex + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
-              </span>
-            </div>
-          </div>
+        {/* Flag Nav */}
+        <div className="flex items-center justify-center gap-3 mt-10">
+          {destinations.map((d, i) => (
+            <motion.button
+              key={d.id}
+              onClick={() => goTo(i)}
+              className={`relative p-2 rounded-full transition-all ${
+                i === activeIndex ? "ring-2 ring-white bg-white/10 scale-110" : "opacity-40 hover:opacity-70"
+              }`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FlagIcon code={d.flagCode} size={22} />
+            </motion.button>
+          ))}
+        </div>
 
-        </section>
-      </main>
-
-      <style jsx global>{`
-        *::-webkit-scrollbar { display: none; }
-      `}</style>
+        {/* Arrow Controls */}
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <button
+            onClick={() => activeIndex > 0 && goTo(activeIndex - 1)}
+            disabled={activeIndex === 0}
+            className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <span className="text-white/50 text-sm font-mono">
+            {String(activeIndex + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
+          </span>
+          <button
+            onClick={() => activeIndex < destinations.length - 1 && goTo(activeIndex + 1)}
+            disabled={activeIndex === destinations.length - 1}
+            className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
