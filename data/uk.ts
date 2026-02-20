@@ -98,9 +98,9 @@ const ukData: CountryDataType = {
     { id: 4, title: "Countryside & Cities", description: "From the Scottish Highlands to London's cosmopolitan buzz" },
   ],
   testimonials: [
-    { name: "Sarita Bhatta", degree: "MSc Finance", university: "Imperial College London", country: "UK", quote: "The 1-year master's program was intense but incredibly rewarding. NEXUS helped me through the CAS and visa process seamlessly.", image: "/student/student1.jpg" },
-    { name: "Deepak KC", degree: "LLM International Law", university: "University of Oxford", country: "UK", quote: "Studying at Oxford was a dream come true. NEXUS guided me to secure a Clarendon Scholarship.", image: "/student/student2.jpg" },
-    { name: "Nisha Rai", degree: "BA English Literature", university: "University of Edinburgh", country: "UK", quote: "Edinburgh's literary culture enhanced my studies beautifully. NEXUS made the UCAS process straightforward.", image: "/student/student3.jpg" },
+    { name: "Sarita Bhatta", degree: "MSc Finance", university: "Imperial College London", country: "UK", quote: "The 1-year master's program was intense but incredibly rewarding. Nexsus helped me through the CAS and visa process seamlessly.", image: "/student/student1.jpg" },
+    { name: "Deepak KC", degree: "LLM International Law", university: "University of Oxford", country: "UK", quote: "Studying at Oxford was a dream come true. Nexsus guided me to secure a Clarendon Scholarship.", image: "/student/student2.jpg" },
+    { name: "Nisha Rai", degree: "BA English Literature", university: "University of Edinburgh", country: "UK", quote: "Edinburgh's literary culture enhanced my studies beautifully. Nexsus made the UCAS process straightforward.", image: "/student/student3.jpg" },
   ],
 };
 

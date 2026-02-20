@@ -15,7 +15,6 @@ export default function DestinationsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Drag-to-scroll state
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
   const dragStartScroll = useRef(0);
@@ -58,24 +57,43 @@ export default function DestinationsSection() {
     }
   };
 
+  const progress = maxScroll > 0 ? scrollPos / maxScroll : 0;
+
   return (
-    <section className="py-24 bg-white">
-      {/* Header */}
+    <section className="py-32 bg-white">
       <FadeUp>
-        <div className="text-center mb-16 max-w-[1440px] mx-auto px-6">
-          <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
-            <Globe size={16} /> Global Opportunities
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 max-w-7xl mx-auto px-6 lg:px-8 gap-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-50 text-slate-600 text-sm font-medium border border-gray-200/80">
+              <Globe size={14} className="text-[#003975]" />
+              Global Opportunities
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
+              Study Destinations
+            </h2>
+            <p className="text-lg text-slate-500 max-w-xl mt-4 leading-relaxed">
+              Choose from top-tier universities across the world&apos;s most sought-after study destinations
+            </p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Study Destinations
-          </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Choose from top-tier universities across the world&apos;s most sought-after study destinations
-          </p>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setScrollPos((p) => Math.max(0, p - 420))}
+              disabled={scrollPos === 0}
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:border-slate-300 transition disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button
+              onClick={() => setScrollPos((p) => Math.min(maxScroll, p + 420))}
+              disabled={scrollPos >= maxScroll}
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:border-slate-300 transition disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
         </div>
       </FadeUp>
 
-      {/* Full-width Carousel with drag */}
       <div
         className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
         ref={containerRef}
@@ -86,43 +104,41 @@ export default function DestinationsSection() {
       >
         <motion.div
           ref={contentRef}
-          className="flex gap-6 pl-6"
+          className="flex gap-6 px-6 lg:px-8"
           style={{
             transform: `translateX(-${scrollPos}px)`,
-            transition: isDragging.current ? "none" : "transform 500ms ease-out",
+            transition: isDragging.current ? "none" : "transform 600ms cubic-bezier(0.23, 1, 0.32, 1)",
           }}
         >
           {destinations.map((dest, idx) => (
             <motion.div
               key={dest.id}
-              className="flex-shrink-0 w-[380px]"
+              className="flex-shrink-0 w-[360px] md:w-[400px]"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.08, duration: 0.5 }}
+              transition={{ delay: idx * 0.08, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
             >
               <Link href={`/destinations/${dest.slug}`} draggable={false} onClick={handleCardClick}>
-                <div className="relative h-[460px] rounded-3xl overflow-hidden group cursor-pointer">
+                <div className="relative h-[480px] rounded-3xl overflow-hidden group cursor-pointer">
                   <Image
                     src={dest.image}
                     alt={dest.name}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-[800ms] ease-out"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-                  {/* Flag badge */}
-                  <div className="absolute top-5 left-5 flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+                  <div className="absolute top-6 left-6 flex items-center gap-2.5 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full border border-white/20">
                     <FlagIcon code={dest.flagCode} size={16} />
                     <span className="text-white text-sm font-medium">{dest.name}</span>
                   </div>
 
-                  {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-7 text-white">
-                    <h3 className="text-2xl font-semibold mb-2">{dest.name}</h3>
-                    <p className="text-white/80 text-sm mb-4 line-clamp-2">{dest.description}</p>
-                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:gap-3 transition-all">
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <h3 className="text-2xl font-bold mb-2">{dest.name}</h3>
+                    <p className="text-white/75 text-sm mb-5 line-clamp-2 leading-relaxed">{dest.description}</p>
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:gap-3 transition-all duration-300">
                       Explore
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                     </span>
@@ -134,23 +150,17 @@ export default function DestinationsSection() {
         </motion.div>
       </div>
 
-      {/* Nav Arrows */}
-      <div className="flex justify-end gap-3 mt-8 px-6 md:px-12 lg:px-16">
-        <button
-          onClick={() => setScrollPos((p) => Math.max(0, p - 400))}
-          disabled={scrollPos === 0}
-          className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          <svg className="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-        </button>
-        <button
-          onClick={() => setScrollPos((p) => Math.min(maxScroll, p + 400))}
-          disabled={scrollPos >= maxScroll}
-          className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          <svg className="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-        </button>
-      </div>
+      {maxScroll > 0 && (
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-10">
+          <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"
+              style={{ width: `${Math.max(10, progress * 100)}%` }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -166,7 +166,7 @@ const australiaData: CountryDataType = {
   testimonials: [
     {
       name: "Rahul Thapa", degree: "MS Computer Science", university: "University of Melbourne", country: "Australia",
-      quote: "The team at NEXUS made the entire process seamless. From university selection to visa approval, they were there every step of the way.",
+      quote: "The team at Nexsus made the entire process seamless. From university selection to visa approval, they were there every step of the way.",
       image: "/student/student1.jpg",
     },
     {

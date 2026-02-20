@@ -1,289 +1,293 @@
-"use client";
+import type { Metadata } from "next";
+import { countryDataMap, destinations } from "@/data";
+import DestinationDetailClient from "./DestinationDetailClient";
 
-import { useParams } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { countryDataMap } from "@/data";
-import { FadeUp, StaggerContainer, StaggerItem } from "@/lib/animations";
-import { FlagIcon, Icon } from "@/lib/icons";
-import { useHeader } from "@/app/contexts/HeaderContext";
+/* ─── SEO data per destination ────────────────────── */
 
-const subPages = [
-  { title: "Why Study Here", slug: "why-study-here", icon: "Lightbulb", description: "Discover the top reasons to pursue your education here", color: "from-blue-600 to-indigo-600" },
-  { title: "Universities", slug: "universities", icon: "GraduationCap", description: "Explore top-ranked universities and their programs", color: "from-emerald-600 to-teal-600" },
-  { title: "Admission", slug: "admission", icon: "ClipboardList", description: "Requirements for undergraduate, postgraduate, and doctoral", color: "from-violet-600 to-purple-600" },
-  { title: "Student Visa", slug: "student-visa", icon: "ShieldCheck", description: "Visa requirements, processing times, and documents needed", color: "from-orange-500 to-red-500" },
-  { title: "Living Cost", slug: "living-cost", icon: "DollarSign", description: "Monthly costs for accommodation, food, transport, and more", color: "from-amber-500 to-yellow-500" },
-  { title: "Work & Jobs", slug: "work-and-jobs", icon: "Briefcase", description: "Part-time work rights and post-study career opportunities", color: "from-cyan-500 to-blue-500" },
-  { title: "Scholarships", slug: "scholarships", icon: "Trophy", description: "Funding opportunities, grants, and financial aid options", color: "from-pink-500 to-rose-500" },
-  { title: "Culture", slug: "culture", icon: "Globe", description: "Lifestyle, traditions, and what to expect as a student", color: "from-green-600 to-emerald-600" },
-];
+const seoData: Record<string, { title: string; description: string; keywords: string[] }> = {
+  "study-in-australia": {
+    title: "Study in Australia from Nepal | Top Universities, Visa & Scholarships",
+    description:
+      "Complete guide to studying in Australia from Nepal. Explore top-ranked Australian universities, student visa requirements, scholarships, living costs, work rights & admission process. 98% visa success rate with Nexsus.",
+    keywords: [
+      "study in australia", "study in australia from nepal", "australian student visa",
+      "australia university admission", "australia scholarship for nepali students",
+      "IELTS for australia", "PTE for australia", "australian education consultancy nepal",
+      "cost of living in australia for students", "work while studying in australia",
+      "post study work visa australia", "best universities in australia",
+      "australia PR pathway", "study abroad australia", "education in australia",
+      "australia student visa requirements", "australia tuition fees",
+      "nursing in australia", "IT courses in australia", "MBA in australia",
+      "engineering in australia", "australia education consultancy kathmandu",
+    ],
+  },
+  "study-in-canada": {
+    title: "Study in Canada from Nepal | Universities, Immigration & Scholarships",
+    description:
+      "Your complete guide to studying in Canada from Nepal. Discover Canadian universities, student visa process, PR pathways, scholarships, tuition fees & post-graduation work permit. Expert guidance from Nexsus.",
+    keywords: [
+      "study in canada", "study in canada from nepal", "canada student visa",
+      "canada university admission", "canada scholarship for nepali students",
+      "IELTS for canada", "PTE for canada", "canada education consultancy nepal",
+      "cost of living in canada for students", "work while studying in canada",
+      "post graduation work permit canada", "PGWP canada", "best universities in canada",
+      "canada PR from student visa", "study abroad canada", "education in canada",
+      "canada student visa requirements", "canada tuition fees",
+      "MBA in canada", "IT courses in canada", "nursing in canada",
+      "canada education consultancy kathmandu", "express entry canada",
+    ],
+  },
+  "study-in-usa": {
+    title: "Study in USA from Nepal | Ivy League, Visa & Scholarships Guide",
+    description:
+      "Ultimate guide to studying in the USA from Nepal. Explore Ivy League universities, F1 student visa, OPT/CPT work authorization, scholarships, GRE/SAT prep & admission requirements. Nexsus experts help you succeed.",
+    keywords: [
+      "study in usa", "study in usa from nepal", "usa student visa",
+      "F1 visa usa", "usa university admission", "usa scholarship for nepali students",
+      "IELTS for usa", "TOEFL for usa", "GRE preparation", "SAT preparation",
+      "OPT usa", "CPT usa", "best universities in usa", "ivy league universities",
+      "study abroad usa", "education in usa", "usa student visa requirements",
+      "usa tuition fees", "MBA in usa", "STEM courses in usa",
+      "computer science in usa", "usa education consultancy kathmandu",
+      "usa education consultancy nepal",
+    ],
+  },
+  "study-in-uk": {
+    title: "Study in UK from Nepal | Top Universities, Visa & Graduate Route",
+    description:
+      "Complete guide to studying in the UK from Nepal. Explore Russell Group universities, student visa requirements, Graduate Route work visa, scholarships, tuition fees & living costs. Trusted guidance from Nexsus.",
+    keywords: [
+      "study in uk", "study in uk from nepal", "uk student visa",
+      "uk university admission", "uk scholarship for nepali students",
+      "IELTS for uk", "PTE for uk", "uk education consultancy nepal",
+      "cost of living in uk for students", "work while studying in uk",
+      "graduate route visa uk", "best universities in uk", "russell group universities",
+      "study abroad uk", "education in united kingdom", "uk student visa requirements",
+      "uk tuition fees", "MBA in uk", "engineering in uk",
+      "oxford cambridge admission", "uk education consultancy kathmandu",
+      "masters in uk", "uk visa from nepal",
+    ],
+  },
+  "study-in-new-zealand": {
+    title: "Study in New Zealand from Nepal | Universities, Visa & Work Rights",
+    description:
+      "Your guide to studying in New Zealand from Nepal. Discover NZ universities, student visa process, post-study work visa, scholarships, affordable tuition & stunning campus life. Nexsus consultants guide you.",
+    keywords: [
+      "study in new zealand", "study in new zealand from nepal", "new zealand student visa",
+      "nz university admission", "new zealand scholarship for nepali students",
+      "IELTS for new zealand", "PTE for new zealand", "new zealand education consultancy nepal",
+      "cost of living in new zealand", "work while studying in new zealand",
+      "post study work visa new zealand", "best universities in new zealand",
+      "study abroad new zealand", "education in new zealand",
+      "new zealand student visa requirements", "new zealand tuition fees",
+      "nursing in new zealand", "IT courses in new zealand",
+      "new zealand education consultancy kathmandu",
+    ],
+  },
+  "study-in-japan": {
+    title: "Study in Japan from Nepal | Universities, Visa, JLPT & Scholarships",
+    description:
+      "Complete guide to studying in Japan from Nepal. Explore Japanese universities, student visa requirements, MEXT scholarships, JLPT preparation, tuition fees & work opportunities. Expert support from Nexsus.",
+    keywords: [
+      "study in japan", "study in japan from nepal", "japan student visa",
+      "japanese university admission", "japan scholarship for nepali students",
+      "JLPT preparation", "MEXT scholarship", "japan education consultancy nepal",
+      "cost of living in japan for students", "work while studying in japan",
+      "best universities in japan", "study abroad japan", "education in japan",
+      "japan student visa requirements", "japan tuition fees",
+      "japanese language course", "engineering in japan", "IT in japan",
+      "japan education consultancy kathmandu", "japan from nepal",
+    ],
+  },
+  "study-in-south-korea": {
+    title: "Study in South Korea from Nepal | Universities, TOPIK & Scholarships",
+    description:
+      "Your guide to studying in South Korea from Nepal. Discover Korean universities, student visa process, KGSP scholarships, TOPIK preparation, tuition fees & K-culture experience. Guided by Nexsus experts.",
+    keywords: [
+      "study in south korea", "study in south korea from nepal", "south korea student visa",
+      "korean university admission", "korea scholarship for nepali students",
+      "TOPIK preparation", "KGSP scholarship", "korea education consultancy nepal",
+      "cost of living in south korea", "work while studying in south korea",
+      "best universities in south korea", "study abroad south korea",
+      "education in south korea", "south korea student visa requirements",
+      "south korea tuition fees", "korean language course",
+      "korea education consultancy kathmandu", "D-2 visa korea",
+    ],
+  },
+  "study-in-europe": {
+    title: "Study in Europe from Nepal | Universities, Visa & Scholarships Guide",
+    description:
+      "Complete guide to studying in Europe from Nepal. Explore universities in Germany, France, Netherlands, Ireland & more. Schengen visa guide, Erasmus scholarships, tuition-free options & living costs.",
+    keywords: [
+      "study in europe", "study in europe from nepal", "europe student visa",
+      "european university admission", "europe scholarship for nepali students",
+      "schengen visa for students", "erasmus scholarship", "europe education consultancy nepal",
+      "cost of living in europe for students", "study in germany from nepal",
+      "study in france from nepal", "study in netherlands", "study in ireland",
+      "best universities in europe", "study abroad europe", "education in europe",
+      "europe tuition fees", "tuition free universities europe",
+      "europe education consultancy kathmandu", "masters in europe",
+    ],
+  },
+};
 
-export default function DestinationDetailPage() {
-  const params = useParams();
-  const country = params.country as string;
+/* ─── Static Params ───────────────────────────────── */
+
+export function generateStaticParams() {
+  return Object.keys(countryDataMap).map((country) => ({ country }));
+}
+
+/* ─── Dynamic Metadata ────────────────────────────── */
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ country: string }>;
+}): Promise<Metadata> {
+  const { country } = await params;
   const data = countryDataMap[country];
-  const { setShowSidebar } = useHeader();
-  const [currentImage, setCurrentImage] = useState(0);
+  const seo = seoData[country];
 
-  useEffect(() => {
-    setShowSidebar(false);
-    return () => setShowSidebar(true);
-  }, [setShowSidebar]);
-
-  useEffect(() => {
-    if (!data) return;
-    const timer = setInterval(() => {
-      setCurrentImage((p) => (p + 1) % data.carouselData.CountryImages.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [data]);
-
-  if (!data) {
-    return (
-      <main className="min-h-screen flex items-center justify-center pt-20">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">Destination Not Found</h1>
-          <p className="text-slate-500 mb-6">The destination you are looking for does not exist.</p>
-          <Link href="/destinations" className="text-[#003975] font-medium hover:underline">
-            View all destinations
-          </Link>
-        </div>
-      </main>
-    );
+  if (!data || !seo) {
+    return { title: "Destination Not Found | Nexsus Educational Consultancy" };
   }
 
+  const countryName = data.country;
+  const canonicalUrl = `https://nexsuseducation.com/destinations/${country}`;
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    keywords: seo.keywords,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url: canonicalUrl,
+      siteName: "Nexsus Educational Consultancy",
+      type: "website",
+      images: [
+        {
+          url: data.carouselData.CountryImages[0]?.url || "/destinations/Australia.png",
+          width: 1200,
+          height: 630,
+          alt: `Study in ${countryName} - Nexsus Educational Consultancy`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Study in ${countryName} from Nepal | Nexsus`,
+      description: seo.description,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  };
+}
+
+/* ─── Page Component with JSON-LD ─────────────────── */
+
+export default async function DestinationPage({
+  params,
+}: {
+  params: Promise<{ country: string }>;
+}) {
+  const { country } = await params;
+  const data = countryDataMap[country];
+  const seo = seoData[country];
+
+  const countryName = data?.country || "Unknown";
+
+  // JSON-LD Structured Data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `https://nexsuseducation.com/destinations/${country}#webpage`,
+        url: `https://nexsuseducation.com/destinations/${country}`,
+        name: seo?.title || `Study in ${countryName}`,
+        description: seo?.description || "",
+        isPartOf: { "@id": "https://nexsuseducation.com/#website" },
+        breadcrumb: { "@id": `https://nexsuseducation.com/destinations/${country}#breadcrumb` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://nexsuseducation.com/destinations/${country}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://nexsuseducation.com" },
+          { "@type": "ListItem", position: 2, name: "Destinations", item: "https://nexsuseducation.com/destinations" },
+          { "@type": "ListItem", position: 3, name: `Study in ${countryName}`, item: `https://nexsuseducation.com/destinations/${country}` },
+        ],
+      },
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://nexsuseducation.com/#organization",
+        name: "Nexsus Educational Consultancy",
+        url: "https://nexsuseducation.com",
+        description: "Nepal's leading education consultancy for studying abroad. Expert guidance for Australia, Canada, USA, UK, New Zealand, Japan, South Korea & Europe.",
+        areaServed: {
+          "@type": "Country",
+          name: "Nepal",
+        },
+        serviceArea: [
+          { "@type": "Country", name: countryName },
+        ],
+        knowsAbout: [
+          `Study in ${countryName}`,
+          `${countryName} student visa`,
+          `${countryName} university admission`,
+          `${countryName} scholarships`,
+          "IELTS preparation",
+          "Education consultancy Nepal",
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: `How to study in ${countryName} from Nepal?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `To study in ${countryName} from Nepal, you need to: 1) Choose a university and program, 2) Meet admission requirements including English proficiency tests like IELTS/PTE, 3) Apply and get an offer letter, 4) Apply for a student visa, 5) Arrange finances and travel. Nexsus Educational Consultancy guides you through every step with a 98% visa success rate.`,
+            },
+          },
+          {
+            "@type": "Question",
+            name: `What is the cost of studying in ${countryName}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `The cost of studying in ${countryName} varies by university and program. Contact Nexsus Educational Consultancy for detailed cost breakdowns including tuition fees, living expenses, and available scholarships.`,
+            },
+          },
+          {
+            "@type": "Question",
+            name: `Can I work while studying in ${countryName}?`,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: `Yes, most countries allow international students to work part-time while studying. Visit our detailed work and career opportunities section for ${countryName}-specific information about work rights, hours allowed, and post-study work visas.`,
+            },
+          },
+        ],
+      },
+    ],
+  };
+
   return (
-    <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[85vh] min-h-[600px] overflow-hidden">
-        {data.carouselData.CountryImages.map((img, idx) => (
-          <div
-            key={img.id}
-            className="absolute inset-0 transition-opacity duration-1000"
-            style={{ opacity: idx === currentImage ? 1 : 0 }}
-          >
-            <Image
-              src={img.url}
-              alt={img.location}
-              fill
-              className="object-cover"
-              priority={idx === 0}
-            />
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
-
-        <div className="absolute inset-0 flex flex-col justify-end pb-16 px-6 md:px-12 lg:px-20">
-          <div className="max-w-4xl">
-            <FadeUp>
-              <div className="flex items-center gap-3 mb-6">
-                <FlagIcon code={data.flagCode} size={28} className="rounded" />
-                <span className="text-white/80 text-lg font-medium">Study in</span>
-              </div>
-            </FadeUp>
-
-            <FadeUp delay={0.1}>
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">{data.country}</h1>
-            </FadeUp>
-
-            <FadeUp delay={0.2}>
-              <p className="text-xl text-white/80 max-w-2xl mb-8 leading-relaxed">
-                {data.carouselData.description}
-              </p>
-            </FadeUp>
-
-            <FadeUp delay={0.3}>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-slate-900 px-8 py-4 rounded-full font-medium hover:bg-slate-100 transition shadow-lg"
-                >
-                  Get Free Counseling
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </Link>
-                <Link
-                  href={`/destinations/${country}/why-study-here`}
-                  className="inline-flex items-center gap-2 bg-white/10 backdrop-blur text-white px-8 py-4 rounded-full font-medium border border-white/30 hover:bg-white/20 transition"
-                >
-                  Learn More
-                </Link>
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-
-        <div className="absolute bottom-6 right-6 flex gap-2">
-          {data.carouselData.CountryImages.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentImage(idx)}
-              className={`h-2 rounded-full transition-all ${idx === currentImage ? "bg-white w-8" : "bg-white/40 w-2"}`}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Key Statistics */}
-      <section className="py-16 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <FadeUp>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {data.highlightedData.statistics.map((stat) => (
-                <div key={stat.id} className="text-center p-6 bg-gray-50 rounded-2xl border border-gray-100">
-                  <p className="text-2xl md:text-3xl font-bold text-[#003975] mb-2">{stat.value}</p>
-                  <p className="text-sm text-slate-500">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </FadeUp>
-
-          <FadeUp delay={0.2}>
-            <p className="text-lg text-slate-600 text-center mt-10 max-w-3xl mx-auto leading-relaxed">
-              {data.highlightedData.description}
-            </p>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* Sub-Pages Navigation */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <FadeUp>
-            <div className="text-center mb-14">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Everything You Need to Know
-              </h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Explore detailed information about studying in {data.country}
-              </p>
-            </div>
-          </FadeUp>
-
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {subPages.map((page) => (
-              <StaggerItem key={page.slug}>
-                <Link href={`/destinations/${country}/${page.slug}`}>
-                  <motion.div
-                    whileHover={{ y: -6, scale: 1.02 }}
-                    className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-shadow h-full group cursor-pointer"
-                  >
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${page.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon name={page.icon} size={22} className="text-white" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-slate-900 mb-2">{page.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed">{page.description}</p>
-                    <div className="mt-4 flex items-center gap-1 text-sm font-medium text-[#003975] group-hover:gap-2 transition-all">
-                      Learn more
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                    </div>
-                  </motion.div>
-                </Link>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Quick Highlights */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <FadeUp>
-            <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">
-              Why Study in {data.country}?
-            </h2>
-          </FadeUp>
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {data.whyData.slice(0, 6).map((reason, idx) => (
-              <StaggerItem key={idx}>
-                <div className="flex items-start gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100">
-                  <div className="w-8 h-8 rounded-full bg-[#003975]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-sm font-bold text-[#003975]">{idx + 1}</span>
-                  </div>
-                  <p className="text-slate-700 text-sm leading-relaxed">{reason}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-          <FadeUp delay={0.3}>
-            <div className="text-center mt-10">
-              <Link
-                href={`/destinations/${country}/why-study-here`}
-                className="inline-flex items-center gap-2 text-[#003975] font-medium hover:gap-3 transition-all"
-              >
-                Read more about studying in {data.country}
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </Link>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* Top Universities Preview */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <FadeUp>
-            <div className="flex items-center justify-between mb-10">
-              <h2 className="text-3xl font-bold text-slate-900">Top Universities</h2>
-              <Link
-                href={`/destinations/${country}/universities`}
-                className="text-[#003975] font-medium flex items-center gap-1 hover:gap-2 transition-all"
-              >
-                View all <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-              </Link>
-            </div>
-          </FadeUp>
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {data.universities.slice(0, 6).map((uni) => (
-              <StaggerItem key={uni.id}>
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-shadow">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="px-3 py-1 bg-blue-50 text-[#003975] rounded-full text-xs font-semibold">
-                      #{uni.ranking.position} {uni.ranking.type}
-                    </div>
-                    <div className="text-xs text-slate-400">{uni.location.city}, {uni.location.state}</div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{uni.name}</h3>
-                  <p className="text-sm text-slate-500">{uni.scholarship.description}</p>
-                  <div className="mt-3">
-                    <span className="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                      Up to {uni.scholarship.percentage}% scholarship
-                    </span>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white">
-        <FadeUp>
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Ready to Study in {data.country}?</h2>
-            <p className="text-blue-100 mb-8 text-lg">
-              Get personalized guidance from our expert counselors. We&apos;ll help you choose the right university, prepare your application, and secure your visa.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg">
-                  Book Free Consultation
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </Link>
-              </motion.div>
-              <Link
-                href="/destinations"
-                className="inline-flex items-center justify-center gap-2 text-white border border-white/30 px-8 py-4 rounded-full font-medium hover:bg-white/10 transition"
-              >
-                Other Destinations
-              </Link>
-            </div>
-          </div>
-        </FadeUp>
-      </section>
-    </main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <DestinationDetailClient />
+    </>
   );
 }

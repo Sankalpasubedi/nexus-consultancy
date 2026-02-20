@@ -1,284 +1,66 @@
-"use client";
+import type { Metadata } from "next";
+import DestinationsClient from "./DestinationsClient";
 
-import { useState, useRef, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { motion, useMotionValue, AnimatePresence } from "framer-motion";
-import { Globe, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { destinations } from "@/data";
-import { FlagIcon } from "@/lib/icons";
-import { FadeUp, TextReveal } from "@/lib/animations";
+export const metadata: Metadata = {
+  title: "Study Abroad Destinations | Top 8 Countries for Nepali Students | Nexsus Education",
+  description:
+    "Explore 8 top study abroad destinations: Australia, Canada, USA, UK, New Zealand, Japan, South Korea & Europe. Universities, costs, visa info & admission requirements for Nepali students.",
+  keywords: [
+    "study abroad destinations",
+    "best countries to study abroad from Nepal",
+    "study in Australia from Nepal",
+    "study in Canada from Nepal",
+    "study in USA from Nepal",
+    "study in UK from Nepal",
+    "study in New Zealand from Nepal",
+    "study in Japan from Nepal",
+    "study in South Korea from Nepal",
+    "study in Europe from Nepal",
+    "Nexsus destinations",
+  ],
+  openGraph: {
+    title: "Study Abroad Destinations | Nexsus Education Nepal",
+    description: "Explore 8 top study abroad destinations for Nepali students.",
+    type: "website",
+  },
+  alternates: {
+    canonical: "/destinations",
+  },
+};
 
-const IMAGE_WIDTH = 420;
-const IMAGE_HEIGHT = 440;
-const GAP = 28;
-const ITEM_WIDTH = IMAGE_WIDTH + GAP;
-const DRAG_THRESHOLD = 5;
-
-export default function Destinations() {
-  const router = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const x = useMotionValue(0);
-
-  // Drag tracking refs
-  const isDragging = useRef(false);
-  const hasDragged = useRef(false);
-  const dragStartX = useRef(0);
-  const dragStartVal = useRef(0);
-
-  useEffect(() => {
-    const update = () => {
-      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const centerOffset = containerWidth / 2 - IMAGE_WIDTH / 2;
-
-  useEffect(() => {
-    const unsub = x.on("change", (latest) => {
-      const idx = Math.round((-latest + centerOffset) / ITEM_WIDTH);
-      setActiveIndex(Math.max(0, Math.min(destinations.length - 1, idx)));
-    });
-    return () => unsub();
-  }, [x, centerOffset]);
-
-  const goTo = useCallback(
-    (index: number) => {
-      const target = -index * ITEM_WIDTH + centerOffset;
-      const startX = x.get();
-      const diff = target - startX;
-      let start: number | null = null;
-      const duration = 500;
-      const step = (ts: number) => {
-        if (!start) start = ts;
-        const elapsed = ts - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        x.set(startX + diff * eased);
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    },
-    [x, centerOffset]
-  );
-
-  useEffect(() => {
-    if (containerWidth > 0) goTo(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerWidth]);
-
-  // --- Mouse drag handlers ---
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      isDragging.current = true;
-      hasDragged.current = false;
-      dragStartX.current = e.clientX;
-      dragStartVal.current = x.get();
-    },
-    [x]
-  );
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging.current) return;
-      const delta = e.clientX - dragStartX.current;
-      if (Math.abs(delta) > DRAG_THRESHOLD) {
-        hasDragged.current = true;
-      }
-
-      const minX =
-        -(ITEM_WIDTH * (destinations.length - 1)) - centerOffset + containerWidth - IMAGE_WIDTH;
-      const maxX = centerOffset;
-      const raw = dragStartVal.current + delta;
-      const clamped = Math.max(minX, Math.min(maxX, raw));
-      x.set(clamped);
-    },
-    [x, centerOffset, containerWidth]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    // Snap to nearest card
-    const current = x.get();
-    const idx = Math.round((-current + centerOffset) / ITEM_WIDTH);
-    const snapped = Math.max(0, Math.min(destinations.length - 1, idx));
-    goTo(snapped);
-  }, [x, centerOffset, goTo]);
-
-  const handleMouseLeave = useCallback(() => {
-    if (isDragging.current) {
-      isDragging.current = false;
-      const current = x.get();
-      const idx = Math.round((-current + centerOffset) / ITEM_WIDTH);
-      const snapped = Math.max(0, Math.min(destinations.length - 1, idx));
-      goTo(snapped);
-    }
-  }, [x, centerOffset, goTo]);
-
-  // Card click handler - prevent navigation when dragged
-  const handleCardClick = useCallback(
-    (e: React.MouseEvent, slug: string) => {
-      if (hasDragged.current) {
-        e.preventDefault();
-        e.stopPropagation();
-        return;
-      }
-      router.push(`/destinations/${slug}`);
-    },
-    [router]
-  );
-
-  const dest = destinations[activeIndex];
+function DestinationsJsonLd() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Study Abroad Destinations",
+    description: "Top 8 study abroad destinations for Nepali students",
+    url: "https://nexsuseducation.com/destinations",
+    numberOfItems: 8,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Study in Australia", url: "https://nexsuseducation.com/destinations/study-in-australia" },
+      { "@type": "ListItem", position: 2, name: "Study in Canada", url: "https://nexsuseducation.com/destinations/study-in-canada" },
+      { "@type": "ListItem", position: 3, name: "Study in USA", url: "https://nexsuseducation.com/destinations/study-in-usa" },
+      { "@type": "ListItem", position: 4, name: "Study in UK", url: "https://nexsuseducation.com/destinations/study-in-uk" },
+      { "@type": "ListItem", position: 5, name: "Study in New Zealand", url: "https://nexsuseducation.com/destinations/study-in-new-zealand" },
+      { "@type": "ListItem", position: 6, name: "Study in Japan", url: "https://nexsuseducation.com/destinations/study-in-japan" },
+      { "@type": "ListItem", position: 7, name: "Study in South Korea", url: "https://nexsuseducation.com/destinations/study-in-south-korea" },
+      { "@type": "ListItem", position: 8, name: "Study in Europe", url: "https://nexsuseducation.com/destinations/study-in-europe" },
+    ],
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-24 pb-16 overflow-hidden">
-      {/* Header */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-12">
-        <FadeUp>
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm text-white/80 backdrop-blur mb-6">
-            <Globe size={16} className="text-white/80" /> {destinations.length} Top Study Destinations
-          </div>
-        </FadeUp>
-        <FadeUp delay={0.1}>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4">
-            <TextReveal text="Choose Your Destination" className="text-4xl md:text-6xl lg:text-7xl font-bold text-white" />
-          </h1>
-        </FadeUp>
-        <FadeUp delay={0.2}>
-          <p className="text-lg text-slate-400 max-w-2xl">
-            Explore detailed information about the world&apos;s top study destinations, from universities to visa requirements
-          </p>
-        </FadeUp>
-      </div>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
 
-      {/* Full-width Drag Carousel */}
-      <div
-        ref={containerRef}
-        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        style={{ height: IMAGE_HEIGHT + 40 }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-      >
-        <motion.div
-          style={{ x }}
-          className="flex items-center absolute top-0 left-0"
-        >
-          {destinations.map((d, i) => {
-            const isActive = i === activeIndex;
-            return (
-              <motion.div
-                key={d.id}
-                className="flex-shrink-0 relative"
-                style={{ width: IMAGE_WIDTH, marginRight: GAP }}
-                animate={{
-                  scale: isActive ? 1 : 0.88,
-                  opacity: isActive ? 1 : 0.45,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={(e) => handleCardClick(e, d.slug)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") router.push(`/destinations/${d.slug}`);
-                  }}
-                  draggable={false}
-                  className="block"
-                >
-                  <div className="relative rounded-3xl overflow-hidden shadow-2xl group" style={{ height: IMAGE_HEIGHT }}>
-                    <Image src={d.image} alt={d.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" draggable={false} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute top-5 left-5 drop-shadow-lg">
-                      <FlagIcon code={d.flagCode} size={30} />
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-2xl font-bold text-white mb-1">{d.name}</h3>
-                      <p className="text-sm text-white/70 line-clamp-2">{d.description}</p>
-                      <div className="mt-3 inline-flex items-center gap-2 text-sm text-white/90 font-medium group-hover:gap-3 transition-all">
-                        Explore <ArrowRight size={16} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
-
-      {/* Active Destination Info */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mt-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
-          >
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 flex items-center gap-3">
-                {dest && <FlagIcon code={dest.flagCode} size={28} />} {dest?.name}
-              </h2>
-              <p className="text-slate-400 max-w-xl">{dest?.description}</p>
-            </div>
-            <button
-              onClick={() => dest && router.push(`/destinations/${dest.slug}`)}
-              className="inline-flex items-center gap-2 bg-white text-slate-900 px-7 py-3.5 rounded-full font-semibold hover:bg-slate-200 transition shrink-0 text-sm"
-            >
-              Explore {dest?.name} <ArrowRight size={16} />
-            </button>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Flag Nav */}
-        <div className="flex items-center justify-center gap-3 mt-10">
-          {destinations.map((d, i) => (
-            <motion.button
-              key={d.id}
-              onClick={() => goTo(i)}
-              className={`relative p-2 rounded-full transition-all ${
-                i === activeIndex ? "ring-2 ring-white bg-white/10 scale-110" : "opacity-40 hover:opacity-70"
-              }`}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FlagIcon code={d.flagCode} size={22} />
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Arrow Controls */}
-        <div className="flex items-center justify-center gap-4 mt-6">
-          <button
-            onClick={() => activeIndex > 0 && goTo(activeIndex - 1)}
-            disabled={activeIndex === 0}
-            className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <span className="text-white/50 text-sm font-mono">
-            {String(activeIndex + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
-          </span>
-          <button
-            onClick={() => activeIndex < destinations.length - 1 && goTo(activeIndex + 1)}
-            disabled={activeIndex === destinations.length - 1}
-            className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div>
-      </div>
-    </div>
+export default function DestinationsPage() {
+  return (
+    <>
+      <DestinationsJsonLd />
+      <DestinationsClient />
+    </>
   );
 }

@@ -30,13 +30,13 @@ export interface CourseCategory {
 
 export const courseCategories: CourseCategory[] = [
   {
-    slug: "it",
+    slug: "information-technology",
     title: "Information Technology",
     description: "Shape the digital future with cutting-edge tech programs from world-class universities.",
     programs: "180+",
     image: "/courses/it.png",
     icon: "Monitor",
-    gradient: "from-blue-500 to-indigo-600",
+    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     programsList: [
       { name: "Cyber Security", duration: "3-4 years", tuition: "$22K-$52K/yr", description: "Protect systems and data from cyber threats." },
       { name: "Cloud Computing", duration: "3-4 years", tuition: "$20K-$48K/yr", description: "Design and manage scalable cloud infrastructure." },
@@ -65,13 +65,13 @@ export const courseCategories: CourseCategory[] = [
     },
   },
   {
-    slug: "business",
+    slug: "business-management",
     title: "Business & Management",
     description: "Develop leadership skills and business acumen at top global business schools.",
     programs: "240+",
     image: "/courses/business and management.webp",
     icon: "BarChart3",
-    gradient: "from-purple-500 to-pink-500",
+    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     programsList: [
       { name: "MBA", duration: "1-2 years", tuition: "$30K-$70K/yr", description: "Comprehensive business leadership program." },
       { name: "International Business", duration: "3-4 years", tuition: "$20K-$50K/yr", description: "Global commerce and trade management." },
@@ -106,7 +106,7 @@ export const courseCategories: CourseCategory[] = [
     programs: "200+",
     image: "/courses/engineering-1024x682.jpg",
     icon: "Cog",
-    gradient: "from-orange-500 to-red-500",
+    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     programsList: [
       { name: "Mechanical Engineering", duration: "4 years", tuition: "$20K-$55K/yr", description: "Design and manufacture mechanical systems." },
       { name: "Civil Engineering", duration: "4 years", tuition: "$18K-$50K/yr", description: "Plan and build infrastructure projects." },
@@ -135,13 +135,13 @@ export const courseCategories: CourseCategory[] = [
     },
   },
   {
-    slug: "health",
+    slug: "health-sciences",
     title: "Health Sciences",
     description: "Pursue a career in healthcare with programs from globally recognized medical institutions.",
     programs: "150+",
     image: "/courses/health sciences.jpg",
     icon: "Heart",
-    gradient: "from-green-500 to-emerald-500",
+    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     programsList: [
       { name: "Medicine / MBBS", duration: "5-6 years", tuition: "$30K-$60K/yr", description: "Comprehensive medical degree." },
       { name: "Nursing", duration: "3-4 years", tuition: "$18K-$40K/yr", description: "Patient care and clinical nursing." },
@@ -170,13 +170,13 @@ export const courseCategories: CourseCategory[] = [
     },
   },
   {
-    slug: "arts",
+    slug: "arts-and-design",
     title: "Arts & Design",
     description: "Unleash your creativity at prestigious art and design schools worldwide.",
     programs: "120+",
     image: "/courses/art and design.jpg",
     icon: "Palette",
-    gradient: "from-pink-500 to-rose-500",
+    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     programsList: [
       { name: "Graphic Design", duration: "3-4 years", tuition: "$18K-$45K/yr", description: "Visual communication and branding." },
       { name: "Fine Arts", duration: "3-4 years", tuition: "$15K-$40K/yr", description: "Painting, sculpture, and mixed media." },
@@ -205,13 +205,13 @@ export const courseCategories: CourseCategory[] = [
     },
   },
   {
-    slug: "law",
+    slug: "law-and-legal-studies",
     title: "Law & Legal Studies",
     description: "Pursue justice and governance with law degrees from internationally renowned faculties.",
     programs: "90+",
     image: "/courses/legal and law.jpeg",
     icon: "Scale",
-    gradient: "from-amber-500 to-yellow-600",
+    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     programsList: [
       { name: "LLB (Bachelor of Laws)", duration: "3-4 years", tuition: "$15K-$40K/yr", description: "Foundational law degree." },
       { name: "LLM (Master of Laws)", duration: "1-2 years", tuition: "$25K-$60K/yr", description: "Advanced legal specialization." },
@@ -246,7 +246,7 @@ export const courseCategories: CourseCategory[] = [
     programs: "160+",
     image: "/courses/social science.jpg",
     icon: "Globe",
-    gradient: "from-cyan-500 to-teal-500",
+    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     programsList: [
       { name: "Psychology", duration: "3-4 years", tuition: "$18K-$50K/yr", description: "Study of mind and behavior." },
       { name: "Sociology", duration: "3-4 years", tuition: "$15K-$42K/yr", description: "Social structures and institutions." },

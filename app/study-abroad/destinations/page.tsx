@@ -28,7 +28,7 @@ const countries = [
     workRating: 90,
     qolRating: 92,
     highlights: ["Post-study work visa 4yr", "Part-time work rights", "7 unis in Top 100"],
-    slug: "australia",
+    slug: "study-in-australia",
   },
   {
     name: "United Kingdom",
@@ -43,7 +43,7 @@ const countries = [
     workRating: 75,
     qolRating: 85,
     highlights: ["4 unis in Top 10", "Shorter degree programs", "Graduate Route 2yr visa"],
-    slug: "uk",
+    slug: "study-in-uk",
   },
   {
     name: "Canada",
@@ -58,7 +58,7 @@ const countries = [
     workRating: 85,
     qolRating: 95,
     highlights: ["PR pathway available", "Work permit 3yr", "Affordable tuition"],
-    slug: "canada",
+    slug: "study-in-canada",
   },
   {
     name: "United States",
@@ -73,7 +73,7 @@ const countries = [
     workRating: 80,
     qolRating: 82,
     highlights: ["5 unis in Top 10", "OPT 3yr for STEM", "Unmatched research"],
-    slug: "usa",
+    slug: "study-in-usa",
   },
   {
     name: "New Zealand",
@@ -88,7 +88,7 @@ const countries = [
     workRating: 82,
     qolRating: 96,
     highlights: ["Lower cost of living", "Work visa 3yr", "Beautiful environment"],
-    slug: "new-zealand",
+    slug: "study-in-new-zealand",
   },
 ];
 

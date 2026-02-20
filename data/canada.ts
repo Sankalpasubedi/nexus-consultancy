@@ -98,9 +98,9 @@ const canadaData: CountryDataType = {
     { id: 4, title: "Arts & Festivals", description: "Toronto International Film Festival, Montreal Jazz Festival, and vibrant arts scenes" },
   ],
   testimonials: [
-    { name: "Priya Sharma", degree: "MBA", university: "University of Toronto", country: "Canada", quote: "NEXUS transformed my dream into reality. Their personalized guidance helped me secure admission to my dream university with a scholarship.", image: "/student/student1.jpg" },
-    { name: "Arun Poudel", degree: "MSc Data Science", university: "University of British Columbia", country: "Canada", quote: "The PGWP pathway was a game-changer for my career. NEXUS helped me navigate every step perfectly.", image: "/student/student2.jpg" },
-    { name: "Sita Gurung", degree: "BBA", university: "McGill University", country: "Canada", quote: "I couldn't have navigated the complex application process without NEXUS. Their expertise and dedication are unmatched.", image: "/student/student3.jpg" },
+    { name: "Priya Sharma", degree: "MBA", university: "University of Toronto", country: "Canada", quote: "Nexsus transformed my dream into reality. Their personalized guidance helped me secure admission to my dream university with a scholarship.", image: "/student/student1.jpg" },
+    { name: "Arun Poudel", degree: "MSc Data Science", university: "University of British Columbia", country: "Canada", quote: "The PGWP pathway was a game-changer for my career. Nexsus helped me navigate every step perfectly.", image: "/student/student2.jpg" },
+    { name: "Sita Gurung", degree: "BBA", university: "McGill University", country: "Canada", quote: "I couldn't have navigated the complex application process without Nexsus. Their expertise and dedication are unmatched.", image: "/student/student3.jpg" },
   ],
 };
 

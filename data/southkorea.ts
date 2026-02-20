@@ -89,7 +89,7 @@ const southKoreaData: CountryDataType = {
     { id: 4, title: "Food Culture", description: "BBQ, kimchi, street food, and a UNESCO-recognized culinary tradition" },
   ],
   testimonials: [
-    { name: "Pradeep Lama", degree: "MSc AI", university: "KAIST", country: "South Korea", quote: "KAIST's research facilities are world-class. NEXUS helped me get a full KGSP scholarship.", image: "/student/student1.jpg" },
+    { name: "Pradeep Lama", degree: "MSc AI", university: "KAIST", country: "South Korea", quote: "KAIST's research facilities are world-class. Nexsus helped me get a full KGSP scholarship.", image: "/student/student1.jpg" },
     { name: "Samjhana Thapa", degree: "BA Korean Studies", university: "Seoul National University", country: "South Korea", quote: "Living in Seoul while studying Korean culture was an amazing experience.", image: "/student/student2.jpg" },
   ],
 };

@@ -6,29 +6,30 @@ import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 const footerLinks = {
   services: [
     { name: "All Services", url: "/services" },
-    { name: "SOP & Application", url: "/services/sop" },
+    { name: "SOP & Application", url: "/services/sop-writing-assistance" },
     { name: "Test Preparation", url: "/services/test-preparation" },
-    { name: "Counseling", url: "/services/counseling" },
-    { name: "Visa Assistance", url: "/services/visa" },
-    { name: "Pre-Departure", url: "/services/pre-departure" },
-    { name: "Scholarships", url: "/services/scholarships" },
+    { name: "Counseling", url: "/services/career-counseling" },
+    { name: "Visa Assistance", url: "/services/student-visa-assistance" },
+    { name: "Pre-Departure", url: "/services/pre-departure-support" },
+    { name: "Scholarships", url: "/services/scholarship-guidance" },
   ],
   destinations: [
-    { name: "Australia", url: "/destinations/australia" },
-    { name: "United Kingdom", url: "/destinations/uk" },
-    { name: "Canada", url: "/destinations/canada" },
-    { name: "United States", url: "/destinations/usa" },
-    { name: "New Zealand", url: "/destinations/new-zealand" },
-    { name: "Japan", url: "/destinations/japan" },
-    { name: "South Korea", url: "/destinations/south-korea" },
+    { name: "Australia", url: "/destinations/study-in-australia" },
+    { name: "United Kingdom", url: "/destinations/study-in-uk" },
+    { name: "Canada", url: "/destinations/study-in-canada" },
+    { name: "United States", url: "/destinations/study-in-usa" },
+    { name: "New Zealand", url: "/destinations/study-in-new-zealand" },
+    { name: "Japan", url: "/destinations/study-in-japan" },
+    { name: "South Korea", url: "/destinations/study-in-south-korea" },
+    { name: "Europe", url: "/destinations/study-in-europe" },
   ],
   courses: [
     { name: "Information Technology", url: "/courses/information-technology" },
     { name: "Business & Management", url: "/courses/business-management" },
     { name: "Engineering", url: "/courses/engineering" },
     { name: "Health Sciences", url: "/courses/health-sciences" },
-    { name: "Arts & Design", url: "/courses/arts-design" },
-    { name: "Law & Legal Studies", url: "/courses/law" },
+    { name: "Arts & Design", url: "/courses/arts-and-design" },
+    { name: "Law & Legal Studies", url: "/courses/law-and-legal-studies" },
   ],
   company: [
     { name: "About Us", url: "/about" },
@@ -156,7 +157,7 @@ export default function FooterSection() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#003975]">
                 <span className="text-xs font-extrabold text-white">N</span>
               </div>
-              <span className="text-lg font-bold text-white">NEXSUS</span>
+              <span className="text-lg font-bold text-white">Nexsus</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-400">
               Your trusted partner in international education. Guiding students
@@ -206,7 +207,7 @@ export default function FooterSection() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 text-xs text-neutral-500 md:flex-row">
           <p>
-            &copy; {new Date().getFullYear()} NEXSUS Educational Consultancy.
+            &copy; {new Date().getFullYear()} Nexsus Educational Consultancy and Immigration Services Pvt. Ltd.
             All rights reserved.
           </p>
           <div className="flex items-center gap-6">

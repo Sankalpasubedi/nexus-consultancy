@@ -18,7 +18,7 @@ const europeData: CountryDataType = {
       { id: 3, label: "Programs", value: "Engineering, Arts, Sciences" },
       { id: 4, label: "Work Rights", value: "Varies by country" },
     ],
-    description: "Europe offers incredible diversity — from tuition-free education in Germany to world-renowned art schools in Italy and innovative tech programs in the Nordics.",
+    description: "Europe covers a wide range of opportunities, from tuition-free education in Germany to globally recognized art schools in Italy and cutting-edge tech programs across the Nordics.",
   },
   universities: [
     { id: "1", name: "ETH Zurich", location: { city: "Zurich", state: "Zurich", country: "Switzerland" }, ranking: { position: 7, type: "Global" }, scholarship: { percentage: 35, accreditedBy: "Swiss Confederation", description: "Excellence Scholarships" } },
@@ -91,7 +91,7 @@ const europeData: CountryDataType = {
     { id: 4, title: "Cuisine", description: "French, Italian, Spanish, and countless regional culinary traditions" },
   ],
   testimonials: [
-    { name: "Ashish Pandey", degree: "MSc Automotive Engineering", university: "TU Munich", country: "Germany", quote: "Tuition-free education at one of the best engineering schools in the world. NEXUS helped with the blocked account and visa.", image: "/student/student1.jpg" },
+    { name: "Ashish Pandey", degree: "MSc Automotive Engineering", university: "TU Munich", country: "Germany", quote: "Tuition-free education at one of the best engineering schools in the world. Nexsus helped with the blocked account and visa.", image: "/student/student1.jpg" },
     { name: "Binita Karki", degree: "MSc Data Science", university: "Delft University", country: "Netherlands", quote: "The orientation year visa gave me time to find the perfect job after graduation.", image: "/student/student2.jpg" },
   ],
 };

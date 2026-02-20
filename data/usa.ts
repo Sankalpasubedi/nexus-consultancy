@@ -99,9 +99,9 @@ const usaData: CountryDataType = {
     { id: 4, title: "Natural Diversity", description: "National parks, beaches, mountains, and deserts across 50 states" },
   ],
   testimonials: [
-    { name: "Anish Shrestha", degree: "MS Computer Science", university: "Stanford University", country: "USA", quote: "The STEM OPT extension gave me 3 years of work experience in Silicon Valley. NEXUS guided me through the complex F-1 visa process perfectly.", image: "/student/student1.jpg" },
-    { name: "Pragya Adhikari", degree: "MBA", university: "University of Chicago", country: "USA", quote: "Studying in the US opened doors I never imagined. NEXUS helped me secure a significant scholarship.", image: "/student/student2.jpg" },
-    { name: "Roshan Maharjan", degree: "PhD Physics", university: "MIT", country: "USA", quote: "The research opportunities at MIT are world-class. NEXUS made the application process stress-free.", image: "/student/student3.jpg" },
+    { name: "Anish Shrestha", degree: "MS Computer Science", university: "Stanford University", country: "USA", quote: "The STEM OPT extension gave me 3 years of work experience in Silicon Valley. Nexsus guided me through the complex F-1 visa process perfectly.", image: "/student/student1.jpg" },
+    { name: "Pragya Adhikari", degree: "MBA", university: "University of Chicago", country: "USA", quote: "Studying in the US opened doors I never imagined. Nexsus helped me secure a significant scholarship.", image: "/student/student2.jpg" },
+    { name: "Roshan Maharjan", degree: "PhD Physics", university: "MIT", country: "USA", quote: "The research opportunities at MIT are world-class. Nexsus made the application process stress-free.", image: "/student/student3.jpg" },
   ],
 };
 

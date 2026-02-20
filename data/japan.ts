@@ -91,7 +91,7 @@ const japanData: CountryDataType = {
     { id: 4, title: "Technology & Innovation", description: "Bullet trains, robotics, and cutting-edge consumer technology" },
   ],
   testimonials: [
-    { name: "Sunil Tamang", degree: "MEng Robotics", university: "University of Tokyo", country: "Japan", quote: "Japan's technology is decades ahead. NEXUS helped me secure a MEXT scholarship covering everything.", image: "/student/student1.jpg" },
+    { name: "Sunil Tamang", degree: "MEng Robotics", university: "University of Tokyo", country: "Japan", quote: "Japan's technology is decades ahead. Nexsus helped me secure a MEXT scholarship covering everything.", image: "/student/student1.jpg" },
     { name: "Rekha Pariyar", degree: "MBA", university: "Kyoto University", country: "Japan", quote: "The blend of traditional business ethics and modern innovation made my MBA truly unique.", image: "/student/student2.jpg" },
   ],
 };

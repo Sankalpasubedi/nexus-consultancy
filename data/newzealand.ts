@@ -95,8 +95,8 @@ const newZealandData: CountryDataType = {
     { id: 4, title: "Natural Wonders", description: "Fiordland, geothermal areas, glaciers, and pristine beaches" },
   ],
   testimonials: [
-    { name: "Maya Tamang", degree: "BSc Environmental Science", university: "University of Auckland", country: "New Zealand", quote: "New Zealand's focus on sustainability perfectly matched my studies. NEXUS helped me every step of the way.", image: "/student/student1.jpg" },
-    { name: "Sujan Shrestha", degree: "MSc Computer Science", university: "Victoria University", country: "New Zealand", quote: "The quality of education and work-life balance in NZ is exceptional. NEXUS made the visa process straightforward.", image: "/student/student2.jpg" },
+    { name: "Maya Tamang", degree: "BSc Environmental Science", university: "University of Auckland", country: "New Zealand", quote: "New Zealand's focus on sustainability perfectly matched my studies. Nexsus helped me every step of the way.", image: "/student/student1.jpg" },
+    { name: "Sujan Shrestha", degree: "MSc Computer Science", university: "Victoria University", country: "New Zealand", quote: "The quality of education and work-life balance in NZ is exceptional. Nexsus made the visa process straightforward.", image: "/student/student2.jpg" },
   ],
 };
 

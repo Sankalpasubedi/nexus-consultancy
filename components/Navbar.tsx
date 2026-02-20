@@ -20,12 +20,12 @@ const navData: NavItem[] = [
     hasDropdown: true,
     children: [
       { title: "All Services", url: "/services", description: "Explore all our services" },
-      { title: "SOP & Application", url: "/services/sop", description: "Statement of purpose help" },
+      { title: "SOP & Application", url: "/services/sop-writing-assistance", description: "Statement of purpose help" },
       { title: "Test Preparation", url: "/services/test-preparation", description: "IELTS, TOEFL, PTE prep" },
-      { title: "Counseling", url: "/services/counseling", description: "Expert guidance" },
-      { title: "Visa Assistance", url: "/services/visa", description: "Visa application support" },
-      { title: "Pre-Departure", url: "/services/pre-departure", description: "Prepare to fly" },
-      { title: "Scholarships", url: "/services/scholarships", description: "Financial aid guidance" },
+      { title: "Counseling", url: "/services/career-counseling", description: "Expert guidance" },
+      { title: "Visa Assistance", url: "/services/student-visa-assistance", description: "Visa application support" },
+      { title: "Pre-Departure", url: "/services/pre-departure-support", description: "Prepare to fly" },
+      { title: "Scholarships", url: "/services/scholarship-guidance", description: "Financial aid guidance" },
     ],
   },
   {
@@ -46,14 +46,14 @@ const navData: NavItem[] = [
     hasDropdown: true,
     children: [
       { title: "All Destinations", url: "/destinations", description: "Explore countries" },
-      { title: "Australia", url: "/destinations/australia", description: "Land down under" },
-      { title: "United Kingdom", url: "/destinations/uk", description: "Historic excellence" },
-      { title: "Canada", url: "/destinations/canada", description: "Welcoming & diverse" },
-      { title: "USA", url: "/destinations/usa", description: "Ivy League & more" },
-      { title: "New Zealand", url: "/destinations/new-zealand", description: "Natural beauty" },
-      { title: "Japan", url: "/destinations/japan", description: "Innovation & tradition" },
-      { title: "South Korea", url: "/destinations/south-korea", description: "K-wave & tech" },
-      { title: "Europe", url: "/destinations/europe", description: "Diverse cultures" },
+      { title: "Australia", url: "/destinations/study-in-australia", description: "Land down under" },
+      { title: "United Kingdom", url: "/destinations/study-in-uk", description: "Historic excellence" },
+      { title: "Canada", url: "/destinations/study-in-canada", description: "Welcoming & diverse" },
+      { title: "USA", url: "/destinations/study-in-usa", description: "Ivy League & more" },
+      { title: "New Zealand", url: "/destinations/study-in-new-zealand", description: "Natural beauty" },
+      { title: "Japan", url: "/destinations/study-in-japan", description: "Innovation & tradition" },
+      { title: "South Korea", url: "/destinations/study-in-south-korea", description: "K-wave & tech" },
+      { title: "Europe", url: "/destinations/study-in-europe", description: "Diverse cultures" },
     ],
   },
   { title: "Contact", url: "/contact" },
@@ -90,7 +90,7 @@ export default function Navbar() {
             <span className="text-sm font-extrabold text-white">N</span>
           </div>
           <span className="text-base font-bold tracking-tight text-neutral-900">
-            NEXSUS
+            Nexsus
           </span>
         </Link>
 
