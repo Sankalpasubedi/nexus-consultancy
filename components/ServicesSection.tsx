@@ -89,7 +89,7 @@ export default function ServicesSection() {
               <HoverCard className="h-full">
                 <div className="p-8 lg:p-10 bg-white border border-gray-100 rounded-3xl hover:shadow-lg transition-all duration-500 h-full group">
                   <div
-                    className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-300"
+                    className="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-300"
                   >
                     <Icon name={service.icon} size={24} className="text-white" />
                   </div>
@@ -108,7 +108,7 @@ export default function ServicesSection() {
                         className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-gray-50 text-gray-600 border border-gray-100"
                       >
                         <span
-                          className="w-1.5 h-1.5 rounded-full bg-slate-900 flex-shrink-0"
+                          className="w-1.5 h-1.5 rounded-full bg-slate-700 flex-shrink-0"
                         />
                         {feature}
                       </span>
@@ -129,7 +129,7 @@ export default function ServicesSection() {
             >
               <Link
                 href="/services"
-                className="inline-flex items-center gap-3 bg-[#003975] text-white px-10 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-900/20"
+                className="inline-flex items-center gap-3 bg-[#003975] text-white px-10 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-800/20"
               >
                 Explore All Services
                 <svg

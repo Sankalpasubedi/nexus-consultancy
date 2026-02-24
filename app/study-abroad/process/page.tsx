@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import {
   FadeUp,
   StaggerContainer,
@@ -10,7 +10,6 @@ import {
   HoverCard,
 } from "@/lib/animations";
 import { useHeader } from "@/app/contexts/HeaderContext";
-import { useEffect } from "react";
 import { Icon } from "@/lib/icons";
 
 /* ─── Data ─────────────────────────────────────────── */
@@ -112,61 +111,102 @@ const steps = [
 /* ─── Full-width slider ────────────────────────────── */
 
 function ProcessSlider() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [scroll, setScroll] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
   const cardWidth = 380;
   const gap = 24;
-  const maxScroll = Math.max(0, steps.length * (cardWidth + gap) - (typeof window !== "undefined" ? window.innerWidth : 1200));
 
-  /* ── Drag-to-scroll state ── */
+  // Drag state
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
-  const scrollStartValue = useRef(0);
-  const [grabbing, setGrabbing] = useState(false);
+  const dragScrollLeft = useRef(0);
+  const hasDragged = useRef(false);
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    isDragging.current = true;
-    dragStartX.current = e.clientX;
-    scrollStartValue.current = scroll;
-    setGrabbing(true);
-  }, [scroll]);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    const dx = dragStartX.current - e.clientX;
-    const newScroll = Math.max(0, Math.min(maxScroll, scrollStartValue.current + dx));
-    setScroll(newScroll);
-  }, [maxScroll]);
-
-  const handleMouseUp = useCallback(() => {
-    isDragging.current = false;
-    setGrabbing(false);
+  const updateState = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    const max = scrollWidth - clientWidth;
+    setProgress(max > 0 ? (scrollLeft / max) * 100 : 0);
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  const handleMouseLeave = useCallback(() => {
-    if (isDragging.current) {
-      isDragging.current = false;
-      setGrabbing(false);
-    }
-  }, []);
-
-  const move = (dir: number) => {
-    setScroll((p) => Math.max(0, Math.min(maxScroll, p + dir * (cardWidth + gap))));
+  const handleScrollLeft = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: -(cardWidth + gap), behavior: "smooth" });
   };
 
+  const handleScrollRight = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: cardWidth + gap, behavior: "smooth" });
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.userSelect = "none";
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !scrollRef.current) return;
+      const dx = e.clientX - dragStartX.current;
+      if (Math.abs(dx) > 3) hasDragged.current = true;
+      scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+    };
+
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    updateState();
+    scrollEl.addEventListener("scroll", updateState, { passive: true });
+    window.addEventListener("resize", updateState);
+
+    return () => {
+      scrollEl.removeEventListener("scroll", updateState);
+      window.removeEventListener("resize", updateState);
+    };
+  }, [updateState]);
+
   return (
-    <div
-      className={`relative overflow-hidden ${grabbing ? "cursor-grabbing" : "cursor-grab"} select-none`}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-    >
-      <motion.div
-        ref={ref}
-        animate={{ x: -scroll }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="flex gap-6 pl-[max(1.5rem,calc((100vw-1440px)/2+1.5rem))]"
+    <div className="relative">
+      <div
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+        className="flex gap-6 px-6 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none focus:outline-none focus:ring-0"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          overscrollBehaviorX: "contain",
+          touchAction: "pan-x pinch-zoom",
+          paddingLeft: "max(1.5rem, calc((100vw - 1440px) / 2 + 1.5rem))",
+        }}
       >
         {steps.map((s, i) => (
           <motion.div
@@ -176,6 +216,7 @@ function ProcessSlider() {
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
             className="flex-shrink-0 w-[380px]"
+            style={{ scrollSnapAlign: "start" }}
           >
             <div className="bg-white rounded-3xl p-8 border border-gray-100 h-full shadow-sm hover:shadow-lg transition-shadow relative overflow-hidden">
               {/* Accent line */}
@@ -213,14 +254,16 @@ function ProcessSlider() {
             </div>
           </motion.div>
         ))}
-      </motion.div>
-      <div className="flex justify-center gap-3 mt-8">
-        <button onClick={() => move(-1)} className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm">
-          <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-        </button>
-        <button onClick={() => move(1)} className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition shadow-sm">
-          <svg className="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-        </button>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="max-w-[1440px] mx-auto px-6 mt-6">
+        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"
+            style={{ width: `${Math.max(5, progress)}%` }}
+          />
+        </div>
       </div>
     </div>
   );
@@ -239,7 +282,7 @@ export default function ProcessPage() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative py-24 px-6 bg-gradient-to-br from-[#003975] via-[#002d5e] to-[#001a3a] text-white overflow-hidden">
+      <section className="relative py-24 px-6 bg-gradient-to-br from-[#004a8f] via-[#003a75] to-[#002550] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-72 h-72 bg-purple-400 rounded-full blur-3xl animate-blob" />
           <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full blur-3xl animate-blob animation-delay-2000" />
@@ -312,7 +355,7 @@ export default function ProcessPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white">
+      <section className="py-20 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white">
         <FadeUp>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Ready to Begin?</h2>

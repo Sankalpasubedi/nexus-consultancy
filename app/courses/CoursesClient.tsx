@@ -126,6 +126,24 @@ export default function CoursesPage() {
     }
   }, [x, centerOffset, goTo]);
 
+  // Wheel handler for trackpad horizontal scroll
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 1) return;
+      
+      e.preventDefault();
+      const minX = -(ITEM_W * (courseCategories.length - 1)) - centerOffset + containerWidth - CARD_W;
+      const maxX = centerOffset;
+      const raw = x.get() - delta;
+      x.set(Math.max(minX, Math.min(maxX, raw)));
+      
+      const idx = Math.round((-x.get() + centerOffset) / ITEM_W);
+      setActiveIndex(Math.max(0, Math.min(courseCategories.length - 1, idx)));
+    },
+    [x, centerOffset, containerWidth]
+  );
+
   const handleCardClick = useCallback(
     (e: React.MouseEvent, slug: string) => {
       if (hasDragged.current) {
@@ -227,7 +245,7 @@ export default function CoursesPage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       draggable={false}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
 
                     {/* Icon badge */}
                     <div className="absolute top-5 left-5">
@@ -272,7 +290,7 @@ export default function CoursesPage() {
           >
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
                   <Icon name={active?.icon || "BookOpen"} size={20} className="text-white" />
                 </div>
                 {active?.title}
@@ -289,23 +307,25 @@ export default function CoursesPage() {
         </AnimatePresence>
 
         {/* Icon Navigation */}
-        <div className="flex items-center justify-center gap-3 mt-10">
-          {courseCategories.map((cat, i) => (
-            <motion.button
-              key={cat.slug}
-              onClick={() => goTo(i)}
-              className={`relative p-2.5 rounded-full transition-all ${
-                i === activeIndex
-                  ? "ring-2 ring-[#003975] bg-[#003975]/10 scale-110"
-                  : "opacity-40 hover:opacity-70 bg-gray-100"
-              }`}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              title={cat.title}
-            >
-              <Icon name={cat.icon} size={18} className={i === activeIndex ? "text-[#003975]" : "text-slate-500"} />
-            </motion.button>
-          ))}
+        <div className="flex items-center justify-center gap-4 mt-10">
+          <div className="flex items-center gap-3">
+            {courseCategories.map((cat, i) => (
+              <motion.button
+                key={cat.slug}
+                onClick={() => goTo(i)}
+                className={`relative p-2.5 rounded-full transition-all ${
+                  i === activeIndex
+                    ? "ring-2 ring-[#003975] bg-[#003975]/10 scale-110"
+                    : "opacity-40 hover:opacity-70 bg-gray-100"
+                }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                title={cat.title}
+              >
+                <Icon name={cat.icon} size={18} className={i === activeIndex ? "text-[#003975]" : "text-slate-500"} />
+              </motion.button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -335,7 +355,7 @@ export default function CoursesPage() {
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                       <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
                         <span className="text-white text-xs font-medium bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
                           {cat.programs} Programs
@@ -376,7 +396,7 @@ export default function CoursesPage() {
         <div className="grid md:grid-cols-2 gap-6">
           <FadeUp delay={0.1}>
             <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full">
-              <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mb-4">
+              <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
                 <Icon name="GraduationCap" size={20} className="text-white" />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Undergraduate</h3>
@@ -399,7 +419,7 @@ export default function CoursesPage() {
           </FadeUp>
           <FadeUp delay={0.2}>
             <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full">
-              <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mb-4">
+              <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
                 <Icon name="Building" size={20} className="text-white" />
               </div>
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Postgraduate</h3>
@@ -426,7 +446,7 @@ export default function CoursesPage() {
       {/* CTA */}
       <div className="relative max-w-3xl mx-auto px-6 mt-24 text-center">
         <FadeUp>
-          <div className="bg-[#003975] rounded-3xl p-12 text-white relative overflow-hidden">
+          <div className="bg-[#004a8f] rounded-3xl p-12 text-white relative overflow-hidden">
             <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#00ab18]/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-white/5 rounded-full blur-3xl" />
             <div className="relative z-10">

@@ -418,7 +418,7 @@ export default function DestinationsComparePage() {
   return (
     <main className="pt-20">
       {/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 HERO \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */}
-      <section className="relative py-28 px-6 bg-gradient-to-br from-[#001a3a] via-[#003975] to-[#002d5e] text-white overflow-hidden">
+      <section className="relative py-28 px-6 bg-gradient-to-br from-[#002550] via-[#004a8f] to-[#003a75] text-white overflow-hidden">
         {/* Decorative */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-cyan-400/10 rounded-full blur-[120px]" />
@@ -640,7 +640,7 @@ export default function DestinationsComparePage() {
       </AnimatePresence>
 
       {/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 CATEGORY FILTER \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */}
-      <section id="rankings" className="py-6 px-6 bg-white border-b border-gray-100 sticky top-20 z-30 backdrop-blur-xl bg-white/95">
+      <section id="rankings" className="py-6 px-6 bg-white border-b border-gray-100 z-30 backdrop-blur-xl bg-white/95">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Rank by</h2>
@@ -938,7 +938,7 @@ export default function DestinationsComparePage() {
                           <div className="px-6 md:px-8 pb-6 md:pb-8">
                             <Link
                               href={`/destinations/${country.slug}`}
-                              className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow"
+                              className="inline-flex items-center gap-2 bg-slate-800 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow"
                             >
                               Explore Full {country.name} Guide <Icon name="ArrowRight" size={14} />
                             </Link>
@@ -1126,7 +1126,7 @@ export default function DestinationsComparePage() {
       </section>
 
       {/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 CTA \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */}
-      <section className="py-24 px-6 bg-gradient-to-br from-[#003975] via-[#002d5e] to-[#001a3a] text-white relative overflow-hidden">
+      <section className="py-24 px-6 bg-gradient-to-br from-[#004a8f] via-[#003a75] to-[#002550] text-white relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 right-0 w-[500px] h-[500px] bg-[#00ab18]/10 rounded-full blur-[120px]" />
           <div className="absolute -bottom-40 left-0 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px]" />

@@ -49,7 +49,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-[#001d3d] via-[#002a52] to-[#003975] text-white">
+    <footer className="relative bg-gradient-to-b from-[#002a52] via-[#003468] to-[#004a8f] text-white">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/[0.05] rounded-full blur-[120px]" />
@@ -65,7 +65,7 @@ export default function Footer() {
       <div className="relative z-10 px-4 pt-16 pb-0 sm:px-6 lg:px-8">
       <div >
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl bg-gradient-to-r from-[#003975] via-[#004a8f] to-[#00ab18] px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/20 border border-white/10">
+          <div className="rounded-3xl bg-gradient-to-r from-[#003975] via-[#004a8f] to-[#00ab18] px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/15 border border-white/10">
             <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
               {/* Left content */}
               <div className="max-w-xl text-center lg:text-left">

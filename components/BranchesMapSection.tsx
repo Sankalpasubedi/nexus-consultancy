@@ -369,7 +369,7 @@ function KathmanduClusterTooltip({
           <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-100/80 p-5 w-[300px]">
             {/* Header */}
             <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-slate-900">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-slate-800">
                 <Icon name="Building2" size={18} className="text-white" />
               </div>
               <div>
@@ -511,7 +511,7 @@ function MobileBranchCard({
           <div
             className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
               branch.isHead
-                ? "bg-slate-900"
+                ? "bg-slate-800"
                 : "bg-[#003975]/10"
             }`}
           >
@@ -723,7 +723,7 @@ export default function BranchesMapSection() {
           {/* Kathmandu Valley group */}
           <div className="rounded-2xl border border-[#003975]/15 bg-gradient-to-br from-white to-blue-50/30 p-5">
             <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100/80">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-900">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-800">
                 <Icon name="Building2" size={16} className="text-white" />
               </div>
               <div>
@@ -814,7 +814,7 @@ export default function BranchesMapSection() {
         {/* Kathmandu group label */}
         <div className="mb-3">
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-7 h-7 rounded-md flex items-center justify-center bg-slate-900">
+            <div className="w-7 h-7 rounded-md flex items-center justify-center bg-slate-800">
               <Icon name="Building2" size={13} className="text-white" />
             </div>
             <span className="text-sm font-bold text-slate-900">

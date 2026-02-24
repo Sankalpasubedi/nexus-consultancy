@@ -161,7 +161,7 @@ export default function BlogPage() {
           className="object-cover object-top"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/80 via-[#002d5e]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/70 via-[#003a75]/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#fafaf8] to-transparent" />
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">

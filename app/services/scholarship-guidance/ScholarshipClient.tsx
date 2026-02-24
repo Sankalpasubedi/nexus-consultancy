@@ -90,8 +90,8 @@ export default function ScholarshipsPage() {
       {/* ── Hero ── */}
       <section className="relative min-h-[440px] md:min-h-[500px] overflow-hidden">
         <Image src="/contact/image.png" alt="Scholarship opportunities" fill className="object-cover object-top" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/85 via-[#002d5e]/70 to-[#003975]/40" />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-800/50 to-transparent" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
           <FadeUp>
             <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-semibold tracking-wide border border-white/20">
@@ -122,7 +122,7 @@ export default function ScholarshipsPage() {
       </section>
 
       {/* ── Stats Bar — Gradient ── */}
-      <section className="py-10 md:py-14 bg-gradient-to-r from-slate-900 via-[#002d5e] to-[#003975]">
+      <section className="py-10 md:py-14 bg-gradient-to-r from-slate-800 via-[#003a75] to-[#004a8f]">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -165,10 +165,10 @@ export default function ScholarshipsPage() {
                 <HoverCard>
                   <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full group hover:shadow-md transition-shadow relative">
                     {/* Top gradient accent */}
-                    <div className="h-1 bg-gradient-to-r from-slate-900 to-[#003975]" />
+                    <div className="h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
                           <Icon name={st.icon} size={20} />
                         </div>
                         <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-bold">
@@ -180,7 +180,7 @@ export default function ScholarshipsPage() {
                       <div className="space-y-2">
                         {st.features.map((f) => (
                           <span key={f} className="flex items-center gap-2 text-[13px] text-slate-600">
-                            <span className="w-1.5 h-1.5 rounded-full bg-slate-900 flex-shrink-0" /> {f}
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-700 flex-shrink-0" /> {f}
                           </span>
                         ))}
                       </div>
@@ -203,7 +203,7 @@ export default function ScholarshipsPage() {
                 <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-2">How We Help You Win</h2>
                 <p className="text-slate-500 text-sm">Our 5-step approach to maximizing your scholarship success</p>
               </div>
-              <Link href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition self-start sm:self-auto">
+              <Link href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-800 text-white text-sm font-medium hover:bg-slate-700 transition self-start sm:self-auto">
                 Start Now <Icon name="ArrowRight" size={14} />
               </Link>
             </div>
@@ -215,7 +215,7 @@ export default function ScholarshipsPage() {
               {howWeHelp.map((step, i) => (
                 <FadeUp key={step.step} delay={i * 0.08}>
                   <div className="flex gap-6 md:gap-8 items-start">
-                    <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-slate-900 text-white flex items-center justify-center text-lg font-bold shadow-lg">
+                    <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-slate-800 text-white flex items-center justify-center text-lg font-bold shadow-lg">
                       {step.step}
                     </div>
                     <div className="bg-white rounded-2xl border border-gray-100 p-6 flex-1 shadow-sm">
@@ -327,7 +327,7 @@ export default function ScholarshipsPage() {
               Get a free scholarship assessment today. Our experts will identify every opportunity you qualify for.
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-slate-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-slate-800 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg">
                 Free Scholarship Assessment <Icon name="ArrowRight" size={14} />
               </Link>
             </motion.div>

@@ -97,13 +97,13 @@ function FooterColumn({
 
 export default function FooterSection() {
   return (
-    <footer className="bg-neutral-950 text-neutral-400">
+    <footer className="bg-neutral-900 text-neutral-400">
       {/* CTA banner */}
       <div
         className="relative overflow-hidden"
         style={{
           background:
-            "linear-gradient(135deg, #003975 0%, #002a57 50%, #001d3d 100%)",
+            "linear-gradient(135deg, #004a8f 0%, #003468 50%, #002a52 100%)",
         }}
       >
         <div className="absolute inset-0 opacity-10">

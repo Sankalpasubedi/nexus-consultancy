@@ -122,7 +122,7 @@ export default function ContactPage() {
           priority
         />
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/85 via-[#002d5e]/70 to-[#003975]/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/40" />
         {/* Bottom Fade — image fades to white around middle of forms */}
         <div className="absolute bottom-0 left-0 right-0 h-[55%] bg-gradient-to-t from-white via-white/80 to-transparent" />
 
@@ -279,7 +279,7 @@ export default function ContactPage() {
 
           {/* ── Book Free Consultation ── */}
           <FadeRight>
-            <div className="bg-[#003975] rounded-2xl md:rounded-3xl p-8 md:p-10 text-white shadow-2xl flex flex-col">
+            <div className="bg-[#004a8f] rounded-2xl md:rounded-3xl p-8 md:p-10 text-white shadow-2xl flex flex-col">
               <h2 className="text-2xl font-bold mb-1.5">Book Free Consultation</h2>
               <p className="text-blue-200/80 text-sm mb-8">
                 Schedule a one-on-one session with our expert counselors. No obligations,
@@ -489,7 +489,7 @@ export default function ContactPage() {
       </section>
 
       {/* CTA */}
-      <section className="pt-20 pb-40 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white relative z-0">
+      <section className="pt-20 pb-40 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white relative z-0">
         <FadeUp>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-4">Still Have Questions?</h2>

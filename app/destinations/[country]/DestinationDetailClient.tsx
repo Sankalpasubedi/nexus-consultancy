@@ -109,7 +109,7 @@ export default function DestinationDetailClient() {
           ))}
         </motion.div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/5" />
 
         {/* Animated decorative elements */}
         <div className="absolute top-20 right-10 w-72 h-72 bg-[#003975]/20 rounded-full blur-[120px] pointer-events-none" />
@@ -190,7 +190,7 @@ export default function DestinationDetailClient() {
                       whileHover={{ backgroundColor: "#f8fafc" }}
                       className="relative p-7 md:p-8 text-center transition-colors group"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                         <Icon name={["Award", "FileText", "BookOpen", "Microscope"][idx] || "Star"} size={18} className="text-white" />
                       </div>
                       <div className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
@@ -243,7 +243,7 @@ export default function DestinationDetailClient() {
                 <HoverCard>
                   <Link href={`/destinations/${country}/${page.slug}`} className="block h-full group">
                     <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                      <div className="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
                         <Icon name={page.icon} size={22} className="text-white" />
                       </div>
                       <h3 className="text-base font-semibold text-slate-900 mb-2">{page.title}</h3>
@@ -284,7 +284,7 @@ export default function DestinationDetailClient() {
                       transition={{ delay: idx * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                       className="flex items-start gap-4 group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
+                      <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
                         <span className="text-xs font-bold text-white">{idx + 1}</span>
                       </div>
                       <p className="text-slate-600 text-sm leading-relaxed pt-1">{reason}</p>
@@ -295,7 +295,7 @@ export default function DestinationDetailClient() {
                   <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                     <Link
                       href={`/destinations/${country}/why-study-here`}
-                      className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                      className="inline-flex items-center gap-2 bg-slate-800 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg"
                     >
                       Learn More <Icon name="ArrowRight" size={14} />
                     </Link>
@@ -325,7 +325,7 @@ export default function DestinationDetailClient() {
                   </div>
                 </Float>
                 <Float duration={5} distance={8}>
-                  <div className="absolute -top-4 -right-4 bg-slate-900 text-white rounded-2xl shadow-xl p-4">
+                  <div className="absolute -top-4 -right-4 bg-slate-800 text-white rounded-2xl shadow-xl p-4">
                     <Icon name="GraduationCap" size={28} />
                   </div>
                 </Float>
@@ -367,7 +367,7 @@ export default function DestinationDetailClient() {
                     {/* Rank badge */}
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
-                        <div className="w-9 h-9 rounded-lg bg-slate-900 flex items-center justify-center">
+                        <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center">
                           <span className="text-white text-xs font-bold">#{uni.ranking.position}</span>
                         </div>
                         <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">{uni.ranking.type}</span>
@@ -421,7 +421,7 @@ export default function DestinationDetailClient() {
                   onClick={() => setActiveTab(tab)}
                   className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeTab === tab
-                      ? "bg-slate-900 text-white shadow-lg"
+                      ? "bg-slate-800 text-white shadow-lg"
                       : "bg-gray-100 text-slate-600 hover:bg-gray-200"
                   }`}
                 >
@@ -448,7 +448,7 @@ export default function DestinationDetailClient() {
                   transition={{ delay: idx * 0.06, duration: 0.4 }}
                   className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Icon name="Check" size={14} className="text-white" />
                   </div>
                   <p className="text-sm text-slate-600 leading-relaxed">{req.text}</p>
@@ -491,7 +491,7 @@ export default function DestinationDetailClient() {
               <StaggerItem key={card.id}>
                 <HoverCard>
                   <div className="bg-white rounded-2xl p-6 border border-gray-100 h-full hover:shadow-lg transition-shadow">
-                    <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mb-4">
+                    <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
                       <Icon name={card.icon} size={20} className="text-white" />
                     </div>
                     <h3 className="text-base font-semibold text-slate-900 mb-3">{card.title}</h3>
@@ -513,7 +513,7 @@ export default function DestinationDetailClient() {
             <div className="text-center mt-10">
               <Link
                 href={`/destinations/${country}/student-visa`}
-                className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                className="inline-flex items-center gap-2 bg-slate-800 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg"
               >
                 Complete Visa Guide <Icon name="ArrowRight" size={14} />
               </Link>
@@ -565,7 +565,7 @@ export default function DestinationDetailClient() {
                     </div>
                     <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                       <motion.div
-                        className="h-full rounded-full bg-slate-900"
+                        className="h-full rounded-full bg-slate-800"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${cost.percentage}%` }}
                         viewport={{ once: true }}
@@ -599,7 +599,7 @@ export default function DestinationDetailClient() {
               <StaggerItem key={idx}>
                 <HoverCard>
                   <div className="bg-white rounded-2xl p-7 border border-gray-100 h-full hover:shadow-xl transition-shadow text-center">
-                    <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mx-auto mb-5">
+                    <div className="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center mx-auto mb-5">
                       <Icon name={work.icon} size={24} className="text-white" />
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 mb-3">{work.title}</h3>
@@ -647,7 +647,7 @@ export default function DestinationDetailClient() {
               <StaggerItem key={sch.id}>
                 <HoverCard>
                   <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-6 border border-gray-100 h-full flex flex-col hover:shadow-xl transition-shadow">
-                    <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mb-4">
+                    <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
                       <Icon name="Award" size={20} className="text-white" />
                     </div>
                     <h3 className="text-base font-bold text-slate-900 mb-3">{sch.name}</h3>
@@ -675,7 +675,7 @@ export default function DestinationDetailClient() {
             <div className="text-center mt-10">
               <Link
                 href={`/destinations/${country}/scholarships`}
-                className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                className="inline-flex items-center gap-2 bg-slate-800 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg"
               >
                 View All Scholarships <Icon name="ArrowRight" size={14} />
               </Link>
@@ -771,7 +771,7 @@ export default function DestinationDetailClient() {
                         &ldquo;{t.quote}&rdquo;
                       </p>
                       <div className="flex items-center gap-3 pt-5 border-t border-gray-100">
-                        <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white text-sm font-bold">
+                        <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white text-sm font-bold">
                           {t.name.split(" ").map(n => n[0]).join("")}
                         </div>
                         <div>
@@ -789,7 +789,7 @@ export default function DestinationDetailClient() {
       )}
 
       {/* ═══════════ CTA ═══════════ */}
-      <section className="relative py-28 px-6 bg-slate-900 text-white overflow-hidden">
+      <section className="relative py-28 px-6 bg-slate-800 text-white overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={data.carouselData.CountryImages[0]?.url || "/destinations/Australia.png"}
@@ -798,7 +798,7 @@ export default function DestinationDetailClient() {
             className="object-cover opacity-15"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/65 to-slate-800" />
         <div className="absolute top-10 right-10 w-80 h-80 bg-[#003975]/30 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-10 left-10 w-60 h-60 bg-[#00ab18]/20 rounded-full blur-[100px] pointer-events-none" />
 

@@ -36,7 +36,7 @@ export default function ContactCTASection() {
       <div className="max-w-7xl mx-auto">
         {/* ─── Top CTA Banner ─── */}
         <FadeUp>
-          <div className="relative bg-gradient-to-r from-[#003975] to-[#001d3d] rounded-3xl p-12 lg:p-16 overflow-hidden">
+          <div className="relative bg-gradient-to-r from-[#004a8f] to-[#002a52] rounded-3xl p-12 lg:p-16 overflow-hidden">
             {/* Background decorations */}
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute top-0 right-0 w-96 h-96 bg-white/[0.04] rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3" />
@@ -69,7 +69,7 @@ export default function ContactCTASection() {
                 >
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-black/20"
+                    className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-black/15"
                   >
                     Book Free Consultation
                     <svg

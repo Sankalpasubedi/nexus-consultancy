@@ -152,7 +152,7 @@ export default function NewsPage() {
           className="object-cover object-top"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/80 via-[#002d5e]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/70 via-[#003a75]/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
@@ -184,7 +184,7 @@ export default function NewsPage() {
                 key={tab}
                 className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   i === 0
-                    ? "bg-slate-900 text-white"
+                    ? "bg-slate-800 text-white"
                     : "bg-gray-50 text-slate-600 hover:bg-slate-100 border border-gray-200"
                 }`}
               >
@@ -350,7 +350,7 @@ export default function NewsPage() {
 
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">
-            <div className="w-14 h-14 rounded-2xl bg-slate-900 text-white flex items-center justify-center mx-auto mb-6">
+            <div className="w-14 h-14 rounded-2xl bg-slate-800 text-white flex items-center justify-center mx-auto mb-6">
               <Icon name="Bell" size={24} />
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-tight">
@@ -369,7 +369,7 @@ export default function NewsPage() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="px-7 py-3.5 bg-slate-900 text-white rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                className="px-7 py-3.5 bg-slate-800 text-white rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg"
               >
                 Subscribe
               </motion.button>

@@ -54,7 +54,7 @@ export default function StudyAbroadPage() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative py-24 px-6 bg-gradient-to-br from-[#003975] via-[#002d5e] to-[#001a3a] text-white overflow-hidden">
+      <section className="relative py-24 px-6 bg-gradient-to-br from-[#004a8f] via-[#003a75] to-[#002550] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-72 h-72 bg-cyan-400 rounded-full blur-3xl animate-blob" />
           <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full blur-3xl animate-blob animation-delay-2000" />
@@ -88,7 +88,7 @@ export default function StudyAbroadPage() {
                   <Link href={l.href} className="block h-full">
                     <div className="bg-white rounded-3xl p-8 border border-gray-100 h-full group relative overflow-hidden">
                       <div className="absolute -top-4 -right-4 w-24 h-24 bg-slate-900 opacity-5 blur-2xl group-hover:opacity-10 transition rounded-full" />
-                      <div className="w-16 h-16 rounded-2xl bg-slate-900 flex items-center justify-center mb-6 shadow-lg">
+                      <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center mb-6 shadow-lg">
                         <Icon name={l.icon} size={28} className="text-white" />
                       </div>
                       <h3 className="text-xl font-semibold text-slate-900 mb-3">{l.title}</h3>
@@ -106,7 +106,7 @@ export default function StudyAbroadPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white">
+      <section className="py-24 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white">
         <FadeUp>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Need Personalized Guidance?</h2>

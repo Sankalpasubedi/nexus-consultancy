@@ -38,7 +38,7 @@ const features = [
 
 export default function HowWeHelpSection() {
   return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#003975] to-[#001d3d] text-white overflow-hidden">
+    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#004a8f] to-[#002a52] text-white overflow-hidden">
       {/* Animated Background Blobs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-400/[0.07] rounded-full blur-[120px] animate-blob" />
@@ -76,7 +76,7 @@ export default function HowWeHelpSection() {
                   className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 hover:bg-white/[0.08] transition-all duration-500"
                 >
                   {/* Icon Badge */}
-                  <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg">
+                  <div className="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300 shadow-lg">
                     <Icon
                       name={feature.icon}
                       size={24}
@@ -107,7 +107,7 @@ export default function HowWeHelpSection() {
             >
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-black/20"
+                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-black/15"
               >
                 Start Your Journey
                 <svg

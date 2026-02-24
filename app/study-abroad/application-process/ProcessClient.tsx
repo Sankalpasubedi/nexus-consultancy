@@ -156,17 +156,18 @@ function ProcessSlider() {
 
   return (
     <div
-      className={`relative overflow-hidden ${grabbing ? "cursor-grabbing" : "cursor-grab"} select-none`}
+      className={` outline-none focus:outline-none focus:ring-0 relative overflow-hidden ${grabbing ? "cursor-grabbing" : "cursor-grab"} select-none`}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => ref.current?.focus({ preventScroll: true })}
     >
       <motion.div
         ref={ref}
         animate={{ x: -scroll }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="flex gap-6 pl-[max(1.5rem,calc((100vw-1440px)/2+1.5rem))]"
+        className="flex gap-6 pl-[max(1.5rem,calc((100vw-1440px)/2+1.5rem))] pr-[max(1.5rem,calc((100vw-1440px)/2+1.5rem))]"
       >
         {steps.map((s, i) => (
           <motion.div
@@ -183,7 +184,7 @@ function ProcessSlider() {
 
               {/* Step number */}
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-2xl shadow-lg">
+                <div className="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center text-2xl shadow-lg">
                   <Icon name={s.icon} size={24} className="text-white" />
                 </div>
                 <div>
@@ -239,7 +240,7 @@ export default function ProcessPage() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative py-24 px-6 bg-gradient-to-br from-[#003975] via-[#002d5e] to-[#001a3a] text-white overflow-hidden">
+      <section className="relative py-24 px-6 bg-gradient-to-br from-[#004a8f] via-[#003a75] to-[#002550] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-72 h-72 bg-purple-400 rounded-full blur-3xl animate-blob" />
           <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full blur-3xl animate-blob animation-delay-2000" />
@@ -312,7 +313,7 @@ export default function ProcessPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white">
+      <section className="py-20 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white">
         <FadeUp>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Ready to Begin?</h2>

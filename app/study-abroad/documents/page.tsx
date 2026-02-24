@@ -98,7 +98,7 @@ export default function DocumentsPage() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative py-24 px-6 bg-gradient-to-br from-[#003975] via-[#002d5e] to-[#001a3a] text-white overflow-hidden">
+      <section className="relative py-24 px-6 bg-gradient-to-br from-[#004a8f] via-[#003a75] to-[#002550] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 right-20 w-72 h-72 bg-blue-400 rounded-full blur-3xl animate-blob" />
           <div className="absolute bottom-10 left-10 w-80 h-80 bg-green-400 rounded-full blur-3xl animate-blob animation-delay-2000" />
@@ -212,7 +212,7 @@ export default function DocumentsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white">
+      <section className="py-20 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white">
         <FadeUp>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Need Help With Documents?</h2>

@@ -94,7 +94,7 @@ export default function ServicesPage() {
           priority
         />
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/80 via-[#002d5e]/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/70 via-[#003a75]/50 to-transparent" />
         {/* Bottom fade to white */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
@@ -210,7 +210,7 @@ export default function ServicesPage() {
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-slate-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                className="inline-flex items-center gap-2 bg-slate-800 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg"
               >
                 Book Counselling <Icon name="ArrowRight" size={14} />
               </Link>

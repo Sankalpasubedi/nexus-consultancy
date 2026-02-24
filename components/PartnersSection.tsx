@@ -55,7 +55,7 @@ export default function PartnersSection() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 rounded-3xl p-10 md:p-16">
+          <div className="bg-gradient-to-r from-slate-800 via-slate-800 to-slate-700 rounded-3xl p-10 md:p-16">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
               {stats.map((stat, idx) => (
                 <motion.div

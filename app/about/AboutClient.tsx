@@ -209,6 +209,24 @@ function TeamSliderSection({
     }
   }, [x, centerOffset, goTo, team.length]);
 
+  // Wheel handler for trackpad horizontal scroll
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 1) return;
+      
+      e.preventDefault();
+      const minX = -(CARD_ITEM * (team.length - 1)) - centerOffset + containerWidth - CARD_W;
+      const maxX = centerOffset;
+      const raw = x.get() - delta;
+      x.set(Math.max(minX, Math.min(maxX, raw)));
+      
+      const idx = Math.round((-x.get() + centerOffset) / CARD_ITEM);
+      setActiveIndex(Math.max(0, Math.min(team.length - 1, idx)));
+    },
+    [x, centerOffset, containerWidth, team.length]
+  );
+
   return (
     <section className="py-24 bg-gray-50 overflow-hidden">
       <FadeUp>
@@ -234,6 +252,7 @@ function TeamSliderSection({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onWheel={handleWheel}
       >
         <motion.div
           style={{ x }}
@@ -320,15 +339,8 @@ function TeamSliderSection({
         </motion.div>
       </div>
 
-      {/* Navigation dots + arrows */}
+      {/* Navigation dots */}
       <div className="flex items-center justify-center gap-4 mt-8">
-        <button
-          onClick={() => activeIndex > 0 && goTo(activeIndex - 1)}
-          disabled={activeIndex === 0}
-          className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          <Icon name="ChevronLeft" size={18} />
-        </button>
         <div className="flex items-center gap-2">
           {team.map((_, i) => (
             <button
@@ -342,13 +354,6 @@ function TeamSliderSection({
             />
           ))}
         </div>
-        <button
-          onClick={() => activeIndex < team.length - 1 && goTo(activeIndex + 1)}
-          disabled={activeIndex === team.length - 1}
-          className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          <Icon name="ChevronRight" size={18} />
-        </button>
       </div>
     </section>
   );
@@ -576,7 +581,7 @@ export default function AboutPage() {
                 <div className="flex flex-wrap gap-3 mb-12">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-900/15"
+                    className="inline-flex items-center gap-2.5 bg-[#004a8f] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#003a75] transition shadow-lg shadow-blue-800/15"
                   >
                     Book Free Consultation
                     <Icon name="ArrowRight" size={16} />
@@ -734,7 +739,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Name overlay at bottom */}
-                  <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/70 via-black/30 to-transparent px-6 pb-5 pt-14">
+                  <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/55 via-black/20 to-transparent px-6 pb-5 pt-14">
                     <h3 className="text-lg font-bold text-white">Bishnu Khadka</h3>
                     <p className="text-[#00ab18] text-sm font-medium">Managing Director</p>
                   </div>
@@ -847,7 +852,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="pt-24 pb-40 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white relative z-0">
+      <section className="pt-24 pb-40 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white relative z-0">
         <div className="max-w-3xl mx-auto text-center">
           <FadeUp>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Journey?</h2>

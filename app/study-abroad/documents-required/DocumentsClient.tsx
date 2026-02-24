@@ -274,7 +274,7 @@ export default function DocumentsPage() {
           <FadeUp delay={0.2}>
             <Link
               href="#checklist"
-              className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-900/20"
+              className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
             >
               Download Checklist
               <Icon name="ArrowRight" size={16} />
@@ -305,7 +305,7 @@ export default function DocumentsPage() {
               <StaggerItem key={tip.title}>
                 <HoverCard>
                   <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full">
-                    <div className="w-12 h-12 rounded-xl bg-slate-900 flex items-center justify-center mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center mb-5">
                       <Icon
                         name={tip.icon}
                         size={20}
@@ -336,7 +336,7 @@ export default function DocumentsPage() {
           <FadeUp>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
                   <Icon
                     name="ClipboardList"
                     size={18}
@@ -377,7 +377,7 @@ export default function DocumentsPage() {
                       }
                       className="w-full flex items-center gap-4 py-5 text-left group"
                     >
-                      <div className="w-9 h-9 rounded-lg bg-slate-900 flex items-center justify-center flex-shrink-0">
+                      <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
                         <Icon
                           name={cat.icon}
                           size={16}
@@ -494,7 +494,7 @@ export default function DocumentsPage() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-900/20"
+                className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
               >
                 Get Document Support
                 <Icon name="ArrowRight" size={16} />

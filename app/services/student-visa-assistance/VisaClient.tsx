@@ -91,7 +91,7 @@ export default function VisaPage() {
       {/* ── Hero ── */}
       <section className="relative min-h-[440px] md:min-h-[500px] overflow-hidden">
         <Image src="/contact/image.png" alt="Visa application assistance" fill className="object-cover object-top" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/85 via-[#002d5e]/70 to-[#003975]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
           <FadeUp>
@@ -166,10 +166,10 @@ export default function VisaPage() {
                 <HoverCard>
                   <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full flex group">
                     {/* Left accent border */}
-                    <div className="w-1.5 bg-slate-900 flex-shrink-0 group-hover:bg-[#003975] transition-colors" />
+                    <div className="w-1.5 bg-slate-800 flex-shrink-0 group-hover:bg-[#003975] transition-colors" />
                     <div className="p-6 flex-1">
                       <div className="flex items-start gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center flex-shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
                           <Icon name={vt.icon} size={20} />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -181,7 +181,7 @@ export default function VisaPage() {
                       <div className="flex flex-wrap gap-2">
                         {vt.features.map((f) => (
                           <span key={f} className="inline-flex items-center gap-1.5 text-[12px] text-slate-600 bg-gray-50 px-2.5 py-1 rounded-full">
-                            <span className="w-1 h-1 rounded-full bg-slate-900" /> {f}
+                            <span className="w-1 h-1 rounded-full bg-slate-700" /> {f}
                           </span>
                         ))}
                       </div>
@@ -247,7 +247,7 @@ export default function VisaPage() {
               <StaggerItem key={step.step}>
                 <div className="bg-white rounded-2xl border border-gray-100 p-6 h-full group hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:bg-[#003975] transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:bg-[#003975] transition-colors">
                       {step.step}
                     </div>
                     <div className="w-8 h-px bg-gray-200 flex-shrink-0" />
@@ -280,7 +280,7 @@ export default function VisaPage() {
                 <div className="space-y-4">
                   {["Dedicated visa specialist assigned to your case", "Real-time application tracking and updates", "Embassy relationship for smooth processing", "Free reapplication support if needed"].map((item) => (
                     <div key={item} className="flex items-center gap-3 text-sm text-slate-600">
-                      <div className="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center flex-shrink-0">
+                      <div className="w-6 h-6 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
                         <Icon name="Check" size={12} />
                       </div>
                       {item}
@@ -290,7 +290,7 @@ export default function VisaPage() {
               </div>
             </FadeLeft>
             <FadeRight>
-              <div className="relative bg-gradient-to-br from-[#003975] to-slate-900 rounded-3xl p-8 text-white overflow-hidden">
+              <div className="relative bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-2xl" />
                 <div className="relative z-10">
                   <h3 className="text-2xl font-bold mb-6">Our Visa Success</h3>
@@ -326,7 +326,7 @@ export default function VisaPage() {
               Get a free visa assessment from our expert team. We'll review your profile and guide you through every step.
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-slate-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-slate-800 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg">
                 Free Visa Assessment <Icon name="ArrowRight" size={14} />
               </Link>
             </motion.div>

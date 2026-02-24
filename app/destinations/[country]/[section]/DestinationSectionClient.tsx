@@ -102,7 +102,7 @@ export default function DestinationSectionClient() {
   return (
     <main className="pt-20 min-h-screen">
       {/* ═══════════ HERO ═══════════ */}
-      <section className="relative py-16 md:py-24 px-6 bg-slate-900 text-white overflow-hidden">
+      <section className="relative py-16 md:py-24 px-6 bg-slate-800 text-white overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={data.carouselData.CountryImages[0]?.url || "/destinations/Australia.png"}
@@ -111,7 +111,7 @@ export default function DestinationSectionClient() {
             className="object-cover opacity-20"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/50 to-slate-800" />
         <div className="absolute top-10 right-10 w-72 h-72 bg-[#003975]/30 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -218,7 +218,7 @@ export default function DestinationSectionClient() {
       </div>
 
       {/* ═══════════ CTA ═══════════ */}
-      <section className="py-20 px-6 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-20 px-6 bg-slate-800 text-white relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={data.carouselData.CountryImages[0]?.url || "/destinations/Australia.png"}
@@ -227,7 +227,7 @@ export default function DestinationSectionClient() {
             className="object-cover opacity-10"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/65 to-slate-800" />
         <div className="absolute top-10 right-10 w-72 h-72 bg-[#003975]/30 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative z-10">
@@ -289,7 +289,7 @@ function WhyStudyHere({ data, country }: { data: CountryDataType; country: strin
         </FadeLeft>
         <FadeRight className="lg:col-span-2">
           <div>
-            <div className="bg-slate-900 rounded-2xl p-6 text-white">
+            <div className="bg-slate-800 rounded-2xl p-6 text-white">
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
                   <FlagIcon code={data.flagCode} size={22} />
@@ -411,7 +411,7 @@ function WhyStudyHere({ data, country }: { data: CountryDataType; country: strin
 
       {/* How Nexsus Helps */}
       <FadeUp>
-        <div className="bg-slate-900 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
+        <div className="bg-slate-800 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#003975]/40 rounded-full blur-[100px] pointer-events-none" />
           <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
             <div>
@@ -484,7 +484,7 @@ function Universities({ data, country }: { data: CountryDataType; country: strin
           </div>
         </FadeLeft>
         <FadeRight className="lg:col-span-2">
-          <div className="bg-slate-900 rounded-2xl p-6 text-white">
+          <div className="bg-slate-800 rounded-2xl p-6 text-white">
             <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">University Snapshot</h4>
             <div className="space-y-3">
               {[
@@ -709,7 +709,7 @@ function Admission({ data, country }: { data: CountryDataType; country: string }
           </div>
         </FadeLeft>
         <FadeRight className="lg:col-span-2">
-          <div className="bg-slate-900 rounded-2xl p-6 text-white">
+          <div className="bg-slate-800 rounded-2xl p-6 text-white">
             <h4 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-4">Quick Overview</h4>
             <div className="space-y-3">
               {[
@@ -776,7 +776,7 @@ function Admission({ data, country }: { data: CountryDataType; country: string }
               onClick={() => setLevel(l)}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
                 level === l
-                  ? "bg-slate-900 text-white shadow-lg"
+                  ? "bg-slate-800 text-white shadow-lg"
                   : "bg-gray-100 text-slate-600 hover:bg-gray-200"
               }`}
             >
@@ -794,7 +794,7 @@ function Admission({ data, country }: { data: CountryDataType; country: string }
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-          <div className="bg-slate-900 px-6 py-4 flex items-center justify-between">
+          <div className="bg-slate-800 px-6 py-4 flex items-center justify-between">
             <h3 className="text-base font-semibold text-white flex items-center gap-2">
               <Icon name="ClipboardList" size={16} className="text-white/70" />
               {level} Requirements

@@ -162,7 +162,7 @@ export default function GuidePage() {
             <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 bg-slate-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition"
+                className="inline-flex items-center gap-2.5 bg-slate-800 text-white px-7 py-3.5 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition"
               >
                 Download Guide
                 <Icon name="ArrowRight" size={16} />
@@ -220,7 +220,7 @@ export default function GuidePage() {
             <motion.div whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 bg-slate-900 text-white px-8 py-4 rounded-full text-sm font-semibold shadow-xl hover:shadow-2xl transition"
+                className="inline-flex items-center gap-2.5 bg-slate-800 text-white px-8 py-4 rounded-full text-sm font-semibold shadow-xl hover:shadow-2xl transition"
               >
                 Start Your Application
                 <Icon name="ArrowRight" size={16} />
@@ -304,7 +304,7 @@ function TimelineSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
           <FadeUp>
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
                 <Icon name="Plane" size={20} className="text-white" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
@@ -396,7 +396,7 @@ function TimelineSection() {
 
                         {/* Card header */}
                         <div className="flex items-center gap-3 mb-4 pl-3">
-                          <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                          <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                             <Icon name={milestone.icon} size={18} className="text-white" />
                           </div>
                           <h3 className="text-lg font-bold text-slate-900">

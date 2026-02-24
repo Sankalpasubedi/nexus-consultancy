@@ -97,7 +97,7 @@ export default function PreDeparturePage() {
       {/* ── Hero ── */}
       <section className="relative min-h-[440px] md:min-h-[500px] overflow-hidden">
         <Image src="/contact/image.png" alt="Pre-departure preparation" fill className="object-cover object-top" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/85 via-[#002d5e]/70 to-[#003975]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#00ab18]/10 to-transparent" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
           <FadeUp>
@@ -171,7 +171,7 @@ export default function PreDeparturePage() {
               <FadeUp key={sa.title} delay={i * 0.06}>
                 <div className={`bg-white rounded-2xl border border-gray-100 overflow-hidden flex flex-col md:flex-row ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
                   {/* Icon panel */}
-                  <div className="md:w-[140px] bg-[#003975] flex items-center justify-center py-6 md:py-0 flex-shrink-0">
+                  <div className="md:w-[140px] bg-[#004a8f] flex items-center justify-center py-6 md:py-0 flex-shrink-0">
                     <div className="text-center text-white">
                       <Icon name={sa.icon} size={28} className="mx-auto mb-2" />
                       <div className="text-[10px] uppercase tracking-widest font-medium text-blue-200">
@@ -212,9 +212,9 @@ export default function PreDeparturePage() {
             {timeline.map((t, i) => (
               <StaggerItem key={t.period}>
                 <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-900 to-[#003975]" />
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
                   <div className="flex items-center gap-3 mb-4 mt-2">
-                    <div className="w-10 h-10 rounded-lg bg-slate-900 text-white flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center">
                       <Icon name={t.icon} size={18} />
                     </div>
                     <div>
@@ -291,7 +291,7 @@ export default function PreDeparturePage() {
                 <div className="space-y-3">
                   {["Attend university orientation and register for courses", "Set up your bank account and local phone number", "Explore campus facilities — library, gym, cafeteria", "Join student clubs and attend welcome events", "Register with local GP or health service"].map((item) => (
                     <div key={item} className="flex items-center gap-3 text-sm text-slate-600">
-                      <div className="w-5 h-5 rounded-full bg-slate-900 text-white flex items-center justify-center flex-shrink-0">
+                      <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
                         <Icon name="Check" size={10} />
                       </div>
                       {item}
@@ -301,7 +301,7 @@ export default function PreDeparturePage() {
               </div>
             </FadeLeft>
             <FadeRight>
-              <div className="bg-gradient-to-br from-[#003975] to-slate-900 rounded-3xl p-8 text-white overflow-hidden relative">
+              <div className="bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden relative">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-[#00ab18]/10 rounded-full blur-3xl" />
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold mb-2">24/7 Support Helpline</h3>
@@ -331,7 +331,7 @@ export default function PreDeparturePage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative py-24 px-6 bg-[#003975] overflow-hidden">
+      <section className="relative py-24 px-6 bg-[#004a8f] overflow-hidden">
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-0 left-0 w-72 h-72 bg-white/5 rounded-full blur-3xl pointer-events-none" />
         <FadeUp>

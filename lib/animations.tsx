@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, type ReactNode } from "react";
+import React, { useRef, useEffect, useState, useCallback, type ReactNode } from "react";
 import {
   motion,
   useInView,
@@ -360,44 +360,128 @@ export function TextReveal({
 export function DragCarousel({
   children,
   className = "",
+  showProgress = true,
+  showButtons = true,
 }: {
   children: ReactNode;
   className?: string;
+  showProgress?: boolean;
+  showButtons?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const [dragConstraints, setDragConstraints] = useState({
-    left: 0,
-    right: 0,
-  });
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  useEffect(() => {
-    if (!containerRef.current || !dragRef.current) return;
-    const updateConstraints = () => {
-      const containerW = containerRef.current!.offsetWidth;
-      const scrollW = dragRef.current!.scrollWidth;
-      setDragConstraints({ left: -(scrollW - containerW), right: 0 });
-    };
-    updateConstraints();
-    const ro = new ResizeObserver(updateConstraints);
-    ro.observe(containerRef.current);
-    return () => ro.disconnect();
+  // Drag state
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const hasDragged = useRef(false);
+
+  const updateState = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    const max = scrollWidth - clientWidth;
+    setProgress(max > 0 ? (scrollLeft / max) * 100 : 0);
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
+  const handleScrollLeft = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const handleScrollRight = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.userSelect = "none";
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !scrollRef.current) return;
+      const dx = e.clientX - dragStartX.current;
+      if (Math.abs(dx) > 3) hasDragged.current = true;
+      scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+    };
+
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    if (hasDragged.current) {
+      e.stopPropagation();
+    }
+  }, []);
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+    
+    updateState();
+    scrollEl.addEventListener("scroll", updateState, { passive: true });
+    window.addEventListener("resize", updateState);
+    
+    return () => {
+      scrollEl.removeEventListener("scroll", updateState);
+      window.removeEventListener("resize", updateState);
+    };
+  }, [updateState]);
+
   return (
-    <div ref={containerRef} className={`overflow-hidden ${className}`}>
-      <motion.div
-        ref={dragRef}
-        drag="x"
-        dragConstraints={dragConstraints}
-        dragElastic={0.1}
-        dragTransition={{ bounceStiffness: 300, bounceDamping: 30 }}
-        style={{ x }}
-        className="flex cursor-grab active:cursor-grabbing"
+    <div ref={containerRef} className={`relative ${className}`}>
+      {/* Scroll Container */}
+      <div
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onClickCapture={handleClick}
+        onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+        className="flex overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing outline-none focus:outline-none focus:ring-0"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          overscrollBehaviorX: "contain",
+          touchAction: "pan-x pinch-zoom",
+        }}
       >
         {children}
-      </motion.div>
+      </div>
+
+      {/* Progress Bar */}
+      {showProgress && (
+        <div className="mt-4 h-1 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#004a8f] to-[#00ab18] rounded-full"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -500,3 +584,248 @@ export function HoverCard({
     </motion.div>
   );
 }
+
+/* ===== TRACKPAD CAROUSEL ===== */
+
+export function TrackpadCarousel({
+  children,
+  className = "",
+  itemClassName = "",
+  showDots = false,
+  showProgress = true,
+  autoPlay = false,
+  autoPlayInterval = 5000,
+}: {
+  children: ReactNode;
+  className?: string;
+  itemClassName?: string;
+  showDots?: boolean;
+  showProgress?: boolean;
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  // Drag state
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const hasDragged = useRef(false);
+
+  const checkScroll = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    
+    // Progress
+    const max = scrollWidth - clientWidth;
+    setProgress(max > 0 ? (scrollLeft / max) * 100 : 0);
+    
+    // Calculate active index based on scroll position
+    const children = scrollRef.current.children;
+    if (children.length > 0) {
+      const firstChild = children[0] as HTMLElement;
+      const itemWidth = firstChild.offsetWidth + 16; // gap
+      const index = Math.round(scrollLeft / itemWidth);
+      setActiveIndex(Math.min(index, children.length - 1));
+      setTotalItems(children.length);
+    }
+  }, []);
+
+  const handleScrollLeft = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const handleScrollRight = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updateScrollState = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
+  }, []);
+
+  // Mouse drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.userSelect = "none";
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !scrollRef.current) return;
+      const dx = e.clientX - dragStartX.current;
+      if (Math.abs(dx) > 3) hasDragged.current = true;
+      scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+    };
+
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const handleClick = useCallback((e: React.MouseEvent) => {
+    if (hasDragged.current) {
+      e.stopPropagation();
+    }
+  }, []);
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+    
+    checkScroll();
+    updateScrollState();
+    scrollEl.addEventListener("scroll", checkScroll, { passive: true });
+    scrollEl.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", checkScroll);
+    window.addEventListener("resize", updateScrollState);
+    
+    return () => {
+      scrollEl.removeEventListener("scroll", checkScroll);
+      scrollEl.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", checkScroll);
+      window.removeEventListener("resize", updateScrollState);
+    };
+  }, [checkScroll, updateScrollState]);
+
+  useEffect(() => {
+    if (!autoPlay) return;
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        if (scrollLeft >= scrollWidth - clientWidth - 5) {
+          scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+        }
+      }
+    }, autoPlayInterval);
+    return () => clearInterval(interval);
+  }, [autoPlay, autoPlayInterval]);
+
+  const scrollToIndex = (index: number) => {
+    if (!scrollRef.current) return;
+    const children = scrollRef.current.children;
+    if (children[index]) {
+      const child = children[index] as HTMLElement;
+      scrollRef.current.scrollTo({
+        left: child.offsetLeft - 24,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  return (
+    <div ref={containerRef} className={`relative ${className}`}>
+      {/* Scroll Container */}
+      <div
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onClickCapture={handleClick}
+        onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+        className="flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide px-12 py-2 cursor-grab active:cursor-grabbing outline-none focus:outline-none focus:ring-0"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          overscrollBehaviorX: "contain",
+          touchAction: "pan-x pinch-zoom",
+        }}
+      >
+        {React.Children.map(children, (child, i) => (
+          <div
+            key={i}
+            className={`flex-shrink-0 ${itemClassName}`}
+            style={{ scrollSnapAlign: "start" }}
+          >
+            {child}
+          </div>
+        ))}
+      </div>
+
+      {/* Progress Bar */}
+      {showProgress && (
+        <div className="mt-4 mx-12 h-1 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#004a8f] to-[#00ab18] rounded-full"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      )}
+
+      {/* Dots */}
+      {showDots && totalItems > 1 && (
+        <div className="flex justify-center gap-2 mt-6">
+          {Array.from({ length: totalItems }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => scrollToIndex(i)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === activeIndex
+                  ? "w-6 bg-[#004a8f]"
+                  : "bg-slate-300 hover:bg-slate-400"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ===== ANIMATED CAROUSEL CARD ===== */
+
+export function CarouselCard({
+  children,
+  className = "",
+  index = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  index?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ 
+        duration: 0.5, 
+        delay: index * 0.1,
+        ease: [0.25, 0.46, 0.45, 0.94] 
+      }}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+

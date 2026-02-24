@@ -82,8 +82,8 @@ export default function CounselingPage() {
       {/* ── Hero ── */}
       <section className="relative min-h-[440px] md:min-h-[500px] overflow-hidden">
         <Image src="/contact/image.png" alt="Career counseling session" fill className="object-cover object-top" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/85 via-[#002d5e]/70 to-[#003975]/40" />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-800 to-transparent" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
           <FadeUp>
             <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-semibold tracking-wide border border-white/20">
@@ -114,7 +114,7 @@ export default function CounselingPage() {
       </section>
 
       {/* ── Stats Bar — Left-accent card style ── */}
-      <section className="py-10 md:py-14 bg-slate-900">
+      <section className="py-10 md:py-14 bg-slate-800">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
@@ -202,7 +202,7 @@ export default function CounselingPage() {
               {howItWorks.map((step, i) => (
                 <FadeUp key={step.title} delay={i * 0.1}>
                   <div className="relative text-center">
-                    <div className="w-[76px] h-[76px] rounded-full bg-slate-900 text-white flex items-center justify-center mx-auto mb-5 relative z-10 shadow-lg">
+                    <div className="w-[76px] h-[76px] rounded-full bg-slate-800 text-white flex items-center justify-center mx-auto mb-5 relative z-10 shadow-lg">
                       <Icon name={step.icon} size={24} />
                     </div>
                     <h4 className="font-semibold text-slate-900 text-[15px] mb-1.5">{step.title}</h4>
@@ -218,7 +218,7 @@ export default function CounselingPage() {
             {howItWorks.map((step, i) => (
               <FadeUp key={step.title} delay={i * 0.06}>
                 <div className="flex gap-4 items-start bg-white rounded-xl border border-gray-100 p-5">
-                  <div className="w-12 h-12 rounded-full bg-slate-900 text-white flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
                     <Icon name={step.icon} size={18} />
                   </div>
                   <div>
@@ -270,8 +270,8 @@ export default function CounselingPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative py-24 px-6 bg-slate-900 overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#003975]/30 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative py-24 px-6 bg-slate-800 overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#004a8f]/30 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-0 left-0 w-72 h-72 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">

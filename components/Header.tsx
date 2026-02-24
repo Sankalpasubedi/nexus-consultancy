@@ -64,6 +64,22 @@ const quickLinks = [
   { label: "News & Events", href: "/news" },
 ];
 
+const branchesLinks = [
+  { label: "All Branches", href: "/branches", icon: "MapPin", description: "Find our offices near you" },
+  { label: "Kathmandu - Dillibazar (Head Office)", href: "/branches/dillibazar", icon: "Building2", description: "Our main headquarters" },
+  { label: "Kathmandu - Baneshwor", href: "/branches/baneshwor", icon: "MapPin", description: "Baneshwor branch office" },
+  { label: "Kathmandu - Samakhusi", href: "/branches/samakhusi", icon: "MapPin", description: "Samakhusi branch office" },
+  { label: "Banepa", href: "/branches/banepa", icon: "MapPin", description: "Kavrepalanchok branch" },
+  { label: "Birtamode", href: "/branches/birtamode", icon: "MapPin", description: "Jhapa branch" },
+  { label: "Dhulabari", href: "/branches/dhulabari", icon: "MapPin", description: "Jhapa branch" },
+];
+
+const studentEssentialsLinks = [
+  { label: "Student Insurance", href: "/student-essentials/insurance", icon: "ShieldCheck", description: "Health & travel insurance plans" },
+  { label: "Student Accommodation", href: "/student-essentials/accommodation", icon: "Home", description: "Find housing abroad" },
+  { label: "Student Dashboard", href: "/dashboard", icon: "LayoutDashboard", description: "Track your application" },
+];
+
 /* ─── Social Icons ─────────────────────────────────── */
 
 function FacebookIcon({ size = 14 }: { size?: number }) {
@@ -508,6 +524,82 @@ function MobileDestinationsAccordion({ onClose }: { onClose: () => void }) {
   );
 }
 
+/* ─── Top Bar Dropdown ─────────────────────────────────── */
+
+function TopBarDropdown({
+  label,
+  items,
+  overviewHref,
+}: {
+  label: string;
+  items: { label: string; href: string; icon: string; description?: string }[];
+  overviewHref?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const enter = () => {
+    clearTimeout(timeout.current);
+    setOpen(true);
+  };
+  const leave = () => {
+    timeout.current = setTimeout(() => setOpen(false), 150);
+  };
+
+  return (
+    <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
+      <button
+        className="text-white/70 hover:text-white text-[12px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5 flex items-center gap-1"
+      >
+        {label}
+        <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-0 pt-1 z-50"
+          >
+            <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden min-w-[260px]">
+              {overviewHref && (
+                <div className="px-4 pt-3 pb-2 border-b border-gray-50 bg-gray-50/50">
+                  <Link href={overviewHref} onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                    View All →
+                  </Link>
+                </div>
+              )}
+              <div className="p-2 space-y-0.5">
+                {items.map((item) => (
+                  <Link
+                    key={item.href + item.label}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="flex items-start gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-200 group"
+                  >
+                    <div className="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                      <Icon name={item.icon} size={13} className="text-slate-400 group-hover:text-[#003975]" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[12px] font-medium block">{item.label}</span>
+                      {item.description && (
+                        <span className="text-[10px] text-slate-400 block mt-0.5">{item.description}</span>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Header() {
   const { showSidebar } = useHeader();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -547,13 +639,7 @@ export default function Header() {
   return (
     <>
       {/* ═══ TOP BAR — Quick links, phone, WhatsApp, location ═══ */}
-      <motion.div
-        initial={false}
-        animate={{
-          y: topBarHidden ? -44 : 0,
-          opacity: topBarHidden ? 0 : 1,
-        }}
-        transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+      <div
         className="fixed top-0 left-0 right-0 z-[100000] hidden md:block"
       >
         <div className="bg-[#001d3d] border-b border-white/5">
@@ -568,11 +654,19 @@ export default function Header() {
                   >
                     {link.label}
                   </Link>
-                  {i < quickLinks.length - 1 && (
-                    <span className="w-px h-3 bg-white/15 mx-0.5" />
-                  )}
+                  <span className="w-px h-3 bg-white/15 mx-0.5" />
                 </span>
               ))}
+              <TopBarDropdown
+                label="Find Us"
+                items={branchesLinks}
+                overviewHref="/branches"
+              />
+              <span className="w-px h-3 bg-white/15 mx-0.5" />
+              <TopBarDropdown
+                label="Student Essentials"
+                items={studentEssentialsLinks}
+              />
             </div>
 
             {/* Right: Contact info */}
@@ -616,23 +710,14 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* ═══ MAIN NAVIGATION BAR ═══ */}
       <header
-        className={`fixed left-0 right-0 z-[99999] transition-all duration-500 ${
-          topBarHidden ? "top-0" : "top-0 md:top-11"
-        }`}
+        className="fixed left-0 right-0 z-[99999] transition-all duration-500 top-0 md:top-11"
       >
-        <div
-          className={`transition-all duration-500 ${
-            isTransparent && !scrolled
-              ? "bg-white/5 backdrop-blur-md border-b border-white/10"
-              : "bg-white/95 backdrop-blur-xl border-b border-gray-200/60 shadow-sm shadow-black/[0.04]"
-          }`}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-[62px] lg:h-[66px]">
+        <div className="bg-white/95 backdrop-blur-md sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-[62px] lg:h-[66px]">
               {/* Logo */}
               <Link href="/" className="flex items-center shrink-0 group">
                 <Image
@@ -713,7 +798,6 @@ export default function Header() {
             {!isTransparent || scrolled ? (
               <div className="h-[2px] bg-gradient-to-r from-[#003975] via-[#0052a3] to-[#003975] -mx-4 sm:-mx-6 lg:-mx-8 opacity-80" />
             ) : null}
-          </div>
         </div>
       </header>
 

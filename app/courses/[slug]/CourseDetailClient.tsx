@@ -126,6 +126,24 @@ function ProgramsCarousel({
     }
   }, [x, centerOffset, goTo, programs.length]);
 
+  // Wheel handler for trackpad horizontal scroll
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 1) return;
+      
+      e.preventDefault();
+      const minX = -(P_ITEM * (programs.length - 1)) - centerOffset + containerWidth - P_CARD_W;
+      const maxX = centerOffset;
+      const raw = x.get() - delta;
+      x.set(Math.max(minX, Math.min(maxX, raw)));
+      
+      const idx = Math.round((-x.get() + centerOffset) / P_ITEM);
+      setActiveIndex(Math.max(0, Math.min(programs.length - 1, idx)));
+    },
+    [x, centerOffset, containerWidth, programs.length]
+  );
+
   return (
     <div>
       <div
@@ -159,7 +177,7 @@ function ProgramsCarousel({
                   style={{ height: P_CARD_H }}
                 >
                   {/* Top visual area */}
-                  <div className="relative h-[180px] overflow-hidden bg-gradient-to-br from-[#003975] to-[#001a3a]">
+                  <div className="relative h-[180px] overflow-hidden bg-gradient-to-br from-[#004a8f] to-[#002550]">
                     <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00ab18]/15 rounded-full blur-2xl" />
                     <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-white/5 rounded-full blur-xl" />
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -270,7 +288,7 @@ export default function CourseDetailPage() {
       {/* Hero */}
       <section className="relative h-[500px] overflow-hidden">
         <Image src={course.image} alt={course.title} fill className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-center px-6">
           <div className="max-w-[1440px] mx-auto w-full">
             <FadeUp>
@@ -514,7 +532,7 @@ export default function CourseDetailPage() {
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                           <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
                             <span className="text-white text-xs font-medium bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
                               {cat.programs} Programs
@@ -541,7 +559,7 @@ export default function CourseDetailPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-gradient-to-br from-[#003975] to-[#002d5e] text-white relative overflow-hidden">
+      <section className="py-24 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white relative overflow-hidden">
         <div className="absolute -top-32 -right-32 w-64 h-64 bg-[#00ab18]/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
         <FadeUp>

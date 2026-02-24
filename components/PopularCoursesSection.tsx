@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -65,97 +65,126 @@ const courses = [
 ];
 
 export default function PopularCoursesSection() {
-  const [scrollPos, setScrollPos] = useState(0);
-  const [maxScroll, setMaxScroll] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
+  // Drag state
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
-  const dragStartScroll = useRef(0);
+  const dragScrollLeft = useRef(0);
   const hasDragged = useRef(false);
 
-  useEffect(() => {
-    const update = () => {
-      if (containerRef.current && contentRef.current) {
-        setMaxScroll(
-          Math.max(
-            0,
-            contentRef.current.scrollWidth - containerRef.current.offsetWidth
-          )
-        );
-      }
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+  const updateState = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    const max = scrollWidth - clientWidth;
+    setProgress(max > 0 ? (scrollLeft / max) * 100 : 0);
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleScrollLeft = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: -360, behavior: "smooth" });
+  };
+
+  const handleScrollRight = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: 360, behavior: "smooth" });
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
     isDragging.current = true;
-    dragStartX.current = e.clientX;
-    dragStartScroll.current = scrollPos;
     hasDragged.current = false;
-  };
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.userSelect = "none";
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const dx = dragStartX.current - e.clientX;
-    if (Math.abs(dx) > 5) hasDragged.current = true;
-    setScrollPos(
-      Math.max(0, Math.min(maxScroll, dragStartScroll.current + dx))
-    );
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !scrollRef.current) return;
+      const dx = e.clientX - dragStartX.current;
+      if (Math.abs(dx) > 3) hasDragged.current = true;
+      scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+    };
 
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    };
 
-  const handleCardClick = (e: React.MouseEvent) => {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const handleCardClick = useCallback((e: React.MouseEvent) => {
     if (hasDragged.current) {
       e.preventDefault();
       e.stopPropagation();
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    updateState();
+    scrollEl.addEventListener("scroll", updateState, { passive: true });
+    window.addEventListener("resize", updateState);
+
+    return () => {
+      scrollEl.removeEventListener("scroll", updateState);
+      window.removeEventListener("resize", updateState);
+    };
+  }, [updateState]);
 
   return (
     <section className="py-32 bg-white">
       {/* Header */}
       <FadeUp>
-        <div className="text-center mb-16 max-w-[1440px] mx-auto px-6">
-          <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
-            <Icon name="BookOpen" size={16} />
-            Explore Programs
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 max-w-[1440px] mx-auto px-6 gap-6">
+          <div className="text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
+              <Icon name="BookOpen" size={16} />
+              Explore Programs
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+              Popular Courses
+            </h2>
+            <p className="text-lg text-slate-500 max-w-2xl">
+              Find the perfect program to match your career aspirations
+            </p>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            Popular Courses
-          </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Find the perfect program to match your career aspirations
-          </p>
         </div>
       </FadeUp>
 
-      {/* Horizontal Scroll Carousel */}
+      {/* Native scroll container */}
       <div
-        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        ref={containerRef}
+        ref={scrollRef}
         onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+        className="flex gap-6 px-6 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none focus:outline-none focus:ring-0"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          overscrollBehaviorX: "contain",
+          touchAction: "pan-x pinch-zoom",
+        }}
       >
-        <motion.div
-          ref={contentRef}
-          className="flex gap-6 px-6"
-          style={{
-            transform: `translateX(-${scrollPos}px)`,
-            transition: isDragging.current
-              ? "none"
-              : "transform 500ms ease-out",
-          }}
-        >
           {courses.map((course, idx) => (
             <motion.div
               key={course.slug}
@@ -164,6 +193,7 @@ export default function PopularCoursesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.5 }}
+              style={{ scrollSnapAlign: "start" }}
             >
               <Link
                 href={`/courses/${course.slug}`}
@@ -180,7 +210,7 @@ export default function PopularCoursesSection() {
                       className="object-cover group-hover:scale-110 transition-transform duration-700"
                       draggable={false}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                     <div className="absolute bottom-4 left-4 flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
                       <Icon
                         name="Users"
@@ -196,7 +226,7 @@ export default function PopularCoursesSection() {
                   {/* Content */}
                   <div className="p-6">
                     <div
-                      className="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                      className="w-12 h-12 rounded-2xl bg-slate-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
                     >
                       <Icon
                         name={course.icon}
@@ -231,49 +261,16 @@ export default function PopularCoursesSection() {
               </Link>
             </motion.div>
           ))}
-        </motion.div>
-      </div>
+        </div>
 
-      {/* Nav Arrows */}
-      <div className="flex justify-end gap-3 mt-8 px-6 md:px-12 lg:px-16">
-        <button
-          onClick={() => setScrollPos((p) => Math.max(0, p - 360))}
-          disabled={scrollPos === 0}
-          className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          <svg
-            className="w-5 h-5 text-slate-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-        <button
-          onClick={() => setScrollPos((p) => Math.min(maxScroll, p + 360))}
-          disabled={scrollPos >= maxScroll}
-          className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition disabled:opacity-30 disabled:cursor-not-allowed"
-        >
-          <svg
-            className="w-5 h-5 text-slate-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
+      {/* Progress Bar */}
+      <div className="max-w-[1440px] mx-auto px-6 mt-10">
+        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"
+            style={{ width: `${Math.max(5, progress)}%` }}
+          />
+        </div>
       </div>
 
       {/* CTA */}

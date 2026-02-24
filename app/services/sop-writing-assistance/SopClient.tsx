@@ -177,7 +177,7 @@ export default function SOPPage() {
           priority
         />
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/85 via-[#002d5e]/70 to-[#003975]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
         {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
@@ -225,7 +225,7 @@ export default function SOPPage() {
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-14">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-5 rounded-full bg-slate-900 text-white text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-5 py-2 mb-5 rounded-full bg-slate-800 text-white text-sm font-medium">
                 Documents We Help With
               </div>
               <p className="text-slate-500 text-base max-w-lg mx-auto">
@@ -312,7 +312,7 @@ export default function SOPPage() {
               {writingProcess.map((step, i) => (
                 <FadeUp key={step.step} delay={i * 0.08}>
                   <div className="flex gap-6 md:gap-8 items-start">
-                    <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-slate-900 text-white flex items-center justify-center text-lg font-bold shadow-lg">
+                    <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-slate-800 text-white flex items-center justify-center text-lg font-bold shadow-lg">
                       {step.step}
                     </div>
                     <div className="bg-white rounded-2xl border border-gray-100 p-6 flex-1 shadow-sm">
@@ -415,7 +415,7 @@ export default function SOPPage() {
 
               {/* Right — Our Guarantee */}
               <FadeRight>
-                <div className="p-8 md:p-10 bg-[#003975] text-white h-full">
+                <div className="p-8 md:p-10 bg-[#004a8f] text-white h-full">
                   <div className="flex items-center gap-2 mb-6">
                     <div className="w-8 h-8 rounded-lg bg-white/15 text-white flex items-center justify-center">
                       <Icon name="ShieldCheck" size={14} />
@@ -461,7 +461,7 @@ export default function SOPPage() {
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-slate-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                className="inline-flex items-center gap-2 bg-slate-800 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg"
               >
                 Book Counselling <Icon name="ArrowRight" size={14} />
               </Link>

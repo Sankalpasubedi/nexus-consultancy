@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -10,54 +10,104 @@ import { FlagIcon } from "@/lib/icons";
 import { Globe } from "lucide-react";
 
 export default function DestinationsSection() {
-  const [scrollPos, setScrollPos] = useState(0);
-  const [maxScroll, setMaxScroll] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
+  // Drag state
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
-  const dragStartScroll = useRef(0);
+  const dragScrollLeft = useRef(0);
   const hasDragged = useRef(false);
+  const hasActivatedClick = useRef(false);
 
-  useEffect(() => {
-    const update = () => {
-      if (containerRef.current && contentRef.current) {
-        setMaxScroll(Math.max(0, contentRef.current.scrollWidth - containerRef.current.offsetWidth));
-      }
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+  const updateState = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    const max = scrollWidth - clientWidth;
+    setProgress(max > 0 ? (scrollLeft / max) * 100 : 0);
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleScrollLeft = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: -420, behavior: "smooth" });
+  };
+
+  const handleScrollRight = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: 420, behavior: "smooth" });
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
     isDragging.current = true;
-    dragStartX.current = e.clientX;
-    dragStartScroll.current = scrollPos;
     hasDragged.current = false;
-  };
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.userSelect = "none";
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const dx = dragStartX.current - e.clientX;
-    if (Math.abs(dx) > 5) hasDragged.current = true;
-    setScrollPos(Math.max(0, Math.min(maxScroll, dragStartScroll.current + dx)));
-  };
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (!scrollRef.current || e.touches.length > 1) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    dragStartX.current = e.touches[0].clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+  }, []);
 
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !scrollRef.current) return;
+      e.preventDefault();
+      const dx = e.clientX - dragStartX.current;
+      if (Math.abs(dx) > 3) hasDragged.current = true;
+      scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+    };
 
-  const handleCardClick = (e: React.MouseEvent) => {
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const handleCardClick = useCallback((e: React.MouseEvent) => {
     if (hasDragged.current) {
       e.preventDefault();
       e.stopPropagation();
     }
-  };
+  }, []);
 
-  const progress = maxScroll > 0 ? scrollPos / maxScroll : 0;
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+    
+    updateState();
+    scrollEl.addEventListener("scroll", updateState, { passive: true });
+    window.addEventListener("resize", updateState);
+    
+    return () => {
+      scrollEl.removeEventListener("scroll", updateState);
+      window.removeEventListener("resize", updateState);
+    };
+  }, [updateState]);
 
   return (
     <section className="py-32 bg-white">
@@ -75,39 +125,21 @@ export default function DestinationsSection() {
               Choose from top-tier universities across the world&apos;s most sought-after study destinations
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setScrollPos((p) => Math.max(0, p - 420))}
-              disabled={scrollPos === 0}
-              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:border-slate-300 transition disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <svg className="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-            </button>
-            <button
-              onClick={() => setScrollPos((p) => Math.min(maxScroll, p + 420))}
-              disabled={scrollPos >= maxScroll}
-              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:border-slate-300 transition disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <svg className="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-            </button>
-          </div>
         </div>
       </FadeUp>
 
-      <div
-        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
-        <motion.div
-          ref={contentRef}
-          className="flex gap-6 px-6 lg:px-8"
+      {/* Native scroll container */}
+      <div ref={containerRef} className="relative w-full">
+        <div
+          ref={scrollRef}
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+          className="flex gap-6 px-6 lg:px-8 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none focus:outline-none focus:ring-0"
           style={{
-            transform: `translateX(-${scrollPos}px)`,
-            transition: isDragging.current ? "none" : "transform 600ms cubic-bezier(0.23, 1, 0.32, 1)",
+            WebkitOverflowScrolling: "touch",
+            overscrollBehaviorX: "contain",
+            touchAction: "pan-y",
           }}
         >
           {destinations.map((dest, idx) => (
@@ -118,6 +150,7 @@ export default function DestinationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+              style={{ scrollSnapAlign: "start" }}
             >
               <Link href={`/destinations/${dest.slug}`} draggable={false} onClick={handleCardClick}>
                 <div className="relative h-[480px] rounded-3xl overflow-hidden group cursor-pointer">
@@ -147,20 +180,18 @@ export default function DestinationsSection() {
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
-      {maxScroll > 0 && (
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-10">
-          <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"
-              style={{ width: `${Math.max(10, progress * 100)}%` }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
+      {/* Progress Bar */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-10">
+        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"
+            style={{ width: `${Math.max(5, progress)}%` }}
+          />
         </div>
-      )}
+      </div>
     </section>
   );
 }

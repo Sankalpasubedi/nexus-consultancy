@@ -138,7 +138,7 @@ export default function TestPreparationPage() {
       {/* ── Hero ── */}
       <section className="relative min-h-[440px] md:min-h-[500px] overflow-hidden">
         <Image src="/contact/image.png" alt="Students preparing for tests" fill className="object-cover object-top" priority />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#001a3a]/85 via-[#002d5e]/70 to-[#003975]/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#003975] to-transparent" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
           <FadeUp>
@@ -170,7 +170,7 @@ export default function TestPreparationPage() {
       </section>
 
       {/* ── Stats Bar — Dark Navy ── */}
-      <section className="py-10 md:py-14 bg-[#003975]">
+      <section className="py-10 md:py-14 bg-[#004a8f]">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -213,7 +213,7 @@ export default function TestPreparationPage() {
                 <HoverCard>
                   <div className="bg-white rounded-2xl border border-gray-100 hover:border-gray-200 transition-all overflow-hidden h-full flex">
                     {/* Left accent + icon */}
-                    <div className="w-[88px] md:w-[100px] bg-slate-900 flex flex-col items-center justify-center gap-2 flex-shrink-0 py-6 text-white">
+                    <div className="w-[88px] md:w-[100px] bg-slate-800 flex flex-col items-center justify-center gap-2 flex-shrink-0 py-6 text-white">
                       <Icon name={exam.icon} size={24} />
                       <div className="text-lg font-bold leading-none">{exam.stat}</div>
                       <div className="text-[9px] uppercase tracking-wider text-slate-300">{exam.statLabel}</div>
@@ -297,7 +297,7 @@ export default function TestPreparationPage() {
                 <HoverCard>
                   <div className="bg-white rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
                         <Icon name={f.icon} size={20} />
                       </div>
                       <div className="text-right">
@@ -353,7 +353,7 @@ export default function TestPreparationPage() {
               Book a free diagnostic test and consultation with our expert trainers today. Your target score is just a few weeks away.
             </p>
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-slate-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-slate-800 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg">
                 Book Free Demo Class <Icon name="ArrowRight" size={14} />
               </Link>
             </motion.div>

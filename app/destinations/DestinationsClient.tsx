@@ -121,6 +121,29 @@ export default function Destinations() {
     }
   }, [x, centerOffset, goTo]);
 
+  // Wheel handler for trackpad horizontal scroll
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      // Handle both horizontal (deltaX) and vertical (deltaY) wheel events for trackpad
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 1) return;
+      
+      e.preventDefault();
+      const minX =
+        -(ITEM_WIDTH * (destinations.length - 1)) - centerOffset + containerWidth - IMAGE_WIDTH;
+      const maxX = centerOffset;
+      const raw = x.get() - delta;
+      const clamped = Math.max(minX, Math.min(maxX, raw));
+      x.set(clamped);
+      
+      // Update active index
+      const idx = Math.round((-x.get() + centerOffset) / ITEM_WIDTH);
+      const snapped = Math.max(0, Math.min(destinations.length - 1, idx));
+      setActiveIndex(snapped);
+    },
+    [x, centerOffset, containerWidth]
+  );
+
   // Card click handler - prevent navigation when dragged
   const handleCardClick = useCallback(
     (e: React.MouseEvent, slug: string) => {
@@ -262,27 +285,6 @@ export default function Destinations() {
             </motion.button>
           ))}
         </div>
-
-        {/* Arrow Controls */}
-        {/* <div className="flex items-center justify-center gap-4 mt-6">
-          <button
-            onClick={() => activeIndex > 0 && goTo(activeIndex - 1)}
-            disabled={activeIndex === 0}
-            className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-gray-100 transition disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <span className="text-slate-400 text-sm font-mono">
-            {String(activeIndex + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
-          </span>
-          <button
-            onClick={() => activeIndex < destinations.length - 1 && goTo(activeIndex + 1)}
-            disabled={activeIndex === destinations.length - 1}
-            className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-gray-100 transition disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div> */}
       </div>
     </div>
   );

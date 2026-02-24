@@ -177,7 +177,7 @@ export default function NewsDetailPage() {
           <FadeUp>
             <div className="flex flex-wrap items-center gap-6 pb-8 mb-10 border-b border-gray-100">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm font-bold">
+                <div className="w-10 h-10 rounded-full bg-slate-800 text-white flex items-center justify-center text-sm font-bold">
                   {article.author
                     .split(" ")
                     .map((n) => n[0])
@@ -269,7 +269,7 @@ export default function NewsDetailPage() {
               ].map((s) => (
                 <button
                   key={s.label}
-                  className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-900 hover:text-white transition-colors"
+                  className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-800 hover:text-white transition-colors"
                   aria-label={s.label}
                 >
                   <Icon name={s.icon} size={15} />
@@ -368,7 +368,7 @@ export default function NewsDetailPage() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-slate-900 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg"
+                className="inline-flex items-center gap-2 bg-slate-800 text-white px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-slate-700 transition shadow-lg"
               >
                 Talk to a Counselor <Icon name="ArrowRight" size={14} />
               </Link>

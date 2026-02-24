@@ -47,7 +47,7 @@ export default function SuccessStoriesSection() {
   const prev = () => setCurrent((p) => (p - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="relative py-32 px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950 overflow-hidden">
+    <section className="relative py-32 px-6 lg:px-8 bg-gradient-to-br from-slate-800 via-slate-800 to-emerald-900 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[120px] animate-blob" />
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />
@@ -82,7 +82,7 @@ export default function SuccessStoriesSection() {
             >
               <div className="relative w-80 sm:w-96 lg:w-[440px] h-[480px] lg:h-[560px] rounded-3xl overflow-hidden shadow-2xl">
                 <Image src={t.image} alt={t.name} fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
                   <p className="font-bold text-xl text-white mb-1">{t.name}</p>
                   <p className="text-white/80 text-sm">{t.degree} - {t.university}</p>
