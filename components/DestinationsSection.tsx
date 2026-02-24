@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { destinations } from "@/data";
 import { FadeUp } from "@/lib/animations";
 import { FlagIcon } from "@/lib/icons";
@@ -12,6 +12,7 @@ import { Globe } from "lucide-react";
 export default function DestinationsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -109,8 +110,17 @@ export default function DestinationsSection() {
     };
   }, [updateState]);
 
+  const { scrollYProgress: sectionProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const rawHeaderY = useTransform(sectionProgress, [0, 0.3], [40, 0]);
+  const rawHeaderOpacity = useTransform(sectionProgress, [0, 0.2], [0, 1]);
+  const headerY = useSpring(rawHeaderY, { stiffness: 80, damping: 25 });
+  const headerOpacity = useSpring(rawHeaderOpacity, { stiffness: 80, damping: 25 });
+
   return (
-    <section className="py-32 bg-white">
+    <section ref={sectionRef} className="py-32 bg-white">
       <FadeUp>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 max-w-7xl mx-auto px-6 lg:px-8 gap-6">
           <div>

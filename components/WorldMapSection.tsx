@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { FadeUp } from "@/lib/animations";
 import { FlagIcon } from "@/lib/icons";
 import Link from "next/link";
@@ -671,12 +671,29 @@ function MobileDestinationCard({
 
 export default function WorldMapSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const [hoveredDest, setHoveredDest] = useState<string | null>(null);
   const [visibleAirplanes, setVisibleAirplanes] = useState<Set<number>>(
     new Set()
   );
   const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /* ── Scroll-driven zoom animation ── */
+  const { scrollYProgress } = useScroll({
+    target: mapContainerRef,
+    offset: ["start end", "center center"],
+  });
+
+  const rawScale = useTransform(scrollYProgress, [0, 1], [0.82, 1.25]);
+  const rawBorderRadius = useTransform(scrollYProgress, [0, 1], [32, 0]);
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.3, 1], [0.4, 0.85, 1]);
+  const rawY = useTransform(scrollYProgress, [0, 1], [60, 0]);
+
+  const smoothScale = useSpring(rawScale, { stiffness: 80, damping: 30, mass: 0.8 });
+  const smoothBorderRadius = useSpring(rawBorderRadius, { stiffness: 80, damping: 30, mass: 0.8 });
+  const smoothOpacity = useSpring(rawOpacity, { stiffness: 80, damping: 30, mass: 0.8 });
+  const smoothY = useSpring(rawY, { stiffness: 80, damping: 30, mass: 0.8 });
 
   /* Stagger airplane appearances after flight paths finish drawing */
   useEffect(() => {
@@ -713,7 +730,7 @@ export default function WorldMapSection() {
     destinations.find((d) => d.slug === hoveredDest) || null;
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-[#fafaf8]">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-[#fafaf8] overflow-hidden">
       {/* -------- Section Header -------- */}
       <FadeUp>
         <div className="text-center max-w-3xl mx-auto px-6 lg:px-8 mb-16 md:mb-20">
@@ -744,9 +761,19 @@ export default function WorldMapSection() {
         </div>
       </FadeUp>
 
-      {/* -------- Desktop: Interactive SVG Map -------- */}
-      <div className="hidden md:block max-w-6xl mx-auto px-6 lg:px-8">
-        <FadeUp delay={0.15}>
+      {/* -------- Desktop: Interactive SVG Map (scroll-zoom) -------- */}
+      <div ref={mapContainerRef} className="hidden md:block max-w-6xl mx-auto px-6 lg:px-8">
+        <motion.div
+          style={{
+            scale: smoothScale,
+            borderRadius: '30px',
+            opacity: smoothOpacity,
+            y: smoothY,
+            transformOrigin: "center center",
+            overflow: "hidden",
+          }}
+          className="will-change-transform bg-white"
+        >
           <div
             className="relative w-full overflow-visible"
             style={{ aspectRatio: "2 / 1" }}
@@ -830,7 +857,7 @@ export default function WorldMapSection() {
               onMouseLeave={handleTooltipLeave}
             />
           </div>
-        </FadeUp>
+        </motion.div>
 
         {/* Legend bar */}
         {/* <div className="flex items-center justify-center gap-8 mt-8 text-xs text-slate-400 font-medium">

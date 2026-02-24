@@ -13,10 +13,11 @@ import ToolsSection from '../components/ToolsSection'
 import NewsSection from '../components/NewsSection'
 import HowWeHelpSection from '../components/HowWeHelpSection'
 import ContactCTASection from '../components/ContactCTASection'
+import PageAnimations from '../components/PageAnimations'
 
 export default function Home() {
   return (
-    <>
+    <PageAnimations>
       <HeroSection />
       <ServicesSection />
       <DestinationsSection />
@@ -32,6 +33,6 @@ export default function Home() {
       <NewsSection />
       <HowWeHelpSection />
       <ContactCTASection />
-    </>
+    </PageAnimations>
   )
 }

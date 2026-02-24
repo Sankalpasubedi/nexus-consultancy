@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { FadeUp, FadeLeft, FadeRight } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
 
@@ -37,14 +38,22 @@ const features = [
 ];
 
 export default function HowWeHelpSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const rawBlobY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+  const blobY = useSpring(rawBlobY, { stiffness: 60, damping: 30 });
+
   return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#004a8f] to-[#002a52] text-white overflow-hidden">
-      {/* Animated Background Blobs */}
-      <div className="absolute inset-0 pointer-events-none">
+    <section ref={sectionRef} className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#004a8f] to-[#002a52] text-white overflow-hidden">
+      {/* Animated Background Blobs with parallax */}
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: blobY }}>
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-400/[0.07] rounded-full blur-[120px] animate-blob" />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-sky-300/[0.05] rounded-full blur-[120px] animate-blob animation-delay-2000" />
         <div className="absolute top-1/2 left-0 w-[350px] h-[350px] bg-indigo-400/[0.06] rounded-full blur-[100px] animate-blob animation-delay-4000" />
-      </div>
+      </motion.div>
 
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}

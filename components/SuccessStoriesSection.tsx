@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { FadeUp } from "@/lib/animations";
 import { Star, Quote } from "lucide-react";
 
@@ -42,17 +42,26 @@ const testimonials = [
 export default function SuccessStoriesSection() {
   const [current, setCurrent] = useState(0);
   const t = testimonials[current];
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const rawBgY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+  const bgY = useSpring(rawBgY, { stiffness: 80, damping: 30 });
 
   const next = () => setCurrent((p) => (p + 1) % testimonials.length);
   const prev = () => setCurrent((p) => (p - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="relative py-32 px-6 lg:px-8 bg-gradient-to-br from-slate-800 via-slate-800 to-emerald-900 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
+    <section ref={sectionRef} className="relative py-32 px-6 lg:px-8 bg-gradient-to-br from-slate-800 via-slate-800 to-emerald-900 overflow-hidden">
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[120px] animate-blob" />
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />
         <div className="absolute bottom-0 left-1/2 w-[400px] h-[400px] bg-green-600/10 rounded-full blur-[120px] animate-blob animation-delay-4000" />
-      </div>
+      </motion.div>
 
       <div className="relative max-w-7xl mx-auto">
         <FadeUp>

@@ -1,8 +1,9 @@
 "use client";
 
+import { useRef, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FadeUp, StaggerContainer, StaggerItem, HoverCard } from "@/lib/animations";
+import { FadeUp } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
 
 const services = [
@@ -12,7 +13,6 @@ const services = [
     description:
       "Not sure where to start? Our experienced counselors sit down with you, understand your goals, budget, and academic background, then map out a personalized study plan that makes sense for your future.",
     icon: "Compass",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     features: ["1-on-1 sessions", "Career pathway mapping", "University shortlisting"],
   },
   {
@@ -21,7 +21,6 @@ const services = [
     description:
       "From crafting your Statement of Purpose to organizing transcripts and recommendation letters, we handle the paperwork so you can focus on preparing for your new chapter abroad.",
     icon: "PenLine",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     features: ["SOP & essay review", "Document checklist", "Application tracking"],
   },
   {
@@ -30,7 +29,6 @@ const services = [
     description:
       "With a 98% visa success rate, our visa team knows exactly what embassies look for. We prepare your documents, conduct mock interviews, and guide you every step of the way.",
     icon: "ShieldCheck",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     features: ["98% success rate", "Mock interviews", "File preparation"],
   },
   {
@@ -39,16 +37,14 @@ const services = [
     description:
       "Get exam-ready with our structured IELTS, PTE, TOEFL, and GRE/GMAT prep courses. Small batches, experienced instructors, and real practice tests to get the score you need.",
     icon: "BookOpen",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     features: ["IELTS & PTE", "GRE & GMAT", "Real practice tests"],
   },
   {
     id: 5,
     title: "Scholarship Guidance",
     description:
-      "Education abroad doesn\u2019t have to break the bank. We help you find and apply for scholarships that match your profile. Our students have secured over NPR 5 Billion in scholarships collectively.",
+      "Education abroad doesn't have to break the bank. We help you find and apply for scholarships that match your profile. Our students have secured over NPR 5 Billion in scholarships collectively.",
     icon: "Trophy",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     features: ["Scholarship matching", "Application support", "Financial planning"],
   },
   {
@@ -57,15 +53,69 @@ const services = [
     description:
       "You got your visa, now what? We help with accommodation bookings, airport pickup arrangements, cultural orientation, and everything you need to feel confident before you fly.",
     icon: "Plane",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
     features: ["Accommodation help", "Airport pickup", "Cultural briefing"],
   },
 ];
 
+const CARD_HEIGHT = 550;
+const SPACER_HEIGHT = CARD_HEIGHT + 280;
+const STICKY_TOP = 80;
+
+// Per depth level: how much % width shrinks and how much px minWidth shrinks
+const WIDTH_SHRINK_PER_DEPTH = 5;    // % — e.g. depth 1 = 95%, depth 2 = 90%
+const MIN_WIDTH_SHRINK_PER_DEPTH = 40; // px — e.g. depth 1 minWidth = 100% - 40px
+
 export default function ServicesSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const spacerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  // depths is now fractional (0.0–N) for smooth interpolation
+  const [depths, setDepths] = useState<number[]>(services.map(() => 0));
+
+  const handleScroll = useCallback(() => {
+    const viewportHeight = window.innerHeight;
+    const newDepths = services.map((_, index) => {
+      const spacer = spacerRefs.current[index];
+      if (!spacer) return 0;
+
+      const rect = spacer.getBoundingClientRect();
+      const isSticky = rect.top <= STICKY_TOP;
+      if (!isSticky) return 0;
+
+      // Fractional depth: sum up how far each later card has scrolled in
+      let depth = 0;
+      for (let j = index + 1; j < services.length; j++) {
+        const laterSpacer = spacerRefs.current[j];
+        if (!laterSpacer) continue;
+        const laterRect = laterSpacer.getBoundingClientRect();
+        // if (laterRect.top <= STICKY_TOP) {
+        //   const rawProgress = (STICKY_TOP - laterRect.top) / CARD_HEIGHT;
+        //   depth += Math.min(1, Math.max(0, rawProgress));
+        // }
+
+        const triggerStart = viewportHeight; 
+        const triggerEnd = STICKY_TOP;     
+
+        const rawProgress = (triggerStart - laterRect.top) / (triggerStart - triggerEnd);
+        const progress = Math.min(1, Math.max(0, rawProgress));
+        if (progress > 0) {
+          depth += progress;
+        }
+      }
+      return depth;
+    });
+
+    setDepths(newDepths);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
   return (
-    <section className="py-32 px-6 lg:px-8 bg-white border-t border-gray-200">
-      <div className="max-w-7xl mx-auto">
+    <section ref={sectionRef} className="py-32 px-6 lg:px-8 bg-white border-t border-gray-200">
+      <div className="max-w-[1500px] mx-auto">
         <FadeUp>
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-slate-50 text-slate-600 text-sm font-medium border border-gray-200/80 shadow-sm">
@@ -83,45 +133,142 @@ export default function ServicesSection() {
           </div>
         </FadeUp>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {services.map((service) => (
-            <StaggerItem key={service.id}>
-              <HoverCard className="h-full">
-                <div className="p-8 lg:p-10 bg-white border border-gray-100 rounded-3xl hover:shadow-lg transition-all duration-500 h-full group">
-                  <div
-                    className="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center mb-8 group-hover:scale-105 transition-transform duration-300"
+        {/* Cards Stack */}
+        <div className="relative">
+          {services.map((service, index) => {
+            const depth = depths[index];
+
+            // Scale + Y push (existing behaviour)
+            const scale = 1 - depth * 0.035;
+            const yOffset = -depth * 18;
+
+            // Dynamic width: shrinks as depth increases, centered via margin auto
+            // e.g. depth=1 → 95%, depth=2 → 90%, etc.
+            const widthPercent = Math.max(60, 100 - depth * WIDTH_SHRINK_PER_DEPTH);
+
+            // Dynamic minWidth: shrinks in px so very deep cards still look proportional
+            // e.g. depth=0 → calc(100% - 0px), depth=2 → calc(100% - 80px)
+            const minWidthOffset = depth * MIN_WIDTH_SHRINK_PER_DEPTH;
+
+            return (
+              <div
+                key={service.id}
+                ref={(el) => { spacerRefs.current[index] = el; }}
+                className="sticky"
+                style={{
+                  top: `${STICKY_TOP}px`,
+                  zIndex: index + 1,
+                  height: `${SPACER_HEIGHT}px` ,
+                  paddingTop: `${(index + 1) * 15}px`,
+                }}
+              >
+                {/* Sticky wrapper — no transforms here, just positioning */}
+                <div
+                  className="sticky"
+                  style={{
+                    top: `${STICKY_TOP}px`,
+                    zIndex: index + 1,
+                    // paddingTop: `${(index + 1) * 15}px`,
+                    paddingTop: `40px`,
+                  }}
+                >
+                  {/* Width + centering wrapper */}
+                  <motion.div
+                    animate={{
+                      width: `${widthPercent}%`,
+                      // minWidth expressed as a CSS string isn't directly animatable
+                      // so we use x:0 and let the width drive the visual narrowing
+                    }}
+                    transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    style={{
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      // minWidth via inline style — updated every render
+                      minWidth: `calc(100% - ${minWidthOffset}px)`,
+                    }}
                   >
-                    <Icon name={service.icon} size={24} className="text-white" />
-                  </div>
-
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-500 leading-relaxed mb-6 text-[15px]">
-                    {service.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-                    {service.features.map((feature, i) => (
-                      <span
-                        key={i}
-                        className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-gray-50 text-gray-600 border border-gray-100"
+                    {/* Scale + Y offset wrapper */}
+                    <motion.div
+                      animate={{ scale, y: yOffset }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      style={{ transformOrigin: "top center" }}
+                    >
+                      {/* Entrance animation */}
+                      <motion.div
+                        initial={{ y: 60, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        <span
-                          className="w-1.5 h-1.5 rounded-full bg-slate-700 flex-shrink-0"
-                        />
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
+                        {/* Card */}
+                        <motion.div
+                          className="group bg-gradient-to-br from-[#0052a3] via-[#003d7a] to-[#002d5e] rounded-3xl overflow-hidden cursor-pointer border border-white/10 shadow-2xl shadow-blue-900/30"
+                          whileHover={{ scale: 1.02, boxShadow: "0 35px 60px -15px rgba(0, 82, 163, 0.4)" }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                        >
+                          <div className="flex items-stretch" style={{ height: `${CARD_HEIGHT}px` }}>
+                            {/* Left Content */}
+                            <div className="flex-1 p-10 lg:p-14 text-white flex flex-col justify-center gap-6">
+                              <div className="text-xs font-semibold tracking-widest text-white/60 uppercase">
+                                {String(index + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
+                              </div>
+
+                              <motion.div
+                                className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-300"
+                                whileHover={{ rotate: [0, -10, 10, -5, 5, 0] }}
+                                transition={{ duration: 0.6 }}
+                              >
+                                <Icon name={service.icon} size={28} className="text-white group-hover:scale-110 transition-transform duration-300" />
+                              </motion.div>
+
+                              <h3 className="text-3xl lg:text-5xl font-bold text-white leading-tight">
+                                {service.title}
+                              </h3>
+
+                              <p className="text-white/75 leading-relaxed text-base lg:text-lg max-w-lg">
+                                {service.description}
+                              </p>
+
+                              <div className="flex flex-wrap gap-2 mt-2">
+                                {service.features.map((feature, i) => (
+                                  <motion.span
+                                    key={i}
+                                    className="text-xs font-medium px-4 py-2.5 rounded-full bg-white/10 text-white/90 border border-white/15 hover:bg-white/20 hover:border-white/25 transition-all duration-300"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 * i, duration: 0.4 }}
+                                  >
+                                    {feature}
+                                  </motion.span>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Right Visual */}
+                            <div className="hidden md:flex w-[280px] items-center justify-center border-l border-white/10 relative overflow-hidden">
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,171,24,0.12)_0%,transparent_70%)] group-hover:scale-150 transition-transform duration-700" />
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(0,82,163,0.15)_0%,transparent_60%)] group-hover:opacity-100 opacity-0 transition-opacity duration-500" />
+                              <div className="relative z-10 transform group-hover:-translate-x-6 group-hover:scale-110 transition-all duration-500 ease-out">
+                                <div className="w-24 h-24 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 flex items-center justify-center group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500">
+                                  <Icon name={service.icon} size={44} className="text-white/40 group-hover:text-white/60 transition-colors duration-500" />
+                                </div>
+                              </div>
+                              <div className="absolute top-8 right-8 w-3 h-3 rounded-full bg-[#00ab18]/30 group-hover:bg-[#00ab18]/60 transition-colors duration-500" />
+                              <div className="absolute bottom-12 right-12 w-2 h-2 rounded-full bg-white/20 group-hover:bg-white/40 transition-colors duration-500" />
+                            </div>
+                          </div>
+                        </motion.div>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
                 </div>
-              </HoverCard>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+              </div>
+            );
+          })}
+        </div>
 
         <FadeUp delay={0.3}>
-          <div className="text-center">
+          <div className="text-center mt-16">
             <motion.div
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
@@ -132,18 +279,8 @@ export default function ServicesSection() {
                 className="inline-flex items-center gap-3 bg-[#003975] text-white px-10 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-800/20"
               >
                 Explore All Services
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
             </motion.div>

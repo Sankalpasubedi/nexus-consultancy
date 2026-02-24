@@ -829,3 +829,164 @@ export function CarouselCard({
   );
 }
 
+/* ===== SCROLL ZOOM (webmonal-style expand on scroll) ===== */
+
+export function ScrollZoom({
+  children,
+  className = "",
+  startScale = 0.85,
+  endScale = 1,
+  startRadius = 32,
+  endRadius = 0,
+  startOpacity = 0.7,
+  endOpacity = 1,
+}: {
+  children: ReactNode;
+  className?: string;
+  startScale?: number;
+  endScale?: number;
+  startRadius?: number;
+  endRadius?: number;
+  startOpacity?: number;
+  endOpacity?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const rawScale = useTransform(scrollYProgress, [0, 0.35, 0.65], [startScale, endScale, endScale]);
+  const rawRadius = useTransform(scrollYProgress, [0, 0.35, 0.65], [startRadius, endRadius, endRadius]);
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.25, 0.65], [startOpacity, endOpacity, endOpacity]);
+
+  const scale = useSpring(rawScale, { stiffness: 100, damping: 30, mass: 0.5 });
+  const borderRadius = useSpring(rawRadius, { stiffness: 100, damping: 30, mass: 0.5 });
+  const opacity = useSpring(rawOpacity, { stiffness: 100, damping: 30, mass: 0.5 });
+
+  return (
+    <div ref={ref} className={className}>
+      <motion.div
+        style={{
+          scale,
+          borderRadius,
+          opacity,
+          transformOrigin: "center center",
+          overflow: "hidden",
+        }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+/* ===== SMOOTH SECTION REVEAL (cinematic scroll entrance) ===== */
+
+export function SectionReveal({
+  children,
+  className = "",
+  direction = "up",
+  distance = 100,
+  blur = 0,
+  duration = 1,
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  direction?: "up" | "down" | "left" | "right";
+  distance?: number;
+  blur?: number;
+  duration?: number;
+  delay?: number;
+}) {
+  const dirMap = {
+    up: { y: distance },
+    down: { y: -distance },
+    left: { x: distance },
+    right: { x: -distance },
+  };
+
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        ...dirMap[direction],
+        filter: blur > 0 ? `blur(${blur}px)` : "blur(0px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        y: 0,
+        filter: "blur(0px)",
+      }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{
+        duration,
+        delay,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ===== SCROLL PARALLAX SCALE (subtle zoom on scroll) ===== */
+
+export function ScrollParallaxScale({
+  children,
+  className = "",
+  startScale = 0.95,
+  endScale = 1.05,
+}: {
+  children: ReactNode;
+  className?: string;
+  startScale?: number;
+  endScale?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const rawScale = useTransform(scrollYProgress, [0, 1], [startScale, endScale]);
+  const scale = useSpring(rawScale, { stiffness: 80, damping: 30 });
+
+  return (
+    <motion.div ref={ref} style={{ scale }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
+/* ===== HORIZONTAL SCROLL TEXT (marquee-style) ===== */
+
+export function MarqueeText({
+  text,
+  className = "",
+  speed = 30,
+  direction = "left",
+}: {
+  text: string;
+  className?: string;
+  speed?: number;
+  direction?: "left" | "right";
+}) {
+  return (
+    <div className={`overflow-hidden whitespace-nowrap ${className}`}>
+      <motion.div
+        animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
+        transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+        className="inline-flex gap-8"
+      >
+        <span>{text}</span>
+        <span>{text}</span>
+        <span>{text}</span>
+        <span>{text}</span>
+      </motion.div>
+    </div>
+  );
+}
+
