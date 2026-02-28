@@ -13,7 +13,130 @@ import {
 } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
 import { useHeader } from "@/app/contexts/HeaderContext";
-import { useEffect } from "react";
+import { useEffect, useRef, useMemo } from "react";
+
+/* ─── Animated Plane on Curved Path ─── */
+function AnimatedPlane({ 
+  path,
+  delay, 
+  duration,
+  reverse = false,
+}: { 
+  path: { startX: number; startY: number; cpX: number; cpY: number; endX: number; endY: number };
+  delay: number; 
+  duration: number; 
+  reverse?: boolean;
+}) {
+  const gRef = useRef<SVGGElement>(null);
+  const rafRef = useRef<number>(0);
+  const startTimeRef = useRef<number>(0);
+
+  // Quadratic bezier point calculation
+  const getPointOnCurve = (t: number) => {
+    const progress = reverse ? 1 - t : t;
+    const x = (1 - progress) * (1 - progress) * path.startX + 2 * (1 - progress) * progress * path.cpX + progress * progress * path.endX;
+    const y = (1 - progress) * (1 - progress) * path.startY + 2 * (1 - progress) * progress * path.cpY + progress * progress * path.endY;
+    return { x, y };
+  };
+
+  // Get tangent angle at point t
+  const getTangentAngle = (t: number) => {
+    const progress = reverse ? 1 - t : t;
+    const dx = 2 * (1 - progress) * (path.cpX - path.startX) + 2 * progress * (path.endX - path.cpX);
+    const dy = 2 * (1 - progress) * (path.cpY - path.startY) + 2 * progress * (path.endY - path.cpY);
+    let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    if (reverse) angle += 180;
+    return angle;
+  };
+
+  useEffect(() => {
+    if (!gRef.current) return;
+
+    const animate = (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp;
+      const elapsed = timestamp - startTimeRef.current;
+      const progress = ((elapsed + delay * 1000) % (duration * 1000)) / (duration * 1000);
+      
+      const point = getPointOnCurve(progress);
+      const angle = getTangentAngle(progress);
+
+      if (gRef.current) {
+        gRef.current.setAttribute(
+          "transform",
+          `translate(${point.x}, ${point.y}) rotate(${angle + 90})`
+        );
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      startTimeRef.current = 0;
+    };
+  }, [path, delay, duration, reverse]);
+
+  return (
+    <g ref={gRef} opacity={0.7}>
+      {/* Airplane icon from WorldMapSection - same as original */}
+      <g transform="scale(0.5) translate(-12, -12)">
+        <path
+          d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
+          fill="#003975"
+        />
+      </g>
+    </g>
+  );
+}
+
+/* ─── Flight Lines Background ─── */
+function FlightLinesBackground() {
+  const lines = useMemo(() => [
+    { startX: -50, startY: 100, cpX: 200, cpY: 400, endX: 850, endY: 120, delay: 0, duration: 12 },
+    { startX: 850, startY: 450, cpX: 400, cpY: 380, endX: -50, endY: 480, delay: 1, duration: 13 },
+  ], []);
+
+  // Generate quadratic bezier path string
+  const getPathD = (line: typeof lines[0]) => {
+    return `M ${line.startX} ${line.startY} Q ${line.cpX} ${line.cpY} ${line.endX} ${line.endY}`;
+  };
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
+      <svg 
+        viewBox="0 0 800 600" 
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+      >
+        {/* Curved dashed lines */}
+        {lines.map((line, i) => (
+          <path
+            key={`line-${i}`}
+            d={getPathD(line)}
+            fill="none"
+            stroke="#003975"
+            strokeWidth={1.5}
+            strokeDasharray="10 8"
+            opacity={0.2}
+          />
+        ))}
+        
+        {/* Animated planes - 2 per line (left-to-right and right-to-left) */}
+        {lines.map((line, i) => (
+          <g key={`planes-${i}`}>
+            {/* Plane 1: Left to Right */}
+            <AnimatedPlane
+              path={line}
+              delay={line.delay}
+              duration={line.duration}
+              reverse={false}
+            />
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
 
 /* ─── Data ─────────────────────────────────────────── */
 
@@ -316,8 +439,9 @@ export default function TestPreparationPage() {
       </section>
 
       {/* ── FAQs ── */}
-      <section className="py-24 px-6 bg-gray-50">
-        <div className="max-w-[800px] mx-auto">
+      <section className="relative py-24 px-6 bg-gray-50 overflow-hidden">
+        <FlightLinesBackground />
+        <div className="max-w-[800px] mx-auto relative z-10">
           <FadeUp>
             <div className="text-center mb-14">
               <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Frequently Asked Questions</h2>

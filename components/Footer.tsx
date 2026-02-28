@@ -247,6 +247,9 @@ export default function Footer() {
                   <a
                     href="mailto:info@nexsuseducation.com"
                     className="transition hover:text-white"
+                    style={{
+                      overflowWrap: "anywhere",
+                    }}
                   >
                     info@nexsuseducation.com
                   </a>

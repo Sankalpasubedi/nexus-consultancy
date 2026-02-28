@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import {
   FadeUp,
   TextReveal,
@@ -16,150 +15,131 @@ import {
 import { useHeader } from "@/app/contexts/HeaderContext";
 import { Icon } from "@/lib/icons";
 import { courseCategories } from "@/data/courses";
-
-/* --- Carousel constants --- */
-const CARD_W = 400;
-const CARD_H = 460;
-const GAP = 28;
-const ITEM_W = CARD_W + GAP;
-const DRAG_THRESHOLD = 5;
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function CoursesPage() {
   const { setShowSidebar } = useHeader();
-  const router = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const x = useMotionValue(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [progress, setProgress] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const isHovering = useRef(false);
 
+  // Drag state
   const isDragging = useRef(false);
-  const hasDragged = useRef(false);
   const dragStartX = useRef(0);
-  const dragStartVal = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const hasDragged = useRef(false);
 
   useEffect(() => {
     setShowSidebar(true);
     return () => setShowSidebar(true);
   }, [setShowSidebar]);
 
-  useEffect(() => {
-    const update = () => {
-      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
-    };
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+  const updateState = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    const max = scrollWidth - clientWidth;
+    setProgress(max > 0 ? (scrollLeft / max) * 100 : 0);
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  const centerOffset = containerWidth / 2 - CARD_W / 2;
+  const handleScrollLeft = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: -400, behavior: "smooth" });
+  };
 
-  useEffect(() => {
-    const unsub = x.on("change", (latest) => {
-      const idx = Math.round((-latest + centerOffset) / ITEM_W);
-      setActiveIndex(Math.max(0, Math.min(courseCategories.length - 1, idx)));
-    });
-    return () => unsub();
-  }, [x, centerOffset]);
+  const handleScrollRight = () => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: 400, behavior: "smooth" });
+  };
 
-  const goTo = useCallback(
-    (index: number) => {
-      const target = -index * ITEM_W + centerOffset;
-      const startX = x.get();
-      const diff = target - startX;
-      let start: number | null = null;
-      const duration = 500;
-      const step = (ts: number) => {
-        if (!start) start = ts;
-        const elapsed = ts - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        x.set(startX + diff * eased);
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    },
-    [x, centerOffset]
-  );
-
-  useEffect(() => {
-    if (containerWidth > 0) goTo(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerWidth]);
-
-  const handleMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      isDragging.current = true;
-      hasDragged.current = false;
-      dragStartX.current = e.clientX;
-      dragStartVal.current = x.get();
-    },
-    [x]
-  );
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging.current) return;
-      const delta = e.clientX - dragStartX.current;
-      if (Math.abs(delta) > DRAG_THRESHOLD) hasDragged.current = true;
-      const minX = -(ITEM_W * (courseCategories.length - 1)) - centerOffset + containerWidth - CARD_W;
-      const maxX = centerOffset;
-      const raw = dragStartVal.current + delta;
-      x.set(Math.max(minX, Math.min(maxX, raw)));
-    },
-    [x, centerOffset, containerWidth]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    const current = x.get();
-    const idx = Math.round((-current + centerOffset) / ITEM_W);
-    goTo(Math.max(0, Math.min(courseCategories.length - 1, idx)));
-  }, [x, centerOffset, goTo]);
+  const handleMouseEnter = useCallback(() => {
+    isHovering.current = true;
+  }, []);
 
   const handleMouseLeave = useCallback(() => {
+    isHovering.current = false;
+    // Also reset dragging state
     if (isDragging.current) {
       isDragging.current = false;
-      const current = x.get();
-      const idx = Math.round((-current + centerOffset) / ITEM_W);
-      goTo(Math.max(0, Math.min(courseCategories.length - 1, idx)));
-    }
-  }, [x, centerOffset, goTo]);
-
-  // Wheel handler for trackpad horizontal scroll
-  const handleWheel = useCallback(
-    (e: React.WheelEvent) => {
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) < 1) return;
-      
-      e.preventDefault();
-      const minX = -(ITEM_W * (courseCategories.length - 1)) - centerOffset + containerWidth - CARD_W;
-      const maxX = centerOffset;
-      const raw = x.get() - delta;
-      x.set(Math.max(minX, Math.min(maxX, raw)));
-      
-      const idx = Math.round((-x.get() + centerOffset) / ITEM_W);
-      setActiveIndex(Math.max(0, Math.min(courseCategories.length - 1, idx)));
-    },
-    [x, centerOffset, containerWidth]
-  );
-
-  const handleCardClick = useCallback(
-    (e: React.MouseEvent, slug: string) => {
-      if (hasDragged.current) {
-        e.preventDefault();
-        e.stopPropagation();
-        return;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
       }
-      router.push(`/courses/${slug}`);
-    },
-    [router]
-  );
+    }
+  }, []);
 
-  const active = courseCategories[activeIndex];
+  // Mouse drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.userSelect = "none";
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !scrollRef.current) return;
+      const dx = e.clientX - dragStartX.current;
+      if (Math.abs(dx) > 3) hasDragged.current = true;
+      scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+    };
+
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const handleCardClick = useCallback((e: React.MouseEvent) => {
+    if (hasDragged.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, []);
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+    
+    updateState();
+    scrollEl.addEventListener("scroll", updateState, { passive: true });
+    window.addEventListener("resize", updateState);
+
+    // Prevent horizontal scroll when not hovering
+    const handleWheelEvent = (e: WheelEvent) => {
+      if (!isHovering.current && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+      }
+    };
+    scrollEl.addEventListener("wheel", handleWheelEvent, { passive: false });
+    
+    return () => {
+      scrollEl.removeEventListener("scroll", updateState);
+      window.removeEventListener("resize", updateState);
+      scrollEl.removeEventListener("wheel", handleWheelEvent);
+    };
+  }, [updateState]);
 
   return (
-    <main className="min-h-screen bg-[#fafaf8] pt-24 pb-40 overflow-hidden relative z-0">
+    <main className="min-h-screen bg-[#fafaf8] pt-24 pb-32 overflow-hidden relative z-0">
       {/* Decorative blurs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-[#003975]/[0.03] rounded-full blur-[100px]" />
@@ -197,135 +177,104 @@ export default function CoursesPage() {
         </FadeUp>
       </div>
 
-      {/* Full-width Drag Carousel */}
-      <div
-        ref={containerRef}
-        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        style={{ height: CARD_H + 40 }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-      >
-        <motion.div
-          style={{ x }}
-          className="flex items-center absolute top-0 left-0"
+      {/* Native Scroll Carousel */}
+      <div className="relative py-5">
+        <div
+          ref={scrollRef}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+          className="flex gap-5 px-6 md:px-12 py-6 overflow-x-auto overflow-y-visible scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none"
+          style={{
+            WebkitOverflowScrolling: "touch",
+            overscrollBehaviorX: "contain",
+            touchAction: "pan-x pinch-zoom",
+          }}
         >
-          {courseCategories.map((cat, i) => {
-            const isActive = i === activeIndex;
-            return (
-              <motion.div
-                key={cat.slug}
-                className="flex-shrink-0 relative"
-                style={{ width: CARD_W, marginRight: GAP }}
-                animate={{
-                  scale: isActive ? 1 : 0.88,
-                  opacity: isActive ? 1 : 0.45,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={(e) => handleCardClick(e, cat.slug)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") router.push(`/courses/${cat.slug}`);
-                  }}
-                  draggable={false}
-                  className="block"
+          {courseCategories.map((cat, idx) => (
+            <motion.div
+              key={cat.slug}
+              className="flex-shrink-0 w-[260px] md:w-[372px] h-[480px] md:h-[680px]"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.03 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.06, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <Link href={`/courses/${cat.slug}`} draggable={false} onClick={handleCardClick} className="block h-full">
+                <div 
+                  className="relative rounded-[28px] overflow-hidden cursor-pointer h-full"
                 >
-                  <div
-                    className="relative rounded-3xl overflow-hidden shadow-2xl group"
-                    style={{ height: CARD_H }}
-                  >
-                    <Image
-                      src={cat.image}
-                      alt={cat.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      draggable={false}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
+                  {/* Full-bleed Image */}
+                  <Image
+                    src={cat.image}
+                    alt={cat.title}
+                    fill
+                    className="object-cover"
+                    draggable={false}
+                  />
+                  
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
 
-                    {/* Icon badge */}
-                    <div className="absolute top-5 left-5">
-                      <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <Icon name={cat.icon} size={20} className="text-white" />
-                      </div>
-                    </div>
+                  {/* Category tag */}
+                  <div className="absolute top-5 left-5 z-10">
+                    <span className="text-xs font-medium text-white/80">{cat.icon === "Monitor" ? "Technology" : cat.icon === "Briefcase" ? "Business" : cat.icon === "Cog" ? "Engineering" : cat.icon === "Heart" ? "Healthcare" : cat.icon === "Palette" ? "Creative" : cat.icon === "Scale" ? "Law" : "Sciences"}</span>
+                  </div>
+                  
+                  {/* Programs badge */}
+                  <div className="absolute top-5 right-5 z-10">
+                    <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      {cat.programs}+ Programs
+                    </span>
+                  </div>
 
-                    {/* Programs count badge */}
-                    <div className="absolute top-5 right-5">
-                      <span className="text-xs font-bold text-white bg-[#003975]/80 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                        {cat.programs} Programs
-                      </span>
-                    </div>
+                  {/* Title section */}
+                  <div className="absolute top-12 left-5 right-5 z-10">
+                    <h3 className="text-lg md:text-2xl font-bold text-white leading-tight mt-4">
+                      {cat.title}
+                    </h3>
+                  </div>
 
-                    {/* Bottom info */}
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-2xl font-bold text-white mb-1">{cat.title}</h3>
-                      <p className="text-sm text-white/70 line-clamp-2">{cat.description}</p>
-                      <div className="mt-3 inline-flex items-center gap-2 text-sm text-white/90 font-medium group-hover:gap-3 transition-all">
-                        Explore <Icon name="ArrowRight" size={16} />
-                      </div>
+                  {/* Bottom description */}
+                  <div className="absolute bottom-5 left-5 right-5 z-10">
+                    <p className="text-sm text-white/70 line-clamp-2 mb-3">{cat.description}</p>
+                    <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                      <Icon name="Plus" size={18} className="text-white" />
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
 
-      {/* Active Course Info */}
-      <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 mt-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+        {/* Navigation Buttons */}
+        <div className="flex items-center justify-end gap-3 px-6 md:px-12 mt-6">
+          <button
+            onClick={handleScrollLeft}
+            disabled={!canScrollLeft}
+            className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
+              canScrollLeft 
+                ? "border-gray-300 text-slate-600 hover:bg-gray-50 hover:border-gray-400" 
+                : "border-gray-200 text-gray-300 cursor-not-allowed"
+            }`}
+            aria-label="Scroll left"
           >
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
-                  <Icon name={active?.icon || "BookOpen"} size={20} className="text-white" />
-                </div>
-                {active?.title}
-              </h2>
-              <p className="text-slate-500 max-w-xl">{active?.description}</p>
-            </div>
-            <button
-              onClick={() => active && router.push(`/courses/${active.slug}`)}
-              className="inline-flex items-center gap-2 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold hover:bg-[#002d5e] transition shrink-0 text-sm shadow-lg shadow-[#003975]/20"
-            >
-              Explore {active?.title} <Icon name="ArrowRight" size={16} />
-            </button>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Icon Navigation */}
-        <div className="flex items-center justify-center gap-4 mt-10">
-          <div className="flex items-center gap-3">
-            {courseCategories.map((cat, i) => (
-              <motion.button
-                key={cat.slug}
-                onClick={() => goTo(i)}
-                className={`relative p-2.5 rounded-full transition-all ${
-                  i === activeIndex
-                    ? "ring-2 ring-[#003975] bg-[#003975]/10 scale-110"
-                    : "opacity-40 hover:opacity-70 bg-gray-100"
-                }`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                title={cat.title}
-              >
-                <Icon name={cat.icon} size={18} className={i === activeIndex ? "text-[#003975]" : "text-slate-500"} />
-              </motion.button>
-            ))}
-          </div>
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={handleScrollRight}
+            disabled={!canScrollRight}
+            className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
+              canScrollRight 
+                ? "border-gray-300 text-slate-600 hover:bg-gray-50 hover:border-gray-400" 
+                : "border-gray-200 text-gray-300 cursor-not-allowed"
+            }`}
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
       </div>
 

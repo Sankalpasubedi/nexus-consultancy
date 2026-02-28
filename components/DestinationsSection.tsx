@@ -10,7 +10,6 @@ import { FlagIcon } from "@/lib/icons";
 import { Globe } from "lucide-react";
 
 export default function DestinationsSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
@@ -22,7 +21,6 @@ export default function DestinationsSection() {
   const dragStartX = useRef(0);
   const dragScrollLeft = useRef(0);
   const hasDragged = useRef(false);
-  const hasActivatedClick = useRef(false);
 
   const updateState = useCallback(() => {
     if (!scrollRef.current) return;
@@ -54,18 +52,9 @@ export default function DestinationsSection() {
     scrollRef.current.style.userSelect = "none";
   }, []);
 
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (!scrollRef.current || e.touches.length > 1) return;
-    isDragging.current = true;
-    hasDragged.current = false;
-    dragStartX.current = e.touches[0].clientX;
-    dragScrollLeft.current = scrollRef.current.scrollLeft;
-  }, []);
-
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging.current || !scrollRef.current) return;
-      e.preventDefault();
       const dx = e.clientX - dragStartX.current;
       if (Math.abs(dx) > 3) hasDragged.current = true;
       scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
@@ -139,19 +128,17 @@ export default function DestinationsSection() {
       </FadeUp>
 
       {/* Native scroll container */}
-      <div ref={containerRef} className="relative w-full">
-        <div
-          ref={scrollRef}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
-          onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
-          className="flex gap-6 px-6 lg:px-8 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none focus:outline-none focus:ring-0"
-          style={{
-            WebkitOverflowScrolling: "touch",
-            overscrollBehaviorX: "contain",
-            touchAction: "pan-y",
-          }}
-        >
+      <div
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+        className="flex gap-6 px-6 lg:px-8 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none focus:outline-none focus:ring-0"
+        style={{
+          WebkitOverflowScrolling: "touch",
+          overscrollBehaviorX: "contain",
+          touchAction: "pan-x pinch-zoom",
+        }}
+      >
           {destinations.map((dest, idx) => (
             <motion.div
               key={dest.id}
@@ -191,7 +178,6 @@ export default function DestinationsSection() {
             </motion.div>
           ))}
         </div>
-      </div>
 
       {/* Progress Bar */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-10">

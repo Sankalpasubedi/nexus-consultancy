@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, useMotionValue, AnimatePresence } from "framer-motion";
-import { Globe, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { destinations } from "@/data";
 import { FlagIcon } from "@/lib/icons";
 import { FadeUp, TextReveal } from "@/lib/animations";
@@ -27,6 +27,7 @@ export default function Destinations() {
   const hasDragged = useRef(false);
   const dragStartX = useRef(0);
   const dragStartVal = useRef(0);
+  const isAnimating = useRef(false);
 
   useEffect(() => {
     const update = () => {
@@ -49,9 +50,17 @@ export default function Destinations() {
 
   const goTo = useCallback(
     (index: number) => {
+      // Prevent overlapping animations
+      if (isAnimating.current) return;
+      
       const target = -index * ITEM_WIDTH + centerOffset;
       const startX = x.get();
       const diff = target - startX;
+      
+      // Skip animation if already at target
+      if (Math.abs(diff) < 1) return;
+      
+      isAnimating.current = true;
       let start: number | null = null;
       const duration = 500;
       const step = (ts: number) => {
@@ -60,7 +69,11 @@ export default function Destinations() {
         const progress = Math.min(elapsed / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         x.set(startX + diff * eased);
-        if (progress < 1) requestAnimationFrame(step);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          isAnimating.current = false;
+        }
       };
       requestAnimationFrame(step);
     },
@@ -75,6 +88,7 @@ export default function Destinations() {
   // --- Mouse drag handlers ---
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      isAnimating.current = false; // Cancel any ongoing animation
       isDragging.current = true;
       hasDragged.current = false;
       dragStartX.current = e.clientX;
@@ -121,6 +135,47 @@ export default function Destinations() {
     }
   }, [x, centerOffset, goTo]);
 
+  // --- Touch handlers ---
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length > 1) return;
+      isAnimating.current = false; // Cancel any ongoing animation
+      isDragging.current = true;
+      hasDragged.current = false;
+      dragStartX.current = e.touches[0].clientX;
+      dragStartVal.current = x.get();
+    },
+    [x]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDragging.current) return;
+      const delta = e.touches[0].clientX - dragStartX.current;
+      if (Math.abs(delta) > DRAG_THRESHOLD) {
+        hasDragged.current = true;
+      }
+
+      const minX =
+        -(ITEM_WIDTH * (destinations.length - 1)) - centerOffset + containerWidth - IMAGE_WIDTH;
+      const maxX = centerOffset;
+      const raw = dragStartVal.current + delta;
+      const clamped = Math.max(minX, Math.min(maxX, raw));
+      x.set(clamped);
+    },
+    [x, centerOffset, containerWidth]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    // Snap to nearest card
+    const current = x.get();
+    const idx = Math.round((-current + centerOffset) / ITEM_WIDTH);
+    const snapped = Math.max(0, Math.min(destinations.length - 1, idx));
+    goTo(snapped);
+  }, [x, centerOffset, goTo]);
+
   // Wheel handler for trackpad horizontal scroll
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
@@ -129,6 +184,7 @@ export default function Destinations() {
       if (Math.abs(delta) < 1) return;
       
       e.preventDefault();
+      isAnimating.current = false; // Cancel any ongoing animation
       const minX =
         -(ITEM_WIDTH * (destinations.length - 1)) - centerOffset + containerWidth - IMAGE_WIDTH;
       const maxX = centerOffset;
@@ -146,15 +202,21 @@ export default function Destinations() {
 
   // Card click handler - prevent navigation when dragged
   const handleCardClick = useCallback(
-    (e: React.MouseEvent, slug: string) => {
+    (e: React.MouseEvent, slug: string, index: number) => {
       if (hasDragged.current) {
         e.preventDefault();
         e.stopPropagation();
         return;
       }
+      // If clicking a non-active card, scroll to it first
+      if (index !== activeIndex) {
+        e.preventDefault();
+        goTo(index);
+        return;
+      }
       router.push(`/destinations/${slug}`);
     },
-    [router]
+    [router, activeIndex, goTo]
   );
 
   const dest = destinations[activeIndex];
@@ -194,6 +256,10 @@ export default function Destinations() {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onWheel={handleWheel}
       >
         <motion.div
           style={{ x }}
@@ -215,9 +281,15 @@ export default function Destinations() {
                 <div
                   role="button"
                   tabIndex={0}
-                  onClick={(e) => handleCardClick(e, d.slug)}
+                  onClick={(e) => handleCardClick(e, d.slug, i)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") router.push(`/destinations/${d.slug}`);
+                    if (e.key === "Enter") {
+                      if (i === activeIndex) {
+                        router.push(`/destinations/${d.slug}`);
+                      } else {
+                        goTo(i);
+                      }
+                    }
                   }}
                   draggable={false}
                   className="block"

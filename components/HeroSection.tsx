@@ -147,7 +147,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative h-screen min-h-[700px] max-h-[1100px] w-full overflow-hidden"
+      className="relative h-screen min-h-[600px] sm:min-h-[700px] max-h-[1100px] w-full overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -178,7 +178,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#001020]/60 via-transparent to-[#001020]/30" />
 
       {/* ── Main Content ── */}
-      <div className="relative z-10 h-full flex flex-col justify-center section-padding">
+      <div className="relative z-10 h-full flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto w-full">
           <AnimatePresence mode="wait">
             <motion.div
@@ -191,7 +191,7 @@ export default function HeroSection() {
             >
               {/* Top Label */}
               <motion.div variants={textChildVariants}>
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs sm:text-sm font-medium text-white/80 tracking-wide uppercase mb-6">
+                <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs sm:text-sm font-medium text-white/80 tracking-wide uppercase mb-4 sm:mb-6">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -266,7 +266,7 @@ export default function HeroSection() {
           </AnimatePresence>
 
           {/* ── Slide Indicator Dots ── */}
-          <div className="flex items-center gap-2.5 mt-12">
+          <div className="flex items-center gap-2.5 mt-8 sm:mt-10 md:mt-12">
             {slides.map((_, idx) => (
               <button
                 key={idx}
@@ -277,8 +277,8 @@ export default function HeroSection() {
                 <span
                   className={`block rounded-full transition-all duration-500 ease-out ${
                     idx === current
-                      ? "w-10 h-2.5 bg-white"
-                      : "w-2.5 h-2.5 bg-white/40 group-hover:bg-white/70"
+                      ? "w-8 sm:w-10 h-2 sm:h-2.5 bg-white"
+                      : "w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/40 group-hover:bg-white/70"
                   }`}
                 />
                 {/* Progress fill for active dot */}
@@ -298,57 +298,60 @@ export default function HeroSection() {
       </div>
 
       {/* ── Country Quick-Links ── */}
-      <div className="absolute bottom-36 sm:bottom-40 left-0 right-0 z-10 section-padding">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <span className="text-xs font-medium text-white/50 uppercase tracking-wider mr-2 hidden sm:inline">
-              Destinations
-            </span>
-            {destinations.map((dest) => (
-              <motion.div
-                key={dest.slug}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Link
-                  href={`/destinations/${dest.slug}`}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs sm:text-sm font-medium text-white/80 hover:bg-white/20 hover:border-white/30 hover:text-white transition-all"
+      <div className="absolute bottom-[120px] sm:bottom-36 md:bottom-40 left-0 right-0 z-10 overflow-x-auto scrollbar-hide">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-16">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+              <span className="text-xs font-medium text-white/50 uppercase tracking-wider mr-1 hidden md:inline flex-shrink-0">
+                Destinations
+              </span>
+              {destinations.map((dest) => (
+                <motion.div
+                  key={dest.slug}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="flex-shrink-0"
                 >
-                  <FlagIcon code={dest.flagCode} size={14} />
-                  {dest.name}
-                </Link>
-              </motion.div>
-            ))}
+                  <Link
+                    href={`/destinations/${dest.slug}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs sm:text-sm font-medium text-white/80 hover:bg-white/20 hover:border-white/30 hover:text-white transition-all whitespace-nowrap"
+                  >
+                    <FlagIcon code={dest.flagCode} size={14} />
+                    {dest.name}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* ── Stats Bar ── */}
-      <div className="absolute -bottom-4 left-0 right-0 z-20 section-padding">
+      <div className="absolute bottom-4 sm:bottom-2 md:-bottom-4 left-0 right-0 z-20 px-4 sm:px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-5xl mx-auto"
         >
-          <div className="bg-white/90 backdrop-blur-xl border border-white/60 shadow-2xl shadow-black/8 rounded-2xl px-6 sm:px-10 py-6 sm:py-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+          <div className="bg-white/95 backdrop-blur-xl border border-white/60 shadow-2xl shadow-black/10 rounded-xl sm:rounded-2xl px-4 sm:px-8 md:px-10 py-4 sm:py-6">
+            <div className="grid grid-cols-4 gap-2 sm:gap-6 md:gap-8">
               {stats.map((stat, idx) => (
                 <div
                   key={idx}
                   className={`text-center ${
                     idx < stats.length - 1
-                      ? "md:border-r md:border-gray-200/70"
+                      ? "border-r border-gray-200/50"
                       : ""
                   }`}
                 >
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                  <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-none">
                     <AnimatedCounter
                       value={stat.value}
                       suffix={stat.suffix}
                     />
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">
+                  <p className="text-[10px] sm:text-xs md:text-sm text-slate-500 mt-0.5 sm:mt-1 font-medium leading-tight">
                     {stat.label}
                   </p>
                 </div>

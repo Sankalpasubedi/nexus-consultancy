@@ -124,6 +124,7 @@ function TeamSliderSection({
   const hasDragged = useRef(false);
   const dragStartX = useRef(0);
   const dragStartVal = useRef(0);
+  const isAnimating = useRef(false);
 
   useEffect(() => {
     const update = () => {
@@ -146,9 +147,17 @@ function TeamSliderSection({
 
   const goTo = useCallback(
     (index: number) => {
+      // Prevent overlapping animations
+      if (isAnimating.current) return;
+      
       const target = -index * CARD_ITEM + centerOffset;
       const startX = x.get();
       const diff = target - startX;
+      
+      // Skip animation if already at target
+      if (Math.abs(diff) < 1) return;
+      
+      isAnimating.current = true;
       let start: number | null = null;
       const duration = 500;
       const step = (ts: number) => {
@@ -157,7 +166,11 @@ function TeamSliderSection({
         const progress = Math.min(elapsed / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         x.set(startX + diff * eased);
-        if (progress < 1) requestAnimationFrame(step);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          isAnimating.current = false;
+        }
       };
       requestAnimationFrame(step);
     },
@@ -171,6 +184,7 @@ function TeamSliderSection({
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      isAnimating.current = false; // Cancel any ongoing animation
       isDragging.current = true;
       hasDragged.current = false;
       dragStartX.current = e.clientX;
@@ -209,6 +223,40 @@ function TeamSliderSection({
     }
   }, [x, centerOffset, goTo, team.length]);
 
+  // Touch handlers for mobile
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length > 1) return;
+      isAnimating.current = false;
+      isDragging.current = true;
+      hasDragged.current = false;
+      dragStartX.current = e.touches[0].clientX;
+      dragStartVal.current = x.get();
+    },
+    [x]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDragging.current) return;
+      const delta = e.touches[0].clientX - dragStartX.current;
+      if (Math.abs(delta) > CARD_DRAG_THRESHOLD) hasDragged.current = true;
+      const minX = -(CARD_ITEM * (team.length - 1)) - centerOffset + containerWidth - CARD_W;
+      const maxX = centerOffset;
+      const raw = dragStartVal.current + delta;
+      x.set(Math.max(minX, Math.min(maxX, raw)));
+    },
+    [x, centerOffset, containerWidth, team.length]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const current = x.get();
+    const idx = Math.round((-current + centerOffset) / CARD_ITEM);
+    goTo(Math.max(0, Math.min(team.length - 1, idx)));
+  }, [x, centerOffset, goTo, team.length]);
+
   // Wheel handler for trackpad horizontal scroll
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
@@ -216,6 +264,7 @@ function TeamSliderSection({
       if (Math.abs(delta) < 1) return;
       
       e.preventDefault();
+      isAnimating.current = false; // Cancel any ongoing animation
       const minX = -(CARD_ITEM * (team.length - 1)) - centerOffset + containerWidth - CARD_W;
       const maxX = centerOffset;
       const raw = x.get() - delta;
@@ -225,6 +274,23 @@ function TeamSliderSection({
       setActiveIndex(Math.max(0, Math.min(team.length - 1, idx)));
     },
     [x, centerOffset, containerWidth, team.length]
+  );
+
+  // Card click handler - click non-active card to move to it
+  const handleCardClick = useCallback(
+    (e: React.MouseEvent, index: number) => {
+      if (hasDragged.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      // If clicking a non-active card, scroll to it
+      if (index !== activeIndex) {
+        e.preventDefault();
+        goTo(index);
+      }
+    },
+    [activeIndex, goTo]
   );
 
   return (
@@ -252,6 +318,9 @@ function TeamSliderSection({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onWheel={handleWheel}
       >
         <motion.div
@@ -263,13 +332,14 @@ function TeamSliderSection({
             return (
               <motion.div
                 key={m.name}
-                className="flex-shrink-0 relative"
+                className={`flex-shrink-0 relative ${!isActive ? 'cursor-pointer' : ''}`}
                 style={{ width: CARD_W, marginRight: CARD_GAP }}
                 animate={{
                   scale: isActive ? 1 : 0.88,
                   opacity: isActive ? 1 : 0.45,
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                onClick={(e) => handleCardClick(e, i)}
               >
                 <div
                   className="rounded-3xl overflow-hidden shadow-xl bg-white border border-gray-100 group"

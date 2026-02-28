@@ -90,21 +90,21 @@ export default function DestinationDetailClient() {
   const admissionTabs = Object.keys(data.admissionRequirementsData);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <ScrollProgress />
 
       {/* ═══════════ HERO ═══════════ */}
-      <section ref={heroRef} className="relative h-[90vh] min-h-[650px] overflow-hidden">
-        <motion.div style={{ y: heroY }} className="absolute inset-0">
+      <section ref={heroRef} className="relative h-[90vh] min-h-[650px] w-full overflow-hidden">
+        <motion.div style={{ y: heroY }} className="absolute inset-0 w-full">
           {data.carouselData.CountryImages.map((img, idx) => (
             <motion.div
               key={img.id}
-              className="absolute inset-0"
+              className="absolute inset-0 w-full"
               initial={false}
               animate={{ opacity: idx === currentImage ? 1 : 0, scale: idx === currentImage ? 1 : 1.1 }}
               transition={{ duration: 1.2, ease: "easeInOut" }}
             >
-              <Image src={img.url} alt={img.location} fill className="object-cover" priority={idx === 0} />
+              <Image src={img.url} alt={img.location} fill className="object-cover w-full" priority={idx === 0} sizes="100vw" />
             </motion.div>
           ))}
         </motion.div>
@@ -414,7 +414,7 @@ export default function DestinationDetailClient() {
 
           {/* Tabs */}
           <FadeUp delay={0.1}>
-            <div className="flex justify-center gap-2 mb-10">
+            <div className="flex justify-center gap-2 mb-10 flex-wrap">
               {admissionTabs.map((tab) => (
                 <button
                   key={tab}

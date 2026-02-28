@@ -41,6 +41,7 @@ function ProgramsCarousel({
   const hasDragged = useRef(false);
   const dragStartX = useRef(0);
   const dragStartVal = useRef(0);
+  const isAnimating = useRef(false);
 
   useEffect(() => {
     const update = () => {
@@ -63,9 +64,12 @@ function ProgramsCarousel({
 
   const goTo = useCallback(
     (index: number) => {
+      if (isAnimating.current) return;
       const target = -index * P_ITEM + centerOffset;
       const startX = x.get();
       const diff = target - startX;
+      if (Math.abs(diff) < 1) return;
+      isAnimating.current = true;
       let start: number | null = null;
       const duration = 500;
       const step = (ts: number) => {
@@ -74,7 +78,11 @@ function ProgramsCarousel({
         const progress = Math.min(elapsed / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         x.set(startX + diff * eased);
-        if (progress < 1) requestAnimationFrame(step);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          isAnimating.current = false;
+        }
       };
       requestAnimationFrame(step);
     },
@@ -88,6 +96,7 @@ function ProgramsCarousel({
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      isAnimating.current = false;
       isDragging.current = true;
       hasDragged.current = false;
       dragStartX.current = e.clientX;
@@ -126,6 +135,55 @@ function ProgramsCarousel({
     }
   }, [x, centerOffset, goTo, programs.length]);
 
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      isAnimating.current = false;
+      isDragging.current = true;
+      hasDragged.current = false;
+      dragStartX.current = e.touches[0].clientX;
+      dragStartVal.current = x.get();
+    },
+    [x]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDragging.current) return;
+      const delta = e.touches[0].clientX - dragStartX.current;
+      if (Math.abs(delta) > DRAG_THRESHOLD) hasDragged.current = true;
+      const minX = -(P_ITEM * (programs.length - 1)) - centerOffset + containerWidth - P_CARD_W;
+      const maxX = centerOffset;
+      const raw = dragStartVal.current + delta;
+      x.set(Math.max(minX, Math.min(maxX, raw)));
+    },
+    [x, centerOffset, containerWidth, programs.length]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const current = x.get();
+    const idx = Math.round((-current + centerOffset) / P_ITEM);
+    goTo(Math.max(0, Math.min(programs.length - 1, idx)));
+  }, [x, centerOffset, goTo, programs.length]);
+
+  const handleCardClick = useCallback(
+    (e: React.MouseEvent, index: number) => {
+      if (hasDragged.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      // If not active card, move to it
+      if (index !== activeIndex) {
+        e.preventDefault();
+        e.stopPropagation();
+        goTo(index);
+      }
+    },
+    [activeIndex, goTo]
+  );
+
   // Wheel handler for trackpad horizontal scroll
   const handleWheel = useCallback(
     (e: React.WheelEvent) => {
@@ -154,6 +212,9 @@ function ProgramsCarousel({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <motion.div
           style={{ x }}
@@ -164,13 +225,14 @@ function ProgramsCarousel({
             return (
               <motion.div
                 key={p.name}
-                className="flex-shrink-0 relative"
+                className={`flex-shrink-0 relative ${!isActive ? 'cursor-pointer' : ''}`}
                 style={{ width: P_CARD_W, marginRight: P_GAP }}
                 animate={{
                   scale: isActive ? 1 : 0.88,
                   opacity: isActive ? 1 : 0.45,
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                onClick={(e) => handleCardClick(e, i)}
               >
                 <div
                   className="rounded-3xl overflow-hidden shadow-xl bg-white border border-gray-100 group"

@@ -147,7 +147,7 @@ function MegaDropdown({
       {overviewHref ? (
         <Link
           href={overviewHref}
-          className={`text-[13px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
+          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
             isTransparent && !scrolled
               ? "text-white/90 hover:text-white"
               : "text-slate-700 hover:text-[#003975]"
@@ -158,7 +158,7 @@ function MegaDropdown({
         </Link>
       ) : (
         <button
-          className={`text-[13px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
+          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
             isTransparent && !scrolled
               ? "text-white/90 hover:text-white"
               : "text-slate-700 hover:text-[#003975]"
@@ -259,7 +259,7 @@ function DestinationsDropdown({
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
       <Link
         href="/destinations"
-        className={`text-[13px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
+        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
           isTransparent && !scrolled
             ? "text-white/90 hover:text-white"
             : "text-slate-700 hover:text-[#003975]"
@@ -549,10 +549,10 @@ function TopBarDropdown({
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
       <button
-        className="text-white/70 hover:text-white text-[12px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5 flex items-center gap-1"
+        className="text-white/70 hover:text-white text-xs lg:text-[13px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5 flex items-center gap-1"
       >
         {label}
-        <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
 
       <AnimatePresence>
@@ -603,6 +603,7 @@ function TopBarDropdown({
 export default function Header() {
   const { showSidebar } = useHeader();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [topBarHidden, setTopBarHidden] = useState(false);
   const isTransparent = showSidebar === false;
@@ -640,17 +641,17 @@ export default function Header() {
     <>
       {/* ═══ TOP BAR — Quick links, phone, WhatsApp, location ═══ */}
       <div
-        className="fixed top-0 left-0 right-0 z-[100000] hidden md:block"
+        className="fixed top-0 left-0 right-0 z-[100000] hidden lg:block w-full"
       >
-        <div className="bg-[#001d3d] border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-11 flex items-center justify-between">
+        <div className="bg-[#001d3d] border-b border-white/5 w-full">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-11 flex items-center justify-between">
             {/* Left: Quick Links */}
             <div className="flex items-center gap-1">
               {quickLinks.map((link, i) => (
                 <span key={link.label} className="flex items-center">
                   <Link
                     href={link.href}
-                    className="text-white/70 hover:text-white text-[12px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5"
+                    className="text-white/70 hover:text-white text-xs lg:text-[13px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5"
                   >
                     {link.label}
                   </Link>
@@ -673,16 +674,16 @@ export default function Header() {
             <div className="flex items-center gap-3">
               <a
                 href="tel:+97714123456"
-                className="flex items-center gap-1.5 text-white/70 hover:text-white text-[12px] transition-colors duration-200 px-2 py-1 rounded-full border border-white/10 hover:border-white/25 hover:bg-white/5"
+                className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs lg:text-[13px] transition-colors duration-200 px-2 py-1 rounded-full border border-white/10 hover:border-white/25 hover:bg-white/5"
               >
-                <Phone size={11} strokeWidth={2.5} />
+                <Phone size={12} strokeWidth={2.5} />
                 <span className="font-medium">+977 1 4123456</span>
               </a>
               <a
                 href="https://wa.me/9779841000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-white/70 hover:text-white text-[12px] transition-colors duration-200 px-2 py-1 rounded-full border border-white/10 hover:border-white/25 hover:bg-white/5"
+                className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs lg:text-[13px] transition-colors duration-200 px-2 py-1 rounded-full border border-white/10 hover:border-white/25 hover:bg-white/5"
               >
                 <MessageCircle size={11} strokeWidth={2.5} />
                 <span className="font-medium">WhatsApp</span>
@@ -703,8 +704,8 @@ export default function Header() {
                 </a>
               </div>
               <span className="w-px h-3.5 bg-white/15" />
-              <div className="flex items-center gap-1.5 text-white/70 text-[12px]">
-                <FlagIcon code="np" size={13} />
+              <div className="flex items-center gap-1.5 text-white/70 text-xs lg:text-[13px]">
+                <FlagIcon code="np" size={14} />
                 <span className="font-medium">Nepal</span>
               </div>
             </div>
@@ -714,10 +715,10 @@ export default function Header() {
 
       {/* ═══ MAIN NAVIGATION BAR ═══ */}
       <header
-        className="fixed left-0 right-0 z-[99999] transition-all duration-500 top-0 md:top-11"
+        className="fixed left-0 right-0 z-[99999] transition-all duration-500 top-0 lg:top-11 w-full"
       >
-        <div className="bg-white/95 backdrop-blur-md sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[62px] lg:h-[66px]">
+        <div className="relative bg-white/95 backdrop-blur-md px-4 sm:px-6 lg:px-8 w-full">
+          <div className="flex items-center justify-between h-[62px] lg:h-[66px] w-full">
               {/* Logo */}
               <Link href="/" className="flex items-center shrink-0 group">
                 <Image
@@ -757,7 +758,7 @@ export default function Header() {
                 />
                 <Link
                   href="/contact"
-                  className={`text-[13px] font-semibold tracking-wide transition-colors duration-300 py-5 ${
+                  className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 py-5 ${
                     isTransparent && !scrolled
                       ? "text-white/90 hover:text-white"
                       : "text-slate-700 hover:text-[#003975]"
@@ -796,7 +797,7 @@ export default function Header() {
 
             {/* Bottom accent line */}
             {!isTransparent || scrolled ? (
-              <div className="h-[2px] bg-gradient-to-r from-[#003975] via-[#0052a3] to-[#003975] -mx-4 sm:-mx-6 lg:-mx-8 opacity-80" />
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#003975] via-[#0052a3] to-[#003975] opacity-80" />
             ) : null}
         </div>
       </header>
@@ -820,7 +821,7 @@ export default function Header() {
               transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="fixed inset-0 z-[99998] bg-white overflow-y-auto lg:hidden"
             >
-              <div className="pt-20 pb-8 px-6">
+              <div className="pt-[80px] pb-8 px-6">
                 <div className="mb-6">
                   <Link href="/" onClick={closeMobile} className="flex items-center">
                     <Image src="/logo.png" alt="Nexsus Educational Consultancy" width={160} height={48} className="h-10 w-auto object-contain" />
@@ -835,6 +836,72 @@ export default function Header() {
                   <Link href="/blog" onClick={closeMobile} className="block py-4 text-slate-900 font-medium text-[15px] border-b border-gray-100">Blog</Link>
                   <Link href="/news" onClick={closeMobile} className="block py-4 text-slate-900 font-medium text-[15px] border-b border-gray-100">News &amp; Events</Link>
                   <Link href="/contact" onClick={closeMobile} className="block py-4 text-slate-900 font-medium text-[15px] border-b border-gray-100">Contact Us</Link>
+                  
+                  {/* More Options Toggle */}
+                  <button
+                    onClick={() => setMobileMoreOpen(!mobileMoreOpen)}
+                    className="flex items-center justify-between w-full py-4 text-[#003975] font-medium text-[15px] border-b border-gray-100"
+                  >
+                    <span>{mobileMoreOpen ? "Hide more options" : "Show more options"}</span>
+                    <motion.svg
+                      animate={{ rotate: mobileMoreOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </motion.svg>
+                  </button>
+                  
+                  {/* More Options Content */}
+                  <AnimatePresence>
+                    {mobileMoreOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="py-4 space-y-1 border-b border-gray-100">
+                          {/* Find Us */}
+                          <div className="space-y-1 mb-4">
+                            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2 mb-2">Find Us</p>
+                            {branchesLinks.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={closeMobile}
+                                className="flex items-center gap-3 py-2.5 px-4 text-sm text-slate-600 rounded-xl hover:bg-gray-50 transition-colors duration-200"
+                              >
+                                <Icon name={item.icon} size={15} className="text-slate-400" />
+                                {item.label}
+                              </Link>
+                            ))}
+                          </div>
+                          
+                          {/* Student Essentials */}
+                          <div className="space-y-1">
+                            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2 mb-2">Student Essentials</p>
+                            {studentEssentialsLinks.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={closeMobile}
+                                className="flex items-center gap-3 py-2.5 px-4 text-sm text-slate-600 rounded-xl hover:bg-gray-50 transition-colors duration-200"
+                              >
+                                <Icon name={item.icon} size={15} className="text-slate-400" />
+                                {item.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
                 <div className="mt-8 space-y-4">
                   <Link href="/contact" onClick={closeMobile} className="block w-full text-center bg-[#003975] text-white py-3.5 rounded-full font-semibold text-[15px] hover:bg-[#002a5c] transition-all duration-300">
@@ -847,10 +914,21 @@ export default function Header() {
                       <Phone size={14} className="text-slate-400" />+977 1 4123456
                     </a>
                   </div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <a href="https://wa.me/9779841000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-600 text-sm">
+                      <MessageCircle size={14} className="text-slate-400" />WhatsApp
+                    </a>
+                  </div>
                   <div className="flex items-center gap-4 mb-6">
                     <a href="mailto:info@nexsuseducation.com" className="flex items-center gap-2 text-slate-600 text-sm">
                       <Mail size={14} className="text-slate-400" />info@nexsuseducation.com
                     </a>
+                  </div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex items-center gap-2 text-slate-600 text-sm">
+                      <FlagIcon code="np" size={16} />
+                      <span>Nepal</span>
+                    </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
@@ -861,6 +939,9 @@ export default function Header() {
                     </a>
                     <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
                       <LinkedInIcon size={15} />
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
+                      <TikTokIcon size={15} />
                     </a>
                   </div>
                 </div>

@@ -69,6 +69,7 @@ import {
   Microscope,
   MessageSquare,
   ArrowUp,
+  LayoutDashboard,
   type LucideIcon,
 } from "lucide-react";
 
@@ -83,7 +84,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Table, Percent, Image, IdCard, Landmark, HeartPulse, Cog,
   Linkedin, HeartHandshake, Pencil, Shield, Lock, AlertTriangle,
   Microscope, MessageSquare,
-  ArrowUp,
+  ArrowUp, LayoutDashboard,
 };
 
 export function Icon({
