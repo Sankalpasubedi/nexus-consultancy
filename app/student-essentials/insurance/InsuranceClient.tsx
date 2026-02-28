@@ -131,48 +131,84 @@ export default function InsuranceClient() {
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#6366f1]/5 rounded-full blur-3xl" />
         
         <div className="relative z-10 max-w-[1200px] mx-auto px-6">
-          {/* Breadcrumb */}
-          <FadeUp>
-            <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-              <Link href="/" className="hover:text-sky-600">Home</Link>
-              <span>/</span>
-              <span className="text-slate-900">Student Insurance</span>
-            </nav>
-          </FadeUp>
-          
-          <FadeUp>
-            <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-wide border border-sky-200">
-              Student Essentials
-            </span>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-slate-900 mb-4 max-w-2xl leading-[1.15]">
-              Student <span className="text-sky-600">Insurance</span>
-            </h1>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <p className="text-base md:text-lg text-slate-600 max-w-xl leading-relaxed mb-8">
-              Comprehensive health and travel insurance plans for international students. 
-              Stay protected throughout your study abroad journey.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.3}>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-sky-700 hover:shadow-lg transition"
-              >
-                Get Insurance Quote <Icon name="ArrowRight" size={14} />
-              </Link>
-              <a
-                href="tel:+97714519495"
-                className="inline-flex items-center gap-2 bg-white text-sky-600 border border-sky-200 px-6 py-3 rounded-full text-sm font-semibold hover:bg-sky-50 transition"
-              >
-                <Icon name="Phone" size={14} />
-                Talk to Advisor
-              </a>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              {/* Breadcrumb */}
+              <FadeUp>
+                <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
+                  <Link href="/" className="hover:text-sky-600">Home</Link>
+                  <span>/</span>
+                  <span className="text-slate-900">Student Insurance</span>
+                </nav>
+              </FadeUp>
+              
+              <FadeUp>
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-wide border border-sky-200">
+                  Student Essentials
+                </span>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-slate-900 mb-4 max-w-2xl leading-[1.15]">
+                  Student <span className="text-sky-600">Insurance</span>
+                </h1>
+              </FadeUp>
+              <FadeUp delay={0.2}>
+                <p className="text-base md:text-lg text-slate-600 max-w-xl leading-relaxed mb-8">
+                  Comprehensive health and travel insurance plans for international students. 
+                  Stay protected throughout your study abroad journey.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.3}>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-sky-700 hover:shadow-lg transition"
+                  >
+                    Get Insurance Quote <Icon name="ArrowRight" size={14} />
+                  </Link>
+                  <a
+                    href="tel:+97714519495"
+                    className="inline-flex items-center gap-2 bg-white text-sky-600 border border-sky-200 px-6 py-3 rounded-full text-sm font-semibold hover:bg-sky-50 transition"
+                  >
+                    <Icon name="Phone" size={14} />
+                    Talk to Advisor
+                  </a>
+                </div>
+              </FadeUp>
             </div>
-          </FadeUp>
+
+            {/* Right Image */}
+            <FadeUp delay={0.4}>
+              <div className="hidden lg:block relative">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/services/NEX-_-15.jpg"
+                    alt="Student Insurance"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-sky-900/20 to-transparent" />
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center">
+                      <Icon name="ShieldCheck" size={24} className="text-sky-600" />
+                    </div>
+                    <div>
+                      <p className="text-slate-900 font-bold text-lg">100%</p>
+                      <p className="text-slate-500 text-xs">Protection Coverage</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 

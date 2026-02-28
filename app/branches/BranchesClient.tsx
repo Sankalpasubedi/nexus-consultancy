@@ -23,7 +23,7 @@ const testimonials = [
     branch: "Kathmandu",
     country: "Australia",
     university: "University of Sydney",
-    image: "/student/testimonial-1.jpg",
+    image: "/services/NEX-_-1.jpg",
     quote: "The Kathmandu branch team was incredibly helpful throughout my entire application process!"
   },
   {
@@ -32,7 +32,7 @@ const testimonials = [
     branch: "Pokhara",
     country: "Canada",
     university: "University of Toronto",
-    image: "/student/testimonial-2.jpg",
+    image: "/services/NEX-_-2.jpg",
     quote: "I visited the Pokhara branch for guidance, and their expertise was impressive!"
   },
   {
@@ -41,7 +41,7 @@ const testimonials = [
     branch: "Chitwan",
     country: "UK",
     university: "University of Manchester",
-    image: "/student/testimonial-3.jpg",
+    image: "/services/NEX-_-3.jpg",
     quote: "The counselors helped me secure a scholarship. Forever grateful for their support!"
   },
   {
@@ -50,7 +50,7 @@ const testimonials = [
     branch: "Butwal",
     country: "USA",
     university: "Boston University",
-    image: "/student/testimonial-4.jpg",
+    image: "/services/NEX-_-4.jpg",
     quote: "From test prep to visa approval, the team was with me every step of the way!"
   },
   {
@@ -59,7 +59,7 @@ const testimonials = [
     branch: "Biratnagar",
     country: "New Zealand",
     university: "University of Auckland",
-    image: "/student/testimonial-5.jpg",
+    image: "/services/NEX-_-5.jpg",
     quote: "The branch made the complex process so simple. I'm now pursuing my dreams!"
   },
 ];
@@ -146,18 +146,55 @@ export default function BranchesClient() {
     <main className="min-h-screen bg-white pt-32 pb-20">
       {/* ── Hero Section ── */}
       <section className="px-6 mb-16">
-        <div className="max-w-[1200px] mx-auto text-center">
-          <FadeUp>
-            <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
-              Find Us Near You
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
-              Our Branch Locations
-            </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Visit any of our offices across Nepal for personalized guidance on your study abroad journey.
-            </p>
-          </FadeUp>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <FadeUp>
+                <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
+                  Find Us Near You
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
+                  Our Branch Locations
+                </h1>
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
+                  Visit any of our offices across Nepal for personalized guidance on your study abroad journey.
+                </p>
+              </FadeUp>
+            </div>
+
+            {/* Right Image */}
+            <FadeUp delay={0.2}>
+              <div className="hidden lg:block relative">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/services/NEX-_-18.jpg"
+                    alt="Our Branch Office"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/20 to-transparent" />
+                </div>
+                {/* Floating accent */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-[#00ab18]/10 flex items-center justify-center">
+                      <Icon name="MapPin" size={24} className="text-[#00ab18]" />
+                    </div>
+                    <div>
+                      <p className="text-slate-900 font-bold text-lg">6+</p>
+                      <p className="text-slate-500 text-xs">Branch Offices</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 
@@ -331,8 +368,14 @@ export default function BranchesClient() {
               <CarouselCard key={testimonial.id} className="min-w-[300px] sm:min-w-[350px]">
                 <div className="bg-gradient-to-br from-[#003975]/5 to-[#00ab18]/5 rounded-2xl p-6 h-full border border-gray-100">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#004a8f] to-[#00ab18] flex items-center justify-center text-white font-bold text-lg">
-                      {testimonial.name.charAt(0)}
+                    <div className="w-14 h-14 rounded-full overflow-hidden">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        width={56}
+                        height={56}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div>
                       <h4 className="font-semibold text-slate-900">{testimonial.name}</h4>

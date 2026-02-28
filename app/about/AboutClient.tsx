@@ -352,8 +352,14 @@ function TeamSliderSection({
                     <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-[#00ab18]/[0.06]" />
 
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-28 h-28 rounded-full bg-slate-900 flex items-center justify-center text-white text-4xl font-bold shadow-2xl ring-4 ring-white">
-                        {m.initial}
+                      <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl ring-4 ring-white">
+                        <Image
+                          src={`/services/NEX-_-${i + 1}.jpg`}
+                          alt={m.name}
+                          width={112}
+                          height={112}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     </div>
 

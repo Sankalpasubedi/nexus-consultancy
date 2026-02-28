@@ -129,22 +129,50 @@ export default function ContactPage() {
         <div className="relative z-10">
           {/* Hero Content */}
           <div className="max-w-[1440px] mx-auto px-6 pt-32 pb-12 md:pt-36 md:pb-14">
-            <FadeUp>
-              <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-medium tracking-wide border border-white/20">
-                Helpline
-              </span>
-            </FadeUp>
-            <FadeUp delay={0.1}>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 max-w-2xl leading-tight">
-                Get In Touch
-              </h1>
-            </FadeUp>
-            <FadeUp delay={0.2}>
-              <p className="text-base md:text-lg text-blue-100/90 max-w-xl leading-relaxed">
-                Have questions about studying abroad? Our expert counselors are ready to
-                guide you every step of the way.
-              </p>
-            </FadeUp>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <FadeUp>
+                  <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-medium tracking-wide border border-white/20">
+                    Helpline
+                  </span>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 max-w-2xl leading-tight">
+                    Get In Touch
+                  </h1>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                  <p className="text-base md:text-lg text-blue-100/90 max-w-xl leading-relaxed">
+                    Have questions about studying abroad? Our expert counselors are ready to
+                    guide you every step of the way.
+                  </p>
+                </FadeUp>
+              </div>
+              {/* Floating Accent Image */}
+              <div className="hidden lg:block relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="relative w-64 h-64 ml-auto"
+                >
+                  <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3">
+                    <Image
+                      src="/services/NEX-_-40.jpg"
+                      alt="Contact our team"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#00ab18]/10 flex items-center justify-center">
+                      <Icon name="Phone" size={16} className="text-[#00ab18]" />
+                    </div>
+                    <span className="text-sm font-semibold text-slate-900">24/7 Support</span>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
 
           {/* Forms — sit on top of hero image */}

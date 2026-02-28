@@ -12,8 +12,6 @@ import {
   HoverCard,
 } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
-import { useHeader } from "@/app/contexts/HeaderContext";
-import { useEffect } from "react";
 
 /* ─── Data ─────────────────────────────────────────── */
 
@@ -83,9 +81,6 @@ const applicationProcess = [
 /* ─── Component ────────────────────────────────────── */
 
 export default function VisaPage() {
-  const { setShowSidebar } = useHeader();
-  useEffect(() => { setShowSidebar(false); return () => setShowSidebar(true); }, [setShowSidebar]);
-
   return (
     <main>
       {/* ── Hero ── */}
@@ -94,31 +89,59 @@ export default function VisaPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
-          <FadeUp>
-            <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-semibold tracking-wide border border-white/20">
-              <Icon name="FileText" size={12} className="inline mr-1.5 -mt-0.5" /> Visa Assistance
-            </span>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-white mb-4 max-w-2xl leading-[1.15]">
-              Visa Success<br />Made Simple
-            </h1>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <p className="text-base md:text-lg text-blue-100/90 max-w-lg leading-relaxed mb-8">
-              Navigate complex visa requirements with confidence. Our experts handle documentation, applications, and interview preparation for a smooth process.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.3}>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition">
-                Start Visa Process <Icon name="ArrowRight" size={14} />
-              </Link>
-              <Link href="#types" className="inline-flex items-center gap-2 text-white border border-white/30 px-6 py-3 rounded-full text-sm font-medium hover:bg-white/10 transition">
-                Visa Types
-              </Link>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <FadeUp>
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs font-semibold tracking-wide border border-white/20">
+                  <Icon name="FileText" size={12} className="inline mr-1.5 -mt-0.5" /> Visa Assistance
+                </span>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-white mb-4 max-w-2xl leading-[1.15]">
+                  Visa Success<br />Made Simple
+                </h1>
+              </FadeUp>
+              <FadeUp delay={0.2}>
+                <p className="text-base md:text-lg text-blue-100/90 max-w-lg leading-relaxed mb-8">
+                  Navigate complex visa requirements with confidence. Our experts handle documentation, applications, and interview preparation for a smooth process.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.3}>
+                <div className="flex flex-wrap gap-3">
+                  <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition">
+                    Start Visa Process <Icon name="ArrowRight" size={14} />
+                  </Link>
+                  <Link href="#types" className="inline-flex items-center gap-2 text-white border border-white/30 px-6 py-3 rounded-full text-sm font-medium hover:bg-white/10 transition">
+                    Visa Types
+                  </Link>
+                </div>
+              </FadeUp>
             </div>
-          </FadeUp>
+            {/* Floating Accent Image */}
+            <div className="hidden lg:block relative">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="relative w-64 h-64 ml-auto"
+              >
+                <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 -rotate-3">
+                  <Image
+                    src="/services/NEX-_-30.jpg"
+                    alt="Visa assistance"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
+                    <Icon name="ShieldCheck" size={16} className="text-[#003975]" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-900">99.2% Approval</span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -149,32 +149,69 @@ export default function CoursesPage() {
 
       {/* Header */}
       <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 my-12">
-        <FadeUp delay={0.1}>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-4">
-            <TextReveal text="Explore Study Programs" className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900" />
-          </h1>
-        </FadeUp>
-        <FadeUp delay={0.2}>
-          <p className="text-lg text-slate-500 max-w-2xl">
-            Discover 1,000+ programs across 7 disciplines at top universities worldwide
-          </p>
-        </FadeUp>
-        <FadeUp delay={0.3}>
-          <div className="flex gap-8 mt-8">
-            {[
-              { label: "Programs", value: 1000, suffix: "+" },
-              { label: "Universities", value: 500, suffix: "+" },
-              { label: "Countries", value: 8, suffix: "" },
-            ].map((s) => (
-              <div key={s.label}>
-                <div className="text-3xl font-bold text-slate-900">
-                  <AnimatedCounter value={s.value} />{s.suffix}
-                </div>
-                <div className="text-sm text-slate-400">{s.label}</div>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div>
+            <FadeUp delay={0.1}>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-4">
+                <TextReveal text="Explore Study Programs" className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900" />
+              </h1>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+              <p className="text-lg text-slate-500 max-w-2xl">
+                Discover 1,000+ programs across 7 disciplines at top universities worldwide
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.3}>
+              <div className="flex gap-8 mt-8">
+                {[
+                  { label: "Programs", value: 1000, suffix: "+" },
+                  { label: "Universities", value: 500, suffix: "+" },
+                  { label: "Countries", value: 8, suffix: "" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <div className="text-3xl font-bold text-slate-900">
+                      <AnimatedCounter value={s.value} />{s.suffix}
+                    </div>
+                    <div className="text-sm text-slate-400">{s.label}</div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </FadeUp>
           </div>
-        </FadeUp>
+
+          {/* Right Image */}
+          <FadeUp delay={0.4}>
+            <div className="hidden lg:block relative">
+              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/services/NEX-_-12.jpg"
+                  alt="Study Programs"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
+              </div>
+              {/* Floating accent */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+                className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                    <Icon name="BookOpen" size={24} className="text-[#003975]" />
+                  </div>
+                  <div>
+                    <p className="text-slate-900 font-bold text-lg">1,000+</p>
+                    <p className="text-slate-500 text-xs">Study Programs</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </FadeUp>
+        </div>
       </div>
 
       {/* Native Scroll Carousel */}

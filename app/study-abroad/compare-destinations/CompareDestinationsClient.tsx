@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FadeUp,
@@ -476,9 +477,39 @@ export default function DestinationsComparePage() {
               </FadeUp>
             </div>
 
-            {/* Hero Stats Grid */}
+            {/* Hero Image + Stats */}
             <FadeRight delay={0.3}>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="hidden lg:block relative">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/services/NEX-_-28.jpg"
+                    alt="Students comparing destinations"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/30 to-transparent" />
+                </div>
+                {/* Floating Stats Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                      <Icon name="Globe" size={24} className="text-[#003975]" />
+                    </div>
+                    <div>
+                      <div className="text-2xl font-bold text-slate-900">8 Countries</div>
+                      <div className="text-sm text-slate-500">Side-by-side Comparison</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+              {/* Stats Grid on mobile */}
+              <div className="lg:hidden grid grid-cols-2 gap-4">
                 {heroStats.map((s, i) => (
                   <motion.div
                     key={s.label}

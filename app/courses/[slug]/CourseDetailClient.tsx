@@ -23,6 +23,7 @@ const P_CARD_H = 400;
 const P_GAP = 24;
 const P_ITEM = P_CARD_W + P_GAP;
 const DRAG_THRESHOLD = 5;
+const MOBILE_BREAKPOINT = 768;
 
 /* --- Programs Carousel (center-focused) --- */
 function ProgramsCarousel({
@@ -35,6 +36,7 @@ function ProgramsCarousel({
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const x = useMotionValue(0);
 
   const isDragging = useRef(false);
@@ -42,10 +44,12 @@ function ProgramsCarousel({
   const dragStartX = useRef(0);
   const dragStartVal = useRef(0);
   const isAnimating = useRef(false);
+  const lastTouchUpdate = useRef(0);
 
   useEffect(() => {
     const update = () => {
       if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
     };
     update();
     window.addEventListener("resize", update);
@@ -71,7 +75,8 @@ function ProgramsCarousel({
       if (Math.abs(diff) < 1) return;
       isAnimating.current = true;
       let start: number | null = null;
-      const duration = 500;
+      // Shorter animation on mobile for snappier feel
+      const duration = isMobile ? 250 : 500;
       const step = (ts: number) => {
         if (!start) start = ts;
         const elapsed = ts - start;
@@ -86,7 +91,7 @@ function ProgramsCarousel({
       };
       requestAnimationFrame(step);
     },
-    [x, centerOffset]
+    [x, centerOffset, isMobile]
   );
 
   useEffect(() => {
@@ -142,6 +147,7 @@ function ProgramsCarousel({
       hasDragged.current = false;
       dragStartX.current = e.touches[0].clientX;
       dragStartVal.current = x.get();
+      lastTouchUpdate.current = 0;
     },
     [x]
   );
@@ -149,6 +155,12 @@ function ProgramsCarousel({
   const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
       if (!isDragging.current) return;
+      
+      // Throttle updates on mobile to ~60fps
+      const now = Date.now();
+      if (now - lastTouchUpdate.current < 16) return;
+      lastTouchUpdate.current = now;
+      
       const delta = e.touches[0].clientX - dragStartX.current;
       if (Math.abs(delta) > DRAG_THRESHOLD) hasDragged.current = true;
       const minX = -(P_ITEM * (programs.length - 1)) - centerOffset + containerWidth - P_CARD_W;
@@ -207,7 +219,10 @@ function ProgramsCarousel({
       <div
         ref={containerRef}
         className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
-        style={{ height: P_CARD_H + 30 }}
+        style={{ 
+          height: P_CARD_H + 30,
+          touchAction: isMobile ? "pan-y" : "none",
+        }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -226,12 +241,19 @@ function ProgramsCarousel({
               <motion.div
                 key={p.name}
                 className={`flex-shrink-0 relative ${!isActive ? 'cursor-pointer' : ''}`}
-                style={{ width: P_CARD_W, marginRight: P_GAP }}
-                animate={{
-                  scale: isActive ? 1 : 0.88,
-                  opacity: isActive ? 1 : 0.45,
+                style={{ 
+                  width: P_CARD_W, 
+                  marginRight: P_GAP,
+                  willChange: isMobile ? "transform" : "auto",
                 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                animate={{
+                  scale: isActive ? 1 : (isMobile ? 0.92 : 0.88),
+                  opacity: isActive ? 1 : (isMobile ? 0.6 : 0.45),
+                }}
+                transition={isMobile 
+                  ? { type: "tween", duration: 0.15, ease: "easeOut" }
+                  : { type: "spring", stiffness: 300, damping: 30 }
+                }
                 onClick={(e) => handleCardClick(e, i)}
               >
                 <div
@@ -284,10 +306,10 @@ function ProgramsCarousel({
         <AnimatePresence mode="wait">
           <motion.div
             key={activeIndex}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: isMobile ? 5 : 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, y: isMobile ? -5 : -10 }}
+            transition={{ duration: isMobile ? 0.12 : 0.25 }}
             className="text-center mt-6"
           >
             <h3 className="text-xl font-bold text-slate-900">{programs[activeIndex]?.name}</h3>
@@ -353,39 +375,68 @@ export default function CourseDetailPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-transparent" />
         <div className="absolute inset-0 flex items-center px-6">
           <div className="max-w-[1440px] mx-auto w-full">
-            <FadeUp>
-              <Link href="/courses" className="inline-flex items-center gap-2 text-white/70 text-sm mb-6 hover:text-white transition">
-                <Icon name="ChevronLeft" size={16} /> All Courses
-              </Link>
-            </FadeUp>
-            <FadeUp delay={0.1}>
-              <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4">
-                <Icon name={course.icon} size={28} className="text-white" />
-              </div>
-            </FadeUp>
-            <FadeUp delay={0.15}>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">{course.title}</h1>
-            </FadeUp>
-            <FadeUp delay={0.2}>
-              <p className="text-xl text-white/80 max-w-2xl mb-6">{course.description}</p>
-            </FadeUp>
-            <FadeUp delay={0.25}>
-              <div className="flex gap-4">
-                {[
-                  { label: "Programs", value: course.programs, icon: "BookOpen" },
-                  { label: "Career Paths", value: `${course.careers.length}+`, icon: "Briefcase" },
-                  { label: "Countries", value: `${course.destinations.length}`, icon: "Globe" },
-                ].map((s) => (
-                  <div key={s.label} className="bg-white/10 backdrop-blur-sm px-5 py-3 rounded-xl border border-white/20">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Icon name={s.icon} size={14} className="text-white/60" />
-                      <span className="text-[10px] text-white/60 uppercase tracking-wide">{s.label}</span>
-                    </div>
-                    <div className="text-xl font-bold text-white">{s.value}</div>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <FadeUp>
+                  <Link href="/courses" className="inline-flex items-center gap-2 text-white/70 text-sm mb-6 hover:text-white transition">
+                    <Icon name="ChevronLeft" size={16} /> All Courses
+                  </Link>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4">
+                    <Icon name={course.icon} size={28} className="text-white" />
                   </div>
-                ))}
+                </FadeUp>
+                <FadeUp delay={0.15}>
+                  <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">{course.title}</h1>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                  <p className="text-xl text-white/80 max-w-2xl mb-6">{course.description}</p>
+                </FadeUp>
+                <FadeUp delay={0.25}>
+                  <div className="flex gap-4">
+                    {[
+                      { label: "Programs", value: course.programs, icon: "BookOpen" },
+                      { label: "Career Paths", value: `${course.careers.length}+`, icon: "Briefcase" },
+                      { label: "Countries", value: `${course.destinations.length}`, icon: "Globe" },
+                    ].map((s) => (
+                      <div key={s.label} className="bg-white/10 backdrop-blur-sm px-5 py-3 rounded-xl border border-white/20">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Icon name={s.icon} size={14} className="text-white/60" />
+                          <span className="text-[10px] text-white/60 uppercase tracking-wide">{s.label}</span>
+                        </div>
+                        <div className="text-xl font-bold text-white">{s.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </FadeUp>
               </div>
-            </FadeUp>
+
+              {/* Floating Accent Image */}
+              <div className="hidden lg:flex justify-end">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                  className="relative"
+                >
+                  <div className="w-56 h-56 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3">
+                    <Image
+                      src="/services/NEX-_-49.jpg"
+                      alt="Course study"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
+                      <Icon name={course.icon} size={16} className="text-[#003975]" />
+                    </div>
+                    <span className="text-sm font-semibold text-slate-900">{course.programs}</span>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -114,8 +114,8 @@ const destinations: DestinationData[] = [
     name: "Japan",
     slug: "study-in-japan",
     flagCode: "jp",
-    x: 855,
-    y: 157,
+    x: 860,
+    y: 160,
     color: "#00ab18",
     glowColor: "rgba(0, 171, 24, 0.4)",
     universities: "80+",
@@ -123,8 +123,40 @@ const destinations: DestinationData[] = [
     visaRate: "93%",
     description:
       "Advanced technology and unique cultural experience",
-    cp1: { x: 780, y: 160 },
-    cp2: { x: 825, y: 150 },
+    cp1: { x: 780, y: 170 },
+    cp2: { x: 825, y: 110 },
+  },
+  {
+    name: "South Korea",
+    slug: "study-in-south-korea",
+    flagCode: "kr",
+    x: 830,
+    y: 151,
+    color: "#003975",
+    glowColor: "rgba(0, 57, 117, 0.4)",
+    universities: "50+",
+    studentsSent: "600+",
+    visaRate: "91%",
+    description:
+      "Cutting-edge technology and rich cultural heritage",
+    cp1: { x: 775, y: 175 },
+    cp2: { x: 815, y: 155 },
+  },
+  {
+    name: "Europe",
+    slug: "study-in-europe",
+    flagCode: "eu",
+    x: 500,
+    y: 125,
+    color: "#00ab18",
+    glowColor: "rgba(0, 171, 24, 0.4)",
+    universities: "500+",
+    studentsSent: "2,000+",
+    visaRate: "89%",
+    description:
+      "Diverse cultures with tuition-free options in many countries",
+    cp1: { x: 650, y: 140 },
+    cp2: { x: 565, y: 125 },
   },
 ];
 
@@ -730,7 +762,7 @@ export default function WorldMapSection() {
     destinations.find((d) => d.slug === hoveredDest) || null;
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-[#fafaf8] overflow-hidden">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-[#fafaf8]">
       {/* -------- Section Header -------- */}
       <FadeUp>
         <div className="text-center max-w-3xl mx-auto px-6 lg:px-8 mb-16 md:mb-20">
@@ -770,7 +802,7 @@ export default function WorldMapSection() {
             opacity: smoothOpacity,
             y: smoothY,
             transformOrigin: "center center",
-            overflow: "hidden",
+            // overflow: "hidden",
           }}
           className="will-change-transform bg-white"
         >

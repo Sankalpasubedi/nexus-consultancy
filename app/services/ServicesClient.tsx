@@ -99,39 +99,67 @@ export default function ServicesPage() {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
-          <FadeUp>
-            <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#00ab18]/90 text-white text-xs font-semibold tracking-wide">
-              Comprehensive Support
-            </span>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-white mb-4 max-w-lg leading-[1.15]">
-              Our
-              <br />
-              Services
-            </h1>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <p className="text-base md:text-lg text-blue-100/90 max-w-lg leading-relaxed mb-8">
-              From test preparation to landing in your dream destination, we provide end-to-end support for your study abroad journey.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.3}>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition"
-              >
-                Book Free Consultation <Icon name="ArrowRight" size={14} />
-              </Link>
-              <Link
-                href="/destinations"
-                className="inline-flex items-center gap-2 text-white text-sm font-medium hover:underline underline-offset-4"
-              >
-                Explore Destinations
-              </Link>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <FadeUp>
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#00ab18]/90 text-white text-xs font-semibold tracking-wide">
+                  Comprehensive Support
+                </span>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-white mb-4 max-w-lg leading-[1.15]">
+                  Our
+                  <br />
+                  Services
+                </h1>
+              </FadeUp>
+              <FadeUp delay={0.2}>
+                <p className="text-base md:text-lg text-blue-100/90 max-w-lg leading-relaxed mb-8">
+                  From test preparation to landing in your dream destination, we provide end-to-end support for your study abroad journey.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.3}>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition"
+                  >
+                    Book Free Consultation <Icon name="ArrowRight" size={14} />
+                  </Link>
+                  <Link
+                    href="/destinations"
+                    className="inline-flex items-center gap-2 text-white text-sm font-medium hover:underline underline-offset-4"
+                  >
+                    Explore Destinations
+                  </Link>
+                </div>
+              </FadeUp>
             </div>
-          </FadeUp>
+            {/* Floating Accent Image */}
+            <div className="hidden lg:block relative">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="relative w-64 h-64 ml-auto"
+              >
+                <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3">
+                  <Image
+                    src="/services/NEX-_-8.jpg"
+                    alt="Student services"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#00ab18]/10 flex items-center justify-center">
+                    <Icon name="CheckCircle" size={16} className="text-[#00ab18]" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-900">6 Expert Services</span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 

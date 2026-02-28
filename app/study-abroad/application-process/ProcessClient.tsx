@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
 import {
@@ -246,21 +247,57 @@ export default function ProcessPage() {
           <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full blur-3xl animate-blob animation-delay-2000" />
         </div>
         <div className="max-w-[1440px] mx-auto relative z-10">
-          <FadeUp>
-            <Link href="/study-abroad" className="inline-flex items-center gap-2 text-white/70 text-sm mb-4 hover:text-white transition">
-              ← Study Abroad
-            </Link>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 max-w-4xl">
-              Application <span className="text-[#00ab18]">Process</span>
-            </h1>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <p className="text-xl text-blue-100 max-w-2xl">
-              A 7-step roadmap from research to arrival. We guide you through every stage.
-            </p>
-          </FadeUp>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <FadeUp>
+                <Link href="/study-abroad" className="inline-flex items-center gap-2 text-white/70 text-sm mb-4 hover:text-white transition">
+                  ← Study Abroad
+                </Link>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 max-w-4xl">
+                  Application <span className="text-[#00ab18]">Process</span>
+                </h1>
+              </FadeUp>
+              <FadeUp delay={0.2}>
+                <p className="text-xl text-blue-100 max-w-2xl">
+                  A 7-step roadmap from research to arrival. We guide you through every stage.
+                </p>
+              </FadeUp>
+            </div>
+
+            {/* Right Image */}
+            <FadeUp delay={0.3}>
+              <div className="hidden lg:block relative">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+                  <Image
+                    src="/services/NEX-_-42.jpg"
+                    alt="Application Process"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#002550]/40 to-transparent" />
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                      <Icon name="CheckCircle" size={24} className="text-[#003975]" />
+                    </div>
+                    <div>
+                      <p className="text-slate-900 font-bold text-lg">7 Steps</p>
+                      <p className="text-slate-500 text-xs">to Your Dream University</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 

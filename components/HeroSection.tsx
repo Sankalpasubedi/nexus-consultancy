@@ -69,6 +69,8 @@ const destinations = [
   { name: "UK", slug: "study-in-uk", flagCode: "gb" },
   { name: "New Zealand", slug: "study-in-new-zealand", flagCode: "nz" },
   { name: "Japan", slug: "study-in-japan", flagCode: "jp" },
+  { name: "South Korea", slug: "study-in-south-korea", flagCode: "kr" },
+  { name: "Europe", slug: "study-in-europe", flagCode: "eu" },
 ];
 
 /* ─── Animation Variants ─────────────────────────────── */

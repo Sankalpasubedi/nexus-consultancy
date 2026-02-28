@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FadeUp,
@@ -254,32 +255,68 @@ export default function DocumentsPage() {
       {/* ───── Hero ───── */}
       <section className="relative pt-20 pb-12 px-6">
         <div className="max-w-[1440px] mx-auto">
-          <FadeUp>
-            <span className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
-              Study Abroad
-            </span>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mt-3 mb-6 max-w-2xl leading-tight">
-              Documents Required
-            </h1>
-          </FadeUp>
-          <FadeUp delay={0.15}>
-            <p className="text-lg text-slate-500 max-w-xl mb-8 leading-relaxed">
-              A comprehensive checklist of all documents you&apos;ll need for
-              university applications and student visa. Stay organized and
-              prepared.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <Link
-              href="#checklist"
-              className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
-            >
-              Download Checklist
-              <Icon name="ArrowRight" size={16} />
-            </Link>
-          </FadeUp>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <FadeUp>
+                <span className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
+                  Study Abroad
+                </span>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mt-3 mb-6 max-w-2xl leading-tight">
+                  Documents Required
+                </h1>
+              </FadeUp>
+              <FadeUp delay={0.15}>
+                <p className="text-lg text-slate-500 max-w-xl mb-8 leading-relaxed">
+                  A comprehensive checklist of all documents you&apos;ll need for
+                  university applications and student visa. Stay organized and
+                  prepared.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.2}>
+                <Link
+                  href="#checklist"
+                  className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
+                >
+                  Download Checklist
+                  <Icon name="ArrowRight" size={16} />
+                </Link>
+              </FadeUp>
+            </div>
+
+            {/* Right Image */}
+            <FadeUp delay={0.25}>
+              <div className="hidden lg:block relative">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/services/NEX-_-38.jpg"
+                    alt="Document Preparation"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                      <Icon name="FileText" size={24} className="text-[#003975]" />
+                    </div>
+                    <div>
+                      <p className="text-slate-900 font-bold text-lg">Complete</p>
+                      <p className="text-slate-500 text-xs">Document Checklist</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 

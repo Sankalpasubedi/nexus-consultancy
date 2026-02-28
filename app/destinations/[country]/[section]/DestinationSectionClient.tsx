@@ -115,35 +115,64 @@ export default function DestinationSectionClient() {
         <div className="absolute top-10 right-10 w-72 h-72 bg-[#003975]/30 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative z-10">
-          <FadeUp>
-            <nav className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm mb-8">
-              <Link href="/destinations" className="text-white/70 hover:text-white transition font-medium">
-                Destinations
-              </Link>
-              <Icon name="ChevronRight" size={12} className="text-white/30" />
-              <Link href={`/destinations/${country}`} className="flex items-center gap-1.5 text-white/70 hover:text-white transition font-medium">
-                <FlagIcon code={data.flagCode} size={14} />
-                {data.country}
-              </Link>
-              <Icon name="ChevronRight" size={12} className="text-white/30" />
-              <span className="text-white font-semibold">{meta.title}</span>
-            </nav>
-          </FadeUp>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <FadeUp>
+                <nav className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm mb-8">
+                  <Link href="/destinations" className="text-white/70 hover:text-white transition font-medium">
+                    Destinations
+                  </Link>
+                  <Icon name="ChevronRight" size={12} className="text-white/30" />
+                  <Link href={`/destinations/${country}`} className="flex items-center gap-1.5 text-white/70 hover:text-white transition font-medium">
+                    <FlagIcon code={data.flagCode} size={14} />
+                    {data.country}
+                  </Link>
+                  <Icon name="ChevronRight" size={12} className="text-white/30" />
+                  <span className="text-white font-semibold">{meta.title}</span>
+                </nav>
+              </FadeUp>
 
-          <FadeUp delay={0.1}>
-            <div className="flex items-center gap-4 mb-5">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
-                <Icon name={meta.icon} size={26} className="text-white" />
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{meta.title}</h1>
+              <FadeUp delay={0.1}>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+                    <Icon name={meta.icon} size={26} className="text-white" />
+                  </div>
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight">{meta.title}</h1>
+                </div>
+              </FadeUp>
+
+              <FadeUp delay={0.2}>
+                <p className="text-lg text-white/70 max-w-2xl leading-relaxed">
+                  {meta.description} for international students in {data.country}
+                </p>
+              </FadeUp>
             </div>
-          </FadeUp>
 
-          <FadeUp delay={0.2}>
-            <p className="text-lg text-white/70 max-w-2xl leading-relaxed">
-              {meta.description} for international students in {data.country}
-            </p>
-          </FadeUp>
+            {/* Floating Accent Image */}
+            <div className="hidden lg:flex justify-end">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="relative"
+              >
+                <div className="w-52 h-52 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 -rotate-3">
+                  <Image
+                    src="/services/NEX-_-47.jpg"
+                    alt="Study abroad"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
+                    <Icon name={meta.icon} size={16} className="text-[#003975]" />
+                  </div>
+                  <span className="text-sm font-semibold text-slate-900">{meta.navTitle}</span>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -160,6 +160,31 @@ export default function DestinationDetailClient() {
             </FadeUp>
           </div>
 
+          {/* Floating Accent Image */}
+          <div className="hidden xl:block absolute bottom-32 right-20">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="relative"
+            >
+              <div className="w-56 h-56 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3">
+                <Image
+                  src="/services/NEX-_-45.jpg"
+                  alt="Student life"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-[#00ab18]/10 flex items-center justify-center">
+                  <Icon name="GraduationCap" size={16} className="text-[#00ab18]" />
+                </div>
+                <span className="text-sm font-semibold text-slate-900">Top Universities</span>
+              </div>
+            </motion.div>
+          </div>
+
           {/* Image locations indicator */}
           <div className="absolute bottom-6 right-6 flex items-center gap-3 bg-black/30 backdrop-blur-md rounded-full px-4 py-2 border border-white/10">
             <Icon name="MapPin" size={14} className="text-white/60" />

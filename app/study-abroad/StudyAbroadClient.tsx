@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   FadeUp,
@@ -60,21 +61,58 @@ export default function StudyAbroadPage() {
           <div className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full blur-3xl animate-blob animation-delay-2000" />
         </div>
         <div className="max-w-[1440px] mx-auto relative z-10">
-          <FadeUp>
-            <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white/10 text-sm font-medium">
-              <Icon name="Plane" size={20} /> Study Abroad
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+              <FadeUp>
+                <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white/10 text-sm font-medium">
+                  <Icon name="Plane" size={20} /> Study Abroad
+                </div>
+              </FadeUp>
+              <FadeUp delay={0.1}>
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 max-w-4xl">
+                  Your Complete Guide to <span className="text-[#00ab18]">Studying Abroad</span>
+                </h1>
+              </FadeUp>
+              <FadeUp delay={0.2}>
+                <p className="text-xl text-blue-100 max-w-2xl">
+                  Everything you need to know, from choosing a destination to settling in at your new university.
+                </p>
+              </FadeUp>
             </div>
-          </FadeUp>
-          <FadeUp delay={0.1}>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 max-w-4xl">
-              Your Complete Guide to <span className="text-[#00ab18]">Studying Abroad</span>
-            </h1>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <p className="text-xl text-blue-100 max-w-2xl">
-              Everything you need to know, from choosing a destination to settling in at your new university.
-            </p>
-          </FadeUp>
+
+            {/* Right Image */}
+            <FadeUp delay={0.3}>
+              <div className="hidden lg:block relative">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/services/NEX-_-1.jpg"
+                    alt="Study Abroad"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/30 to-transparent" />
+                </div>
+                {/* Floating accent */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-[#00ab18]/10 flex items-center justify-center">
+                      <Icon name="GraduationCap" size={24} className="text-[#00ab18]" />
+                    </div>
+                    <div>
+                      <p className="text-slate-900 font-bold text-lg">15,000+</p>
+                      <p className="text-slate-500 text-xs">Students Placed</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 

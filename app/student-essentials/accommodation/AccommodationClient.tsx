@@ -140,18 +140,54 @@ export default function AccommodationClient() {
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-white pt-32 pb-20">
       {/* ── Hero Section ── */}
       <section className="px-6 mb-16">
-        <div className="max-w-[1200px] mx-auto text-center">
-          <FadeUp>
-            <span className="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-600 text-sm font-medium rounded-full mb-4">
-              Student Housing Guide
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
-              Student Accommodation
-            </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Find the perfect home away from home. Explore accommodation options for international students.
-            </p>
-          </FadeUp>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <FadeUp>
+                <span className="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-600 text-sm font-medium rounded-full mb-4">
+                  Student Housing Guide
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
+                  Student Accommodation
+                </h1>
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
+                  Find the perfect home away from home. Explore accommodation options for international students.
+                </p>
+              </FadeUp>
+            </div>
+
+            {/* Right Image */}
+            <FadeRight delay={0.2}>
+              <div className="hidden lg:block relative">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="/services/NEX-_-22.jpg"
+                    alt="Student Accommodation"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/20 to-transparent" />
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+                      <Icon name="Home" size={24} className="text-emerald-600" />
+                    </div>
+                    <div>
+                      <p className="text-slate-900 font-bold text-lg">Find</p>
+                      <p className="text-slate-500 text-xs">Your Perfect Home</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </FadeRight>
+          </div>
         </div>
       </section>
 
