@@ -129,14 +129,14 @@ export default function PreDeparturePage() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="relative w-64 h-64 ml-auto"
+                className="relative w-64 h-64 ml-auto group"
               >
-                <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 -rotate-2">
+                <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 -rotate-2 transition-transform duration-500 group-hover:scale-105">
                   <Image
                     src="/services/NEX-_-19.jpg"
                     alt="Pre-departure preparation"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
@@ -152,7 +152,7 @@ export default function PreDeparturePage() {
       </section>
 
       {/* ── Stats Bar — Green accent top border ── */}
-      <section className="border-t-4 border-[#00ab18] py-10 md:py-14 bg-white">
+      <section className="py-10 md:py-14 bg-white">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[

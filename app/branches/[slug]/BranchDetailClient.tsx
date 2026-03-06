@@ -267,12 +267,12 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
       <section className="px-6 mb-16">
         <div className="max-w-4xl mx-auto">
           <FadeUp>
-            <div className="relative rounded-2xl overflow-hidden h-64 md:h-80 lg:h-96">
+            <div className="relative rounded-2xl overflow-hidden h-64 md:h-80 lg:h-96 group">
               <Image
                 src={branch.image}
                 alt={`${branch.name} office`}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

@@ -269,13 +269,13 @@ export default function ProcessPage() {
 
             {/* Right Image */}
             <FadeUp delay={0.3}>
-              <div className="hidden lg:block relative">
-                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <div className="hidden lg:block relative group">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src="/services/NEX-_-42.jpg"
                     alt="Application Process"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#002550]/40 to-transparent" />
                 </div>

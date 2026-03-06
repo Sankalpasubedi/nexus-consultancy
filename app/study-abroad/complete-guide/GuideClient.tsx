@@ -177,13 +177,13 @@ export default function GuidePage() {
 
             {/* Right Image */}
             <FadeUp delay={0.25}>
-              <div className="hidden lg:block relative">
-                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="hidden lg:block relative group">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src="/services/NEX-_-32.jpg"
                     alt="Study Abroad Guide"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
                 </div>
@@ -427,7 +427,7 @@ function TimelineSection() {
                         isLeft ? "md:pr-[8%]" : "md:pl-[8%]"
                       }`}
                     >
-                      <div className="bg-white rounded-2xl p-6 md:p-7 border border-gray-100 shadow-sm hover:shadow-lg transition-shadow relative group overflow-hidden">
+                      <div className="bg-white rounded-2xl p-6 md:p-7 border border-gray-100 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all duration-300 relative group overflow-hidden">
                         {/* Left accent bar */}
                         <div className="absolute left-0 top-4 bottom-4 w-[3px] bg-gray-200 rounded-full" />
 

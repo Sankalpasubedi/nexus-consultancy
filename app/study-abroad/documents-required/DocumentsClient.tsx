@@ -288,13 +288,13 @@ export default function DocumentsPage() {
 
             {/* Right Image */}
             <FadeUp delay={0.25}>
-              <div className="hidden lg:block relative">
-                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="hidden lg:block relative group">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src="/services/NEX-_-38.jpg"
                     alt="Document Preparation"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
                 </div>
@@ -469,7 +469,7 @@ export default function DocumentsPage() {
                                         delay: di * 0.08,
                                         duration: 0.35,
                                       }}
-                                      className="flex-1 bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md transition-shadow"
+                                      className="flex-1 bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:scale-[1.02] transition-all duration-300"
                                     >
                                       {doc.required && (
                                         <span className="inline-block text-[10px] font-bold tracking-wide uppercase bg-orange-100 text-orange-600 px-2.5 py-0.5 rounded-full mb-2">

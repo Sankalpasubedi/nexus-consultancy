@@ -165,13 +165,13 @@ export default function BranchesClient() {
 
             {/* Right Image */}
             <FadeUp delay={0.2}>
-              <div className="hidden lg:block relative">
-                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="hidden lg:block relative group">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src="/services/NEX-_-18.jpg"
                     alt="Our Branch Office"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/20 to-transparent" />
                 </div>
@@ -368,13 +368,13 @@ export default function BranchesClient() {
               <CarouselCard key={testimonial.id} className="min-w-[300px] sm:min-w-[350px]">
                 <div className="bg-gradient-to-br from-[#003975]/5 to-[#00ab18]/5 rounded-2xl p-6 h-full border border-gray-100">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden">
+                    <div className="w-14 h-14 rounded-full overflow-hidden group">
                       <Image
                         src={testimonial.image}
                         alt={testimonial.name}
                         width={56}
                         height={56}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
                     </div>
                     <div>

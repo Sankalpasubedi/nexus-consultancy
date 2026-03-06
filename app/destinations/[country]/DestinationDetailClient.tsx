@@ -166,14 +166,14 @@ export default function DestinationDetailClient() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="relative"
+              className="relative group"
             >
-              <div className="w-56 h-56 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3">
+              <div className="w-56 h-56 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3 transition-transform duration-500 group-hover:scale-105">
                 <Image
                   src="/services/NEX-_-45.jpg"
                   alt="Student life"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
@@ -330,14 +330,14 @@ export default function DestinationDetailClient() {
             </FadeLeft>
 
             <FadeRight>
-              <div className="relative">
-                <div className="rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative group">
+                <div className="rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src={data.carouselData.CountryImages[0]?.url || "/destinations/Australia.png"}
                     alt={data.country}
                     width={600}
                     height={500}
-                    className="object-cover w-full h-[400px]"
+                    className="object-cover w-full h-[400px] transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 {/* Floating stat card */}

@@ -479,13 +479,13 @@ export default function DestinationsComparePage() {
 
             {/* Hero Image + Stats */}
             <FadeRight delay={0.3}>
-              <div className="hidden lg:block relative">
-                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="hidden lg:block relative group">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src="/services/NEX-_-28.jpg"
                     alt="Students comparing destinations"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/30 to-transparent" />
@@ -1003,7 +1003,7 @@ export default function DestinationsComparePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {countries.map((c, i) => (
               <FadeUp key={c.slug} delay={i * 0.05}>
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition p-5 h-full flex flex-col">
+                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 p-5 h-full flex flex-col">
                   <div className="flex items-center gap-2.5 mb-4">
                     <FlagIcon code={c.flag} size={20} />
                     <span className="font-semibold text-slate-900 text-sm">{c.name}</span>
@@ -1143,8 +1143,8 @@ export default function DestinationsComparePage() {
               },
             ].map((item, i) => (
               <FadeUp key={item.title} delay={i * 0.08}>
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition h-full">
-                  <div className="w-11 h-11 rounded-xl bg-[#003975]/5 flex items-center justify-center mb-4">
+                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 h-full">
+                  <div className="w-11 h-11 rounded-xl bg-[#003975]/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     <Icon name={item.icon} size={20} className="text-[#003975]" />
                   </div>
                   <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>

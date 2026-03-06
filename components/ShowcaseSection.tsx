@@ -91,13 +91,13 @@ export default function ShowcaseSection() {
           {[...serviceImages, ...serviceImages, ...serviceImages].map((img, idx) => (
             <div
               key={idx}
-              className="flex-shrink-0 relative w-[400px] h-[280px] md:w-[500px] md:h-[320px]"
+              className="flex-shrink-0 relative w-[400px] h-[280px] md:w-[500px] md:h-[320px] overflow-hidden group"
             >
               <Image
                 src={img}
                 alt={`Service showcase ${idx + 1}`}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           ))}
@@ -120,7 +120,7 @@ export default function ShowcaseSection() {
           {[...testimonials, ...testimonials, ...testimonials].map((testimonial, idx) => (
             <div
               key={idx}
-              className="flex-shrink-0 w-[400px] md:w-[500px] bg-gray-50 p-8 flex flex-col justify-between"
+              className="flex-shrink-0 w-[400px] md:w-[500px] bg-gray-50 p-8 flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300"
             >
               <p className="text-slate-600 text-base leading-relaxed mb-6 line-clamp-3">
                 "{testimonial.quote}"

@@ -81,14 +81,14 @@ export default function PartnersSection() {
               {[...topPartners, ...topPartners, ...topPartners].map((partner, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:border-[#003975]/30 hover:shadow-sm transition-all duration-300"
+                  className="flex-shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:border-[#003975]/30 hover:shadow-sm hover:scale-105 transition-all duration-300 group"
                 >
                   <Image
                     src={partner.logo}
                     alt={partner.name}
                     width={120}
                     height={60}
-                    className="object-contain max-h-[50px] w-auto"
+                    className="object-contain max-h-[50px] w-auto transition-transform duration-300 group-hover:scale-110"
                     unoptimized
                   />
                 </div>
@@ -112,14 +112,14 @@ export default function PartnersSection() {
               {[...bottomPartners, ...bottomPartners, ...bottomPartners].map((partner, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:border-[#003975]/30 hover:shadow-sm transition-all duration-300"
+                  className="flex-shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:border-[#003975]/30 hover:shadow-sm hover:scale-105 transition-all duration-300 group"
                 >
                   <Image
                     src={partner.logo}
                     alt={partner.name}
                     width={120}
                     height={60}
-                    className="object-contain max-h-[50px] w-auto"
+                    className="object-contain max-h-[50px] w-auto transition-transform duration-300 group-hover:scale-110"
                     unoptimized
                   />
                 </div>

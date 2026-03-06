@@ -265,13 +265,13 @@ export default function Destinations() {
 
           {/* Right Image */}
           <FadeUp delay={0.3}>
-            <div className="hidden lg:block relative">
-              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+            <div className="hidden lg:block relative group">
+              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                 <Image
                   src="/services/NEX-_-25.jpg"
                   alt="Study Destinations"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
               </div>

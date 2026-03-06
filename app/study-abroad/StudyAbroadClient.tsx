@@ -240,13 +240,13 @@ export default function StudyAbroadPage() {
 
             {/* Right Image */}
             <FadeUp delay={0.3}>
-              <div className="hidden lg:block relative">
-                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
+              <div className="hidden lg:block relative group">
+                <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src="/services/NEX-_-1.jpg"
                     alt="Study Abroad"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/30 to-transparent" />
                 </div>

@@ -187,7 +187,7 @@ export default function EventsSection() {
         <StaggerContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
           {otherEvents.map((event) => (
             <StaggerItem key={event.id}>
-              <div className="bg-white border border-gray-100 rounded-2xl p-6 premium-card h-full group">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 premium-card h-full group hover:scale-[1.02] transition-transform duration-300">
                 <div className="flex items-center gap-3 mb-5">
                   <span
                     className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getTypeBadgeColor(

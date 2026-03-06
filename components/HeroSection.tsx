@@ -291,7 +291,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Country Quick-Links ── */}
+      {/* ── Country Quick-Links ──
       <div className="absolute bottom-[120px] sm:bottom-36 md:bottom-40 left-0 right-0 z-10 overflow-x-auto scrollbar-hide">
         <div className="px-4 sm:px-6 md:px-8 lg:px-16">
           <div className="max-w-7xl mx-auto">
@@ -318,7 +318,7 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* ── Search Section ── */}
       <HeroSearchSection />

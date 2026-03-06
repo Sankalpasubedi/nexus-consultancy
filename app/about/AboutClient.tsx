@@ -352,13 +352,13 @@ function TeamSliderSection({
                     <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-[#00ab18]/[0.06]" />
 
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl ring-4 ring-white">
+                      <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl ring-4 ring-white group">
                         <Image
                           src={`/services/NEX-_-${i + 1}.jpg`}
                           alt={m.name}
                           width={112}
                           height={112}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                       </div>
                     </div>
@@ -689,15 +689,15 @@ export default function AboutPage() {
 
             {/* Right — Visual Mosaic */}
             <FadeRight delay={0.15}>
-              <div className="relative">
+              <div className="relative group">
                 {/* Main large photo */}
-                <div className="rounded-3xl overflow-hidden shadow-2xl">
+                <div className="rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <Image
                     src="/contact/image.png"
                     alt="Nexsus Office"
                     width={640}
                     height={420}
-                    className="w-full h-[400px] object-cover"
+                    className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
 
@@ -801,16 +801,16 @@ export default function AboutPage() {
                 </div>
 
                 {/* Card with green accent border */}
-                <div className="relative rounded-3xl overflow-hidden border-2 border-gray-100 shadow-xl bg-white max-w-[380px]">
+                <div className="relative rounded-3xl overflow-hidden border-2 border-gray-100 shadow-xl bg-white max-w-[380px] group">
                   {/* Green bottom-left accent */}
                   <div className="absolute bottom-0 left-0 w-14 h-14 bg-[#00ab18] rounded-tr-[2rem] z-10" />
 
-                  <div className="relative aspect-[4/5] w-full">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
                     <Image
                       src="/MD.png"
                       alt="Bishnu Khadka – Managing Director"
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 

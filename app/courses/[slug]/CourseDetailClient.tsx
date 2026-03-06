@@ -418,14 +418,14 @@ export default function CourseDetailPage() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
-                  className="relative"
+                  className="relative group"
                 >
-                  <div className="w-56 h-56 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3">
+                  <div className="w-56 h-56 rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 rotate-3 transition-transform duration-500 group-hover:scale-105">
                     <Image
                       src="/services/NEX-_-49.jpg"
                       alt="Course study"
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
                   <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
