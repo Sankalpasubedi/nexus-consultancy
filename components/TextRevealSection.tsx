@@ -9,7 +9,7 @@ export default function TextRevealSection() {
   const [progress, setProgress] = useState(0);
   const targetProgress = useRef(0);
   const currentProgress = useRef(0);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
