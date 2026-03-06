@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
@@ -17,7 +18,10 @@ const branches: Record<string, {
   email: string;
   hours: string;
   mapUrl: string;
+  mapEmbedUrl: string;
   description: string;
+  image: string;
+  coordinates: { lat: number; lng: number };
 }> = {
   kathmandu: {
     name: "Kathmandu Main Office",
@@ -26,58 +30,115 @@ const branches: Record<string, {
     phone: "+977-1-4444444",
     email: "kathmandu@nexsus.edu.np",
     hours: "Sun-Fri: 10AM - 6PM",
-    mapUrl: "https://maps.google.com/?q=Putalisadak+Kathmandu",
+    mapUrl: "https://maps.google.com/?q=27.7089,85.3239",
+    mapEmbedUrl: "https://maps.google.com/maps?q=27.7089,85.3239&t=&z=15&ie=UTF8&iwloc=&output=embed",
     description: "Our main headquarters in the heart of Kathmandu, serving students from across Nepal with comprehensive study abroad services.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 27.7089, lng: 85.3239 },
   },
   dillibazar: {
-    name: "dillibazar Main Office",
-    city: "dillibazar",
-    address: "Putalisadak, dillibazar",
-    phone: "+977-1-4444444",
-    email: "dillibazar@nexsus.edu.np",
-    hours: "Sun-Fri: 10AM - 6PM",
-    mapUrl: "https://maps.google.com/?q=Putalisadak+dillibazar",
-    description: "Our main headquarters in the heart of dillibazar, serving students from across Nepal with comprehensive study abroad services.",
+    name: "Dillibazar Main Office",
+    city: "Dillibazar",
+    address: "Dillibazar, Kathmandu-44600, Nepal",
+    phone: "+977 1 4519495",
+    email: "info@nexsuseducation.com",
+    hours: "Sun-Fri: 9AM - 6PM",
+    mapUrl: "https://maps.google.com/?q=27.7089,85.3239",
+    mapEmbedUrl: "https://maps.google.com/maps?q=27.7089,85.3239&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    description: "Our main headquarters in the heart of Dillibazar, serving students from across Nepal with comprehensive study abroad services.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 27.7089, lng: 85.3239 },
   },
   baneshwor: {
-    name: "baneshwor Main Office",
-    city: "baneshwor",
-    address: "Putalisadak, baneshwor",
-    phone: "+977-1-4444444",
-    email: "baneshwor@nexsus.edu.np",
-    hours: "Sun-Fri: 10AM - 6PM",
-    mapUrl: "https://maps.google.com/?q=Putalisadak+baneshwor",
-    description: "Our main headquarters in the heart of baneshwor, serving students from across Nepal with comprehensive study abroad services.",
+    name: "Baneshwor Branch",
+    city: "Baneshwor",
+    address: "Baneshwor, Kathmandu, Nepal",
+    phone: "+977 1 5922227",
+    email: "baneshwor@nexsuseducation.com",
+    hours: "Sun-Fri: 9AM - 6PM",
+    mapUrl: "https://maps.google.com/?q=27.6908,85.3433",
+    mapEmbedUrl: "https://maps.google.com/maps?q=27.6908,85.3433&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    description: "Conveniently located in Baneshwor, serving students in eastern Kathmandu with dedicated counselors.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 27.6908, lng: 85.3433 },
   },
   samakhusi: {
-    name: "samakhusi Main Office",
-    city: "samakhusi",
-    address: "Putalisadak, samakhusi",
-    phone: "+977-1-4444444",
-    email: "samakhusi@nexsus.edu.np",
-    hours: "Sun-Fri: 10AM - 6PM",
-    mapUrl: "https://maps.google.com/?q=Putalisadak+samakhusi",
-    description: "Our main headquarters in the heart of samakhusi, serving students from across Nepal with comprehensive study abroad services.",
+    name: "Samakhusi Branch",
+    city: "Samakhusi",
+    address: "Samakhusi, Kathmandu, Nepal",
+    phone: "+977 1 4971971",
+    email: "samakhusi@nexsuseducation.com",
+    hours: "Sun-Fri: 9AM - 6PM",
+    mapUrl: "https://maps.google.com/?q=27.7295,85.3115",
+    mapEmbedUrl: "https://maps.google.com/maps?q=27.7295,85.3115&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    description: "Serving students in the northern Kathmandu valley area with personalized guidance.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 27.7295, lng: 85.3115 },
+  },
+  banepa: {
+    name: "Banepa Branch",
+    city: "Banepa",
+    address: "Banepa, Kavrepalanchok, Nepal",
+    phone: "+977 11 665859",
+    email: "banepa@nexsuseducation.com",
+    hours: "Sun-Fri: 9AM - 6PM",
+    mapUrl: "https://maps.google.com/?q=27.6291,85.5219",
+    mapEmbedUrl: "https://maps.google.com/maps?q=27.6291,85.5219&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    description: "Serving students in Kavrepalanchok and surrounding areas with comprehensive services.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 27.6291, lng: 85.5219 },
+  },
+  birtamode: {
+    name: "Birtamode Branch",
+    city: "Birtamode",
+    address: "Birtamode, Jhapa, Nepal",
+    phone: "+977 23 591692",
+    email: "birtamode@nexsuseducation.com",
+    hours: "Sun-Fri: 9AM - 6PM",
+    mapUrl: "https://maps.google.com/?q=26.6466,87.9893",
+    mapEmbedUrl: "https://maps.google.com/maps?q=26.6466,87.9893&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    description: "Serving students in Jhapa and eastern Nepal region with dedicated support.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 26.6466, lng: 87.9893 },
+  },
+  dhulabari: {
+    name: "Dhulabari Branch",
+    city: "Dhulabari",
+    address: "Dhulabari, Jhapa, Nepal",
+    phone: "+977 23 591127",
+    email: "dhulabari@nexsuseducation.com",
+    hours: "Sun-Fri: 9AM - 6PM",
+    mapUrl: "https://maps.google.com/?q=26.6689,88.0412",
+    mapEmbedUrl: "https://maps.google.com/maps?q=26.6689,88.0412&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    description: "Conveniently located in Dhulabari, serving the Jhapa district with expert guidance.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 26.6689, lng: 88.0412 },
   },
   pokhara: {
     name: "Pokhara Branch",
     city: "Pokhara",
     address: "Lakeside, Pokhara",
     phone: "+977-61-555555",
-    email: "pokhara@nexsus.edu.np",
+    email: "pokhara@nexsuseducation.com",
     hours: "Sun-Fri: 10AM - 6PM",
-    mapUrl: "https://maps.google.com/?q=Lakeside+Pokhara",
+    mapUrl: "https://maps.google.com/?q=28.2096,83.9568",
+    mapEmbedUrl: "https://maps.google.com/maps?q=28.2096,83.9568&t=&z=15&ie=UTF8&iwloc=&output=embed",
     description: "Serving the western region of Nepal with dedicated counselors for Australia, UK, and Canada programs.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 28.2096, lng: 83.9568 },
   },
   chitwan: {
     name: "Chitwan Branch",
     city: "Chitwan",
     address: "Bharatpur, Chitwan",
     phone: "+977-56-666666",
-    email: "chitwan@nexsus.edu.np",
+    email: "chitwan@nexsuseducation.com",
     hours: "Sun-Fri: 10AM - 6PM",
-    mapUrl: "https://maps.google.com/?q=Bharatpur+Chitwan",
+    mapUrl: "https://maps.google.com/?q=27.6766,84.4362",
+    mapEmbedUrl: "https://maps.google.com/maps?q=27.6766,84.4362&t=&z=15&ie=UTF8&iwloc=&output=embed",
     description: "Our Chitwan branch provides personalized guidance to students from the Terai region.",
+    image: "/branches/branch.png",
+    coordinates: { lat: 27.6766, lng: 84.4362 },
   },
 };
 
@@ -199,6 +260,68 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
               </div>
             </StaggerItem>
           </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Branch Image Section */}
+      <section className="px-6 mb-16">
+        <div className="max-w-4xl mx-auto">
+          <FadeUp>
+            <div className="relative rounded-2xl overflow-hidden h-64 md:h-80 lg:h-96">
+              <Image
+                src={branch.image}
+                alt={`${branch.name} office`}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <div className="absolute bottom-6 left-6 text-white">
+                <h3 className="text-xl font-bold">{branch.name}</h3>
+                <p className="text-white/80">{branch.address}</p>
+              </div>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="px-6 mb-16">
+        <div className="max-w-4xl mx-auto">
+          <FadeUp>
+            <h2 className="text-2xl font-bold text-slate-900 mb-6">Our Location</h2>
+            <div className="relative rounded-2xl overflow-hidden h-80 md:h-96 border border-gray-200">
+              <iframe
+                src={branch.mapEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Map showing ${branch.name} location`}
+                className="w-full h-full"
+              />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-4">
+              <a
+                href={branch.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-brand-blue text-white px-5 py-2.5 rounded-full font-medium hover:bg-blue-900 transition"
+              >
+                <Icon name="Navigation" size={16} />
+                Get Directions
+              </a>
+              <a
+                href={`tel:${branch.phone}`}
+                className="inline-flex items-center gap-2 border border-brand-blue text-brand-blue px-5 py-2.5 rounded-full font-medium hover:bg-brand-blue/5 transition"
+              >
+                <Icon name="Phone" size={16} />
+                Call Now
+              </a>
+            </div>
+          </FadeUp>
         </div>
       </section>
 

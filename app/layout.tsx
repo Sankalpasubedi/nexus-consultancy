@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import FloatingActions from '../components/FloatingActions'
 import { HeaderProvider } from './contexts/HeaderContext'
+import { BranchProvider } from './contexts/BranchContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -120,12 +121,14 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <HeaderProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <FloatingActions />
-        </HeaderProvider>
+        <BranchProvider>
+          <HeaderProvider>
+            <Header />
+            <main className="content-light">{children}</main>
+            <Footer />
+            <FloatingActions />
+          </HeaderProvider>
+        </BranchProvider>
       </body>
     </html>
   )

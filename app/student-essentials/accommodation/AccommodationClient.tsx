@@ -137,7 +137,7 @@ export default function AccommodationClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-white pt-32 pb-20">
+    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-32 pb-20">
       {/* ── Hero Section ── */}
       <section className="px-6 mb-16">
         <div className="max-w-[1200px] mx-auto">
@@ -145,7 +145,7 @@ export default function AccommodationClient() {
             {/* Left Content */}
             <div className="text-center lg:text-left">
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-600 text-sm font-medium rounded-full mb-4">
+                <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
                   Student Housing Guide
                 </span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
@@ -167,7 +167,7 @@ export default function AccommodationClient() {
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/20 to-transparent" />
                 </div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -176,8 +176,8 @@ export default function AccommodationClient() {
                   className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
-                      <Icon name="Home" size={24} className="text-emerald-600" />
+                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                      <Icon name="Home" size={24} className="text-[#003975]" />
                     </div>
                     <div>
                       <p className="text-slate-900 font-bold text-lg">Find</p>
@@ -221,11 +221,11 @@ export default function AccommodationClient() {
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <span className="text-xs font-medium text-emerald-600 uppercase mb-2 block">Pros</span>
+                      <span className="text-xs font-medium text-[#003975] uppercase mb-2 block">Pros</span>
                       <ul className="space-y-1">
                         {type.pros.map((pro) => (
                           <li key={pro} className="flex items-center gap-2 text-sm text-slate-600">
-                            <Icon name="Check" size={12} className="text-emerald-500" />
+                            <Icon name="Check" size={12} className="text-[#003975]" />
                             {pro}
                           </li>
                         ))}
@@ -246,7 +246,7 @@ export default function AccommodationClient() {
 
                   <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                     <span className="text-sm text-slate-500">Typical cost:</span>
-                    <span className="font-semibold text-emerald-600">{type.priceRange}</span>
+                    <span className="font-semibold text-[#003975]">{type.priceRange}</span>
                   </div>
                 </div>
               </FadeUp>
@@ -281,14 +281,14 @@ export default function AccommodationClient() {
                     
                     <div className="mb-4">
                       <span className="text-xs text-slate-500 uppercase">Avg Cost</span>
-                      <p className="font-semibold text-emerald-600">{country.avgCost}</p>
+                      <p className="font-semibold text-[#003975]">{country.avgCost}</p>
                     </div>
 
                     <div className="mb-4">
                       <span className="text-xs text-slate-500 uppercase">Popular Options</span>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {country.popular.map((opt) => (
-                          <span key={opt} className="text-xs px-2 py-0.5 bg-emerald-100 text-emerald-600 rounded-full">
+                          <span key={opt} className="text-xs px-2 py-0.5 bg-[#003975]/10 text-[#003975] rounded-full">
                             {opt}
                           </span>
                         ))}
@@ -308,11 +308,11 @@ export default function AccommodationClient() {
       </section>
 
       {/* ── Featured Student Cities Carousel ── */}
-      <section className="py-16 px-6 bg-gradient-to-b from-white to-emerald-50">
+      <section className="py-16 px-6 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-10">
-              <span className="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-600 text-sm font-medium rounded-full mb-4">
+              <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
                 Popular Destinations
               </span>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
@@ -326,12 +326,12 @@ export default function AccommodationClient() {
 
           <TrackpadCarousel className="mt-8">
             {[
-              { city: "Sydney", country: "Australia", avgRent: "$1,200/mo", image: "🏞️", color: "from-sky-500 to-blue-600" },
-              { city: "London", country: "UK", avgRent: "£900/mo", image: "🏰", color: "from-red-500 to-rose-600" },
-              { city: "Toronto", country: "Canada", avgRent: "C$1,500/mo", image: "🍁", color: "from-red-600 to-orange-500" },
-              { city: "New York", country: "USA", avgRent: "$1,800/mo", image: "🗽", color: "from-blue-600 to-indigo-600" },
-              { city: "Melbourne", country: "Australia", avgRent: "$1,100/mo", image: "🎯", color: "from-indigo-500 to-purple-600" },
-              { city: "Auckland", country: "New Zealand", avgRent: "NZ$1,000/mo", image: "🌋", color: "from-green-500 to-emerald-600" },
+              { city: "Sydney", country: "Australia", avgRent: "$1,200/mo", image: "🏞️", color: "from-[#003975] to-[#0052a3]" },
+              { city: "London", country: "UK", avgRent: "£900/mo", image: "🏰", color: "from-[#00468f] to-[#005fb8]" },
+              { city: "Toronto", country: "Canada", avgRent: "C$1,500/mo", image: "🍁", color: "from-[#003975] to-[#1f6db7]" },
+              { city: "New York", country: "USA", avgRent: "$1,800/mo", image: "🗽", color: "from-[#002f61] to-[#0052a3]" },
+              { city: "Melbourne", country: "Australia", avgRent: "$1,100/mo", image: "🎯", color: "from-[#003975] to-[#0b5eb0]" },
+              { city: "Auckland", country: "New Zealand", avgRent: "NZ$1,000/mo", image: "🌋", color: "from-[#00468f] to-[#1f6db7]" },
             ].map((city) => (
               <CarouselCard key={city.city} className="min-w-[280px] sm:min-w-[320px]">
                 <div className={`bg-gradient-to-br ${city.color} rounded-2xl p-6 h-full text-white relative overflow-hidden`}>
@@ -350,7 +350,7 @@ export default function AccommodationClient() {
       </section>
 
       {/* ── Checklist ── */}
-      <section className="py-16 px-6 bg-emerald-50">
+      <section className="py-16 px-6 bg-slate-50">
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-12">
@@ -366,9 +366,9 @@ export default function AccommodationClient() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {checklist.map((item, i) => (
               <FadeUp key={item.item} delay={i * 0.05}>
-                <div className="bg-white rounded-xl p-4 border border-emerald-100 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0">
-                    <Icon name={item.icon} size={18} className="text-emerald-600" />
+                <div className="bg-white rounded-xl p-4 border border-gray-100 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-[#003975]/10 flex items-center justify-center shrink-0">
+                    <Icon name={item.icon} size={18} className="text-[#003975]" />
                   </div>
                   <span className="text-sm text-slate-700 font-medium">{item.item}</span>
                 </div>
@@ -392,7 +392,7 @@ export default function AccommodationClient() {
           <div className="space-y-3">
             {faqs.map((faq, i) => (
               <FadeUp key={i} delay={i * 0.05}>
-                <div className="bg-emerald-50 rounded-xl border border-emerald-100 overflow-hidden">
+                <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="w-full flex items-center justify-between p-5 text-left"
@@ -402,7 +402,7 @@ export default function AccommodationClient() {
                       animate={{ rotate: openFaq === i ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <Icon name="ChevronDown" size={16} className="text-emerald-500" />
+                      <Icon name="ChevronDown" size={16} className="text-slate-400" />
                     </motion.div>
                   </button>
                   <motion.div
@@ -423,20 +423,20 @@ export default function AccommodationClient() {
       </section>
 
       {/* ── CTA Section ── */}
-      <section className="py-20 px-6 bg-gradient-to-r from-emerald-600 to-teal-600">
+      <section className="py-20 px-6 bg-gradient-to-r from-[#003975] to-[#0052a3]">
         <div className="max-w-[800px] mx-auto text-center text-white">
           <FadeUp>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Need Help Finding Accommodation?
             </h2>
-            <p className="text-emerald-100 mb-8 max-w-lg mx-auto">
+            <p className="text-white/85 mb-8 max-w-lg mx-auto">
               Our pre-departure support includes accommodation guidance. 
               Let us help you find your home away from home!
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
+                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
               >
                 Get Housing Help <Icon name="ArrowRight" size={14} />
               </Link>

@@ -72,7 +72,7 @@ export default function JourneySection() {
         {/* ── DESKTOP TIMELINE ── */}
         <div className="hidden md:block relative">
           {/* Center vertical line */}
-          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-gradient-to-b from-[#003975]/20 via-[#00CCCC]/20 to-[#00D81E]/20" />
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-[#003975]/20" />
 
           <div className="space-y-0">
             {steps.map((step, idx) => {
@@ -92,18 +92,18 @@ export default function JourneySection() {
                         <div className="relative bg-white rounded-3xl p-8 shadow-sm border border-gray-100 overflow-hidden group hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-500">
                           {/* Left accent bar */}
                           <div
-                            className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${step.gradient}`}
+                            className={`absolute left-0 top-0 bottom-0 w-1 bg-[#003975]`}
                           />
 
                           {/* Ambient glow */}
                           <div
-                            className={`absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br ${step.gradient} opacity-[0.07] blur-3xl rounded-full group-hover:opacity-[0.12] transition-opacity duration-500`}
+                            className={`absolute -bottom-6 -right-6 w-32 h-32 bg-[#003975] opacity-[0.07] blur-3xl rounded-full group-hover:opacity-[0.12] transition-opacity duration-500`}
                           />
 
                           <div className="flex items-start gap-5 relative z-10">
                             {/* Icon badge */}
                             <div
-                              className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.gradient} flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-300`}
+                              className={`w-14 h-14 rounded-2xl bg-[#003975] flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-300`}
                             >
                               <Icon
                                 name={step.icon}
@@ -138,7 +138,7 @@ export default function JourneySection() {
                         className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center shadow-sm"
                       >
                         <div
-                          className={`w-8 h-8 rounded-full bg-gradient-to-br ${step.gradient} shadow-lg flex items-center justify-center`}
+                          className={`w-8 h-8 rounded-full bg-[#003975] shadow-lg flex items-center justify-center`}
                         >
                           <span className="text-white text-xs font-bold">
                             {step.id}

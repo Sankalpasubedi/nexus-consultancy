@@ -100,7 +100,7 @@ export default function DestinationSectionClient() {
   }
 
   return (
-    <main className="pt-20 min-h-screen">
+    <main className="pt-20 min-h-screen bg-white">
       {/* ═══════════ HERO ═══════════ */}
       <section className="relative py-16 md:py-24 px-6 bg-slate-800 text-white overflow-hidden">
         <div className="absolute inset-0">

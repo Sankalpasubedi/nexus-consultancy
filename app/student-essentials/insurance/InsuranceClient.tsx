@@ -123,12 +123,12 @@ export default function InsuranceClient() {
   }, [setShowSidebar]);
 
   return (
-    <main className="bg-gradient-to-b from-sky-50/50 to-white min-h-screen">
+    <main className="bg-gradient-to-b from-slate-50 to-white min-h-screen">
       {/* ── Hero Section ── */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0ea5e9]/5 via-transparent to-[#6366f1]/5" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-[#0ea5e9]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#6366f1]/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#003975]/6 via-transparent to-[#003975]/3" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-[#003975]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#003975]/5 rounded-full blur-3xl" />
         
         <div className="relative z-10 max-w-[1200px] mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -137,20 +137,20 @@ export default function InsuranceClient() {
               {/* Breadcrumb */}
               <FadeUp>
                 <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-                  <Link href="/" className="hover:text-sky-600">Home</Link>
+                  <Link href="/" className="hover:text-[#003975]">Home</Link>
                   <span>/</span>
                   <span className="text-slate-900">Student Insurance</span>
                 </nav>
               </FadeUp>
               
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold tracking-wide border border-sky-200">
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-semibold tracking-wide border border-[#003975]/20">
                   Student Essentials
                 </span>
               </FadeUp>
               <FadeUp delay={0.1}>
                 <h1 className="text-4xl sm:text-5xl md:text-[56px] font-bold text-slate-900 mb-4 max-w-2xl leading-[1.15]">
-                  Student <span className="text-sky-600">Insurance</span>
+                  Student <span className="text-[#0052a3]">Insurance</span>
                 </h1>
               </FadeUp>
               <FadeUp delay={0.2}>
@@ -163,13 +163,13 @@ export default function InsuranceClient() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 bg-sky-600 text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-sky-700 hover:shadow-lg transition"
+                    className="inline-flex items-center gap-2 bg-[#003975] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] hover:shadow-lg transition"
                   >
                     Get Insurance Quote <Icon name="ArrowRight" size={14} />
                   </Link>
                   <a
                     href="tel:+97714519495"
-                    className="inline-flex items-center gap-2 bg-white text-sky-600 border border-sky-200 px-6 py-3 rounded-full text-sm font-semibold hover:bg-sky-50 transition"
+                    className="inline-flex items-center gap-2 bg-white text-[#003975] border border-[#003975]/20 px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#003975]/5 transition"
                   >
                     <Icon name="Phone" size={14} />
                     Talk to Advisor
@@ -188,7 +188,7 @@ export default function InsuranceClient() {
                     fill
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-sky-900/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/20 to-transparent" />
                 </div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -197,8 +197,8 @@ export default function InsuranceClient() {
                   className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center">
-                      <Icon name="ShieldCheck" size={24} className="text-sky-600" />
+                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                      <Icon name="ShieldCheck" size={24} className="text-[#003975]" />
                     </div>
                     <div>
                       <p className="text-slate-900 font-bold text-lg">100%</p>
@@ -215,28 +215,28 @@ export default function InsuranceClient() {
       {/* ── Why Insurance Matters ── */}
       <section className="py-16 px-6">
         <div className="max-w-[1200px] mx-auto">
-          <div className="bg-gradient-to-r from-sky-600 to-indigo-600 rounded-2xl p-8 md:p-12 text-white">
+          <div className="bg-gradient-to-r from-[#003975] to-[#0052a3] rounded-2xl p-8 md:p-12 text-white">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
                   Why Student Insurance Matters
                 </h2>
-                <p className="text-sky-100 leading-relaxed mb-6">
+                <p className="text-white/85 leading-relaxed mb-6">
                   Studying abroad is an exciting journey, but unexpected medical expenses 
                   or travel issues can be costly. Insurance provides peace of mind and 
                   financial protection, and is often mandatory for visa approval.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
-                    <Icon name="Check" size={14} className="text-sky-200" />
+                    <Icon name="Check" size={14} className="text-white/85" />
                     <span className="text-sm">Visa Requirement</span>
                   </div>
                   <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
-                    <Icon name="Check" size={14} className="text-sky-200" />
+                    <Icon name="Check" size={14} className="text-white/85" />
                     <span className="text-sm">Financial Protection</span>
                   </div>
                   <div className="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2">
-                    <Icon name="Check" size={14} className="text-sky-200" />
+                    <Icon name="Check" size={14} className="text-white/85" />
                     <span className="text-sm">Peace of Mind</span>
                   </div>
                 </div>
@@ -249,9 +249,9 @@ export default function InsuranceClient() {
                   { icon: "Users", label: "Students Helped", value: "5000+" },
                 ].map((stat) => (
                   <div key={stat.label} className="bg-white/10 rounded-xl p-4 text-center">
-                    <Icon name={stat.icon} size={24} className="text-sky-200 mx-auto mb-2" />
+                    <Icon name={stat.icon} size={24} className="text-white/85 mx-auto mb-2" />
                     <div className="text-2xl font-bold">{stat.value}</div>
-                    <div className="text-xs text-sky-200">{stat.label}</div>
+                    <div className="text-xs text-white/80">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -368,8 +368,8 @@ export default function InsuranceClient() {
               <FadeUp key={item.title} delay={i * 0.1}>
                 <div className="bg-white rounded-xl p-6 border border-gray-100 relative overflow-hidden">
                   <span className="absolute top-4 right-4 text-4xl font-bold text-slate-100">{item.step}</span>
-                  <div className="w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center mb-4">
-                    <Icon name={item.icon} size={20} className="text-sky-600" />
+                  <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center mb-4">
+                    <Icon name={item.icon} size={20} className="text-[#003975]" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-slate-500">{item.desc}</p>
@@ -432,7 +432,7 @@ export default function InsuranceClient() {
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-10">
-              <span className="inline-block px-4 py-1.5 bg-sky-100 text-sky-600 text-sm font-medium rounded-full mb-4">
+              <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
                 Trusted Partners
               </span>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
@@ -446,12 +446,12 @@ export default function InsuranceClient() {
 
           <TrackpadCarousel className="mt-8">
             {[
-              { name: "Medibank", country: "Australia", logo: "🏥", color: "from-sky-500 to-blue-500" },
-              { name: "BUPA", country: "UK & Global", logo: "💙", color: "from-blue-600 to-indigo-600" },
-              { name: "Allianz", country: "Worldwide", logo: "🛡️", color: "from-indigo-500 to-purple-500" },
-              { name: "NIB", country: "Australia & NZ", logo: "🌏", color: "from-emerald-500 to-green-500" },
-              { name: "Guard.me", country: "Canada", logo: "🍁", color: "from-red-500 to-pink-500" },
-              { name: "ISO", country: "USA", logo: "🇺🇸", color: "from-blue-500 to-red-500" },
+              { name: "Medibank", country: "Australia", logo: "🏥", color: "from-[#003975] to-[#0052a3]" },
+              { name: "BUPA", country: "UK & Global", logo: "💙", color: "from-[#00468f] to-[#005fb8]" },
+              { name: "Allianz", country: "Worldwide", logo: "🛡️", color: "from-[#003975] to-[#1f6db7]" },
+              { name: "NIB", country: "Australia & NZ", logo: "🌏", color: "from-[#002f61] to-[#0052a3]" },
+              { name: "Guard.me", country: "Canada", logo: "🍁", color: "from-[#003975] to-[#0b5eb0]" },
+              { name: "ISO", country: "USA", logo: "🇺🇸", color: "from-[#00468f] to-[#1f6db7]" },
             ].map((partner, i) => (
               <CarouselCard key={partner.name} className="min-w-[260px] sm:min-w-[300px]">
                 <div className={`bg-gradient-to-br ${partner.color} rounded-2xl p-6 h-full text-white`}>
@@ -470,20 +470,20 @@ export default function InsuranceClient() {
       </section>
 
       {/* ── CTA Section ── */}
-      <section className="py-20 px-6 bg-gradient-to-r from-sky-600 to-indigo-600">
+      <section className="py-20 px-6 bg-gradient-to-r from-[#003975] to-[#0052a3]">
         <div className="max-w-[800px] mx-auto text-center text-white">
           <FadeUp>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
               Need Help with Insurance?
             </h2>
-            <p className="text-sky-100 mb-8 max-w-lg mx-auto">
+            <p className="text-white/85 mb-8 max-w-lg mx-auto">
               Our team can help you find the perfect insurance plan for your destination. 
               Free assistance for Nexsus students!
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-sky-600 px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
+                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
               >
                 Get Free Quote <Icon name="ArrowRight" size={14} />
               </Link>

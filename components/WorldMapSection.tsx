@@ -802,6 +802,7 @@ export default function WorldMapSection() {
             opacity: smoothOpacity,
             y: smoothY,
             transformOrigin: "center center",
+            border: "1px solid grey",
             // overflow: "hidden",
           }}
           className="will-change-transform bg-white"

@@ -83,7 +83,7 @@ export default function ToolsSection() {
               <Link href={tool.href} className="block h-full">
                 <div className="bg-white border border-gray-100 rounded-3xl p-8 premium-card hover:shadow-xl transition-all duration-300 h-full group flex flex-col">
                   <div
-                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
+                    className={`w-14 h-14 rounded-2xl bg-[#003975] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
                   >
                     <Icon
                       name={tool.icon}

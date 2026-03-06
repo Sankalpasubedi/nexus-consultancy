@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useHeader } from "@/app/contexts/HeaderContext";
+import { useBranch } from "@/app/contexts/BranchContext";
+import { branches, getBranchLinks, Branch } from "@/data/branches";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Icon, FlagIcon } from "@/lib/icons";
@@ -24,6 +26,18 @@ const studyAbroadLinks = [
   { label: "Documents Required", href: "/study-abroad/documents-required", icon: "FileText", description: "Complete document checklist" },
   { label: "Application Process", href: "/study-abroad/application-process", icon: "Map", description: "Step-by-step guide" },
   { label: "Study Abroad Guide", href: "/study-abroad/complete-guide", icon: "Compass", description: "Everything you need to know" },
+  { label: "Why Study Abroad", href: "/study-abroad/why-study-abroad", icon: "Sparkles", description: "Benefits of studying internationally" },
+];
+
+const studyInCountries = [
+  { label: "Australia", href: "/destinations/study-in-australia", flagCode: "au" },
+  { label: "Canada", href: "/destinations/study-in-canada", flagCode: "ca" },
+  { label: "USA", href: "/destinations/study-in-usa", flagCode: "us" },
+  { label: "UK", href: "/destinations/study-in-uk", flagCode: "gb" },
+  { label: "New Zealand", href: "/destinations/study-in-new-zealand", flagCode: "nz" },
+  { label: "Japan", href: "/destinations/study-in-japan", flagCode: "jp" },
+  { label: "South Korea", href: "/destinations/study-in-south-korea", flagCode: "kr" },
+  { label: "Europe", href: "/destinations/study-in-europe", flagCode: "eu" },
 ];
 
 const coursesLinks = [
@@ -64,15 +78,7 @@ const quickLinks = [
   { label: "News & Events", href: "/news" },
 ];
 
-const branchesLinks = [
-  { label: "All Branches", href: "/branches", icon: "MapPin", description: "Find our offices near you" },
-  { label: "Kathmandu - Dillibazar (Head Office)", href: "/branches/dillibazar", icon: "Building2", description: "Our main headquarters" },
-  { label: "Kathmandu - Baneshwor", href: "/branches/baneshwor", icon: "MapPin", description: "Baneshwor branch office" },
-  { label: "Kathmandu - Samakhusi", href: "/branches/samakhusi", icon: "MapPin", description: "Samakhusi branch office" },
-  { label: "Banepa", href: "/branches/banepa", icon: "MapPin", description: "Kavrepalanchok branch" },
-  { label: "Birtamode", href: "/branches/birtamode", icon: "MapPin", description: "Jhapa branch" },
-  { label: "Dhulabari", href: "/branches/dhulabari", icon: "MapPin", description: "Jhapa branch" },
-];
+// branchesLinks moved to data/branches.ts and imported via getBranchLinks()
 
 const studentEssentialsLinks = [
   { label: "Student Insurance", href: "/student-essentials/insurance", icon: "ShieldCheck", description: "Health & travel insurance plans" },
@@ -147,22 +153,14 @@ function MegaDropdown({
       {overviewHref ? (
         <Link
           href={overviewHref}
-          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
-            isTransparent && !scrolled
-              ? "text-white/90 hover:text-white"
-              : "text-slate-700 hover:text-[#003975]"
-          }`}
+          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}
         >
           {label}
           <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
         </Link>
       ) : (
         <button
-          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
-            isTransparent && !scrolled
-              ? "text-white/90 hover:text-white"
-              : "text-slate-700 hover:text-[#003975]"
-          }`}
+          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}
         >
           {label}
           <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -189,6 +187,79 @@ function MegaDropdown({
               )}
               <div className={`p-3 ${columns === 2 ? 'grid grid-cols-2 gap-1' : 'space-y-0.5'}`}>
                 {items.map((item) => (
+                  <Link
+                    key={item.href + item.label}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="flex items-start gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-200 group"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                      <Icon name={item.icon} size={15} className="text-slate-400 group-hover:text-[#003975]" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[13px] font-medium block">{item.label}</span>
+                      {item.description && (
+                        <span className="text-[11px] text-slate-400 block mt-0.5">{item.description}</span>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ─── Study Abroad Dropdown with Country Quick Links ── */
+
+function StudyAbroadDropdown({
+  isTransparent,
+  scrolled,
+}: {
+  isTransparent: boolean;
+  scrolled: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const enter = () => {
+    clearTimeout(timeout.current);
+    setOpen(true);
+  };
+  const leave = () => {
+    timeout.current = setTimeout(() => setOpen(false), 150);
+  };
+
+  return (
+    <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
+      <Link
+        href="/study-abroad"
+        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}>
+        Study Abroad
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </Link>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="absolute top-full left-0 pt-0 z-50"
+          >
+            <div className="w-10 h-[3px] bg-[#003975] rounded-full ml-6" />
+            <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden w-[320px] mt-0.5">
+              <div className="px-5 pt-4 pb-3 border-b border-gray-50 bg-gray-50/50">
+                <Link href="/study-abroad" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                  View All Study Abroad →
+                </Link>
+              </div>
+              <div className="p-3 space-y-0.5">
+                {studyAbroadLinks.map((item) => (
                   <Link
                     key={item.href + item.label}
                     href={item.href}
@@ -259,11 +330,7 @@ function DestinationsDropdown({
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
       <Link
         href="/destinations"
-        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 ${
-          isTransparent && !scrolled
-            ? "text-white/90 hover:text-white"
-            : "text-slate-700 hover:text-[#003975]"
-        }`}
+        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}
       >
         Destinations
         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -279,7 +346,7 @@ function DestinationsDropdown({
             className="absolute top-full left-0 pt-0 z-50"
           >
             <div className="w-10 h-[3px] bg-[#003975] rounded-full ml-6" />
-            <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden flex w-[700px] mt-0.5">
+            <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden flex w-[550px] mt-0.5">
               {/* Left: Countries */}
               <div className="flex-shrink-0 w-[300px]">
                 <div className="px-5 pt-4 pb-3 border-b border-gray-50 bg-gray-50/50">
@@ -319,7 +386,7 @@ function DestinationsDropdown({
                     <div className="px-5 pt-4 pb-2">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Explore {activeDest.label}</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-0.5 px-3 pb-3">
+                    <div className="grid grid-cols-1 gap-0.5 px-3 pb-3">
                       {destinationSubPages.map((sub) => (
                         <Link key={sub.slug} href={`${hoveredDest}/${sub.slug}`} onClick={() => setOpen(false)} className="px-3 py-2.5 text-[12px] text-slate-500 hover:text-[#003975] hover:bg-[#003975]/5 rounded-lg transition-colors duration-150 font-medium">
                           {sub.label}
@@ -400,6 +467,66 @@ function MobileAccordion({
           >
             <div className="pb-4 pl-2 space-y-0.5">
               {items.map((item) => (
+                <Link
+                  key={item.href + item.label}
+                  href={item.href}
+                  onClick={onClose}
+                  className="flex items-center gap-3 py-2.5 px-4 text-sm text-slate-600 rounded-xl hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <Icon name={item.icon} size={15} className="text-slate-400" />
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function MobileStudyAbroadAccordion({ onClose }: { onClose: () => void }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="border-b border-gray-100">
+      <div className="flex items-center justify-between py-4">
+        <Link
+          href="/study-abroad"
+          onClick={onClose}
+          className="text-slate-900 font-medium text-[15px]"
+        >
+          Study Abroad
+        </Link>
+        <button
+          onClick={() => setOpen(!open)}
+          className="p-1 -mr-1"
+          aria-label="Expand Study Abroad submenu"
+        >
+          <motion.svg
+            animate={{ rotate: open ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="w-4 h-4 text-slate-400"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </motion.svg>
+        </button>
+      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="overflow-hidden"
+          >
+            <div className="pb-4 pl-2 space-y-0.5">
+              {studyAbroadLinks.map((item) => (
                 <Link
                   key={item.href + item.label}
                   href={item.href}
@@ -600,8 +727,94 @@ function TopBarDropdown({
   );
 }
 
+/* ─── Find Us Branch Dropdown (with URL change) ─────────────────────────────────── */
+
+function FindUsBranchDropdown() {
+  const [open, setOpen] = useState(false);
+  const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const { selectBranch, currentBranch } = useBranch();
+  const branchLinks = getBranchLinks();
+
+  const enter = () => {
+    clearTimeout(timeout.current);
+    setOpen(true);
+  };
+  const leave = () => {
+    timeout.current = setTimeout(() => setOpen(false), 150);
+  };
+
+  const handleBranchClick = (slug: string | null) => {
+    setOpen(false);
+    if (slug) {
+      selectBranch(slug);
+    }
+  };
+
+  return (
+    <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
+      <button
+        className="text-white/70 hover:text-white text-xs lg:text-[13px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5 flex items-center gap-1"
+      >
+        Find Us
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 4 }}
+            transition={{ duration: 0.15 }}
+            className="absolute top-full left-0 pt-1 z-50"
+          >
+            <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden min-w-[300px]">
+              <div className="px-4 pt-3 pb-2 border-b border-gray-50 bg-gray-50/50">
+                <Link href="/branches" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                  View All →
+                </Link>
+              </div>
+              <div className="p-2 space-y-0.5">
+                {branchLinks.slice(1).map((item) => (
+                  <button
+                    key={item.href + item.label}
+                    onClick={() => handleBranchClick(item.slug)}
+                    className={`w-full flex items-start gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 group text-left ${
+                      currentBranch.slug === item.slug 
+                        ? "bg-[#003975]/10 text-[#003975]" 
+                        : "text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975]"
+                    }`}
+                  >
+                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                      currentBranch.slug === item.slug
+                        ? "bg-[#003975]/20"
+                        : "bg-gray-100 group-hover:bg-[#003975]/10"
+                    }`}>
+                      <Icon name={item.icon} size={13} className={currentBranch.slug === item.slug ? "text-[#003975]" : "text-slate-400 group-hover:text-[#003975]"} />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-[12px] font-medium block">{item.label}</span>
+                      {item.description && (
+                        <span className="text-[10px] text-slate-400 block mt-0.5">{item.description}</span>
+                      )}
+                    </div>
+                    {currentBranch.slug === item.slug && (
+                      <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#003975] mt-1.5" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Header() {
   const { showSidebar } = useHeader();
+  const { currentBranch, selectBranch } = useBranch();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -658,11 +871,7 @@ export default function Header() {
                   <span className="w-px h-3 bg-white/15 mx-0.5" />
                 </span>
               ))}
-              <TopBarDropdown
-                label="Find Us"
-                items={branchesLinks}
-                overviewHref="/branches"
-              />
+              <FindUsBranchDropdown />
               <span className="w-px h-3 bg-white/15 mx-0.5" />
               <TopBarDropdown
                 label="Student Essentials"
@@ -670,17 +879,17 @@ export default function Header() {
               />
             </div>
 
-            {/* Right: Contact info */}
+            {/* Right: Contact info (dynamic based on selected branch) */}
             <div className="flex items-center gap-3">
               <a
-                href="tel:+97714123456"
+                href={`tel:${currentBranch.phone.replace(/\s/g, '')}`}
                 className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs lg:text-[13px] transition-colors duration-200 px-2 py-1 rounded-full border border-white/10 hover:border-white/25 hover:bg-white/5"
               >
                 <Phone size={12} strokeWidth={2.5} />
-                <span className="font-medium">+977 1 4123456</span>
+                <span className="font-medium">{currentBranch.phone}</span>
               </a>
               <a
-                href="https://wa.me/9779841000000"
+                href={`https://wa.me/${currentBranch.whatsapp.replace(/[^0-9]/g, '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-white/70 hover:text-white text-xs lg:text-[13px] transition-colors duration-200 px-2 py-1 rounded-full border border-white/10 hover:border-white/25 hover:bg-white/5"
@@ -690,23 +899,23 @@ export default function Header() {
               </a>
               <span className="w-px h-3.5 bg-white/15" />
               <div className="flex items-center gap-2">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
+                <a href={currentBranch.socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
                   <FacebookIcon size={12} />
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
+                <a href={currentBranch.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
                   <InstagramIcon size={12} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
+                <a href={currentBranch.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
                   <LinkedInIcon size={12} />
                 </a>
-                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
+                <a href={currentBranch.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors duration-200">
                   <TikTokIcon size={12} />
                 </a>
               </div>
               <span className="w-px h-3.5 bg-white/15" />
               <div className="flex items-center gap-1.5 text-white/70 text-xs lg:text-[13px]">
                 <FlagIcon code="np" size={14} />
-                <span className="font-medium">Nepal</span>
+                <span className="font-medium">{currentBranch.shortName}</span>
               </div>
             </div>
           </div>
@@ -720,26 +929,24 @@ export default function Header() {
         <div className="relative bg-white/95 backdrop-blur-md px-4 sm:px-6 lg:px-8 w-full">
           <div className="flex items-center justify-between h-[62px] lg:h-[66px] w-full">
               {/* Logo */}
-              <Link href="/" className="flex items-center shrink-0 group">
+              <Link href="/" className="flex items-center gap-3 shrink-0 group">
                 <Image
                   src="/logo.png"
-                  alt="Nexsus Educational Consultancy"
-                  width={160}
-                  height={48}
-                  className="h-10 w-auto object-contain"
+                  alt="Nexsus Educational Consultancy and Immigration Services"
+                  width={56}
+                  height={56}
+                  className="h-14 w-auto"
                   priority
                 />
+                <div className="hidden min-[700px]:block min-[1025px]:hidden min-[1112px]:block">
+                  <span className="font-bold text-xl text-[#003975]">Nexsus</span>
+                  <span className="text-[#5a6a7a] text-xs block leading-tight">Educational Consultancy &amp; Immigration Services</span>
+                </div>
               </Link>
 
               {/* Desktop Navigation */}
               <nav className="hidden lg:flex items-center gap-6">
-                <MegaDropdown
-                  label="Study Abroad"
-                  items={studyAbroadLinks}
-                  isTransparent={isTransparent}
-                  scrolled={scrolled}
-                  overviewHref="/study-abroad"
-                />
+                <StudyAbroadDropdown isTransparent={isTransparent} scrolled={scrolled} />
                 <DestinationsDropdown isTransparent={isTransparent} scrolled={scrolled} />
                 <MegaDropdown
                   label="Courses"
@@ -758,11 +965,7 @@ export default function Header() {
                 />
                 <Link
                   href="/contact"
-                  className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 py-5 ${
-                    isTransparent && !scrolled
-                      ? "text-white/90 hover:text-white"
-                      : "text-slate-700 hover:text-[#003975]"
-                  }`}
+                  className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 py-5 text-slate-700 hover:text-[#003975]`}
                 >
                   Contact
                 </Link>
@@ -772,11 +975,7 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/contact"
-                  className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-bold tracking-wide transition-all duration-300 ${
-                    isTransparent && !scrolled
-                      ? "bg-white text-[#003975] hover:bg-white/90 shadow-lg shadow-white/10"
-                      : "bg-[#003975] text-white hover:bg-[#002a5c] shadow-md shadow-[#003975]/15"
-                  }`}
+                  className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-bold tracking-wide transition-all duration-300 bg-[#003975] text-white hover:bg-[#002a5c] shadow-md shadow-[#003975]/15`}
                 >
                   Free Consultation
                   <Icon name="ArrowRight" size={13} />
@@ -823,13 +1022,17 @@ export default function Header() {
             >
               <div className="pt-[80px] pb-8 px-6">
                 <div className="mb-6">
-                  <Link href="/" onClick={closeMobile} className="flex items-center">
-                    <Image src="/logo.png" alt="Nexsus Educational Consultancy" width={160} height={48} className="h-10 w-auto object-contain" />
+                  <Link href="/" onClick={closeMobile} className="flex items-center gap-3">
+                    <Image src="/logo.png" alt="Nexsus Educational Consultancy and Immigration Services" width={56} height={56} className="h-14 w-auto" />
+                    <div>
+                      <span className="font-bold text-xl text-[#003975]">Nexsus</span>
+                      <span className="text-[#5a6a7a] text-xs block leading-tight">Educational Consultancy &amp; Immigration Services</span>
+                    </div>
                   </Link>
                 </div>
                 <div className="space-y-0">
                   <Link href="/about" onClick={closeMobile} className="block py-4 text-slate-900 font-medium text-[15px] border-b border-gray-100">About</Link>
-                  <MobileAccordion label="Study Abroad" items={studyAbroadLinks} overviewHref="/study-abroad" onClose={closeMobile} />
+                  <MobileStudyAbroadAccordion onClose={closeMobile} />
                   <MobileAccordion label="Services" items={servicesLinks} overviewHref="/services" onClose={closeMobile} />
                   <MobileAccordion label="Courses" items={coursesLinks} overviewHref="/courses" onClose={closeMobile} />
                   <MobileDestinationsAccordion onClose={closeMobile} />
@@ -870,16 +1073,27 @@ export default function Header() {
                           {/* Find Us */}
                           <div className="space-y-1 mb-4">
                             <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-2 mb-2">Find Us</p>
-                            {branchesLinks.map((item) => (
-                              <Link
+                            {getBranchLinks().map((item) => (
+                              <button
                                 key={item.href}
-                                href={item.href}
-                                onClick={closeMobile}
-                                className="flex items-center gap-3 py-2.5 px-4 text-sm text-slate-600 rounded-xl hover:bg-gray-50 transition-colors duration-200"
+                                onClick={() => {
+                                  if (item.slug) {
+                                    selectBranch(item.slug);
+                                  }
+                                  closeMobile();
+                                }}
+                                className={`w-full flex items-center gap-3 py-2.5 px-4 text-sm rounded-xl transition-colors duration-200 ${
+                                  currentBranch.slug === item.slug 
+                                    ? "bg-[#003975]/10 text-[#003975]" 
+                                    : "text-slate-600 hover:bg-gray-50"
+                                }`}
                               >
-                                <Icon name={item.icon} size={15} className="text-slate-400" />
-                                {item.label}
-                              </Link>
+                                <Icon name={item.icon} size={15} className={currentBranch.slug === item.slug ? "text-[#003975]" : "text-slate-400"} />
+                                <span className="flex-1 text-left">{item.label}</span>
+                                {currentBranch.slug === item.slug && (
+                                  <span className="w-2 h-2 rounded-full bg-[#003975]" />
+                                )}
+                              </button>
                             ))}
                           </div>
                           
@@ -910,37 +1124,37 @@ export default function Header() {
                 </div>
                 <div className="mt-8 pt-6 border-t border-gray-100">
                   <div className="flex items-center gap-4 mb-4">
-                    <a href="tel:+97714123456" className="flex items-center gap-2 text-slate-600 text-sm">
-                      <Phone size={14} className="text-slate-400" />+977 1 4123456
+                    <a href={`tel:${currentBranch.phone.replace(/\s/g, '')}`} className="flex items-center gap-2 text-slate-600 text-sm">
+                      <Phone size={14} className="text-slate-400" />{currentBranch.phone}
                     </a>
                   </div>
                   <div className="flex items-center gap-4 mb-4">
-                    <a href="https://wa.me/9779841000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-600 text-sm">
+                    <a href={`https://wa.me/${currentBranch.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-600 text-sm">
                       <MessageCircle size={14} className="text-slate-400" />WhatsApp
                     </a>
                   </div>
                   <div className="flex items-center gap-4 mb-6">
-                    <a href="mailto:info@nexsuseducation.com" className="flex items-center gap-2 text-slate-600 text-sm">
-                      <Mail size={14} className="text-slate-400" />info@nexsuseducation.com
+                    <a href={`mailto:${currentBranch.email}`} className="flex items-center gap-2 text-slate-600 text-sm">
+                      <Mail size={14} className="text-slate-400" />{currentBranch.email}
                     </a>
                   </div>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="flex items-center gap-2 text-slate-600 text-sm">
                       <FlagIcon code="np" size={16} />
-                      <span>Nepal</span>
+                      <span>{currentBranch.shortName}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
+                    <a href={currentBranch.socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
                       <FacebookIcon size={15} />
                     </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
+                    <a href={currentBranch.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
                       <InstagramIcon size={15} />
                     </a>
-                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
+                    <a href={currentBranch.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
                       <LinkedInIcon size={15} />
                     </a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
+                    <a href={currentBranch.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-slate-500 hover:bg-gray-200 hover:text-slate-700 transition-colors">
                       <TikTokIcon size={15} />
                     </a>
                   </div>

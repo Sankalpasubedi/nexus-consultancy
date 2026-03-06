@@ -5,52 +5,209 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   FadeUp,
-  StaggerContainer,
-  StaggerItem,
-  HoverCard,
 } from "@/lib/animations";
 import { useHeader } from "@/app/contexts/HeaderContext";
-import { useEffect } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Icon } from "@/lib/icons";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const links = [
+  {
+    icon: "Sparkles",
+    title: "Why Study Abroad",
+    description: "Discover the life-changing benefits of international education.",
+    href: "/study-abroad/why-study-abroad",
+    image: "/services/NEX-_-7.jpg",
+    resources: 1,
+  },
   {
     icon: "Globe",
     title: "Destinations",
     description: "Compare countries side-by-side on costs, education quality, work opportunities, and more.",
     href: "/study-abroad/compare-destinations",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-32.jpg",
+    resources: 8,
   },
   {
     icon: "FileText",
     title: "Documents Required",
     description: "Complete checklist of every document you need for applications and visa.",
     href: "/study-abroad/documents-required",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-42.jpg",
+    resources: 1,
   },
   {
     icon: "Map",
     title: "Application Process",
     description: "Step-by-step guide from research to arrival, with timelines and tips.",
     href: "/study-abroad/application-process",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-3.jpg",
+    resources: 1,
   },
   {
     icon: "Compass",
     title: "Study Abroad Guide",
     description: "Your complete roadmap to studying overseas — from planning to departure.",
     href: "/study-abroad/complete-guide",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-12.jpg",
+    resources: 1,
   },
 ];
 
+const infiniteLinks = [...links, ...links];
+
 export default function StudyAbroadPage() {
   const { setShowSidebar } = useHeader();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const isHovering = useRef(false);
+  const isPaused = useRef(false);
+
+  // Drag state
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const hasDragged = useRef(false);
 
   useEffect(() => {
     setShowSidebar(true);
     return () => setShowSidebar(true);
   }, [setShowSidebar]);
+
+  const updateState = useCallback(() => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+    const max = scrollWidth - clientWidth;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < max - 5);
+  }, []);
+
+  // Infinite auto-scroll
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    let animationId: number;
+    const scrollSpeed = 0.5;
+
+    const smoothScroll = () => {
+      if (isPaused.current || isDragging.current || isHovering.current) {
+        animationId = requestAnimationFrame(smoothScroll);
+        return;
+      }
+
+      const { scrollLeft, scrollWidth, clientWidth } = scrollEl;
+      const half = (scrollWidth - clientWidth) / 2;
+
+      if (scrollLeft >= half + clientWidth) {
+        scrollEl.scrollLeft = scrollLeft - half;
+      } else {
+        scrollEl.scrollLeft += scrollSpeed;
+      }
+
+      animationId = requestAnimationFrame(smoothScroll);
+    };
+
+    animationId = requestAnimationFrame(smoothScroll);
+    return () => cancelAnimationFrame(animationId);
+  }, []);
+
+  const handleScrollLeft = () => {
+    if (!scrollRef.current) return;
+    isPaused.current = true;
+    scrollRef.current.scrollBy({ left: -400, behavior: "smooth" });
+    setTimeout(() => { isPaused.current = false; }, 600);
+  };
+
+  const handleScrollRight = () => {
+    if (!scrollRef.current) return;
+    isPaused.current = true;
+    scrollRef.current.scrollBy({ left: 400, behavior: "smooth" });
+    setTimeout(() => { isPaused.current = false; }, 600);
+  };
+
+  const handleMouseEnter = useCallback(() => {
+    isHovering.current = true;
+    isPaused.current = true;
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    isHovering.current = false;
+    isPaused.current = false;
+    if (isDragging.current) {
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    }
+  }, []);
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    dragStartX.current = e.clientX;
+    dragScrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.style.cursor = "grabbing";
+    scrollRef.current.style.userSelect = "none";
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current || !scrollRef.current) return;
+      const dx = e.clientX - dragStartX.current;
+      if (Math.abs(dx) > 3) hasDragged.current = true;
+      scrollRef.current.scrollLeft = dragScrollLeft.current - dx;
+    };
+
+    const handleMouseUp = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      if (scrollRef.current) {
+        scrollRef.current.style.cursor = "";
+        scrollRef.current.style.userSelect = "";
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
+
+  const handleCardClick = useCallback((e: React.MouseEvent) => {
+    if (hasDragged.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, []);
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    updateState();
+    scrollEl.addEventListener("scroll", updateState, { passive: true });
+    window.addEventListener("resize", updateState);
+
+    const handleWheelEvent = (e: WheelEvent) => {
+      if (!isHovering.current && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        e.preventDefault();
+      }
+    };
+    scrollEl.addEventListener("wheel", handleWheelEvent, { passive: false });
+
+    return () => {
+      scrollEl.removeEventListener("scroll", updateState);
+      window.removeEventListener("resize", updateState);
+      scrollEl.removeEventListener("wheel", handleWheelEvent);
+    };
+  }, [updateState]);
 
   return (
     <main className="pt-20">
@@ -118,28 +275,125 @@ export default function StudyAbroadPage() {
 
       {/* Links */}
       <section className="py-24 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <StaggerContainer className="grid md:grid-cols-3 gap-8">
-            {links.map((l) => (
-              <StaggerItem key={l.title}>
-                <HoverCard>
-                  <Link href={l.href} className="block h-full">
-                    <div className="bg-white rounded-3xl p-8 border border-gray-100 h-full group relative overflow-hidden">
-                      <div className="absolute -top-4 -right-4 w-24 h-24 bg-slate-900 opacity-5 blur-2xl group-hover:opacity-10 transition rounded-full" />
-                      <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center mb-6 shadow-lg">
-                        <Icon name={l.icon} size={28} className="text-white" />
+        <div className="mx-auto">
+          <FadeUp>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                Explore Study Abroad Resources
+              </h2>
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                Everything you need to plan your international education journey
+              </p>
+            </div>
+          </FadeUp>
+
+          {/* Infinite Scroll Carousel */}
+          <div className="relative py-5">
+            <div
+              ref={scrollRef}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseEnter={handleMouseEnter}
+              className="flex gap-5 px-6 md:px-12 py-6 overflow-x-auto overflow-y-visible scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none"
+              style={{
+                WebkitOverflowScrolling: "touch",
+                overscrollBehaviorX: "contain",
+                touchAction: "pan-x pinch-zoom",
+              }}
+            >
+              {infiniteLinks.map((l, idx) => (
+                <motion.div
+                  key={`${l.title}-${idx}`}
+                  aria-hidden={idx >= links.length}
+                  className="flex-shrink-0 w-[260px] md:w-[372px] h-[480px] md:h-[680px]"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.03 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    delay: (idx % links.length) * 0.06,
+                    duration: 0.5,
+                    ease: [0.23, 1, 0.32, 1],
+                  }}
+                >
+                  <Link href={l.href} draggable={false} onClick={handleCardClick} className="block h-full">
+                    <div className="relative rounded-[28px] overflow-hidden cursor-pointer h-full">
+                      {/* Full-bleed Image */}
+                      <Image
+                        src={l.image}
+                        alt={l.title}
+                        fill
+                        className="object-cover"
+                        draggable={false}
+                      />
+
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
+
+                      {/* Category tag */}
+                      <div className="absolute top-5 left-5 z-10">
+                        <span className="text-xs font-medium text-white/80">Study Abroad</span>
                       </div>
-                      <h3 className="text-xl font-semibold text-slate-900 mb-3">{l.title}</h3>
-                      <p className="text-slate-500 text-sm leading-relaxed mb-6">{l.description}</p>
-                      <span className="text-[#003975] text-sm font-medium group-hover:gap-2 transition-all inline-flex items-center gap-1">
-                        Explore →
-                      </span>
+
+                      {/* Programs badge */}
+                      <div className="absolute top-5 right-5 z-10">
+                        <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                          {l.resources}+ Resource{l.resources > 1 ? "s" : ""}
+                        </span>
+                      </div>
+
+                      {/* Title section */}
+                      <div className="absolute top-12 left-5 right-5 z-10">
+                        <h3 className="text-lg md:text-2xl font-bold text-white leading-tight mt-4">
+                          {l.title}
+                        </h3>
+                      </div>
+
+                      {/* Bottom description */}
+                      <div className="absolute bottom-5 left-5 right-5 z-10">
+                        <p className="text-sm text-white/70 line-clamp-2 mb-3">{l.description}</p>
+                        <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                          <Icon name="Plus" size={18} className="text-white" />
+                        </div>
+                      </div>
                     </div>
                   </Link>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-end gap-3 px-6 md:px-12 mt-6">
+              <button
+                onClick={handleScrollLeft}
+                onMouseEnter={() => { isPaused.current = true; }}
+                onMouseLeave={() => { isPaused.current = false; }}
+                disabled={!canScrollLeft}
+                className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
+                  canScrollLeft
+                    ? "border-gray-300 text-slate-600 hover:bg-gray-50 hover:border-gray-400"
+                    : "border-gray-200 text-gray-300 cursor-not-allowed"
+                }`}
+                aria-label="Scroll left"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={handleScrollRight}
+                onMouseEnter={() => { isPaused.current = true; }}
+                onMouseLeave={() => { isPaused.current = false; }}
+                disabled={!canScrollRight}
+                className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
+                  canScrollRight
+                    ? "border-gray-300 text-slate-600 hover:bg-gray-50 hover:border-gray-400"
+                    : "border-gray-200 text-gray-300 cursor-not-allowed"
+                }`}
+                aria-label="Scroll right"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

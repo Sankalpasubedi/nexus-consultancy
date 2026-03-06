@@ -1,16 +1,140 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FadeUp } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
 
+/* ─── Animated Plane on SVG Path with Loop ─── */
+function AnimatedPlaneOnPath({ 
+  pathId,
+  delay, 
+  duration,
+}: { 
+  pathId: string;
+  delay: number; 
+  duration: number; 
+}) {
+  const gRef = useRef<SVGGElement>(null);
+  const rafRef = useRef<number>(0);
+  const startTimeRef = useRef<number>(0);
+  const pathRef = useRef<SVGPathElement | null>(null);
+  const pathLengthRef = useRef<number>(0);
+
+  useEffect(() => {
+    const el = document.getElementById(pathId);
+    if (el && el instanceof SVGPathElement) {
+      pathRef.current = el;
+      pathLengthRef.current = el.getTotalLength();
+    }
+  }, [pathId]);
+
+  useEffect(() => {
+    if (!gRef.current) return;
+
+    const animate = (timestamp: number) => {
+      if (!startTimeRef.current) startTimeRef.current = timestamp;
+      if (!pathRef.current || pathLengthRef.current === 0) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
+      const elapsed = timestamp - startTimeRef.current;
+      const progress = ((elapsed + delay * 1000) % (duration * 1000)) / (duration * 1000);
+      
+      const length = progress * pathLengthRef.current;
+      const point = pathRef.current.getPointAtLength(length);
+      
+      const delta = 0.5;
+      const p1 = pathRef.current.getPointAtLength(Math.max(0, length - delta));
+      const p2 = pathRef.current.getPointAtLength(Math.min(pathLengthRef.current, length + delta));
+      const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x) * (180 / Math.PI);
+
+      if (gRef.current) {
+        gRef.current.setAttribute(
+          "transform",
+          `translate(${point.x}, ${point.y}) rotate(${angle + 90})`
+        );
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      startTimeRef.current = 0;
+    };
+  }, [pathId, delay, duration]);
+
+  return (
+    <g ref={gRef} opacity={0.7}>
+      <g transform="scale(0.5) translate(-12, -12)">
+        <path
+          d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
+          fill="#003975"
+        />
+      </g>
+    </g>
+  );
+}
+
+/* ─── Flight Lines Background with Loops ─── */
+function FlightLinesBackground() {
+  const paths = useMemo(() => [
+    {
+      id: "services-flight-path-1",
+      d: "M -50 200 Q 100 200 155 150 A 45 45 0 1 1 150 155 Q 220 95 450 80 Q 650 65 850 100",
+      delay: 0,
+      duration: 14,
+    },
+    {
+      id: "services-flight-path-2",
+      d: "M 900 420 Q 780 450 680 480 A 50 50 0 1 1 681 480 Q 550 510 300 500 Q 100 490 -50 510",
+      delay: 0.5,
+      duration: 15,
+    },
+  ], []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
+      <svg 
+        viewBox="0 0 800 600" 
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+      >
+        {paths.map((path) => (
+          <path
+            key={path.id}
+            id={path.id}
+            d={path.d}
+            fill="none"
+            stroke="#003975"
+            strokeWidth={1.5}
+            strokeDasharray="10 8"
+            opacity={0.15}
+          />
+        ))}
+        
+        {paths.map((path) => (
+          <AnimatedPlaneOnPath
+            key={`plane-${path.id}`}
+            pathId={path.id}
+            delay={path.delay}
+            duration={path.duration}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 const services = [
   {
     id: 1,
     title: "Career Counseling",
+    slug: "career-counseling",
     description:
       "Not sure where to start? Our experienced counselors sit down with you, understand your goals, budget, and academic background, then map out a personalized study plan that makes sense for your future.",
     icon: "Compass",
@@ -20,6 +144,7 @@ const services = [
   {
     id: 2,
     title: "University Application",
+    slug: "sop-writing-assistance",
     description:
       "From crafting your Statement of Purpose to organizing transcripts and recommendation letters, we handle the paperwork so you can focus on preparing for your new chapter abroad.",
     icon: "PenLine",
@@ -29,6 +154,7 @@ const services = [
   {
     id: 3,
     title: "Visa Processing",
+    slug: "student-visa-assistance",
     description:
       "With a 98% visa success rate, our visa team knows exactly what embassies look for. We prepare your documents, conduct mock interviews, and guide you every step of the way.",
     icon: "ShieldCheck",
@@ -38,6 +164,7 @@ const services = [
   {
     id: 4,
     title: "Test Preparation",
+    slug: "test-preparation",
     description:
       "Get exam-ready with our structured IELTS, PTE, TOEFL, and GRE/GMAT prep courses. Small batches, experienced instructors, and real practice tests to get the score you need.",
     icon: "BookOpen",
@@ -47,6 +174,7 @@ const services = [
   {
     id: 5,
     title: "Scholarship Guidance",
+    slug: "scholarship-guidance",
     description:
       "Education abroad doesn't have to break the bank. We help you find and apply for scholarships that match your profile. Our students have secured over NPR 5 Billion in scholarships collectively.",
     icon: "Trophy",
@@ -56,6 +184,7 @@ const services = [
   {
     id: 6,
     title: "Pre-Departure Support",
+    slug: "pre-departure-support",
     description:
       "You got your visa, now what? We help with accommodation bookings, airport pickup arrangements, cultural orientation, and everything you need to feel confident before you fly.",
     icon: "Plane",
@@ -136,8 +265,15 @@ export default function ServicesSection() {
   }, [handleScroll]);
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-32 px-4 md:px-6 lg:px-8 bg-white border-t border-gray-200">
-      <div className="max-w-[1500px] mx-auto">
+    <section ref={sectionRef} className="relative py-16 md:py-32 px-4 md:px-6 lg:px-8 bg-white border-t border-gray-200">
+      {/* Sticky Flight Animation Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="sticky top-0 h-screen overflow-hidden" style={{ zIndex: 0 }}>
+          <FlightLinesBackground />
+        </div>
+      </div>
+      
+      <div className="max-w-[1500px] mx-auto relative z-10">
         <FadeUp>
           <div className="text-center mb-12 md:mb-20">
             <div className="inline-flex items-center gap-2 px-4 md:px-5 py-2 mb-4 md:mb-6 rounded-full bg-slate-50 text-slate-600 text-xs md:text-sm font-medium border border-gray-200/80 shadow-sm">
@@ -222,11 +358,12 @@ export default function ServicesSection() {
                         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                       >
                         {/* Card */}
-                        <motion.div
-                          className="group bg-gradient-to-br from-[#0052a3] via-[#003d7a] to-[#002d5e] rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer border border-white/10 shadow-2xl shadow-blue-900/30"
-                          whileHover={{ scale: 1.02, boxShadow: "0 35px 60px -15px rgba(0, 82, 163, 0.4)" }}
-                          transition={{ duration: 0.4, ease: "easeOut" }}
-                        >
+                        <Link href={`/services/${service.slug}`}>
+                          <motion.div
+                            className="group bg-gradient-to-br from-[#0052a3] via-[#003d7a] to-[#002d5e] rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer border border-white/10 shadow-2xl shadow-blue-900/30"
+                            whileHover={{ scale: 1.02, boxShadow: "0 35px 60px -15px rgba(0, 82, 163, 0.4)" }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                          >
                           <div className="flex flex-col md:flex-row md:items-stretch" style={{ minHeight: `${cardHeight}px` }}>
                             {/* Left Content */}
                             <div className="flex-1 p-6 md:p-10 lg:p-14 text-white flex flex-col justify-center gap-4 md:gap-6">
@@ -282,6 +419,7 @@ export default function ServicesSection() {
                             </div>
                           </div>
                         </motion.div>
+                        </Link>
                       </motion.div>
                     </motion.div>
                   </motion.div>

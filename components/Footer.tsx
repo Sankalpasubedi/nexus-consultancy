@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -10,6 +12,7 @@ import {
   Youtube,
   ArrowUpRight,
 } from "lucide-react";
+import { useBranch } from "@/app/contexts/BranchContext";
 
 const services = [
   { label: "Career Counseling", href: "/services/career-counseling" },
@@ -48,6 +51,8 @@ const socials = [
 ];
 
 export default function Footer() {
+  const { currentBranch } = useBranch();
+  
   return (
     <footer className="relative bg-gradient-to-b from-[#002a52] via-[#003468] to-[#004a8f] text-white">
       {/* Background decorative elements */}
@@ -65,7 +70,7 @@ export default function Footer() {
       <div className="relative z-10 px-4 pt-16 pb-0 sm:px-6 lg:px-8">
       <div >
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl bg-gradient-to-r from-[#003975] via-[#004a8f] to-[#00ab18] px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/15 border border-white/10">
+          <div className="rounded-3xl bg-[#003975] px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/15 border border-white/10">
             <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
               {/* Left content */}
               <div className="max-w-xl text-center lg:text-left">
@@ -133,7 +138,7 @@ export default function Footer() {
                   className="h-40 w-auto object-contain "
                 />
               </Link>
-              <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
+                <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
                 Nepal&apos;s trusted international education consultancy.
                 Guiding students toward global opportunities since 2010.
               </p>
@@ -222,9 +227,7 @@ export default function Footer() {
                     className="mt-0.5 shrink-0 text-[#00ab18]"
                   />
                   <span>
-                    Putalisadak, Kathmandu
-                    <br />
-                    Nepal
+                    {currentBranch.address}
                   </span>
                 </li>
                 <li className="flex gap-3">
@@ -233,10 +236,10 @@ export default function Footer() {
                     className="mt-0.5 shrink-0 text-[#00ab18]"
                   />
                   <a
-                    href="tel:+97714123456"
+                    href={`tel:${currentBranch.phone.replace(/\s/g, '')}`}
                     className="transition hover:text-white"
                   >
-                    +977 1 4123456
+                    {currentBranch.phone}
                   </a>
                 </li>
                 <li className="flex gap-3">
@@ -245,13 +248,13 @@ export default function Footer() {
                     className="mt-0.5 shrink-0 text-[#00ab18]"
                   />
                   <a
-                    href="mailto:info@nexsuseducation.com"
+                    href={`mailto:${currentBranch.email}`}
                     className="transition hover:text-white"
                     style={{
                       overflowWrap: "anywhere",
                     }}
                   >
-                    info@nexsuseducation.com
+                    {currentBranch.email}
                   </a>
                 </li>
                 <li className="mt-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-3">
@@ -259,7 +262,7 @@ export default function Footer() {
                     Working Hours
                   </p>
                   <p className="mt-1 text-sm text-slate-300">
-                    Sun &ndash; Fri: 10 AM &ndash; 6 PM
+                    {currentBranch.openingHours}
                   </p>
                 </li>
               </ul>

@@ -6,67 +6,18 @@ import {
   FadeUp,
   FadeLeft,
   FadeRight,
-  StaggerContainer,
-  StaggerItem,
   HoverCard,
 } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
 import ContactBranchExplorer from "@/components/ContactBranchExplorer";
 import { useHeader } from "@/app/contexts/HeaderContext";
+import { useBranch } from "@/app/contexts/BranchContext";
+import { branches as allBranches } from "@/data/branches";
 import { useEffect, useState } from "react";
 
 /* ─── Data ─────────────────────────────────────────── */
 
-const branches = [
-  {
-    name: "Head Office",
-    city: "Dillibazar, Kathmandu",
-    address: "Dillibazar, Kathmandu-44600, Nepal",
-    phone1: "01-4519495",
-    phone2: "9851032197",
-    isHead: true,
-  },
-  {
-    name: "Baneshwor Branch",
-    city: "Baneshwor, Kathmandu",
-    address: "Baneshwor, Kathmandu, Nepal",
-    phone1: "01-5922227",
-    phone2: "9841830127",
-    isHead: false,
-  },
-  {
-    name: "Samakhusi Branch",
-    city: "Samakhusi, Kathmandu",
-    address: "Samakhusi, Kathmandu, Nepal",
-    phone1: "01-4971971",
-    phone2: "9820291960",
-    isHead: false,
-  },
-  {
-    name: "Banepa Branch",
-    city: "Banepa, Kavrepalanchok",
-    address: "Banepa, Kavrepalanchok, Nepal",
-    phone1: "01-1665859",
-    phone2: "9860824272",
-    isHead: false,
-  },
-  {
-    name: "Birtamode Branch",
-    city: "Birtamode, Jhapa",
-    address: "Birtamode, Jhapa, Nepal",
-    phone1: "02-3591692",
-    phone2: "9843649305",
-    isHead: false,
-  },
-  {
-    name: "Dhulabari Branch",
-    city: "Dhulabari, Jhapa",
-    address: "Dhulabari, Jhapa, Nepal",
-    phone1: "02-3591127",
-    phone2: "9801455861",
-    isHead: false,
-  },
-];
+// Branches imported from @/data/branches
 
 const faqs = [
   {
@@ -102,7 +53,11 @@ const consultationExpects = [
 
 export default function ContactPage() {
   const { setShowSidebar } = useHeader();
+  const { currentBranch, selectBranch } = useBranch();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Other branches (not currently selected)
+  const otherBranches = allBranches.filter(b => b.slug !== currentBranch.slug);
 
   useEffect(() => {
     setShowSidebar(false);
@@ -411,55 +366,177 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Nationwide Presence */}
-      <section className="py-24 px-6 bg-gray-50">
+      {/* Current Branch Details */}
+      <section className="py-16 px-6 bg-white">
         <div className="max-w-[1440px] mx-auto">
           <FadeUp>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm">
-                <Icon name="MapPin" size={20} /> Nationwide Presence
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-[#003975]/10 text-[#003975] text-sm font-medium">
+                <Icon name="Building2" size={20} /> Currently Viewing
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Visit Our Branches</h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                We have branches across Nepal to serve you. Walk in for a free consultation at any of our offices.
-              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">{currentBranch.name}</h2>
+              <p className="text-lg text-slate-500">{currentBranch.description}</p>
             </div>
           </FadeUp>
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {branches.map((b) => (
-              <StaggerItem key={b.name}>
-                <HoverCard>
-                  <div className={`rounded-2xl p-7 h-full border ${
-                    b.isHead
-                      ? "bg-[#003975] text-white border-[#003975]"
-                      : "bg-white text-slate-900 border-gray-100"
-                  }`}>
-                    {b.isHead && (
-                      <span className="inline-block px-3 py-1 mb-3 rounded-full bg-white/20 text-[11px] font-semibold tracking-wide uppercase">
+          
+          {/* Current Branch Card */}
+          <FadeUp delay={0.1}>
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#003975] to-[#002550] rounded-3xl p-8 md:p-10 text-white shadow-2xl">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    {currentBranch.isHeadOffice && (
+                      <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-[11px] font-semibold tracking-wide uppercase">
                         Head Office
                       </span>
                     )}
-                    <h3 className="text-lg font-semibold mb-1">{b.name}</h3>
-                    <p className={`text-sm mb-4 ${b.isHead ? "text-blue-200" : "text-slate-400"}`}>{b.city}</p>
-                    <div className={`space-y-2.5 text-sm ${b.isHead ? "text-blue-100/80" : "text-slate-500"}`}>
-                      <div className="flex items-start gap-2.5">
-                        <span className="mt-0.5"><Icon name="MapPin" size={14} /></span>
-                        <span>{b.address}</span>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                        <Icon name="MapPin" size={18} className="text-white/80" />
                       </div>
-                      <div className="flex items-center gap-2.5">
-                        <span><Icon name="Phone" size={14} /></span>
-                        <span>{b.phone1}</span>
+                      <div>
+                        <p className="text-sm text-blue-200/70 mb-1">Address</p>
+                        <p className="text-white font-medium">{currentBranch.address}</p>
                       </div>
-                      <div className="flex items-center gap-2.5">
-                        <span><Icon name="Phone" size={14} /></span>
-                        <span>{b.phone2}</span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                        <Icon name="Phone" size={18} className="text-white/80" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-blue-200/70 mb-1">Phone Numbers</p>
+                        <p className="text-white font-medium">{currentBranch.phone}</p>
+                        <p className="text-white/80 text-sm">{currentBranch.phone2}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                        <Icon name="Mail" size={18} className="text-white/80" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-blue-200/70 mb-1">Email</p>
+                        <p className="text-white font-medium">{currentBranch.email}</p>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                        <Icon name="Clock" size={18} className="text-white/80" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-blue-200/70 mb-1">Opening Hours</p>
+                        <p className="text-white font-medium">{currentBranch.openingHours}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                        <Icon name="MessageCircle" size={18} className="text-white/80" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-blue-200/70 mb-1">WhatsApp</p>
+                        <a 
+                          href={`https://wa.me/${currentBranch.whatsapp.replace(/[^0-9]/g, '')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white font-medium hover:underline"
+                        >
+                          {currentBranch.whatsapp}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <motion.a
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      href={`tel:${currentBranch.phone.replace(/\s/g, '')}`}
+                      className="inline-flex items-center gap-2 bg-white text-[#003975] px-6 py-3 rounded-xl font-semibold text-sm"
+                    >
+                      <Icon name="Phone" size={16} /> Call Now
+                    </motion.a>
+                    <motion.a
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      href={currentBranch.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white/10 text-white px-6 py-3 rounded-xl font-semibold text-sm border border-white/20"
+                    >
+                      <Icon name="MapPin" size={16} /> Get Directions
+                    </motion.a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* Other Branches */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-[1440px] mx-auto">
+          <FadeUp>
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm">
+                <Icon name="MapPin" size={20} /> More Locations
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Visit Our Other Branches</h2>
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                Click on any branch to view its details and make it your preferred location.
+              </p>
+            </div>
+          </FadeUp>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {otherBranches.map((branch) => (
+              <motion.div
+                key={branch.slug}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <HoverCard>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => selectBranch(branch.slug)}
+                    className={`w-full text-left rounded-2xl p-7 h-full border transition-all duration-200 ${
+                      branch.isHeadOffice
+                        ? "bg-[#003975]/10 text-slate-900 border-[#003975]/20 hover:border-[#003975]/40"
+                        : "bg-white text-slate-900 border-gray-100 hover:border-[#003975]/30"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      {branch.isHeadOffice && (
+                        <span className="inline-block px-3 py-1 rounded-full bg-[#003975]/20 text-[#003975] text-[11px] font-semibold tracking-wide uppercase">
+                          Head Office
+                        </span>
+                      )}
+                      <div className="ml-auto w-8 h-8 rounded-full bg-[#003975]/10 flex items-center justify-center">
+                        <Icon name="ArrowRight" size={14} className="text-[#003975]" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-1">{branch.name}</h3>
+                    <p className="text-sm text-slate-400 mb-4">{branch.city}, {branch.district}</p>
+                    <div className="space-y-2 text-sm text-slate-500">
+                      <div className="flex items-center gap-2.5">
+                        <Icon name="Phone" size={14} className="text-slate-400" />
+                        <span>{branch.phone}</span>
+                      </div>
+                      <div className="flex items-center gap-2.5">
+                        <Icon name="MapPin" size={14} className="text-slate-400" />
+                        <span className="line-clamp-1">{branch.address}</span>
+                      </div>
+                    </div>
+                  </motion.button>
                 </HoverCard>
-              </StaggerItem>
+              </motion.div>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
@@ -522,15 +599,15 @@ export default function ContactPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-4">Still Have Questions?</h2>
             <p className="text-blue-100 mb-8">
-              Our team is available Monday to Saturday, 9 AM - 6 PM. Reach out anytime.
+              Our {currentBranch.shortName} team is available Monday to Saturday, 9 AM - 6 PM. Reach out anytime.
             </p>
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="tel:+97714123456"
+              href={`tel:${currentBranch.phone.replace(/\s/g, '')}`}
               className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg"
             >
-              <Icon name="Phone" size={20} /> Call Us Now
+              <Icon name="Phone" size={20} /> Call {currentBranch.shortName}
             </motion.a>
           </div>
         </FadeUp>

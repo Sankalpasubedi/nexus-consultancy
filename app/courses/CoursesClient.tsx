@@ -24,6 +24,7 @@ export default function CoursesPage() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const isHovering = useRef(false);
+  const isPaused = useRef(false);
 
   // Drag state
   const isDragging = useRef(false);
@@ -45,6 +46,38 @@ export default function CoursesPage() {
     setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
+  // Auto-scroll functionality - smooth continuous scroll
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    let animationId: number;
+    const scrollSpeed = 0.5; // pixels per frame
+
+    const smoothScroll = () => {
+      if (isPaused.current || isDragging.current || isHovering.current) {
+        animationId = requestAnimationFrame(smoothScroll);
+        return;
+      }
+      
+      const { scrollLeft, scrollWidth, clientWidth } = scrollEl;
+      const max = scrollWidth - clientWidth;
+      
+      // If at the end, reset to start
+      if (scrollLeft >= max - 1) {
+        scrollEl.scrollLeft = 0;
+      } else {
+        scrollEl.scrollLeft += scrollSpeed;
+      }
+      
+      animationId = requestAnimationFrame(smoothScroll);
+    };
+
+    animationId = requestAnimationFrame(smoothScroll);
+
+    return () => cancelAnimationFrame(animationId);
+  }, []);
+
   const handleScrollLeft = () => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollBy({ left: -400, behavior: "smooth" });
@@ -57,10 +90,12 @@ export default function CoursesPage() {
 
   const handleMouseEnter = useCallback(() => {
     isHovering.current = true;
+    isPaused.current = true;
   }, []);
 
   const handleMouseLeave = useCallback(() => {
     isHovering.current = false;
+    isPaused.current = false;
     // Also reset dragging state
     if (isDragging.current) {
       isDragging.current = false;
@@ -220,7 +255,7 @@ export default function CoursesPage() {
           ref={scrollRef}
           onMouseDown={handleMouseDown}
           onMouseLeave={handleMouseLeave}
-          onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
+          onMouseEnter={handleMouseEnter}
           className="flex gap-5 px-6 md:px-12 py-6 overflow-x-auto overflow-y-visible scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none"
           style={{
             WebkitOverflowScrolling: "touch",
@@ -240,14 +275,14 @@ export default function CoursesPage() {
             >
               <Link href={`/courses/${cat.slug}`} draggable={false} onClick={handleCardClick} className="block h-full">
                 <div 
-                  className="relative rounded-[28px] overflow-hidden cursor-pointer h-full"
+                  className="relative rounded-[28px] overflow-hidden cursor-pointer h-full group"
                 >
                   {/* Full-bleed Image */}
                   <Image
                     src={cat.image}
                     alt={cat.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-250"
                     draggable={false}
                   />
                   
@@ -290,6 +325,8 @@ export default function CoursesPage() {
         <div className="flex items-center justify-end gap-3 px-6 md:px-12 mt-6">
           <button
             onClick={handleScrollLeft}
+            onMouseEnter={() => { isPaused.current = true; }}
+            onMouseLeave={() => { isPaused.current = false; }}
             disabled={!canScrollLeft}
             className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
               canScrollLeft 
@@ -302,6 +339,8 @@ export default function CoursesPage() {
           </button>
           <button
             onClick={handleScrollRight}
+            onMouseEnter={() => { isPaused.current = true; }}
+            onMouseLeave={() => { isPaused.current = false; }}
             disabled={!canScrollRight}
             className={`w-11 h-11 rounded-full border flex items-center justify-center transition-all ${
               canScrollRight 

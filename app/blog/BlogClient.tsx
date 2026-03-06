@@ -185,7 +185,7 @@ export default function BlogPage() {
       </section>
 
       {/* ── Categories ── */}
-      <section className="bg-[#fafaf8] pt-4 pb-2 px-6 sticky top-[72px] z-20 border-b border-gray-100">
+      <section className="bg-[#fafaf8] pt-4 pb-2 px-6 z-20 border-b border-gray-100">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex gap-2 overflow-x-auto no-scrollbar py-2">
             {categories.map((cat, i) => (
@@ -337,7 +337,7 @@ export default function BlogPage() {
               <button className="w-10 h-10 rounded-full bg-white border border-gray-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition-colors">
                 3
               </button>
-              <button className="w-10 h-10 rounded-full bg-white border border-gray-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition-colors">
+              <button className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition-colors">
                 <Icon name="ArrowRight" size={14} />
               </button>
             </div>
