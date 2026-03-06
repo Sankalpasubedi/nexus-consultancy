@@ -47,7 +47,7 @@ export default function HowWeHelpSection() {
   const blobY = useSpring(rawBlobY, { stiffness: 60, damping: 30 });
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#004a8f] to-[#002a52] text-white overflow-hidden">
+    <section ref={sectionRef} className="relative py-24 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-gradient-to-br from-[#004a8f] to-[#002a52] text-white overflow-hidden">
       {/* Animated Background Blobs with parallax */}
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y: blobY }}>
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-400/[0.07] rounded-full blur-[120px] animate-blob" />
@@ -58,7 +58,7 @@ export default function HowWeHelpSection() {
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <FadeUp>
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 text-sm font-medium text-white/90">
               <Icon name="Sparkles" size={16} className="text-[#00ab18]" />
               Why Choose Us

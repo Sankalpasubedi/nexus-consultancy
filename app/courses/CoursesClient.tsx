@@ -174,7 +174,7 @@ export default function CoursesPage() {
   }, [updateState]);
 
   return (
-    <main className="min-h-screen bg-[#fafaf8] pt-24 pb-32 overflow-hidden relative z-0">
+    <main className="min-h-screen bg-[#fafaf8] pt-28 md:pt-32 pb-32 md:pb-48 overflow-hidden relative z-0">
       {/* Decorative blurs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-[#003975]/[0.03] rounded-full blur-[100px]" />

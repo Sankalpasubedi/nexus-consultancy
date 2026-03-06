@@ -58,11 +58,11 @@ const tools = [
 
 export default function ToolsSection() {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-24 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-white">
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
         <FadeUp>
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
               <Icon name="Zap" size={16} />
               Student Tools
@@ -77,11 +77,11 @@ export default function ToolsSection() {
         </FadeUp>
 
         {/* Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
           {tools.map((tool) => (
             <StaggerItem key={tool.title}>
               <Link href={tool.href} className="block h-full">
-                <div className="bg-white border border-gray-100 rounded-3xl p-8 premium-card hover:shadow-xl transition-all duration-300 h-full group flex flex-col">
+                <div className="bg-white border border-gray-100 rounded-3xl p-8 md:p-10 premium-card hover:shadow-xl transition-all duration-300 h-full group flex flex-col">
                   <div
                     className={`w-14 h-14 rounded-2xl bg-[#003975] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
                   >

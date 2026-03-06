@@ -465,7 +465,7 @@ export default function HeroSearchSection() {
   };
 
   return (
-    <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-0 right-0 z-20 px-4 sm:px-6 md:px-8">
+    <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 left-0 right-0 z-20 px-4 sm:px-6 md:px-10 lg:px-16">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

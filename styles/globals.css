@@ -38,7 +38,17 @@
       radial-gradient(900px 500px at 100% 0%, rgb(112 193 167 / 0.12), transparent 60%),
       linear-gradient(180deg, #f7fbff 0%, #edf5ff 52%, #f9fcff 100%);
     color: var(--foreground);
-    /* overflow-x: hidden; */
+    line-height: 1.7;
+  }
+  
+  /* Better typography defaults */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  p {
+    line-height: 1.75;
   }
 }
 

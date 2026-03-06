@@ -56,7 +56,7 @@ export default function SuccessStoriesSection() {
   const prev = () => setCurrent((p) => (p - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-6 lg:px-8 bg-gradient-to-br from-slate-800 via-slate-800 to-emerald-900 overflow-hidden">
+    <section ref={sectionRef} className="relative py-24 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-gradient-to-br from-slate-800 via-slate-800 to-emerald-900 overflow-hidden">
       <motion.div className="absolute inset-0 pointer-events-none" style={{ y: bgY }}>
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[120px] animate-blob" />
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[120px] animate-blob animation-delay-2000" />
@@ -65,7 +65,7 @@ export default function SuccessStoriesSection() {
 
       <div className="relative max-w-7xl mx-auto">
         <FadeUp>
-          <div className="text-center mb-20">
+          <div className="text-center mb-16 md:mb-24">
             <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 mb-6">
               <Star size={14} className="text-[#00ab18]" />
               <span className="text-sm font-medium text-white/80">Success Stories</span>

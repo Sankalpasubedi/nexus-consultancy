@@ -23,9 +23,7 @@ export default function Home() {
     <PageAnimations>
       <HeroSection />
       <ThumbnailVideoSection />
-      <div className="relative z-10 -mt-[50vh]">
-        <ServicesSection />
-      </div>
+      <ServicesSection />
       <DestinationsSection />
       <ShowcaseSection />
       <WorldMapSection />

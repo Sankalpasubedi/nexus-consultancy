@@ -109,9 +109,9 @@ export default function DestinationsSection() {
   const headerOpacity = useSpring(rawHeaderOpacity, { stiffness: 80, damping: 25 });
 
   return (
-    <section ref={sectionRef} className="py-32 bg-white">
+    <section ref={sectionRef} className="py-24 md:py-40 bg-white">
       <FadeUp>
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 max-w-7xl mx-auto px-6 lg:px-8 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-50 text-slate-600 text-sm font-medium border border-gray-200/80">
               <Globe size={14} className="text-[#003975]" />
@@ -132,7 +132,7 @@ export default function DestinationsSection() {
         ref={scrollRef}
         onMouseDown={handleMouseDown}
         onMouseEnter={() => scrollRef.current?.focus({ preventScroll: true })}
-        className="flex gap-6 px-6 lg:px-8 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none focus:outline-none focus:ring-0"
+        className="flex gap-5 md:gap-8 px-4 sm:px-6 lg:px-12 xl:px-16 overflow-x-auto overflow-y-hidden scrollbar-hide cursor-grab active:cursor-grabbing select-none outline-none focus:outline-none focus:ring-0"
         style={{
           WebkitOverflowScrolling: "touch",
           overscrollBehaviorX: "contain",
@@ -180,7 +180,7 @@ export default function DestinationsSection() {
         </div>
 
       {/* Progress Bar */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 mt-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 mt-8 md:mt-12">
         <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"

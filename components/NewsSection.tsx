@@ -53,11 +53,11 @@ export default function NewsSection() {
   const rest = articles.slice(1);
 
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[#fafaf8]">
+    <section className="py-24 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-[#fafaf8]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <FadeUp>
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200">
               <svg
                 className="w-4 h-4 text-[#003975]"
@@ -85,7 +85,7 @@ export default function NewsSection() {
         </FadeUp>
 
         {/* Articles Grid */}
-        <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 mb-16\">
           {/* Featured Article */}
           <StaggerItem>
             <Link href={featured.slug} className="block h-full group">

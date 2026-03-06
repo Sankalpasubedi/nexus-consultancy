@@ -64,11 +64,11 @@ export default function EventsSection() {
   const otherEvents = events.filter((e) => !e.featured);
 
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[#fafaf8]">
+    <section className="py-24 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-[#fafaf8]">
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
         <FadeUp>
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200">
               <Icon name="Calendar" size={16} />
               Upcoming Events
@@ -184,10 +184,10 @@ export default function EventsSection() {
         )}
 
         {/* Other Events Grid */}
-        <StaggerContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+        <StaggerContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-16">
           {otherEvents.map((event) => (
             <StaggerItem key={event.id}>
-              <div className="bg-white border border-gray-100 rounded-2xl p-6 premium-card h-full group hover:scale-[1.02] transition-transform duration-300">
+              <div className="bg-white border border-gray-100 rounded-2xl p-6 md:p-8 premium-card h-full group hover:scale-[1.02] transition-transform duration-300">
                 <div className="flex items-center gap-3 mb-5">
                   <span
                     className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getTypeBadgeColor(

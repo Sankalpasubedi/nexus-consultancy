@@ -88,11 +88,11 @@ export default function PopularCoursesSection() {
   }, []);
 
   return (
-    <section className="py-24 md:py-32 bg-gray-50">
-      <div className="max-w-[1440px] mx-auto px-6">
+    <section className="py-20 md:py-36 bg-gray-50">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         {/* Header */}
         <FadeUp>
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-12 md:mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-10 md:mb-16 gap-6">
             <div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
                 Popular Courses

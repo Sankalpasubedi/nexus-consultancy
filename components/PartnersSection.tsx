@@ -44,10 +44,10 @@ export default function PartnersSection() {
   const [bottomPaused, setBottomPaused] = useState(false);
 
   return (
-    <section className="py-32 bg-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="py-24 md:py-40 bg-gray-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         <FadeUp>
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200/80">
               <Users size={14} className="text-[#003975]" />
               Trusted Partners

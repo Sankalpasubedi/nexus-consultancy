@@ -265,7 +265,7 @@ export default function ServicesSection() {
   }, [handleScroll]);
 
   return (
-    <section ref={sectionRef} className="relative py-16 md:py-32 px-4 md:px-6 lg:px-8 bg-white border-t border-gray-200">
+    <section ref={sectionRef} className="relative py-20 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-white border-t border-gray-200">
       {/* Sticky Flight Animation Background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="sticky top-0 h-screen overflow-hidden" style={{ zIndex: 0 }}>
@@ -275,7 +275,7 @@ export default function ServicesSection() {
       
       <div className="max-w-[1500px] mx-auto relative z-10">
         <FadeUp>
-          <div className="text-center mb-12 md:mb-20">
+          <div className="text-center mb-16 md:mb-24">
             <div className="inline-flex items-center gap-2 px-4 md:px-5 py-2 mb-4 md:mb-6 rounded-full bg-slate-50 text-slate-600 text-xs md:text-sm font-medium border border-gray-200/80 shadow-sm">
               <Icon name="Zap" size={14} className="text-[#003975]" />
               Our Services

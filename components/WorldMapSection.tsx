@@ -762,10 +762,10 @@ export default function WorldMapSection() {
     destinations.find((d) => d.slug === hoveredDest) || null;
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-[#fafaf8]">
+    <section ref={sectionRef} className="py-24 md:py-40 bg-[#fafaf8]">
       {/* -------- Section Header -------- */}
       <FadeUp>
-        <div className="text-center max-w-3xl mx-auto px-6 lg:px-8 mb-16 md:mb-20">
+        <div className="text-center max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 mb-12 md:mb-20">
           <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200/80 shadow-sm">
             <svg
               className="w-4 h-4 text-[#003975]"

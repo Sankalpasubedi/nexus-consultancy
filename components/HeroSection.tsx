@@ -141,7 +141,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative h-screen min-h-[600px] sm:min-h-[700px] max-h-[1100px] w-full overflow-hidden"
+      className="relative h-screen min-h-[650px] sm:min-h-[750px] max-h-[1100px] w-full overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -172,7 +172,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#001020]/42 via-transparent to-[#001020]/20" />
 
       {/* ── Main Content ── */}
-      <div className="relative z-10 h-full flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-16">
+      <div className="relative z-10 h-full flex flex-col justify-center pb-[320px] sm:pb-[240px] md:pb-52 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
         <div className="max-w-7xl mx-auto w-full">
           <AnimatePresence mode="wait">
             <motion.div
@@ -205,7 +205,7 @@ export default function HeroSection() {
               {/* Subtitle */}
               <motion.p
                 variants={textChildVariants}
-                className="text-base sm:text-lg md:text-xl text-white/85 leading-relaxed mb-8 max-w-xl"
+                className="text-base sm:text-lg md:text-xl text-white/85 leading-relaxed mb-10 max-w-xl"
               >
                 {slide.subtitle}
               </motion.p>

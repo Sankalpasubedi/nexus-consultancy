@@ -67,7 +67,7 @@ export default function Footer() {
           }}
         />
       </div>
-      <div className="relative z-10 px-4 pt-16 pb-0 sm:px-6 lg:px-8">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-12 xl:px-16 pt-20 pb-0">
       <div >
         <div className="mx-auto max-w-7xl">
           <div className="rounded-3xl bg-[#003975] px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/15 border border-white/10">
@@ -124,9 +124,9 @@ export default function Footer() {
       
 
       {/* ── Main Footer Content ── */}
-      <div className="relative z-10 px-4 pt-16 pb-0 sm:px-6 lg:px-8">
+      <div className="relative z-10 px-4 sm:px-6 lg:px-12 xl:px-16 pt-20 pb-0">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-6 lg:gap-8">
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-6 lg:gap-10">
             {/* Column 1 - Brand (col-span-2) */}
             <div className="sm:col-span-2">
               <Link href="/" className="inline-block">
@@ -274,8 +274,8 @@ export default function Footer() {
 
 
       {/* ── Bottom Bar ── */}
-      <div className="relative z-10 mt-16 border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <div className="relative z-10 mt-16 md:mt-20 border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 xl:px-16 py-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-slate-400 md:flex-row">
             {/* Left */}
             <p>

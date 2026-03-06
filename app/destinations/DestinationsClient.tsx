@@ -236,7 +236,7 @@ export default function Destinations() {
   const dest = destinations[activeIndex];
 
   return (
-    <div className="min-h-screen bg-[#fafaf8] pt-24 pb-40 overflow-hidden relative z-0">
+    <div className="min-h-screen bg-[#fafaf8] pt-28 md:pt-32 pb-32 md:pb-48 overflow-hidden relative z-0">
       {/* Subtle decorative bubbles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-[#003975]/[0.03] rounded-full blur-[100px]" />
@@ -247,7 +247,7 @@ export default function Destinations() {
       </div>
 
       {/* Header */}
-      <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 my-12">
+      <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 my-8 md:my-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>

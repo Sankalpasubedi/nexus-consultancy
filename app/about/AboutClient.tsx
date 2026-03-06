@@ -257,25 +257,6 @@ function TeamSliderSection({
     goTo(Math.max(0, Math.min(team.length - 1, idx)));
   }, [x, centerOffset, goTo, team.length]);
 
-  // Wheel handler for trackpad horizontal scroll
-  const handleWheel = useCallback(
-    (e: React.WheelEvent) => {
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      if (Math.abs(delta) < 1) return;
-      
-      e.preventDefault();
-      isAnimating.current = false; // Cancel any ongoing animation
-      const minX = -(CARD_ITEM * (team.length - 1)) - centerOffset + containerWidth - CARD_W;
-      const maxX = centerOffset;
-      const raw = x.get() - delta;
-      x.set(Math.max(minX, Math.min(maxX, raw)));
-      
-      const idx = Math.round((-x.get() + centerOffset) / CARD_ITEM);
-      setActiveIndex(Math.max(0, Math.min(team.length - 1, idx)));
-    },
-    [x, centerOffset, containerWidth, team.length]
-  );
-
   // Card click handler - click non-active card to move to it
   const handleCardClick = useCallback(
     (e: React.MouseEvent, index: number) => {
@@ -321,7 +302,6 @@ function TeamSliderSection({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        onWheel={handleWheel}
       >
         <motion.div
           style={{ x }}

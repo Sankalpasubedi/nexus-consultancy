@@ -50,11 +50,11 @@ const steps = [
 
 export default function JourneySection() {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[#fafaf8]">
+    <section className="py-24 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-[#fafaf8]">
       <div className="max-w-[1440px] mx-auto">
         {/* ── Header ── */}
         <FadeUp>
-          <div className="text-center mb-20">
+          <div className="text-center mb-16 md:mb-24">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200">
               <Icon name="Map" size={16} />
               Your Pathway

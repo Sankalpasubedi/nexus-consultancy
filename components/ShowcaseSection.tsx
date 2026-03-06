@@ -74,10 +74,10 @@ export default function ShowcaseSection() {
   const [bottomPaused, setBottomPaused] = useState(false);
 
   return (
-    <section className="py-20 bg-white overflow-hidden">
+    <section className="py-16 md:py-24 bg-white overflow-hidden">
       {/* Top Carousel - Service Images - Moving Left */}
       <div
-        className="relative overflow-hidden mb-0"
+        className="relative overflow-hidden mb-4"
         onMouseEnter={() => setTopPaused(true)}
         onMouseLeave={() => setTopPaused(false)}
       >

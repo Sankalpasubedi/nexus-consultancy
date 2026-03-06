@@ -32,7 +32,7 @@ const offices = [
 
 export default function ContactCTASection() {
   return (
-    <section className="pt-32 pb-52 px-4 sm:px-6 lg:px-8 bg-white relative z-0">
+    <section className="pt-24 md:pt-40 pb-40 md:pb-56 px-4 sm:px-6 lg:px-12 xl:px-16 bg-white relative z-0">
       <div className="max-w-7xl mx-auto">
         {/* ─── Top CTA Banner ─── */}
         <FadeUp>

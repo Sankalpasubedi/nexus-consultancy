@@ -45,11 +45,11 @@ const trustCards = [
 
 export default function WhyChooseSection() {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="py-24 md:py-40 px-4 sm:px-6 lg:px-12 xl:px-16 bg-white">
       <div className="max-w-[1440px] mx-auto">
         {/* ── Header ── */}
         <FadeUp>
-          <div className="text-center mb-20">
+          <div className="text-center mb-16 md:mb-24">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-50 text-slate-600 text-sm font-medium border border-gray-200">
               <Icon name="Star" size={16} />
               Why Choose Us
@@ -69,7 +69,7 @@ export default function WhyChooseSection() {
         </FadeUp>
 
         {/* ── Two-column layout ── */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-stretch">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch">
           {/* LEFT: Stats card */}
           <FadeUp className="lg:w-[45%] flex" delay={0.1}>
             <div className="relative w-full bg-slate-800 rounded-3xl p-10 lg:p-12 overflow-hidden flex flex-col justify-center">
