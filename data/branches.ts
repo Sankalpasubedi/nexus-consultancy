@@ -28,7 +28,7 @@ export interface Branch {
 export const branches: Branch[] = [
   {
     id: "dillibazar",
-    slug: "dillibazar",
+    slug: "find-us-at-dillibazar",
     name: "Kathmandu - Dillibazar (Head Office)",
     shortName: "Dillibazar",
     city: "Kathmandu",
@@ -52,7 +52,7 @@ export const branches: Branch[] = [
   },
   {
     id: "baneshwor",
-    slug: "baneshwor",
+    slug: "find-us-at-baneshwor",
     name: "Kathmandu - Baneshwor",
     shortName: "Baneshwor",
     city: "Kathmandu",
@@ -76,7 +76,7 @@ export const branches: Branch[] = [
   },
   {
     id: "samakhusi",
-    slug: "samakhusi",
+    slug: "find-us-at-samakhusi",
     name: "Kathmandu - Samakhusi",
     shortName: "Samakhusi",
     city: "Kathmandu",
@@ -100,7 +100,7 @@ export const branches: Branch[] = [
   },
   {
     id: "banepa",
-    slug: "banepa",
+    slug: "find-us-at-banepa",
     name: "Banepa",
     shortName: "Banepa",
     city: "Banepa",
@@ -124,7 +124,7 @@ export const branches: Branch[] = [
   },
   {
     id: "birtamode",
-    slug: "birtamode",
+    slug: "find-us-at-birtamode",
     name: "Birtamode",
     shortName: "Birtamode",
     city: "Birtamode",
@@ -148,7 +148,7 @@ export const branches: Branch[] = [
   },
   {
     id: "dhulabari",
-    slug: "dhulabari",
+    slug: "find-us-at-dhulabari",
     name: "Dhulabari",
     shortName: "Dhulabari",
     city: "Dhulabari",
@@ -175,10 +175,23 @@ export const branches: Branch[] = [
 // Get default branch (head office)
 export const defaultBranch = branches.find((b) => b.isHeadOffice) || branches[0];
 
-// Get branch by slug
+// Get branch by slug (supports both old format and new find-us-at-{name} format)
 export function getBranchBySlug(slug: string | null): Branch {
   if (!slug) return defaultBranch;
-  const branch = branches.find((b) => b.slug === slug);
+  
+  // First try to find by exact slug match
+  let branch = branches.find((b) => b.slug === slug);
+  if (branch) return branch;
+  
+  // Try to extract id from "find-us-at-{id}" format
+  const match = slug.match(/^find-us-at-(.+)$/);
+  if (match) {
+    branch = branches.find((b) => b.id === match[1]);
+    if (branch) return branch;
+  }
+  
+  // Fallback: try to match by id directly (for backwards compatibility)
+  branch = branches.find((b) => b.id === slug);
   return branch || defaultBranch;
 }
 

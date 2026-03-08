@@ -2,17 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { FadeUp,
-  FadeLeft,
-  FadeRight,
   StaggerContainer,
   StaggerItem,
   HoverCard,
 } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
-import { useEffect, useRef, useMemo, useState, useCallback } from "react";
-import { X } from "lucide-react";
+import { useEffect, useRef, useMemo } from "react";
+import { exams } from "./examData";
 
 /* ─── Animated Plane on SVG Path with Loop ─── */
 function AnimatedPlaneOnPath({ 
@@ -147,346 +145,7 @@ function FlightLinesBackground() {
   );
 }
 
-/* ─── Exam Detail Modal ─── */
-function ExamModal({
-  exam,
-  isOpen,
-  onClose,
-}: {
-  exam: ExamData | null;
-  isOpen: boolean;
-  onClose: () => void;
-}) {
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  // Close on escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "";
-    };
-  }, [isOpen, onClose]);
-
-  // Close on click outside
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      onClose();
-    }
-  };
-
-  if (!exam) return null;
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-50 flex items-start justify-center pt-20 md:pt-24 pb-4 px-4 md:px-6"
-          onClick={handleBackdropClick}
-        >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-          {/* Modal */}
-          <motion.div
-            ref={modalRef}
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="relative bg-white rounded-2xl md:rounded-3xl shadow-2xl w-full max-w-4xl max-h-[calc(100vh-6rem)] md:max-h-[calc(100vh-7rem)] overflow-hidden mt-4"
-          >
-            {/* Close button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center justify-center text-slate-600 hover:text-slate-900 hover:bg-white transition-all"
-              aria-label="Close modal"
-            >
-              <X size={20} />
-            </button>
-
-            {/* Scrollable content */}
-            <div className="overflow-y-auto max-h-[calc(100vh-6rem)] md:max-h-[calc(100vh-7rem)]">
-              {/* Header with image */}
-              <div className="relative h-48 md:h-64">
-                <Image
-                  src={exam.image}
-                  alt={exam.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white">
-                      <Icon name={exam.icon} size={24} />
-                    </div>
-                    <div>
-                      <h2 className="text-2xl md:text-3xl font-bold text-white">{exam.title}</h2>
-                      <p className="text-sm text-white/80">{exam.subtitle}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-6 md:p-8 space-y-6">
-                {/* Quick stats */}
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-50 rounded-xl p-4 text-center">
-                    <Icon name="Clock" size={20} className="text-[#003975] mx-auto mb-2" />
-                    <div className="text-sm font-semibold text-slate-900">{exam.duration}</div>
-                    <div className="text-xs text-slate-500">Duration</div>
-                  </div>
-                  <div className="bg-slate-50 rounded-xl p-4 text-center">
-                    <Icon name="CreditCard" size={20} className="text-[#003975] mx-auto mb-2" />
-                    <div className="text-sm font-semibold text-slate-900">{exam.fee}</div>
-                    <div className="text-xs text-slate-500">Test Fee</div>
-                  </div>
-                  <div className="bg-slate-50 rounded-xl p-4 text-center">
-                    <Icon name="Calendar" size={20} className="text-[#003975] mx-auto mb-2" />
-                    <div className="text-sm font-semibold text-slate-900">{exam.validity}</div>
-                    <div className="text-xs text-slate-500">Validity</div>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">About {exam.title}</h3>
-                  <p className="text-slate-600 leading-relaxed">{exam.detailedDescription}</p>
-                </div>
-
-                {/* Test Sections */}
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-3">Test Sections</h3>
-                  <div className="space-y-3">
-                    {exam.sections.map((section, idx) => (
-                      <div key={idx} className="flex gap-3 items-start">
-                        <div className="w-8 h-8 rounded-lg bg-[#003975] text-white flex items-center justify-center flex-shrink-0 text-sm font-bold">
-                          {idx + 1}
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-slate-900">{section.name}</h4>
-                          <p className="text-sm text-slate-500">{section.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Key Features */}
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-3">Key Features</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {exam.features.map((feature, idx) => (
-                      <span
-                        key={idx}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#003975]/5 text-[#003975] text-sm font-medium"
-                      >
-                        <Icon name="Check" size={14} />
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Preparation Tips */}
-                <div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-3">Preparation Tips</h3>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    {exam.tips.map((tip, idx) => (
-                      <div key={idx} className="flex items-start gap-2">
-                        <Icon name="Lightbulb" size={16} className="text-[#00ab18] mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-slate-600">{tip}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-100">
-                  <Link
-                    href="/contact"
-                    className="flex-1 inline-flex items-center justify-center gap-2 bg-[#003975] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002d5e] transition"
-                    onClick={onClose}
-                  >
-                    Enroll Now <Icon name="ArrowRight" size={14} />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="flex-1 inline-flex items-center justify-center gap-2 border border-gray-200 text-slate-700 px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-50 transition"
-                    onClick={onClose}
-                  >
-                    Book Free Demo
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
 /* ─── Data ─────────────────────────────────────────── */
-
-interface ExamData {
-  title: string;
-  subtitle: string;
-  description: string;
-  features: string[];
-  icon: string;
-  stat: string;
-  statLabel: string;
-  image: string;
-  detailedDescription: string;
-  sections: { name: string; description: string }[];
-  tips: string[];
-  duration: string;
-  fee: string;
-  validity: string;
-}
-
-const exams: ExamData[] = [
-  {
-    title: "IELTS",
-    subtitle: "International English Language Testing System",
-    description:
-      "The world's most popular English proficiency test for study, work, and migration. Accepted by over 11,000 organizations in 140+ countries.",
-    features: ["Academic & General Training", "Computer & Paper-based", "Band score 0–9", "Results in 13 days"],
-    icon: "BookOpen",
-    stat: "3.5M+",
-    statLabel: "Tests/Year",
-    image: "/services/NEX-_-1.jpg",
-    detailedDescription: "IELTS (International English Language Testing System) is the world's most popular English language proficiency test. It assesses your ability to listen, read, write and speak in English, and is designed to reflect how you will use English at study, at work and in everyday life.",
-    sections: [
-      { name: "Listening", description: "40 minutes - 4 sections with recordings of native English speakers" },
-      { name: "Reading", description: "60 minutes - 3 sections with academic or general texts" },
-      { name: "Writing", description: "60 minutes - 2 tasks including essay and report/letter" },
-      { name: "Speaking", description: "11-14 minutes - Face-to-face interview with examiner" },
-    ],
-    tips: ["Practice with authentic materials", "Time yourself during practice tests", "Focus on your weak areas", "Learn vocabulary in context"],
-    duration: "2 hours 45 minutes",
-    fee: "NPR 29,500",
-    validity: "2 years",
-  },
-  {
-    title: "TOEFL iBT",
-    subtitle: "Test of English as a Foreign Language",
-    description:
-      "Preferred by universities in the USA, Canada, and worldwide. Measures reading, listening, speaking, and writing in an academic context.",
-    features: ["Internet-based test", "Score range 0–120", "Accepted by 12,000+ institutions", "Results in 4–8 days"],
-    icon: "Globe",
-    stat: "35M+",
-    statLabel: "Tests Taken",
-    image: "/services/NEX-_-2.jpg",
-    detailedDescription: "TOEFL iBT (Test of English as a Foreign Language Internet-Based Test) measures your ability to use and understand English at the university level. It evaluates how well you combine listening, reading, speaking and writing skills to perform academic tasks.",
-    sections: [
-      { name: "Reading", description: "35 minutes - 2 passages with 10 questions each" },
-      { name: "Listening", description: "36 minutes - Lectures and conversations from academic settings" },
-      { name: "Speaking", description: "16 minutes - 4 tasks expressing opinions and summarizing" },
-      { name: "Writing", description: "29 minutes - Integrated and independent writing tasks" },
-    ],
-    tips: ["Get familiar with the computer-based format", "Practice note-taking skills", "Build academic vocabulary", "Take full-length practice tests"],
-    duration: "About 2 hours",
-    fee: "USD 190-200",
-    validity: "2 years",
-  },
-  {
-    title: "PTE Academic",
-    subtitle: "Pearson Test of English",
-    description:
-      "Fast, fair computer-based English test ideal for study abroad and immigration. Accepted by thousands of institutions globally.",
-    features: ["AI-scored for fairness", "Results in 48 hours", "Score range 10–90", "Flexible test dates"],
-    icon: "Monitor",
-    stat: "99%",
-    statLabel: "Acceptance",
-    image: "/services/NEX-_-3.jpg",
-    detailedDescription: "PTE Academic is a computer-based English language test trusted by universities, colleges and governments around the world. It uses AI technology to score your test, ensuring fast, accurate and unbiased results.",
-    sections: [
-      { name: "Speaking & Writing", description: "54-67 minutes - Personal introduction, read aloud, essays" },
-      { name: "Reading", description: "29-30 minutes - Multiple choice, reorder paragraphs, fill blanks" },
-      { name: "Listening", description: "30-43 minutes - Summarize spoken text, multiple choice, dictation" },
-    ],
-    tips: ["Practice speaking clearly into a microphone", "Improve your typing speed", "Master time management", "Understand the AI scoring criteria"],
-    duration: "Approximately 2 hours",
-    fee: "USD 210-270",
-    validity: "2 years",
-  },
-  {
-    title: "GRE",
-    subtitle: "Graduate Record Examination",
-    description:
-      "Required for graduate school admission in the US and other countries. Tests verbal reasoning, quantitative reasoning, and analytical writing.",
-    features: ["Verbal & Quantitative", "Score range 130–170/section", "5-year score validity", "At home or test center"],
-    icon: "BarChart3",
-    stat: "700K+",
-    statLabel: "Tests/Year",
-    image: "/services/NEX-_-4.jpg",
-    detailedDescription: "The GRE General Test measures verbal reasoning, quantitative reasoning, critical thinking and analytical writing skills that have been developed over a long period of time and are not related to any specific field of study.",
-    sections: [
-      { name: "Analytical Writing", description: "60 minutes - Analyze an issue and analyze an argument" },
-      { name: "Verbal Reasoning", description: "60 minutes - Reading comprehension, text completion, sentence equivalence" },
-      { name: "Quantitative Reasoning", description: "70 minutes - Arithmetic, algebra, geometry, data analysis" },
-    ],
-    tips: ["Build a strong vocabulary foundation", "Review math fundamentals", "Practice argument analysis", "Use official ETS materials"],
-    duration: "About 3 hours 45 minutes",
-    fee: "USD 220",
-    validity: "5 years",
-  },
-  {
-    title: "SAT",
-    subtitle: "Scholastic Assessment Test",
-    description:
-      "Standardized test for undergraduate admissions in the US. Measures math, evidence-based reading, and writing skills.",
-    features: ["Digital adaptive test", "Score range 400–1600", "Accepted worldwide", "Multiple test dates"],
-    icon: "Star",
-    stat: "2.2M+",
-    statLabel: "Students/Year",
-    image: "/services/NEX-_-5.jpg",
-    detailedDescription: "The SAT is a standardized test widely used for college admissions in the United States. The new digital SAT is shorter, more secure, and provides faster results while still measuring the skills and knowledge that matter most for college and career readiness.",
-    sections: [
-      { name: "Reading & Writing", description: "64 minutes - 2 modules with reading comprehension and grammar" },
-      { name: "Math", description: "70 minutes - 2 modules covering algebra, geometry, and data analysis" },
-    ],
-    tips: ["Practice with Khan Academy's free resources", "Master time management", "Understand the adaptive format", "Review algebra and data analysis thoroughly"],
-    duration: "About 2 hours 14 minutes",
-    fee: "USD 60 (international fees apply)",
-    validity: "5 years",
-  },
-  {
-    title: "GMAT",
-    subtitle: "Graduate Management Admission Test",
-    description:
-      "The gold standard for MBA and business school admissions globally. Assesses analytical, writing, quantitative, and verbal skills.",
-    features: ["Focus Edition available", "Score range 205–805", "Accepted by 7,700+ programs", "5-year validity"],
-    icon: "Briefcase",
-    stat: "200K+",
-    statLabel: "Tests/Year",
-    image: "/services/NEX-_-6.jpg",
-    detailedDescription: "The GMAT is a computer-adaptive test that measures analytical writing and problem-solving abilities, along with data sufficiency, logic, and critical reasoning skills. It is specifically designed to predict success in graduate business programs.",
-    sections: [
-      { name: "Quantitative Reasoning", description: "45 minutes - Data sufficiency and problem solving" },
-      { name: "Verbal Reasoning", description: "45 minutes - Reading comprehension, critical reasoning, sentence correction" },
-      { name: "Data Insights", description: "45 minutes - Data interpretation, multi-source reasoning, graphics interpretation" },
-    ],
-    tips: ["Focus on data interpretation skills", "Practice critical reasoning daily", "Master sentence correction patterns", "Take official GMAT practice tests"],
-    duration: "About 2 hours 15 minutes",
-    fee: "USD 275",
-    validity: "5 years",
-  },
-];
 
 const whyChooseUs = [
   {
@@ -538,20 +197,6 @@ const faqs = [
 /* ─── Component ────────────────────────────────────── */
 
 export default function TestPreparationPage() {
-  const [selectedExam, setSelectedExam] = useState<ExamData | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = useCallback((exam: ExamData) => {
-    setSelectedExam(exam);
-    setIsModalOpen(true);
-  }, []);
-
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
-    // Delay clearing exam data for exit animation
-    setTimeout(() => setSelectedExam(null), 200);
-  }, []);
-
   return (
     <main>
       {/* ── Hero ── */}
@@ -658,8 +303,8 @@ export default function TestPreparationPage() {
             {exams.map((exam) => (
               <StaggerItem key={exam.title}>
                 <HoverCard>
-                  <button
-                    onClick={() => openModal(exam)}
+                  <Link
+                    href={`/services/test-preparation/${exam.slug}`}
                     className="bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all overflow-hidden h-full flex w-full text-left cursor-pointer group"
                   >
                     {/* Left accent + icon */}
@@ -686,7 +331,7 @@ export default function TestPreparationPage() {
                         ))}
                       </div>
                     </div>
-                  </button>
+                  </Link>
                 </HoverCard>
               </StaggerItem>
             ))}
@@ -816,9 +461,6 @@ export default function TestPreparationPage() {
           </div>
         </FadeUp>
       </section>
-
-      {/* Exam Detail Modal */}
-      <ExamModal exam={selectedExam} isOpen={isModalOpen} onClose={closeModal} />
     </main>
   );
 }

@@ -5,45 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FadeUp } from "@/lib/animations";
+import { courseCategories } from "@/data/courses";
 
-const courses = [
-  {
-    title: "Information Technology",
-    image: "/courses/it.png",
-    slug: "information-technology",
-    size: "large",
-  },
-  {
-    title: "Business & Management",
-    image: "/courses/business.png",
-    slug: "business-management",
-    size: "large",
-  },
-  {
-    title: "Engineering",
-    image: "/courses/engineering.png",
-    slug: "engineering",
-    size: "large",
-  },
-  {
-    title: "Health Sciences",
-    image: "/courses/health.png",
-    slug: "health-sciences",
-    size: "small",
-  },
-  {
-    title: "Arts & Design",
-    image: "/courses/art design.png",
-    slug: "arts-and-design",
-    size: "small",
-  },
-  {
-    title: "Law & Legal Studies",
-    image: "/courses/legal.png",
-    slug: "law-and-legal-studies",
-    size: "small",
-  },
-];
+// Map courseCategories to include descriptions for the bento grid
+const courses = courseCategories.map((cat) => ({
+  title: cat.title,
+  description: cat.description,
+  image: cat.image,
+  slug: cat.slug,
+}));
 
 export default function PopularCoursesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -184,10 +154,13 @@ export default function PopularCoursesSection() {
                   </div>
                   {/* Title - slides up on hover */}
                   <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <div className="p-5 bg-gray-100/95 backdrop-blur-sm">
-                      <h3 className="text-lg md:text-xl font-semibold text-slate-900">
+                    <div className="p-5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-xs">
+                      <h3 className="text-lg md:text-xl font-semibold text-white">
                         {courses[0].title}
                       </h3>
+                      <p className="text-white text-xs mt-1">
+                        {courses[0].description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -214,10 +187,13 @@ export default function PopularCoursesSection() {
                   </div>
                   {/* Title - slides up on hover */}
                   <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <div className="p-5 bg-gray-100/95 backdrop-blur-sm">
-                      <h3 className="text-lg md:text-xl font-semibold text-slate-900">
+                    <div className="p-5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-xs">
+                      <h3 className="text-lg md:text-xl font-semibold text-white">
                         {courses[1].title}
                       </h3>
+                      <p className="text-white text-xs mt-1">
+                        {courses[1].description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -255,10 +231,13 @@ export default function PopularCoursesSection() {
                     </div>
                     {/* Title - slides up on hover */}
                     <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                      <div className="p-4 bg-gray-100/95 backdrop-blur-sm">
-                        <h3 className="text-sm md:text-base font-medium text-slate-900">
+                      <div className="p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-xs">
+                        <h3 className="text-sm md:text-base font-medium text-white">
                           {course.title}
                         </h3>
+                        <p className="text-white text-xs mt-0.5 leading-snug">
+                          {course.description}
+                        </p>
                       </div>
                     </div>
                   </motion.div>

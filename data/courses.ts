@@ -34,7 +34,7 @@ export const courseCategories: CourseCategory[] = [
     title: "Information Technology",
     description: "Shape the digital future with cutting-edge tech programs from world-class universities.",
     programs: "180+",
-    image: "/courses/it.png",
+    image: "/courses/it.svg",
     icon: "Monitor",
     gradient: "from-[#004a8f] via-[#004a8f] to-[#00ab18]",
     programsList: [
@@ -69,7 +69,7 @@ export const courseCategories: CourseCategory[] = [
     title: "Business & Management",
     description: "Develop leadership skills and business acumen at top global business schools.",
     programs: "240+",
-    image: "/courses/business and management.webp",
+    image: "/courses/business and management.svg",
     icon: "BarChart3",
     gradient: "from-[#004a8f] via-[#004a8f] to-[#00ab18]",
     programsList: [
@@ -104,7 +104,7 @@ export const courseCategories: CourseCategory[] = [
     title: "Engineering",
     description: "Build the future with world-class engineering education and research opportunities.",
     programs: "200+",
-    image: "/courses/engineering-1024x682.jpg",
+    image: "/courses/engineering.svg",
     icon: "Cog",
     gradient: "from-[#004a8f] via-[#004a8f] to-[#00ab18]",
     programsList: [

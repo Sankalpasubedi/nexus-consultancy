@@ -289,7 +289,7 @@ export default function BranchesClient() {
                     {/* Actions */}
                     <div className="mt-6 pt-4 border-t border-gray-100 flex gap-2">
                       <Link
-                        href={`/branches/${branch.id}`}
+                        href={`/branches/find-us-at-${branch.id}`}
                         className="flex-1 text-center px-4 py-2.5 bg-[#004a8f] text-white text-sm font-medium rounded-lg hover:bg-[#003468] transition"
                       >
                         View Details

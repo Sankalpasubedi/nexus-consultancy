@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useHeader } from "@/app/contexts/HeaderContext";
 import { useBranch } from "@/app/contexts/BranchContext";
 import { branches, getBranchLinks, Branch } from "@/data/branches";
@@ -734,6 +735,7 @@ function FindUsBranchDropdown() {
   const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
   const { selectBranch, currentBranch } = useBranch();
   const branchLinks = getBranchLinks();
+  const router = useRouter();
 
   const enter = () => {
     clearTimeout(timeout.current);
@@ -747,6 +749,11 @@ function FindUsBranchDropdown() {
     setOpen(false);
     if (slug) {
       selectBranch(slug);
+      // Navigate to the branch page with the new URL format
+      // Extract the branch id from the slug (e.g., "find-us-at-dillibazar" -> "dillibazar")
+      const match = slug.match(/^find-us-at-(.+)$/);
+      const branchId = match ? match[1] : slug.replace("find-us-at-", "");
+      router.push(`/branches/find-us-at-${branchId}`);
     }
   };
 
@@ -815,6 +822,7 @@ function FindUsBranchDropdown() {
 export default function Header() {
   const { showSidebar } = useHeader();
   const { currentBranch, selectBranch } = useBranch();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileMoreOpen, setMobileMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -1079,6 +1087,10 @@ export default function Header() {
                                 onClick={() => {
                                   if (item.slug) {
                                     selectBranch(item.slug);
+                                    // Navigate to the branch page with the new URL format
+                                    const match = item.slug.match(/^find-us-at-(.+)$/);
+                                    const branchId = match ? match[1] : item.slug.replace("find-us-at-", "");
+                                    router.push(`/branches/find-us-at-${branchId}`);
                                   }
                                   closeMobile();
                                 }}

@@ -18,9 +18,19 @@ import { Icon, FlagIcon } from "@/lib/icons";
 import { courseCategories } from "@/data/courses";
 
 /* --- Programs Carousel constants --- */
-const P_CARD_W = 340;
-const P_CARD_H = 400;
-const P_GAP = 24;
+const P_CARD_W = 400;
+const P_CARD_H = 480;
+const P_GAP = 28;
+
+/* --- Program images for carousel --- */
+const programImages = [
+  "/services/NEX-_-1.jpg",
+  "/services/NEX-_-3.jpg",
+  "/services/NEX-_-5.jpg",
+  "/services/NEX-_-7.jpg",
+  "/services/NEX-_-10.jpg",
+  "/services/NEX-_-12.jpg",
+];
 const P_ITEM = P_CARD_W + P_GAP;
 const DRAG_THRESHOLD = 5;
 const MOBILE_BREAKPOINT = 768;
@@ -28,10 +38,8 @@ const MOBILE_BREAKPOINT = 768;
 /* --- Programs Carousel (center-focused) --- */
 function ProgramsCarousel({
   programs,
-  icon,
 }: {
   programs: { name: string; duration: string; tuition: string; description: string }[];
-  icon: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -260,36 +268,36 @@ function ProgramsCarousel({
                   className="rounded-3xl overflow-hidden shadow-xl bg-white border border-gray-100 group"
                   style={{ height: P_CARD_H }}
                 >
-                  {/* Top visual area */}
-                  <div className="relative h-[180px] overflow-hidden bg-gradient-to-br from-[#004a8f] to-[#002550]">
-                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00ab18]/15 rounded-full blur-2xl" />
-                    <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-white/5 rounded-full blur-xl" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center">
-                        <Icon name={icon} size={32} className="text-white" />
-                      </div>
-                    </div>
+                  {/* Top visual area with image */}
+                  <div className="relative h-[240px] overflow-hidden">
+                    <Image
+                      src={programImages[i % programImages.length]}
+                      alt={p.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                      <span className="text-[10px] font-bold tracking-widest uppercase text-white/60">
+                      <span className="text-xs font-bold tracking-widest uppercase text-white/80 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         Program
                       </span>
-                      <span className="text-xs font-semibold text-white bg-white/15 px-3 py-1 rounded-full">
+                      <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         {p.duration}
                       </span>
                     </div>
                   </div>
 
                   {/* Info area */}
-                  <div className="p-6">
-                    <h3 className="text-lg font-bold text-slate-900 mb-2">{p.name}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">{p.description}</p>
-                    <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <div className="p-7">
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">{p.name}</h3>
+                    <p className="text-sm text-slate-500 leading-relaxed mb-5 line-clamp-3">{p.description}</p>
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <Icon name="Clock" size={14} className="text-slate-400" />
+                        <Icon name="Clock" size={16} className="text-slate-400" />
                         {p.duration}
                       </div>
                       <div className="flex items-center gap-2 text-sm font-semibold text-[#003975]">
-                        <Icon name="DollarSign" size={14} />
+                        <Icon name="DollarSign" size={16} />
                         {p.tuition}
                       </div>
                     </div>
@@ -349,6 +357,257 @@ function ProgramsCarousel({
         </div>
       </div>
     </div>
+  );
+}
+
+/* --- Explore Other Disciplines (Bento Grid with Custom Cursor) --- */
+function ExploreOtherDisciplines({ currentSlug }: { currentSlug: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Filter out current course
+  const otherCourses = courseCategories.filter((c) => c.slug !== currentSlug);
+
+  // Smooth cursor tracking
+  useEffect(() => {
+    const container = containerRef.current;
+    const cursor = cursorRef.current;
+    if (!container || !cursor) return;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let animationId: number;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    const animate = () => {
+      cursor.style.left = `${mouseX}px`;
+      cursor.style.top = `${mouseY}px`;
+      animationId = requestAnimationFrame(animate);
+    };
+
+    container.addEventListener("mousemove", handleMouseMove);
+    animationId = requestAnimationFrame(animate);
+
+    return () => {
+      container.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+
+  return (
+    <section className="py-20 md:py-36 bg-gray-50">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+        {/* Header */}
+        <FadeUp>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+              Explore Other Disciplines
+            </h2>
+            <p className="text-base md:text-lg text-slate-500 max-w-xl mx-auto">
+              Browse more study fields that interest you
+            </p>
+          </div>
+        </FadeUp>
+
+        {/* Bento Grid with Custom Cursor */}
+        <div
+          ref={containerRef}
+          className="relative [&_*]:cursor-none"
+          style={{ cursor: "none" }}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          {/* Custom Cursor - View Button */}
+          <div
+            ref={cursorRef}
+            className={`pointer-events-none fixed z-[9999] -translate-x-1/2 -translate-y-1/2 ${
+              isHovering ? "opacity-100 scale-100" : "opacity-0 scale-50"
+            }`}
+            style={{
+              willChange: "left, top",
+              transition: isHovering ? "opacity 0.2s, transform 0.2s" : "opacity 0.15s, transform 0.15s",
+            }}
+          >
+            <div className="flex items-center gap-2 px-5 py-2.5 bg-white rounded-full text-slate-900 text-sm font-medium shadow-xl border border-gray-100">
+              View
+              <svg 
+                className="w-4 h-4" 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="none"
+              >
+                <path 
+                  d="M7 17L17 7M17 7H7M17 7V17" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* Large Card 1 - First course (spans 2 rows) */}
+            {otherCourses[0] && (
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="md:row-span-2"
+              >
+                <Link href={`/courses/${otherCourses[0].slug}`} className="block group h-full">
+                  <div className="h-full rounded-2xl overflow-hidden bg-white shadow-sm relative">
+                    <div className="relative h-full min-h-[380px] md:min-h-[500px] overflow-hidden">
+                      <Image
+                        src={otherCourses[0].image}
+                        alt={otherCourses[0].title}
+                        fill
+                        className="object-cover group-hover:scale-[1.15] transition-transform duration-700 ease-out"
+                      />
+                      {/* Programs badge */}
+                      <div className="absolute top-4 left-4">
+                        <span className="text-white text-xs font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                          {otherCourses[0].programs} Programs
+                        </span>
+                      </div>
+                      {/* Icon badge */}
+                      <div className="absolute top-4 right-4">
+                        <span className="w-9 h-9 rounded-lg bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                          <Icon name={otherCourses[0].icon} size={18} className="text-white" />
+                        </span>
+                      </div>
+                    </div>
+                    {/* Title - slides up on hover */}
+                    <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                      <div className="p-5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-xs">
+                        <h3 className="text-lg md:text-xl font-semibold text-white">
+                          {otherCourses[0].title}
+                        </h3>
+                        <p className="text-white text-xs mt-1">
+                          {otherCourses[0].description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            )}
+
+            {/* Large Card 2 - Second course (spans 2 columns) */}
+            {otherCourses[1] && (
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="lg:col-span-2"
+              >
+                <Link href={`/courses/${otherCourses[1].slug}`} className="block group">
+                  <div className="rounded-2xl overflow-hidden bg-white shadow-sm relative">
+                    <div className="relative h-[280px] md:h-[320px] overflow-hidden">
+                      <Image
+                        src={otherCourses[1].image}
+                        alt={otherCourses[1].title}
+                        fill
+                        className="object-cover group-hover:scale-[1.15] transition-transform duration-700 ease-out"
+                      />
+                      {/* Programs badge */}
+                      <div className="absolute top-4 left-4">
+                        <span className="text-white text-xs font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                          {otherCourses[1].programs} Programs
+                        </span>
+                      </div>
+                      {/* Icon badge */}
+                      <div className="absolute top-4 right-4">
+                        <span className="w-9 h-9 rounded-lg bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                          <Icon name={otherCourses[1].icon} size={18} className="text-white" />
+                        </span>
+                      </div>
+                    </div>
+                    {/* Title - slides up on hover */}
+                    <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                      <div className="p-5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-xs">
+                        <h3 className="text-lg md:text-xl font-semibold text-white">
+                          {otherCourses[1].title}
+                        </h3>
+                        <p className="text-white text-xs mt-1">
+                          {otherCourses[1].description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            )}
+
+            {/* Small Cards Grid - Remaining courses */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-5"
+            >
+              {otherCourses.slice(2).map((cat, idx) => (
+                <Link
+                  key={cat.slug}
+                  href={`/courses/${cat.slug}`}
+                  className="block group"
+                >
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.1 * idx }}
+                    className="rounded-2xl overflow-hidden bg-white shadow-sm relative"
+                  >
+                    <div className="relative h-[160px] md:h-[180px] overflow-hidden">
+                      <Image
+                        src={cat.image}
+                        alt={cat.title}
+                        fill
+                        className="object-cover group-hover:scale-[1.5] transition-transform duration-700 ease-out"
+                      />
+                      {/* Programs badge */}
+                      <div className="absolute top-3 left-3">
+                        <span className="text-white text-[10px] font-medium bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full">
+                          {cat.programs} Programs
+                        </span>
+                      </div>
+                      {/* Icon badge */}
+                      <div className="absolute top-3 right-3">
+                        <span className="w-7 h-7 rounded-md bg-black/30 backdrop-blur-sm flex items-center justify-center">
+                          <Icon name={cat.icon} size={14} className="text-white" />
+                        </span>
+                      </div>
+                    </div>
+                    {/* Title - slides up on hover */}
+                    <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                      <div className="p-4 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-xs">
+                        <h3 className="text-sm md:text-base font-medium text-white">
+                          {cat.title}
+                        </h3>
+                        <p className="text-white text-xs mt-1">
+                          {cat.description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Link>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -452,7 +711,7 @@ export default function CourseDetailPage() {
             <p className="text-slate-500 max-w-xl">Choose from specialized programs in {course.title}</p>
           </FadeUp>
         </div>
-        <ProgramsCarousel programs={course.programsList} icon={course.icon} />
+        <ProgramsCarousel programs={course.programsList} />
       </section>
 
       {/* Career Outcomes */}
@@ -618,58 +877,8 @@ export default function CourseDetailPage() {
         </div>
       </section>
 
-      {/* Other Course Categories */}
-      <section className="py-24 px-6 bg-[#fafaf8]">
-        <div className="max-w-[1440px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Explore Other Disciplines
-              </h2>
-              <p className="text-lg text-slate-500">Browse more study fields that interest you</p>
-            </div>
-          </FadeUp>
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {courseCategories
-              .filter((c) => c.slug !== slug)
-              .slice(0, 6)
-              .map((cat) => (
-                <StaggerItem key={cat.slug}>
-                  <HoverCard>
-                    <Link href={`/courses/${cat.slug}`} className="block">
-                      <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 group h-full shadow-sm">
-                        <div className="relative h-36 overflow-hidden">
-                          <Image
-                            src={cat.image}
-                            alt={cat.title}
-                            fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                          <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
-                            <span className="text-white text-xs font-medium bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                              {cat.programs} Programs
-                            </span>
-                            <span className="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                              <Icon name={cat.icon} size={16} className="text-white" />
-                            </span>
-                          </div>
-                        </div>
-                        <div className="p-5">
-                          <h3 className="text-base font-semibold text-slate-900 mb-1">{cat.title}</h3>
-                          <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed">{cat.description}</p>
-                          <div className="mt-3 flex items-center gap-1 text-[#003975] text-xs font-medium group-hover:gap-2 transition-all">
-                            Explore <Icon name="ArrowRight" size={12} />
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </HoverCard>
-                </StaggerItem>
-              ))}
-          </StaggerContainer>
-        </div>
-      </section>
+      {/* Other Course Categories - Bento Grid */}
+      <ExploreOtherDisciplines currentSlug={slug} />
 
       {/* CTA */}
       <section className="py-24 px-6 bg-gradient-to-br from-[#004a8f] to-[#003a75] text-white relative overflow-hidden">
