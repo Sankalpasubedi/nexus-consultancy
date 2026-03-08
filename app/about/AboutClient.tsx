@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, useMotionValue, useScroll, useTransform, MotionValue, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect, useCallback } from "react";
 import {
   FadeUp,
@@ -102,7 +102,7 @@ const testimonials = [
   },
 ];
 
-/* ─── Team Slider Component (Destination-style center-focused) ── */
+/* ─── Team Slider Component (with Featured Image) ── */
 
 const CARD_W = 320;
 const CARD_H = 420;
@@ -118,6 +118,8 @@ function TeamSliderSection({
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState<"left" | "right">("right");
   const x = useMotionValue(0);
 
   const isDragging = useRef(false);
@@ -140,22 +142,33 @@ function TeamSliderSection({
   useEffect(() => {
     const unsub = x.on("change", (latest) => {
       const idx = Math.round((-latest + centerOffset) / CARD_ITEM);
-      setActiveIndex(Math.max(0, Math.min(team.length - 1, idx)));
+      const newIndex = Math.max(0, Math.min(team.length - 1, idx));
+      if (newIndex !== activeIndex) {
+        setPrevIndex(activeIndex);
+        setSwipeDirection(newIndex > activeIndex ? "left" : "right");
+        setActiveIndex(newIndex);
+      }
     });
     return () => unsub();
-  }, [x, centerOffset, team.length]);
+  }, [x, centerOffset, team.length, activeIndex]);
 
   const goTo = useCallback(
     (index: number) => {
-      // Prevent overlapping animations
       if (isAnimating.current) return;
       
       const target = -index * CARD_ITEM + centerOffset;
       const startX = x.get();
       const diff = target - startX;
       
-      // Skip animation if already at target
       if (Math.abs(diff) < 1) return;
+      
+      // Set direction before animation
+      if (index > activeIndex) {
+        setSwipeDirection("left");
+      } else if (index < activeIndex) {
+        setSwipeDirection("right");
+      }
+      setPrevIndex(activeIndex);
       
       isAnimating.current = true;
       let start: number | null = null;
@@ -174,7 +187,7 @@ function TeamSliderSection({
       };
       requestAnimationFrame(step);
     },
-    [x, centerOffset]
+    [x, centerOffset, activeIndex]
   );
 
   useEffect(() => {
@@ -184,7 +197,7 @@ function TeamSliderSection({
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      isAnimating.current = false; // Cancel any ongoing animation
+      isAnimating.current = false;
       isDragging.current = true;
       hasDragged.current = false;
       dragStartX.current = e.clientX;
@@ -223,7 +236,6 @@ function TeamSliderSection({
     }
   }, [x, centerOffset, goTo, team.length]);
 
-  // Touch handlers for mobile
   const handleTouchStart = useCallback(
     (e: React.TouchEvent) => {
       if (e.touches.length > 1) return;
@@ -257,7 +269,6 @@ function TeamSliderSection({
     goTo(Math.max(0, Math.min(team.length - 1, idx)));
   }, [x, centerOffset, goTo, team.length]);
 
-  // Card click handler - click non-active card to move to it
   const handleCardClick = useCallback(
     (e: React.MouseEvent, index: number) => {
       if (hasDragged.current) {
@@ -265,7 +276,6 @@ function TeamSliderSection({
         e.stopPropagation();
         return;
       }
-      // If clicking a non-active card, scroll to it
       if (index !== activeIndex) {
         e.preventDefault();
         goTo(index);
@@ -273,6 +283,30 @@ function TeamSliderSection({
     },
     [activeIndex, goTo]
   );
+
+  // Animation variants for featured image
+  const imageVariants = {
+    enter: (direction: "left" | "right") => ({
+      x: direction === "left" ? 100 : -100,
+      y: 50,
+      opacity: 0,
+      scale: 0.8,
+    }),
+    center: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      scale: 1,
+    },
+    exit: (direction: "left" | "right") => ({
+      x: direction === "left" ? -100 : 100,
+      y: 50,
+      opacity: 0,
+      scale: 0.8,
+    }),
+  };
+
+  const activeMember = team[activeIndex];
 
   return (
     <section className="py-24 bg-gray-50 overflow-hidden">
@@ -290,125 +324,201 @@ function TeamSliderSection({
         </div>
       </FadeUp>
 
-      {/* Center-focused carousel */}
-      <div
-        ref={containerRef}
-        className="relative w-full cursor-grab active:cursor-grabbing select-none"
-        style={{ height: CARD_H + 40 }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <motion.div
-          style={{ x }}
-          className="flex items-center absolute top-0 left-0"
-        >
-          {team.map((m, i) => {
-            const isActive = i === activeIndex;
-            return (
-              <motion.div
-                key={m.name}
-                className={`flex-shrink-0 relative ${!isActive ? 'cursor-pointer' : ''}`}
-                style={{ width: CARD_W, marginRight: CARD_GAP }}
-                animate={{
-                  scale: isActive ? 1 : 0.88,
-                  opacity: isActive ? 1 : 0.45,
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                onClick={(e) => handleCardClick(e, i)}
-              >
-                <div
-                  className="rounded-3xl overflow-hidden shadow-xl bg-white border border-gray-100 group"
-                  style={{ height: CARD_H }}
+      {/* Main layout: Featured Image Left + Carousel Right */}
+      <div className="max-w-[1440px] mx-auto px-6">
+        <div className="grid lg:grid-cols-[400px_1fr] gap-8 items-center">
+          {/* Featured Image - Left Side */}
+          <div className="hidden lg:block relative h-[500px]">
+            <div className="absolute -top-8 -left-8 w-40 h-40 rounded-full bg-[#003975]/[0.08] blur-2xl" />
+            <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-[#00ab18]/[0.08] blur-2xl" />
+            
+            {/* Featured Image Container */}
+            <div className="relative h-full flex items-center justify-center z-20">
+              <AnimatePresence mode="wait" custom={swipeDirection}>
+                <motion.div
+                  key={activeIndex}
+                  custom={swipeDirection}
+                  variants={imageVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                    duration: 0.5,
+                  }}
+                  className="relative"
                 >
-                  {/* Photo area / placeholder */}
-                  <div className="relative h-[260px] overflow-hidden bg-gradient-to-br from-[#003975]/5 via-slate-50 to-[#00ab18]/5">
-                    {/* Decorative circles */}
-                    <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[#003975]/[0.06]" />
-                    <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-[#00ab18]/[0.06]" />
-
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl ring-4 ring-white group">
-                        <Image
-                          src={`/services/NEX-_-${i + 1}.jpg`}
-                          alt={m.name}
-                          width={112}
-                          height={112}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Role badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="text-[10px] font-bold tracking-widest uppercase text-[#003975] bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
-                        {m.role.split("/")[0].trim()}
-                      </span>
-                    </div>
+                  {/* Large Featured Image */}
+                  <div className="relative w-72 h-72 rounded-full overflow-hidden shadow-2xl ring-8 ring-white">
+                    <Image
+                      src={`/services/NEX-_-${activeIndex + 1}.jpg`}
+                      alt={activeMember.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
+                  
+                  {/* Name badge below image */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                    className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-6 py-3 text-center min-w-[200px]"
+                  >
+                    <h3 className="text-lg font-bold text-slate-900">{activeMember.name}</h3>
+                    <p className="text-[#003975] text-xs font-medium">{activeMember.role}</p>
+                  </motion.div>
 
-                  {/* Info */}
-                  <div className="p-6 text-center">
-                    <h3 className="text-lg font-bold text-slate-900">{m.name}</h3>
-                    <p className="text-[#003975] text-xs font-medium mt-1">{m.role}</p>
+                  {/* Decorative ring */}
+                  <div className="absolute inset-0 w-72 h-72 rounded-full border-4 border-dashed border-[#003975]/20 animate-spin-slow" style={{ animationDuration: '20s' }} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-                    {/* Social links */}
-                    <div className="flex items-center justify-center gap-3 mt-4">
-                      {m.linkedin && (
-                        <a
-                          href={m.linkedin}
-                          onClick={(e) => { if (hasDragged.current) { e.preventDefault(); e.stopPropagation(); } }}
-                          className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
-                          aria-label={`${m.name} LinkedIn`}
-                        >
-                          <Icon name="Linkedin" size={14} />
-                        </a>
-                      )}
-                      {m.email && (
-                        <a
-                          href={`mailto:${m.email}`}
-                          onClick={(e) => { if (hasDragged.current) { e.preventDefault(); e.stopPropagation(); } }}
-                          className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
-                          aria-label={`Email ${m.name}`}
-                        >
-                          <Icon name="Mail" size={14} />
-                        </a>
-                      )}
-                      <a
-                        href="#"
-                        onClick={(e) => { e.preventDefault(); if (hasDragged.current) e.stopPropagation(); }}
-                        className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
-                        aria-label={`${m.name} Phone`}
+            {/* Index indicator */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">
+              <span className="text-2xl font-bold text-[#003975]">{String(activeIndex + 1).padStart(2, '0')}</span>
+              <span className="text-slate-400">/</span>
+              <span className="text-sm text-slate-500">{String(team.length).padStart(2, '0')}</span>
+            </div>
+          </div>
+
+          {/* Carousel - Right Side */}
+          <div className="relative overflow-hidden">
+            <div
+              ref={containerRef}
+              className="relative w-full cursor-grab active:cursor-grabbing select-none"
+              style={{ height: CARD_H + 40 }}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <motion.div
+                style={{ x }}
+                className="flex items-center absolute top-0 left-0"
+              >
+                {team.map((m, i) => {
+                  const isActive = i === activeIndex;
+                  return (
+                    <motion.div
+                      key={m.name}
+                      className={`flex-shrink-0 relative ${!isActive ? 'cursor-pointer' : ''}`}
+                      style={{ width: CARD_W, marginRight: CARD_GAP }}
+                      animate={{
+                        scale: isActive ? 1 : 0.88,
+                        opacity: isActive ? 1 : 0.45,
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      onClick={(e) => handleCardClick(e, i)}
+                    >
+                      <div
+                        className="rounded-3xl overflow-hidden shadow-xl bg-white border border-gray-100 group"
+                        style={{ height: CARD_H }}
                       >
-                        <Icon name="Phone" size={14} />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
+                        {/* Photo area */}
+                        <div className="relative h-[260px] overflow-hidden bg-gradient-to-br from-[#003975]/5 via-slate-50 to-[#00ab18]/5">
+                          <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[#003975]/[0.06]" />
+                          <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-[#00ab18]/[0.06]" />
 
-      {/* Navigation dots */}
-      <div className="flex items-center justify-center gap-4 mt-8">
-        <div className="flex items-center gap-2">
-          {team.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className={`rounded-full transition-all duration-300 ${
-                i === activeIndex
-                  ? "w-8 h-2.5 bg-[#003975]"
-                  : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
-              }`}
-            />
-          ))}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl ring-4 ring-white group">
+                              <Image
+                                src={`/services/NEX-_-${i + 1}.jpg`}
+                                alt={m.name}
+                                width={112}
+                                height={112}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="absolute top-4 left-4">
+                            <span className="text-[10px] font-bold tracking-widest uppercase text-[#003975] bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
+                              {m.role.split("/")[0].trim()}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Info */}
+                        <div className="p-6 text-center">
+                          <h3 className="text-lg font-bold text-slate-900">{m.name}</h3>
+                          <p className="text-[#003975] text-xs font-medium mt-1">{m.role}</p>
+
+                          <div className="flex items-center justify-center gap-3 mt-4">
+                            {m.linkedin && (
+                              <a
+                                href={m.linkedin}
+                                onClick={(e) => { if (hasDragged.current) { e.preventDefault(); e.stopPropagation(); } }}
+                                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                                aria-label={`${m.name} LinkedIn`}
+                              >
+                                <Icon name="Linkedin" size={14} />
+                              </a>
+                            )}
+                            {m.email && (
+                              <a
+                                href={`mailto:${m.email}`}
+                                onClick={(e) => { if (hasDragged.current) { e.preventDefault(); e.stopPropagation(); } }}
+                                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                                aria-label={`Email ${m.name}`}
+                              >
+                                <Icon name="Mail" size={14} />
+                              </a>
+                            )}
+                            <a
+                              href="#"
+                              onClick={(e) => { e.preventDefault(); if (hasDragged.current) e.stopPropagation(); }}
+                              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                              aria-label={`${m.name} Phone`}
+                            >
+                              <Icon name="Phone" size={14} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </div>
+
+            {/* Navigation dots */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <button
+                onClick={() => activeIndex > 0 && goTo(activeIndex - 1)}
+                disabled={activeIndex === 0}
+                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <Icon name="ChevronLeft" size={18} />
+              </button>
+              <div className="flex items-center gap-2">
+                {team.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goTo(i)}
+                    className={`rounded-full transition-all duration-300 ${
+                      i === activeIndex
+                        ? "w-8 h-2.5 bg-[#003975]"
+                        : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
+                    }`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => activeIndex < team.length - 1 && goTo(activeIndex + 1)}
+                disabled={activeIndex === team.length - 1}
+                className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <Icon name="ChevronRight" size={18} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

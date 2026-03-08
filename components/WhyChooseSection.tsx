@@ -72,11 +72,11 @@ export default function WhyChooseSection() {
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch">
           {/* LEFT: Stats card */}
           <FadeUp className="lg:w-[45%] flex" delay={0.1}>
-            <div className="relative w-full bg-slate-800 rounded-3xl p-10 lg:p-12 overflow-hidden flex flex-col justify-center">
+            <div className="relative w-full bg-[#003975] rounded-3xl p-10 lg:p-12 overflow-hidden flex flex-col justify-center">
               {/* Subtle gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-emerald-600/10 pointer-events-none" />
-              <div className="absolute -top-32 -right-32 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+              {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-emerald-600/10 pointer-events-none" /> */}
+              {/* <div className="absolute -top-32 -right-32 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" /> */}
+              {/* <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" /> */}
 
               <div className="relative z-10">
                 <p className="text-sm font-medium text-slate-400 uppercase tracking-widest mb-10">

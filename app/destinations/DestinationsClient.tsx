@@ -26,6 +26,10 @@ export default function Destinations() {
   const [isMobile, setIsMobile] = useState(false);
   const x = useMotionValue(0);
 
+  // Cursor tooltip state
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+
   // Drag tracking refs
   const isDragging = useRef(false);
   const hasDragged = useRef(false);
@@ -248,7 +252,7 @@ export default function Destinations() {
 
       {/* Header */}
       <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 my-8 md:my-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="flex gap-12 items-center">
           {/* Left Content */}
           <div>
             <FadeUp delay={0.1}>
@@ -266,7 +270,7 @@ export default function Destinations() {
           {/* Right Image */}
           <FadeUp delay={0.3}>
             <div className="hidden lg:block relative group">
-              <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+              <div className="relative w-72 h-72 aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                 <Image
                   src="/services/NEX-_-25.jpg"
                   alt="Study Destinations"
@@ -300,7 +304,7 @@ export default function Destinations() {
       {/* Full-width Drag Carousel */}
       <div
         ref={containerRef}
-        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        className="relative w-full overflow-hidden select-none"
         style={{ 
           height: IMAGE_HEIGHT + 40,
           touchAction: isMobile ? "pan-y" : "none", // Allow vertical scroll on mobile
@@ -312,7 +316,7 @@ export default function Destinations() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        onWheel={handleWheel}
+        // onWheel={handleWheel}
       >
         <motion.div
           style={{ x }}
@@ -320,6 +324,7 @@ export default function Destinations() {
         >
           {destinations.map((d, i) => {
             const isActive = i === activeIndex;
+            const isHovered = hoveredIndex === i;
             return (
               <motion.div
                 key={d.id}
@@ -353,8 +358,15 @@ export default function Destinations() {
                       }
                     }
                   }}
+                  onMouseEnter={() => !isMobile && setHoveredIndex(i)}
+                  onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+                  onMouseMove={(e) => {
+                    if (!isMobile) {
+                      setCursorPos({ x: e.clientX, y: e.clientY });
+                    }
+                  }}
                   draggable={false}
-                  className="block"
+                  className="block cursor-none"
                 >
                   <div className="relative rounded-3xl overflow-hidden shadow-2xl group" style={{ height: IMAGE_HEIGHT }}>
                     <Image 
@@ -381,6 +393,29 @@ export default function Destinations() {
             );
           })}
         </motion.div>
+
+        {/* Cursor-following tooltip */}
+        <AnimatePresence>
+          {hoveredIndex !== null && !isDragging.current && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.15 }}
+              className="fixed pointer-events-none z-50 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 text-sm font-medium text-slate-800"
+              style={{
+                left: cursorPos.x + 16,
+                top: cursorPos.y + 16,
+              }}
+            >
+              {hoveredIndex === activeIndex ? (
+                <>Why study in {destinations[hoveredIndex]?.name} <ArrowRight size={14} /></>
+              ) : (
+                <>Click to preview</>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Active Destination Info */}

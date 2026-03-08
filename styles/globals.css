@@ -148,6 +148,15 @@
   animation-play-state: paused;
 }
 
+/* Slow spin animation for decorative elements */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
 /* Gradient border effect */
 .gradient-border {
   position: relative;

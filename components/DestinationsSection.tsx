@@ -3,11 +3,11 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { destinations } from "@/data";
 import { FadeUp } from "@/lib/animations";
 import { FlagIcon } from "@/lib/icons";
-import { Globe } from "lucide-react";
+import { Globe, ArrowRight } from "lucide-react";
 
 export default function DestinationsSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -21,6 +21,18 @@ export default function DestinationsSection() {
   const dragStartX = useRef(0);
   const dragScrollLeft = useRef(0);
   const hasDragged = useRef(false);
+
+  // Cursor tooltip state
+  const [hoveredDestination, setHoveredDestination] = useState<string | null>(null);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const updateState = useCallback(() => {
     if (!scrollRef.current) return;
@@ -149,13 +161,24 @@ export default function DestinationsSection() {
               transition={{ delay: idx * 0.08, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
               style={{ scrollSnapAlign: "start" }}
             >
-              <Link href={`/destinations/${dest.slug}`} draggable={false} onClick={handleCardClick}>
-                <div className="relative h-[480px] rounded-3xl overflow-hidden group cursor-pointer">
+              <Link 
+                href={`/destinations/${dest.slug}`} 
+                draggable={false} 
+                onClick={handleCardClick}
+                onMouseEnter={() => !isMobile && setHoveredDestination(dest.name)}
+                onMouseLeave={() => !isMobile && setHoveredDestination(null)}
+                onMouseMove={(e) => {
+                  if (!isMobile) {
+                    setCursorPos({ x: e.clientX, y: e.clientY });
+                  }
+                }}
+              >
+                <div className="relative h-[480px] rounded-3xl overflow-hidden group cursor-none">
                   <Image
                     src={dest.image}
                     alt={dest.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-[800ms] ease-out"
+                    className="object-cover group-hover:scale-150 transition-transform duration-[800ms] ease-out"
                     draggable={false}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
@@ -178,6 +201,25 @@ export default function DestinationsSection() {
             </motion.div>
           ))}
         </div>
+
+      {/* Cursor-following tooltip */}
+      <AnimatePresence>
+        {hoveredDestination && !isDragging.current && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.15 }}
+            className="fixed pointer-events-none z-50 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 text-sm font-medium text-slate-800"
+            style={{
+              left: cursorPos.x + 16,
+              top: cursorPos.y + 16,
+            }}
+          >
+            Why study in {hoveredDestination} <ArrowRight size={14} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Progress Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 mt-8 md:mt-12">

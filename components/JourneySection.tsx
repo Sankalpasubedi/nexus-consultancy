@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { FadeUp, FadeLeft, FadeRight } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
@@ -13,6 +14,7 @@ const steps = [
       "We assess your profile, goals, and preferences to create a personalized education plan.",
     icon: "Search",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-1.jpg",
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const steps = [
       "Shortlist universities that match your aspirations, budget, and academic background.",
     icon: "ClipboardList",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-3.jpg",
   },
   {
     id: 3,
@@ -29,6 +32,7 @@ const steps = [
       "Complete applications with expert guidance and navigate visa requirements seamlessly.",
     icon: "FileText",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-5.jpg",
   },
   {
     id: 4,
@@ -37,6 +41,7 @@ const steps = [
       "Get ready with accommodation, travel bookings, and essential pre-departure briefings.",
     icon: "Plane",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-7.jpg",
   },
   {
     id: 5,
@@ -45,6 +50,7 @@ const steps = [
       "Arrive confident and prepared to excel in your new academic environment.",
     icon: "GraduationCap",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    image: "/services/NEX-_-10.jpg",
   },
 ];
 
@@ -89,30 +95,32 @@ export default function JourneySection() {
                     {/* Card side */}
                     <div className="w-[calc(50%-2rem)] px-4">
                       <Wrapper delay={idx * 0.1}>
-                        <div className="relative bg-white rounded-3xl p-8 shadow-sm border border-gray-100 overflow-hidden group hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-500">
-                          {/* Left accent bar */}
-                          <div
-                            className={`absolute left-0 top-0 bottom-0 w-1 bg-[#003975]`}
-                          />
-
-                          {/* Ambient glow */}
-                          <div
-                            className={`absolute -bottom-6 -right-6 w-32 h-32 bg-[#003975] opacity-[0.07] blur-3xl rounded-full group-hover:opacity-[0.12] transition-opacity duration-500`}
-                          />
-
-                          <div className="flex items-start gap-5 relative z-10">
-                            {/* Icon badge */}
-                            <div
-                              className={`w-14 h-14 rounded-2xl bg-[#003975] flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-300`}
-                            >
-                              <Icon
-                                name={step.icon}
-                                size={22}
-                                className="text-white"
+                        <div className="relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-500">
+                          <div className={`flex ${isLeft ? "flex-row" : "flex-row-reverse"}`}>
+                            {/* Image side */}
+                            <div className="relative w-72 h-72 flex-shrink-0 overflow-hidden">
+                              <Image
+                                src={step.image}
+                                alt={step.title}
+                                fill
+                                className="object-cover group-hover:scale-110 transition-transform duration-500"
                               />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                              {/* Step number overlay */}
+                              <div className="absolute bottom-3 left-3">
+                                <div className="w-10 h-10 rounded-xl bg-[#003975] flex items-center justify-center shadow-lg">
+                                  <span className="text-white text-sm font-bold">{step.id}</span>
+                                </div>
+                              </div>
                             </div>
 
-                            <div>
+                            {/* Content side */}
+                            <div className="flex-1 p-6 flex flex-col justify-center">
+                              {/* Icon badge */}
+                              <div className="w-12 h-12 rounded-xl bg-[#003975] flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                <Icon name={step.icon} size={20} className="text-white" />
+                              </div>
+
                               <p className="text-xs text-slate-400 font-semibold uppercase tracking-widest mb-1.5">
                                 Step {step.id}
                               </p>

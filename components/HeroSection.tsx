@@ -168,8 +168,8 @@ export default function HeroSection() {
       </AnimatePresence>
 
       {/* ── Gradient Overlay ── */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#001020]/62 via-[#001020]/38 to-transparent" />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#001020]/42 via-transparent to-[#001020]/20" />
+      {/* <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#001020]/62 via-[#001020]/38 to-transparent" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#001020]/42 via-transparent to-[#001020]/20" /> */}
 
       {/* ── Main Content ── */}
       <div className="relative z-10 h-full flex flex-col justify-center pb-[320px] sm:pb-[240px] md:pb-52 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">

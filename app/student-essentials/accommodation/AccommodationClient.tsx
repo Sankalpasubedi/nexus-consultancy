@@ -2,19 +2,334 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, AnimatePresence } from "framer-motion";
 import {
   FadeUp,
-  FadeLeft,
   FadeRight,
   StaggerContainer,
   StaggerItem,
   HoverCard,
-  TrackpadCarousel,
-  CarouselCard,
 } from "@/lib/animations";
 import { Icon, FlagIcon } from "@/lib/icons";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+
+/* ─── Cities Carousel Constants ──────────────────── */
+const C_CARD_W = 340;
+const C_CARD_H = 153;
+const C_GAP = 24;
+const C_ITEM = C_CARD_W + C_GAP;
+const DRAG_THRESHOLD = 5;
+const MOBILE_BREAKPOINT = 768;
+
+const cities = [
+  { city: "Sydney", country: "Australia", avgRent: "$1,200/mo", logo: "🏞️", image: "/services/NEX-_-15.jpg", highlight: "Beach lifestyle" },
+  { city: "London", country: "UK", avgRent: "£900/mo", logo: "🏰", image: "/services/NEX-_-17.jpg", highlight: "Historic city" },
+  { city: "Toronto", country: "Canada", avgRent: "C$1,500/mo", logo: "🍁", image: "/services/NEX-_-19.jpg", highlight: "Multicultural" },
+  { city: "New York", country: "USA", avgRent: "$1,800/mo", logo: "🗽", image: "/services/NEX-_-21.jpg", highlight: "Vibrant hub" },
+  { city: "Melbourne", country: "Australia", avgRent: "$1,100/mo", logo: "🎯", image: "/services/NEX-_-23.jpg", highlight: "Cultural capital" },
+  { city: "Auckland", country: "New Zealand", avgRent: "NZ$1,000/mo", logo: "🌋", image: "/services/NEX-_-25.jpg", highlight: "Nature & city" },
+];
+
+/* ─── Cities Carousel Component ───────────────────── */
+function CitiesCarousel() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const x = useMotionValue(0);
+
+  const isDragging = useRef(false);
+  const hasDragged = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartVal = useRef(0);
+  const isAnimating = useRef(false);
+  const lastTouchUpdate = useRef(0);
+
+  useEffect(() => {
+    const update = () => {
+      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const centerOffset = containerWidth / 2 - C_CARD_W / 2;
+
+  useEffect(() => {
+    const unsub = x.on("change", (latest) => {
+      const idx = Math.round((-latest + centerOffset) / C_ITEM);
+      setActiveIndex(Math.max(0, Math.min(cities.length - 1, idx)));
+    });
+    return () => unsub();
+  }, [x, centerOffset]);
+
+  const goTo = useCallback(
+    (index: number) => {
+      if (isAnimating.current) return;
+      const target = -index * C_ITEM + centerOffset;
+      const startX = x.get();
+      const diff = target - startX;
+      if (Math.abs(diff) < 1) return;
+      isAnimating.current = true;
+      let start: number | null = null;
+      const duration = isMobile ? 250 : 500;
+      const step = (ts: number) => {
+        if (!start) start = ts;
+        const elapsed = ts - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        x.set(startX + diff * eased);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          isAnimating.current = false;
+        }
+      };
+      requestAnimationFrame(step);
+    },
+    [x, centerOffset, isMobile]
+  );
+
+  useEffect(() => {
+    if (containerWidth > 0) goTo(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [containerWidth]);
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      isAnimating.current = false;
+      isDragging.current = true;
+      hasDragged.current = false;
+      dragStartX.current = e.clientX;
+      dragStartVal.current = x.get();
+    },
+    [x]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging.current) return;
+      const delta = e.clientX - dragStartX.current;
+      if (Math.abs(delta) > DRAG_THRESHOLD) hasDragged.current = true;
+      const minX = -(C_ITEM * (cities.length - 1)) - centerOffset + containerWidth - C_CARD_W;
+      const maxX = centerOffset;
+      const raw = dragStartVal.current + delta;
+      x.set(Math.max(minX, Math.min(maxX, raw)));
+    },
+    [x, centerOffset, containerWidth]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const current = x.get();
+    const idx = Math.round((-current + centerOffset) / C_ITEM);
+    goTo(Math.max(0, Math.min(cities.length - 1, idx)));
+  }, [x, centerOffset, goTo]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isDragging.current) {
+      isDragging.current = false;
+      const current = x.get();
+      const idx = Math.round((-current + centerOffset) / C_ITEM);
+      goTo(Math.max(0, Math.min(cities.length - 1, idx)));
+    }
+  }, [x, centerOffset, goTo]);
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      isAnimating.current = false;
+      isDragging.current = true;
+      hasDragged.current = false;
+      dragStartX.current = e.touches[0].clientX;
+      dragStartVal.current = x.get();
+      lastTouchUpdate.current = 0;
+    },
+    [x]
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDragging.current) return;
+      const now = Date.now();
+      if (now - lastTouchUpdate.current < 16) return;
+      lastTouchUpdate.current = now;
+      const delta = e.touches[0].clientX - dragStartX.current;
+      if (Math.abs(delta) > DRAG_THRESHOLD) hasDragged.current = true;
+      const minX = -(C_ITEM * (cities.length - 1)) - centerOffset + containerWidth - C_CARD_W;
+      const maxX = centerOffset;
+      const raw = dragStartVal.current + delta;
+      x.set(Math.max(minX, Math.min(maxX, raw)));
+    },
+    [x, centerOffset, containerWidth]
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const current = x.get();
+    const idx = Math.round((-current + centerOffset) / C_ITEM);
+    goTo(Math.max(0, Math.min(cities.length - 1, idx)));
+  }, [x, centerOffset, goTo]);
+
+  const handleCardClick = useCallback(
+    (e: React.MouseEvent, index: number) => {
+      if (hasDragged.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      if (index !== activeIndex) {
+        e.preventDefault();
+        e.stopPropagation();
+        goTo(index);
+      }
+    },
+    [activeIndex, goTo]
+  );
+
+  const cityData = cities[activeIndex];
+
+  return (
+    <div>
+      <div
+        ref={containerRef}
+        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        style={{ 
+          height: C_CARD_H + 30,
+          touchAction: isMobile ? "pan-y" : "none",
+        }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <motion.div
+          style={{ x }}
+          className="flex items-center absolute top-0 left-0"
+        >
+          {cities.map((c, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <motion.div
+                key={c.city}
+                className={`flex-shrink-0 relative ${!isActive ? 'cursor-pointer' : ''}`}
+                style={{ 
+                  width: C_CARD_W, 
+                  marginRight: C_GAP,
+                  willChange: isMobile ? "transform" : "auto",
+                }}
+                animate={{
+                  scale: isActive ? 1 : (isMobile ? 0.92 : 0.88),
+                  opacity: isActive ? 1 : (isMobile ? 0.6 : 0.45),
+                }}
+                transition={isMobile 
+                  ? { type: "tween", duration: 0.15, ease: "easeOut" }
+                  : { type: "spring", stiffness: 300, damping: 30 }
+                }
+                onClick={(e) => handleCardClick(e, i)}
+              >
+                <div
+                  className="rounded-3xl overflow-hidden shadow-xl bg-white border border-gray-100 group"
+                  style={{ height: C_CARD_H }}
+                >
+                  {/* Top visual area with image */}
+                  {/* <div className="relative h-[200px] overflow-hidden">
+                    <Image
+                      src={c.image}
+                      alt={c.city}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                      <span className="text-xs font-bold tracking-widest uppercase text-white/80 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                        City
+                      </span>
+                      <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                        {c.highlight}
+                      </span>
+                    </div>
+                    <div className="absolute top-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-2xl shadow-lg">
+                      {c.logo}
+                    </div>
+                  </div> */}
+
+                  {/* Info area */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-slate-900 mb-1">{c.city}</h3>
+                    <p className="text-sm text-slate-500 mb-4">{c.country}</p>
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-2 text-sm text-slate-600">
+                        <Icon name="Home" size={16} className="text-[#003975]" />
+                        Avg: {c.avgRent}
+                      </div>
+                      <div className="flex items-center gap-2 text-sm font-semibold text-[#003975]">
+                        <Icon name="MapPin" size={16} />
+                        {c.highlight}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {/* Active info + nav */}
+      <div className="max-w-[1200px] mx-auto px-6">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: isMobile ? 5 : 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: isMobile ? -5 : -10 }}
+            transition={{ duration: isMobile ? 0.12 : 0.25 }}
+            className="text-center mt-6"
+          >
+            <h3 className="text-xl font-bold text-slate-900">{cityData?.city}</h3>
+            <p className="text-slate-500 text-sm">{cityData?.highlight} • {cityData?.country}</p>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Dots + arrows */}
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <button
+            onClick={() => activeIndex > 0 && goTo(activeIndex - 1)}
+            disabled={activeIndex === 0}
+            className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <Icon name="ChevronLeft" size={18} />
+          </button>
+          <div className="flex items-center gap-2">
+            {cities.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === activeIndex ? "w-6 bg-[#003975]" : "w-2 bg-gray-300 hover:bg-gray-400"
+                }`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={() => activeIndex < cities.length - 1 && goTo(activeIndex + 1)}
+            disabled={activeIndex === cities.length - 1}
+            className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-slate-700 hover:bg-white transition disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <Icon name="ChevronRight" size={18} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ─── Data ─────────────────────────────────────────── */
 
@@ -308,10 +623,10 @@ export default function AccommodationClient() {
       </section>
 
       {/* ── Featured Student Cities Carousel ── */}
-      <section className="py-16 px-6 bg-gradient-to-b from-white to-slate-50">
-        <div className="max-w-[1200px] mx-auto">
+      <section className="py-16 bg-[#fafaf8] overflow-hidden">
+        <div className="max-w-[1200px] mx-auto px-6 mb-10">
           <FadeUp>
-            <div className="text-center mb-10">
+            <div className="text-center">
               <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
                 Popular Destinations
               </span>
@@ -323,30 +638,8 @@ export default function AccommodationClient() {
               </p>
             </div>
           </FadeUp>
-
-          <TrackpadCarousel className="mt-8">
-            {[
-              { city: "Sydney", country: "Australia", avgRent: "$1,200/mo", image: "🏞️", color: "from-[#003975] to-[#0052a3]" },
-              { city: "London", country: "UK", avgRent: "£900/mo", image: "🏰", color: "from-[#00468f] to-[#005fb8]" },
-              { city: "Toronto", country: "Canada", avgRent: "C$1,500/mo", image: "🍁", color: "from-[#003975] to-[#1f6db7]" },
-              { city: "New York", country: "USA", avgRent: "$1,800/mo", image: "🗽", color: "from-[#002f61] to-[#0052a3]" },
-              { city: "Melbourne", country: "Australia", avgRent: "$1,100/mo", image: "🎯", color: "from-[#003975] to-[#0b5eb0]" },
-              { city: "Auckland", country: "New Zealand", avgRent: "NZ$1,000/mo", image: "🌋", color: "from-[#00468f] to-[#1f6db7]" },
-            ].map((city) => (
-              <CarouselCard key={city.city} className="min-w-[280px] sm:min-w-[320px]">
-                <div className={`bg-gradient-to-br ${city.color} rounded-2xl p-6 h-full text-white relative overflow-hidden`}>
-                  <div className="text-5xl mb-4">{city.image}</div>
-                  <h4 className="font-bold text-xl mb-1">{city.city}</h4>
-                  <p className="text-white/80 text-sm mb-3">{city.country}</p>
-                  <div className="flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 w-fit">
-                    <Icon name="Home" size={14} />
-                    <span className="text-sm font-medium">Avg: {city.avgRent}</span>
-                  </div>
-                </div>
-              </CarouselCard>
-            ))}
-          </TrackpadCarousel>
         </div>
+        <CitiesCarousel />
       </section>
 
       {/* ── Checklist ── */}
