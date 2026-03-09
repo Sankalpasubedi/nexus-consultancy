@@ -17,7 +17,7 @@ const links = [
     title: "Why Study Abroad",
     description: "Discover the life-changing benefits of international education.",
     href: "/study-abroad/why-study-abroad",
-    image: "/services/NEX-_-7.jpg",
+    image: "/images/why-study-abroad.jpg",
     resources: 1,
   },
   {
@@ -25,7 +25,7 @@ const links = [
     title: "Destinations",
     description: "Compare countries side-by-side on costs, education quality, work opportunities, and more.",
     href: "/study-abroad/compare-destinations",
-    image: "/services/NEX-_-32.jpg",
+    image: "/images/destinations.jpg",
     resources: 8,
   },
   {
@@ -33,7 +33,7 @@ const links = [
     title: "Documents Required",
     description: "Complete checklist of every document you need for applications and visa.",
     href: "/study-abroad/documents-required",
-    image: "/services/NEX-_-42.jpg",
+    image: "/images/documents-required.jpg",
     resources: 1,
   },
   {
@@ -41,7 +41,7 @@ const links = [
     title: "Application Process",
     description: "Step-by-step guide from research to arrival, with timelines and tips.",
     href: "/study-abroad/application-process",
-    image: "/services/NEX-_-3.jpg",
+    image: "/images/application-processes.jpg",
     resources: 1,
   },
   {
@@ -49,7 +49,7 @@ const links = [
     title: "Study Abroad Guide",
     description: "Your complete roadmap to studying overseas — from planning to departure.",
     href: "/study-abroad/complete-guide",
-    image: "/services/NEX-_-12.jpg",
+    image: "/images/study-abroad-guide.jpg",
     resources: 1,
   },
 ];
@@ -83,27 +83,32 @@ export default function StudyAbroadPage() {
     setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  // Infinite auto-scroll
+  // Infinite auto-scroll with delta-time for smooth animation
   useEffect(() => {
     const scrollEl = scrollRef.current;
     if (!scrollEl) return;
 
     let animationId: number;
-    const scrollSpeed = 0.5;
+    let lastTime = performance.now();
+    const scrollSpeed = 40; // pixels per second
 
-    const smoothScroll = () => {
+    const smoothScroll = (currentTime: number) => {
+      const deltaTime = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
       if (isPaused.current || isDragging.current || isHovering.current) {
         animationId = requestAnimationFrame(smoothScroll);
         return;
       }
 
-      const { scrollLeft, scrollWidth, clientWidth } = scrollEl;
-      const half = (scrollWidth - clientWidth) / 2;
+      const { scrollLeft, scrollWidth } = scrollEl;
+      const singleSetWidth = scrollWidth / 2;
 
-      if (scrollLeft >= half + clientWidth) {
-        scrollEl.scrollLeft = scrollLeft - half;
+      // When we've scrolled past the first set, jump back seamlessly
+      if (scrollLeft >= singleSetWidth) {
+        scrollEl.scrollLeft = scrollLeft - singleSetWidth;
       } else {
-        scrollEl.scrollLeft += scrollSpeed;
+        scrollEl.scrollLeft += scrollSpeed * deltaTime;
       }
 
       animationId = requestAnimationFrame(smoothScroll);
@@ -299,6 +304,8 @@ export default function StudyAbroadPage() {
                 WebkitOverflowScrolling: "touch",
                 overscrollBehaviorX: "contain",
                 touchAction: "pan-x pinch-zoom",
+                scrollBehavior: "auto",
+                willChange: "scroll-position",
               }}
             >
               {infiniteLinks.map((l, idx) => (

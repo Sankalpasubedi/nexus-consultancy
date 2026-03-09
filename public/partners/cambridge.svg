@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <rect width="200" height="80" fill="#A3C1AD"/>
+  <text x="100" y="45" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#1E3A28">CAMBRIDGE</text>
+  <text x="100" y="62" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1E3A28">University</text>
+</svg>

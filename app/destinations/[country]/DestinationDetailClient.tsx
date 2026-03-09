@@ -246,6 +246,22 @@ export default function DestinationDetailClient() {
       <section className="py-20 px-6 bg-[#fafaf8] relative overflow-hidden">
         <AnimatedBlob className="absolute -top-32 -right-32 w-96 h-96" color="blue" />
         <AnimatedBlob className="absolute -bottom-32 -left-32 w-80 h-80" color="green" />
+        
+        {/* Floating Right Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden xl:block absolute top-24 right-12 z-0"
+        >
+          <div className="relative">
+            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
+            <div className="relative w-72 h-96 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+              <Image src="/services/rightimage3.jpg" alt="" fill className="object-cover" />
+            </div>
+          </div>
+        </motion.div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <FadeUp>
@@ -361,8 +377,24 @@ export default function DestinationDetailClient() {
       </section>
 
       {/* ═══════════ TOP UNIVERSITIES ═══════════ */}
-      <section className="py-24 px-6 bg-[#fafaf8]">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 px-6 bg-[#fafaf8] relative overflow-hidden">
+        {/* Floating Left Image */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden xl:block absolute bottom-16 left-12 z-0"
+        >
+          <div className="relative">
+            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
+            <div className="relative w-72 h-96 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+              <Image src="/services/leftimage5.jpg" alt="" fill className="object-cover" />
+            </div>
+          </div>
+        </motion.div>
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <FadeUp>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
               <div>
@@ -495,6 +527,22 @@ export default function DestinationDetailClient() {
       {/* ═══════════ VISA & DOCUMENTS ═══════════ */}
       <section className="py-24 px-6 bg-[#fafaf8] relative overflow-hidden">
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#003975]/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        {/* Floating Right Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 120 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden xl:block absolute top-32 right-12 z-0"
+        >
+          <div className="relative">
+            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
+            <div className="relative w-72 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+              <Image src="/services/rightimage7.jpg" alt="" fill className="object-cover" />
+            </div>
+          </div>
+        </motion.div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <FadeUp>
@@ -606,8 +654,24 @@ export default function DestinationDetailClient() {
       </section>
 
       {/* ═══════════ WORK & CAREER ═══════════ */}
-      <section className="py-24 px-6 bg-[#fafaf8]">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 px-6 bg-[#fafaf8] relative overflow-hidden">
+        {/* Floating Right Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden xl:block absolute top-16 right-10 z-0"
+        >
+          <div className="relative">
+            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
+            <div className="relative w-64 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+              <Image src="/services/rightimage2.jpg" alt="" fill className="object-cover" />
+            </div>
+          </div>
+        </motion.div>
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <FadeUp>
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
@@ -651,6 +715,22 @@ export default function DestinationDetailClient() {
       {/* ═══════════ SCHOLARSHIPS ═══════════ */}
       <section className="py-24 px-6 bg-white relative overflow-hidden">
         <div className="absolute top-0 left-0 w-72 h-72 bg-[#003975]/5 rounded-full blur-[100px] pointer-events-none" />
+        
+        {/* Floating Left Image */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden xl:block absolute bottom-20 left-10 z-0"
+        >
+          <div className="relative">
+            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
+            <div className="relative w-64 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+              <Image src="/services/leftimage9.jpg" alt="" fill className="object-cover" />
+            </div>
+          </div>
+        </motion.div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <FadeUp>
@@ -710,8 +790,9 @@ export default function DestinationDetailClient() {
       </section>
 
       {/* ═══════════ CULTURE ═══════════ */}
-      <section className="py-24 px-6 bg-[#fafaf8]">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 px-6 bg-[#fafaf8] relative overflow-hidden">
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <FadeUp>
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
@@ -768,6 +849,21 @@ export default function DestinationDetailClient() {
       {/* ═══════════ TESTIMONIALS ═══════════ */}
       {data.testimonials.length > 0 && (
         <section className="py-24 px-6 bg-white relative overflow-hidden">
+          {/* Floating Left Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden xl:block absolute top-24 left-10 z-0"
+          >
+            <div className="relative">
+              <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
+              <div className="relative w-64 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+                <Image src="/services/leftimage2.jpg" alt="" fill className="object-cover" />
+              </div>
+            </div>
+          </motion.div>
           <AnimatedBlob className="absolute -top-20 -left-20 w-72 h-72" color="purple" />
 
           <div className="max-w-6xl mx-auto relative z-10">
@@ -785,7 +881,7 @@ export default function DestinationDetailClient() {
             <StaggerContainer className="grid md:grid-cols-3 gap-6">
               {data.testimonials.map((t, idx) => (
                 <StaggerItem key={idx}>
-                  <ClipReveal>
+                  <HoverCard>
                     <div className="bg-[#fafaf8] rounded-2xl p-7 border border-gray-100 h-full flex flex-col">
                       <div className="mb-5">
                         <svg className="w-8 h-8 text-[#003975]/20" fill="currentColor" viewBox="0 0 24 24">
@@ -805,7 +901,7 @@ export default function DestinationDetailClient() {
                         </div>
                       </div>
                     </div>
-                  </ClipReveal>
+                  </HoverCard>
                 </StaggerItem>
               ))}
             </StaggerContainer>

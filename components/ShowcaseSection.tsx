@@ -4,18 +4,18 @@ import { useState } from "react";
 import Image from "next/image";
 
 const serviceImages = [
-  "/services/NEX-_-32.jpg",
-  "/services/NEX-_-42.jpg",
-  "/services/NEX-_-49.jpg",
-  "/services/NEX-_-2.jpg",
-  "/services/NEX-_-47.jpg",
-  "/services/NEX-_-28.jpg",
-  "/services/NEX-_-7.jpg",
-  "/services/NEX-_-35.jpg",
-  "/services/NEX-_-14.jpg",
-  "/services/NEX-_-25.jpg",
-  "/services/NEX-_-3.jpg",
-  "/services/NEX-_-10.jpg",
+  "/services/showcase1.jpg",
+  "/services/showcase2.jpg",
+  "/services/showcase3.jpg",
+  "/services/showcase4.jpg",
+  "/services/showcase5.jpg",
+  "/services/showcase6.jpg",
+  "/services/showcase7.jpg",
+  "/services/showcase8.jpg",
+  "/services/showcase9.jpg",
+  "/services/showcase10.jpg",
+  "/services/showcase12.jpg",
+  "/services/showcase13.jpg",
 ];
 
 const testimonials = [

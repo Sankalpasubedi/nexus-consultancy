@@ -7,29 +7,29 @@ import { FadeUp, AnimatedCounter } from "@/lib/animations";
 import { Users } from "lucide-react";
 
 const topPartners = [
-  { name: "Oxford", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Oxford-University-Circlet.svg/200px-Oxford-University-Circlet.svg.png" },
-  { name: "Cambridge", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg/200px-Coat_of_Arms_of_the_University_of_Cambridge.svg.png" },
-  { name: "MIT", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/200px-MIT_logo.svg.png" },
-  { name: "Stanford", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Stanford_Cardinal_logo.svg/200px-Stanford_Cardinal_logo.svg.png" },
-  { name: "Harvard", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Harvard_University_coat_of_arms.svg/200px-Harvard_University_coat_of_arms.svg.png" },
-  { name: "Yale", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Yale_University_logo.svg/200px-Yale_University_logo.svg.png" },
-  { name: "Toronto", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Utoronto_coa.svg/200px-Utoronto_coa.svg.png" },
-  { name: "Melbourne", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/University_of_Melbourne_logo.svg/200px-University_of_Melbourne_logo.svg.png" },
-  { name: "Sydney", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/4/4f/University_of_Sydney_Logo.svg/200px-University_of_Sydney_Logo.svg.png" },
-  { name: "UCL", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/UCL_Logo.svg/200px-UCL_Logo.svg.png" },
+  { name: "Oxford", logo: "/partners/oxford.svg" },
+  { name: "Cambridge", logo: "/partners/cambridge.svg" },
+  { name: "MIT", logo: "/partners/mit.svg" },
+  { name: "Stanford", logo: "/partners/stanford.svg" },
+  { name: "Harvard", logo: "/partners/harvard.svg" },
+  { name: "Yale", logo: "/partners/yale.svg" },
+  { name: "Toronto", logo: "/partners/toronto.svg" },
+  { name: "Melbourne", logo: "/partners/melbourne.svg" },
+  { name: "Sydney", logo: "/partners/sydney.svg" },
+  { name: "UCL", logo: "/partners/ucl.svg" },
 ];
 
 const bottomPartners = [
-  { name: "Imperial", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Imperial_College_London_crest.svg/200px-Imperial_College_London_crest.svg.png" },
-  { name: "Princeton", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Princeton_seal.svg/200px-Princeton_seal.svg.png" },
-  { name: "Columbia", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Columbia_University_shield.svg/200px-Columbia_University_shield.svg.png" },
-  { name: "Cornell", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Cornell_University_logo.svg/200px-Cornell_University_logo.svg.png" },
-  { name: "ETH Zurich", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/ETH_Z%C3%BCrich_Logo.svg/200px-ETH_Z%C3%BCrich_Logo.svg.png" },
-  { name: "NUS", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/NUS_Coat_of_Arms.svg/200px-NUS_Coat_of_Arms.svg.png" },
-  { name: "McGill", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/McGill_University_CoA.svg/200px-McGill_University_CoA.svg.png" },
-  { name: "LSE", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/LSE_Logo.svg/200px-LSE_Logo.svg.png" },
-  { name: "Edinburgh", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/University_of_Edinburgh_coat_of_arms.svg/200px-University_of_Edinburgh_coat_of_arms.svg.png" },
-  { name: "Monash", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Monash_University_logo.svg/200px-Monash_University_logo.svg.png" },
+  { name: "Imperial", logo: "/partners/imperial.svg" },
+  { name: "Princeton", logo: "/partners/princeton.svg" },
+  { name: "Columbia", logo: "/partners/columbia.svg" },
+  { name: "Cornell", logo: "/partners/cornell.svg" },
+  { name: "ETH Zurich", logo: "/partners/eth-zurich.svg" },
+  { name: "NUS", logo: "/partners/nus.svg" },
+  { name: "McGill", logo: "/partners/mcgill.svg" },
+  { name: "LSE", logo: "/partners/lse.svg" },
+  { name: "Edinburgh", logo: "/partners/edinburgh.svg" },
+  { name: "Monash", logo: "/partners/monash.svg" },
 ];
 
 const stats = [
@@ -81,7 +81,7 @@ export default function PartnersSection() {
               {[...topPartners, ...topPartners, ...topPartners].map((partner, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:border-[#003975]/30 hover:shadow-sm hover:scale-105 transition-all duration-300 group"
+                  className="shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:scale-105 transition-all duration-300 group"
                 >
                   <Image
                     src={partner.logo}
@@ -89,7 +89,6 @@ export default function PartnersSection() {
                     width={120}
                     height={60}
                     className="object-contain max-h-[50px] w-auto transition-transform duration-300 group-hover:scale-110"
-                    unoptimized
                   />
                 </div>
               ))}
@@ -112,7 +111,7 @@ export default function PartnersSection() {
               {[...bottomPartners, ...bottomPartners, ...bottomPartners].map((partner, idx) => (
                 <div
                   key={idx}
-                  className="flex-shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:border-[#003975]/30 hover:shadow-sm hover:scale-105 transition-all duration-300 group"
+                  className="shrink-0 flex items-center justify-center px-10 py-6 bg-white border border-gray-100 rounded-2xl min-w-[180px] h-[100px] hover:scale-105 transition-all duration-300 group"
                 >
                   <Image
                     src={partner.logo}
@@ -120,7 +119,6 @@ export default function PartnersSection() {
                     width={120}
                     height={60}
                     className="object-contain max-h-[50px] w-auto transition-transform duration-300 group-hover:scale-110"
-                    unoptimized
                   />
                 </div>
               ))}

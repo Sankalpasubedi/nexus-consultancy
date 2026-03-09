@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useHeader } from "@/app/contexts/HeaderContext";
 import { useBranch } from "@/app/contexts/BranchContext";
-import { branches, getBranchLinks, Branch } from "@/data/branches";
+import { branches, getBranchLinks, Branch, formatDistance } from "@/data/branches";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Icon, FlagIcon } from "@/lib/icons";
@@ -733,7 +733,7 @@ function TopBarDropdown({
 function FindUsBranchDropdown() {
   const [open, setOpen] = useState(false);
   const timeout = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const { selectBranch, currentBranch } = useBranch();
+  const { selectBranch, currentBranch, detectNearestBranch, locationStatus, detectedDistance } = useBranch();
   const branchLinks = getBranchLinks();
   const router = useRouter();
 
@@ -757,6 +757,57 @@ function FindUsBranchDropdown() {
     }
   };
 
+  const handleUseMyLocation = async () => {
+    const result = await detectNearestBranch();
+    if (result) {
+      // Navigate to the nearest branch
+      const match = result.branch.slug.match(/^find-us-at-(.+)$/);
+      const branchId = match ? match[1] : result.branch.slug.replace("find-us-at-", "");
+      router.push(`/branches/find-us-at-${branchId}`);
+      setOpen(false);
+    }
+  };
+
+  const getLocationButtonContent = () => {
+    switch (locationStatus) {
+      case 'loading':
+        return (
+          <>
+            <div className="w-4 h-4 border-2 border-[#003975]/30 border-t-[#003975] rounded-full animate-spin" />
+            <span>Detecting location...</span>
+          </>
+        );
+      case 'denied':
+        return (
+          <>
+            <Icon name="MapPinOff" size={14} className="text-red-500" />
+            <span className="text-red-600">Location access denied</span>
+          </>
+        );
+      case 'unavailable':
+        return (
+          <>
+            <Icon name="MapPinOff" size={14} className="text-slate-400" />
+            <span>Location unavailable</span>
+          </>
+        );
+      case 'error':
+        return (
+          <>
+            <Icon name="AlertCircle" size={14} className="text-amber-500" />
+            <span>Could not get location</span>
+          </>
+        );
+      default:
+        return (
+          <>
+            <Icon name="Navigation" size={14} className="text-[#003975]" />
+            <span>Use My Location</span>
+          </>
+        );
+    }
+  };
+
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
       <button
@@ -776,40 +827,76 @@ function FindUsBranchDropdown() {
             className="absolute top-full left-0 pt-1 z-50"
           >
             <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden min-w-[300px]">
-              <div className="px-4 pt-3 pb-2 border-b border-gray-50 bg-gray-50/50">
+              <div className="px-4 pt-3 pb-2 border-b border-gray-50 bg-gray-50/50 flex items-center justify-between">
                 <Link href="/branches" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
                   View All →
                 </Link>
               </div>
-              <div className="p-2 space-y-0.5">
-                {branchLinks.slice(1).map((item) => (
-                  <button
-                    key={item.href + item.label}
-                    onClick={() => handleBranchClick(item.slug)}
-                    className={`w-full flex items-start gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 group text-left ${
-                      currentBranch.slug === item.slug 
-                        ? "bg-[#003975]/10 text-[#003975]" 
-                        : "text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975]"
-                    }`}
-                  >
-                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                      currentBranch.slug === item.slug
-                        ? "bg-[#003975]/20"
-                        : "bg-gray-100 group-hover:bg-[#003975]/10"
-                    }`}>
-                      <Icon name={item.icon} size={13} className={currentBranch.slug === item.slug ? "text-[#003975]" : "text-slate-400 group-hover:text-[#003975]"} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="text-[12px] font-medium block">{item.label}</span>
-                      {item.description && (
-                        <span className="text-[10px] text-slate-400 block mt-0.5">{item.description}</span>
+              
+              {/* Use My Location Button */}
+              <div className="px-3 pt-3 pb-2">
+                <button
+                  onClick={handleUseMyLocation}
+                  disabled={locationStatus === 'loading'}
+                  className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-[12px] font-medium transition-all duration-200 ${
+                    locationStatus === 'loading'
+                      ? 'bg-slate-100 text-slate-500 cursor-wait'
+                      : locationStatus === 'denied' || locationStatus === 'error'
+                      ? 'bg-red-50 text-red-600 hover:bg-red-100'
+                      : 'bg-[#003975]/5 text-[#003975] hover:bg-[#003975]/10 border border-[#003975]/20'
+                  }`}
+                >
+                  {getLocationButtonContent()}
+                </button>
+                {locationStatus === 'denied' && (
+                  <p className="text-[10px] text-slate-400 text-center mt-1.5">
+                    Please enable location in your browser settings
+                  </p>
+                )}
+              </div>
+
+              <div className="px-3 py-1">
+                <div className="border-b border-gray-100" />
+              </div>
+
+              <div className="p-2 space-y-0.5 max-h-[280px] overflow-y-auto">
+                {branchLinks.slice(1).map((item) => {
+                  const isCurrentBranch = currentBranch.slug === item.slug;
+                  const showDistance = isCurrentBranch && detectedDistance !== null;
+                  
+                  return (
+                    <button
+                      key={item.href + item.label}
+                      onClick={() => handleBranchClick(item.slug)}
+                      className={`w-full flex items-start gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 group text-left ${
+                        isCurrentBranch 
+                          ? "bg-[#003975]/10 text-[#003975]" 
+                          : "text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975]"
+                      }`}
+                    >
+                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                        isCurrentBranch
+                          ? "bg-[#003975]/20"
+                          : "bg-gray-100 group-hover:bg-[#003975]/10"
+                      }`}>
+                        <Icon name={item.icon} size={13} className={isCurrentBranch ? "text-[#003975]" : "text-slate-400 group-hover:text-[#003975]"} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="text-[12px] font-medium block">{item.label}</span>
+                        {showDistance ? (
+                          <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">
+                            {formatDistance(detectedDistance)} — Nearest to you
+                          </span>
+                        ) : item.description && (
+                          <span className="text-[10px] text-slate-400 block mt-0.5">{item.description}</span>
+                        )}
+                      </div>
+                      {isCurrentBranch && (
+                        <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#003975] mt-1.5" />
                       )}
-                    </div>
-                    {currentBranch.slug === item.slug && (
-                      <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#003975] mt-1.5" />
-                    )}
-                  </button>
-                ))}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

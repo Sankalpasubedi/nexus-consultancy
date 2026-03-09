@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect, useCallback } from "react";
 import {
   FadeUp,
@@ -15,7 +15,9 @@ import {
 import { useHeader } from "@/app/contexts/HeaderContext";
 import { Icon } from "@/lib/icons";
 import { courseCategories } from "@/data/courses";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+
+const infiniteCategories = [...courseCategories, ...courseCategories];
 
 export default function CoursesPage() {
   const { setShowSidebar } = useHeader();
@@ -32,6 +34,18 @@ export default function CoursesPage() {
   const dragScrollLeft = useRef(0);
   const hasDragged = useRef(false);
 
+  // Cursor tooltip state
+  const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   useEffect(() => {
     setShowSidebar(true);
     return () => setShowSidebar(true);
@@ -46,46 +60,53 @@ export default function CoursesPage() {
     setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  // Auto-scroll functionality - smooth continuous scroll
+  // Infinite auto-scroll functionality with delta-time for smooth animation
   useEffect(() => {
     const scrollEl = scrollRef.current;
     if (!scrollEl) return;
 
     let animationId: number;
-    const scrollSpeed = 0.5; // pixels per frame
+    let lastTime = performance.now();
+    const scrollSpeed = 40; // pixels per second
 
-    const smoothScroll = () => {
+    const smoothScroll = (currentTime: number) => {
+      const deltaTime = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
       if (isPaused.current || isDragging.current || isHovering.current) {
         animationId = requestAnimationFrame(smoothScroll);
         return;
       }
-      
-      const { scrollLeft, scrollWidth, clientWidth } = scrollEl;
-      const max = scrollWidth - clientWidth;
-      
-      // If at the end, reset to start
-      if (scrollLeft >= max - 1) {
-        scrollEl.scrollLeft = 0;
+
+      const { scrollLeft, scrollWidth } = scrollEl;
+      const singleSetWidth = scrollWidth / 2;
+
+      // When we've scrolled past the first set, jump back seamlessly
+      if (scrollLeft >= singleSetWidth) {
+        scrollEl.scrollLeft = scrollLeft - singleSetWidth;
       } else {
-        scrollEl.scrollLeft += scrollSpeed;
+        scrollEl.scrollLeft += scrollSpeed * deltaTime;
       }
-      
+
       animationId = requestAnimationFrame(smoothScroll);
     };
 
     animationId = requestAnimationFrame(smoothScroll);
-
     return () => cancelAnimationFrame(animationId);
   }, []);
 
   const handleScrollLeft = () => {
     if (!scrollRef.current) return;
+    isPaused.current = true;
     scrollRef.current.scrollBy({ left: -400, behavior: "smooth" });
+    setTimeout(() => { isPaused.current = false; }, 600);
   };
 
   const handleScrollRight = () => {
     if (!scrollRef.current) return;
+    isPaused.current = true;
     scrollRef.current.scrollBy({ left: 400, behavior: "smooth" });
+    setTimeout(() => { isPaused.current = false; }, 600);
   };
 
   const handleMouseEnter = useCallback(() => {
@@ -220,7 +241,7 @@ export default function CoursesPage() {
             <div className="hidden lg:block relative group">
               <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                 <Image
-                  src="/services/NEX-_-12.jpg"
+                  src="/services/centerimage1.jpg"
                   alt="Study Programs"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -249,7 +270,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      {/* Native Scroll Carousel */}
+      {/* Infinite Scroll Carousel */}
       <div className="relative py-5">
         <div
           ref={scrollRef}
@@ -261,21 +282,40 @@ export default function CoursesPage() {
             WebkitOverflowScrolling: "touch",
             overscrollBehaviorX: "contain",
             touchAction: "pan-x pinch-zoom",
+            scrollBehavior: "auto",
+            willChange: "scroll-position",
           }}
         >
-          {courseCategories.map((cat, idx) => (
+          {infiniteCategories.map((cat, idx) => (
             <motion.div
-              key={cat.slug}
+              key={`${cat.slug}-${idx}`}
+              aria-hidden={idx >= courseCategories.length}
               className="flex-shrink-0 w-[260px] md:w-[372px] h-[480px] md:h-[680px]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.03 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.06, duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+              transition={{
+                delay: (idx % courseCategories.length) * 0.06,
+                duration: 0.5,
+                ease: [0.23, 1, 0.32, 1],
+              }}
             >
-              <Link href={`/courses/${cat.slug}`} draggable={false} onClick={handleCardClick} className="block h-full">
+              <Link 
+                href={`/courses/${cat.slug}`} 
+                draggable={false} 
+                onClick={handleCardClick} 
+                className="block h-full"
+                onMouseEnter={() => !isMobile && setHoveredCourse(cat.title)}
+                onMouseLeave={() => !isMobile && setHoveredCourse(null)}
+                onMouseMove={(e) => {
+                  if (!isMobile) {
+                    setCursorPos({ x: e.clientX, y: e.clientY });
+                  }
+                }}
+              >
                 <div 
-                  className="relative rounded-[28px] overflow-hidden cursor-pointer h-full group"
+                  className="relative rounded-[28px] overflow-hidden cursor-none h-full group"
                 >
                   {/* Full-bleed Image */}
                   <Image
@@ -353,6 +393,25 @@ export default function CoursesPage() {
           </button>
         </div>
       </div>
+
+      {/* Cursor-following tooltip */}
+      <AnimatePresence>
+        {hoveredCourse && !isDragging.current && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.15 }}
+            className="fixed pointer-events-none z-50 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 text-sm font-medium text-slate-800"
+            style={{
+              left: cursorPos.x + 16,
+              top: cursorPos.y + 16,
+            }}
+          >
+            Why {hoveredCourse} <ArrowRight size={14} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Quick Overview Grid */}
       <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 mt-24">

@@ -6,436 +6,17 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { FadeUp, StaggerContainer, StaggerItem } from "@/lib/animations";
 import { Icon } from "@/lib/icons";
+import { 
+  Branch, 
+  FAQ, 
+  branches, 
+  extractBranchId, 
+  getOtherBranches,
+  getBranchById 
+} from "@/data/branches";
 
 interface BranchDetailClientProps {
   slug: string;
-}
-
-// Testimonial type
-interface Testimonial {
-  id: number;
-  name: string;
-  country: string;
-  quote: string;
-  destination: string;
-}
-
-// FAQ type
-interface FAQ {
-  question: string;
-  answer: string;
-}
-
-// Branch data type
-interface BranchData {
-  name: string;
-  city: string;
-  district: string;
-  address: string;
-  phone: string;
-  phone2?: string;
-  whatsapp?: string;
-  email: string;
-  hours: string;
-  saturdayHours?: string;
-  mapUrl: string;
-  mapEmbedUrl: string;
-  description: string;
-  longDescription: string[];
-  image: string;
-  coordinates: { lat: number; lng: number };
-  googleRating: number;
-  googleReviews: number;
-  stats: { label: string; value: string }[];
-  testimonials: Testimonial[];
-  faqs: FAQ[];
-}
-
-const branches: Record<string, BranchData> = {
-  kathmandu: {
-    name: "Kathmandu Main Office",
-    city: "Kathmandu",
-    district: "Kathmandu",
-    address: "Putalisadak, Kathmandu",
-    phone: "+977-1-4444444",
-    phone2: "+977-9851234567",
-    whatsapp: "+977-9851234567",
-    email: "kathmandu@nexsuseducation.com",
-    hours: "Sunday - Friday: 9:00 AM to 6:00 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=27.7089,85.3239",
-    mapEmbedUrl: "https://maps.google.com/maps?q=27.7089,85.3239&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Our main headquarters in the heart of Kathmandu, serving students from across Nepal with comprehensive study abroad services.",
-    longDescription: [
-      "Nexsus Education Kathmandu is one of the leading study abroad consultants in Nepal, dedicated to helping students achieve their international education dreams. Established with a vision to provide world-class guidance, we have been assisting students in securing admissions to top universities across the UK, USA, Australia, Canada, New Zealand, and Europe.",
-      "We offer comprehensive services including IELTS, PTE Academic, TOEFL iBT, and SAT coaching, providing ample mock tests to ensure our students meet their visa and admission requirements. Our experienced counselors work tirelessly to identify the best opportunities for each student.",
-      "From counseling and university applications to visa guidance, test preparation, and pre-departure services, we offer a complete range of services. We help students connect with those who have already reached their dream destinations, making us one of the most trusted education consultants in Nepal."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 27.7089, lng: 85.3239 },
-    googleRating: 4.8,
-    googleReviews: 156,
-    stats: [
-      { label: "Students Assisted", value: "5,000+" },
-      { label: "University Partners", value: "200+" },
-      { label: "Visa Success Rate", value: "98%" },
-      { label: "Countries", value: "10+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Sarina Shrestha", country: "Canada", quote: "I was looking for a top education consultant in Kathmandu and luckily a friend recommended me to Nexsus Education. They assisted me from getting a letter of offer to acquiring student insurance and finally arranging my visa.", destination: "Canada" },
-      { id: 2, name: "Shrawan Kumar Thapa", country: "Australia", quote: "Nexsus Education is the best overseas education consultant in Nepal. They provided great assistance with my student visa application to Melbourne. The team has been very approachable and always there to answer all my queries.", destination: "Australia" },
-      { id: 3, name: "Devnand Thapa", country: "Canada", quote: "I am ever grateful to the competent team for helping me attain my Canada student visa in no time. The consultation and customer services they provide are efficient and excellent.", destination: "Canada" }
-    ],
-    faqs: [
-      { question: "Is Nexsus one of the best study abroad consultants in Nepal?", answer: "Yes, Nexsus Education is recognized as one of the leading study abroad consultants in Nepal, with a proven track record of helping thousands of students achieve their international education goals." },
-      { question: "What services do study abroad consultants in Nepal provide?", answer: "We provide comprehensive services including career counseling, university selection, application assistance, visa guidance, test preparation (IELTS, PTE, TOEFL, SAT), SOP writing, scholarship guidance, and pre-departure support." },
-      { question: "Does Nexsus offer free counseling for students?", answer: "Yes, we offer free initial counseling sessions to understand your academic goals and provide personalized guidance on your study abroad journey." },
-      { question: "Which countries can I apply to through Nexsus Nepal?", answer: "Through Nexsus, you can apply to universities in the UK, USA, Australia, Canada, New Zealand, Germany, Japan, South Korea, and several other European countries." },
-      { question: "Where is Nexsus located in Kathmandu?", answer: "Our Kathmandu office is located at Putalisadak, easily accessible from all parts of the city. Visit us during our office hours for a free consultation." }
-    ]
-  },
-  dillibazar: {
-    name: "Dillibazar Main Office",
-    city: "Dillibazar",
-    district: "Kathmandu",
-    address: "Dillibazar, Kathmandu-44600, Nepal",
-    phone: "+977 1 4519495",
-    phone2: "+977 9851032197",
-    whatsapp: "+977 9851032197",
-    email: "info@nexsuseducation.com",
-    hours: "Sunday - Friday: 9:00 AM to 6:00 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=27.7089,85.3239",
-    mapEmbedUrl: "https://maps.google.com/maps?q=27.7089,85.3239&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Our main headquarters in the heart of Dillibazar, serving students from across Nepal with comprehensive study abroad services.",
-    longDescription: [
-      "Nexsus Education Dillibazar is our flagship headquarters, serving as the central hub for all study abroad services in Nepal. With years of experience and a dedicated team of expert counselors, we have helped thousands of students realize their dreams of studying at prestigious international universities.",
-      "Our Dillibazar office specializes in providing end-to-end support for students aspiring to study in the UK, USA, Australia, Canada, and European countries. We offer expert guidance on course selection, university applications, visa processing, and scholarship opportunities.",
-      "We take pride in our high visa success rate and personalized approach to each student's journey. Our team stays updated with the latest immigration policies and university requirements to provide accurate and timely guidance to all our students."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 27.7089, lng: 85.3239 },
-    googleRating: 4.9,
-    googleReviews: 203,
-    stats: [
-      { label: "Students Assisted", value: "8,000+" },
-      { label: "University Partners", value: "300+" },
-      { label: "Visa Success Rate", value: "99%" },
-      { label: "Countries", value: "12+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Anita Gurung", country: "UK", quote: "The team at Dillibazar branch made my UK study dream come true. From selecting the right university to visa approval, they were with me every step of the way. Highly recommended!", destination: "UK" },
-      { id: 2, name: "Rajesh Karki", country: "Australia", quote: "I got my Australian student visa within 3 weeks thanks to Nexsus Dillibazar. Their documentation support and interview preparation were excellent.", destination: "Australia" },
-      { id: 3, name: "Priya Adhikari", country: "Canada", quote: "Best education consultancy in Kathmandu! The counselors are knowledgeable and genuinely care about students' success. Got admission to my dream university in Canada.", destination: "Canada" }
-    ],
-    faqs: [
-      { question: "Is Nexsus one of the best study abroad consultants in Nepal?", answer: "Yes, Nexsus Education is widely recognized as one of the top study abroad consultants in Nepal with the highest success rates and student satisfaction." },
-      { question: "What services do study abroad consultants in Nepal provide?", answer: "We offer comprehensive services including free counseling, university selection, application processing, visa assistance, test preparation, SOP writing, scholarship guidance, and pre-departure orientation." },
-      { question: "Does Nexsus offer free counseling for students in Dillibazar?", answer: "Absolutely! We provide free initial counseling to all students. Book an appointment or walk in during office hours to meet our expert counselors." },
-      { question: "Which countries can I apply to through Nexsus Nepal?", answer: "We facilitate applications to universities in the UK, USA, Australia, Canada, New Zealand, Germany, Japan, South Korea, Ireland, and many other countries." },
-      { question: "Where is Nexsus located in Dillibazar?", answer: "Our Dillibazar head office is located at the main Dillibazar road, Kathmandu-44600. It's easily accessible by public transport and near major landmarks." }
-    ]
-  },
-  baneshwor: {
-    name: "Baneshwor Branch",
-    city: "Baneshwor",
-    district: "Kathmandu",
-    address: "Baneshwor, Kathmandu, Nepal",
-    phone: "+977 1 5922227",
-    phone2: "+977 9841830127",
-    whatsapp: "+977 9841830127",
-    email: "baneshwor@nexsuseducation.com",
-    hours: "Sunday - Friday: 9:00 AM to 6:00 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=27.6908,85.3433",
-    mapEmbedUrl: "https://maps.google.com/maps?q=27.6908,85.3433&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Conveniently located in Baneshwor, serving students in eastern Kathmandu with dedicated counselors.",
-    longDescription: [
-      "Nexsus Education Baneshwor branch brings our world-class study abroad services to the heart of eastern Kathmandu. Our branch is strategically located to serve students from Baneshwor, Koteshwor, Tinkune, and surrounding areas.",
-      "With a team of experienced counselors specializing in various destinations, we provide personalized guidance tailored to each student's academic background and career aspirations. Our Baneshwor team has successfully helped hundreds of students secure admissions to top universities worldwide.",
-      "We offer all services available at our main branch including IELTS/PTE coaching, visa processing, scholarship guidance, and comprehensive pre-departure support. Visit us for a free consultation and take the first step towards your international education journey."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 27.6908, lng: 85.3433 },
-    googleRating: 4.7,
-    googleReviews: 89,
-    stats: [
-      { label: "Students Assisted", value: "2,500+" },
-      { label: "University Partners", value: "150+" },
-      { label: "Visa Success Rate", value: "97%" },
-      { label: "Countries", value: "10+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Bikash Tamang", country: "Australia", quote: "The Baneshwor team is amazing! They helped me get into a top Australian university with a scholarship. Very professional and supportive throughout the process.", destination: "Australia" },
-      { id: 2, name: "Sushma Rai", country: "UK", quote: "I'm so grateful to Nexsus Baneshwor for making my UK study journey smooth and stress-free. The counselors are very knowledgeable and helpful.", destination: "UK" },
-      { id: 3, name: "Nabin Shrestha", country: "Canada", quote: "Got my Canada study permit approved on first attempt! The team's expertise in documentation and visa processing is exceptional.", destination: "Canada" }
-    ],
-    faqs: [
-      { question: "What areas does the Baneshwor branch serve?", answer: "Our Baneshwor branch primarily serves students from Baneshwor, Koteshwor, Tinkune, Sinamangal, and all surrounding areas of eastern Kathmandu." },
-      { question: "Does the Baneshwor branch offer test preparation classes?", answer: "Yes, we offer IELTS, PTE, TOEFL, and SAT preparation classes with experienced trainers and flexible schedules." },
-      { question: "Can I get a free consultation at the Baneshwor branch?", answer: "Absolutely! We offer free counseling sessions. You can walk in during office hours or book an appointment in advance." },
-      { question: "What documents should I bring for my first consultation?", answer: "For your first visit, bring your academic transcripts, English test scores (if any), passport, and any other relevant documents." },
-      { question: "How can I reach the Baneshwor branch?", answer: "Our office is located at the main Baneshwor road, easily accessible by public transport. Contact us for detailed directions." }
-    ]
-  },
-  samakhusi: {
-    name: "Samakhusi Branch",
-    city: "Samakhusi",
-    district: "Kathmandu",
-    address: "Samakhusi, Kathmandu, Nepal",
-    phone: "+977 1 4971971",
-    phone2: "+977 9820291960",
-    whatsapp: "+977 9820291960",
-    email: "samakhusi@nexsuseducation.com",
-    hours: "Sunday - Friday: 9:00 AM to 6:00 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=27.7295,85.3115",
-    mapEmbedUrl: "https://maps.google.com/maps?q=27.7295,85.3115&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Serving students in the northern Kathmandu valley area with personalized guidance.",
-    longDescription: [
-      "Nexsus Education Samakhusi branch extends our commitment to quality education consulting to the northern Kathmandu valley. We serve students from Samakhusi, Gongabu, Balaju, Machapokhari, and nearby areas.",
-      "Our dedicated team of counselors brings years of experience in guiding students towards their international education goals. We understand the unique aspirations of each student and provide customized solutions to help them succeed.",
-      "From initial career counseling to post-arrival support in your destination country, we are your trusted partner throughout your study abroad journey. Our branch offers complete services including test preparation, visa assistance, and scholarship guidance."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 27.7295, lng: 85.3115 },
-    googleRating: 4.6,
-    googleReviews: 67,
-    stats: [
-      { label: "Students Assisted", value: "1,800+" },
-      { label: "University Partners", value: "120+" },
-      { label: "Visa Success Rate", value: "96%" },
-      { label: "Countries", value: "8+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Rajan Maharjan", country: "Japan", quote: "Nexsus Samakhusi helped me fulfill my dream of studying in Japan. Their guidance on language requirements and visa process was invaluable.", destination: "Japan" },
-      { id: 2, name: "Sabina KC", country: "Australia", quote: "Very professional service! They helped me choose the right course and university in Australia. The entire process was hassle-free.", destination: "Australia" },
-      { id: 3, name: "Sunil Thapa", country: "UK", quote: "The counselors at Samakhusi branch are very supportive. They helped me secure admission with a partial scholarship to a UK university.", destination: "UK" }
-    ],
-    faqs: [
-      { question: "Which areas does the Samakhusi branch cover?", answer: "We serve students from Samakhusi, Gongabu, Balaju, Machapokhari, Budhanilkantha, and all northern Kathmandu areas." },
-      { question: "Do you offer Japanese language classes?", answer: "Yes, we offer Japanese language classes for students planning to study in Japan, along with guidance on JLPT preparation." },
-      { question: "What is the consultation process?", answer: "Book a free appointment, bring your documents, meet our counselor, get personalized university recommendations, and start your application process." },
-      { question: "How long does the visa process take?", answer: "Visa processing time varies by country, typically ranging from 2-12 weeks. Our team ensures timely and accurate documentation." },
-      { question: "Do you help with scholarship applications?", answer: "Yes, we actively help students identify and apply for scholarships, and have helped many secure partial and full scholarships." }
-    ]
-  },
-  banepa: {
-    name: "Banepa Branch",
-    city: "Banepa",
-    district: "Kavrepalanchok",
-    address: "Banepa, Kavrepalanchok, Nepal",
-    phone: "+977 11 665859",
-    phone2: "+977 9860824272",
-    whatsapp: "+977 9860824272",
-    email: "banepa@nexsuseducation.com",
-    hours: "Sunday - Friday: 9:00 AM to 5:30 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=27.6291,85.5219",
-    mapEmbedUrl: "https://maps.google.com/maps?q=27.6291,85.5219&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Serving students in Kavrepalanchok and surrounding areas with comprehensive services.",
-    longDescription: [
-      "Nexsus Education Banepa brings premium study abroad consulting services to Kavrepalanchok district. Our branch serves students from Banepa, Dhulikhel, Panauti, and surrounding areas who aspire to pursue international education.",
-      "Understanding the challenges students face in accessing quality guidance outside Kathmandu, we established this branch to provide the same high-quality services closer to home. Our counselors are well-versed in various study destinations and visa requirements.",
-      "We offer complete end-to-end services including career counseling, test preparation, university applications, visa processing, and pre-departure orientation. Our goal is to make international education accessible to students across Nepal."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 27.6291, lng: 85.5219 },
-    googleRating: 4.5,
-    googleReviews: 45,
-    stats: [
-      { label: "Students Assisted", value: "800+" },
-      { label: "University Partners", value: "100+" },
-      { label: "Visa Success Rate", value: "95%" },
-      { label: "Countries", value: "8+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Prem Tamang", country: "Australia", quote: "Having Nexsus in Banepa was a blessing. I didn't have to travel to Kathmandu for consultations. The team here is very capable and helpful.", destination: "Australia" },
-      { id: 2, name: "Sunita Shrestha", country: "UK", quote: "Excellent service at the Banepa branch! They guided me through every step of my UK student visa application.", destination: "UK" },
-      { id: 3, name: "Dipak Lama", country: "Canada", quote: "The counselors are very experienced. They helped me choose the right program and university in Canada based on my profile.", destination: "Canada" }
-    ],
-    faqs: [
-      { question: "Is the Banepa branch as capable as Kathmandu branches?", answer: "Absolutely! Our Banepa branch offers all the same services and has equally experienced counselors. We maintain the same high standards across all branches." },
-      { question: "Do you offer test preparation in Banepa?", answer: "Yes, we offer IELTS and PTE preparation classes at our Banepa branch with experienced trainers." },
-      { question: "What documents do I need for consultation?", answer: "Bring your academic transcripts, English test scores (if available), passport, and any reference letters you may have." },
-      { question: "Can I apply to multiple universities through you?", answer: "Yes, we help students apply to multiple universities to increase their chances of admission and scholarship opportunities." },
-      { question: "How do I book an appointment?", answer: "Call us, WhatsApp us, or visit our office during working hours. We also offer online consultations for students who cannot visit in person." }
-    ]
-  },
-  birtamode: {
-    name: "Birtamode Branch",
-    city: "Birtamode",
-    district: "Jhapa",
-    address: "Birtamode, Jhapa, Nepal",
-    phone: "+977 23 591692",
-    phone2: "+977 9843649305",
-    whatsapp: "+977 9843649305",
-    email: "birtamode@nexsuseducation.com",
-    hours: "Sunday - Friday: 10:00 AM to 5:30 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=26.6466,87.9893",
-    mapEmbedUrl: "https://maps.google.com/maps?q=26.6466,87.9893&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Serving students in Jhapa and eastern Nepal region with dedicated support.",
-    longDescription: [
-      "Nexsus Education Birtamode is your gateway to international education in eastern Nepal. Located in the heart of Jhapa district, we serve students from Birtamode, Damak, Bhadrapur, and the entire eastern region.",
-      "Our branch is staffed with experienced counselors who understand the aspirations of students from this region. We have successfully guided hundreds of students from eastern Nepal to prestigious universities abroad.",
-      "We provide comprehensive services including career counseling, test preparation, visa assistance, and scholarship guidance. Our mission is to make quality study abroad consulting accessible to students in eastern Nepal without the need to travel to Kathmandu."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 26.6466, lng: 87.9893 },
-    googleRating: 4.7,
-    googleReviews: 78,
-    stats: [
-      { label: "Students Assisted", value: "1,200+" },
-      { label: "University Partners", value: "100+" },
-      { label: "Visa Success Rate", value: "96%" },
-      { label: "Countries", value: "8+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Prakash Rai", country: "Australia", quote: "Nexsus Birtamode made my dream of studying in Australia come true. The team is very professional and supportive.", destination: "Australia" },
-      { id: 2, name: "Kabita Limbu", country: "UK", quote: "I'm grateful to the Birtamode team for their excellent guidance. Got my UK visa approved without any hassle.", destination: "UK" },
-      { id: 3, name: "Santosh Chaudhary", country: "Canada", quote: "The best education consultancy in eastern Nepal! They helped me secure a scholarship to study in Canada.", destination: "Canada" }
-    ],
-    faqs: [
-      { question: "What areas does the Birtamode branch serve?", answer: "We serve students from Birtamode, Damak, Bhadrapur, Mechinagar, and all areas of Jhapa and surrounding districts." },
-      { question: "Do you have test preparation facilities?", answer: "Yes, we offer IELTS and PTE preparation classes with experienced instructors and modern facilities." },
-      { question: "Is the nearest airport far from your office?", answer: "Bhadrapur Airport is the nearest, located about 15-20 km from our office. We also assist students traveling to Kathmandu for visa interviews." },
-      { question: "Can I apply for Australian student visa from here?", answer: "Yes, we handle complete visa applications for all countries including Australia. You don't need to visit Kathmandu for most processes." },
-      { question: "What makes Nexsus different from other consultancies?", answer: "Our high success rate, transparent process, experienced team, and genuine care for student success sets us apart." }
-    ]
-  },
-  dhulabari: {
-    name: "Dhulabari Branch",
-    city: "Dhulabari",
-    district: "Jhapa",
-    address: "Dhulabari, Jhapa, Nepal",
-    phone: "+977 23 591127",
-    phone2: "+977 9801455861",
-    whatsapp: "+977 9801455861",
-    email: "dhulabari@nexsuseducation.com",
-    hours: "Sunday - Friday: 10:00 AM to 5:30 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=26.6689,88.0412",
-    mapEmbedUrl: "https://maps.google.com/maps?q=26.6689,88.0412&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Conveniently located in Dhulabari, serving the Jhapa district with expert guidance.",
-    longDescription: [
-      "Nexsus Education Dhulabari extends our commitment to quality education consulting to the border region of eastern Nepal. We serve students from Dhulabari, Kakarbhitta, and nearby areas who dream of studying abroad.",
-      "Our strategic location makes it convenient for students in this region to access world-class study abroad guidance without traveling long distances. Our counselors are experienced in handling diverse student profiles and immigration requirements.",
-      "We offer the same comprehensive services as our main branches including counseling, test prep, visa processing, and scholarship assistance. Our goal is to help every aspiring student achieve their international education dreams."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 26.6689, lng: 88.0412 },
-    googleRating: 4.6,
-    googleReviews: 52,
-    stats: [
-      { label: "Students Assisted", value: "600+" },
-      { label: "University Partners", value: "80+" },
-      { label: "Visa Success Rate", value: "95%" },
-      { label: "Countries", value: "7+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Raju Pradhan", country: "Japan", quote: "The Dhulabari team helped me with Japanese language preparation and visa processing. Very professional service!", destination: "Japan" },
-      { id: 2, name: "Mina Thapa", country: "Australia", quote: "Got my Australian visa within a month! The team's expertise in documentation is impressive.", destination: "Australia" },
-      { id: 3, name: "Bikram Rai", country: "UK", quote: "Excellent counseling service. They helped me find the perfect university program matching my career goals.", destination: "UK" }
-    ],
-    faqs: [
-      { question: "Where exactly is the Dhulabari branch located?", answer: "We are located at the main Dhulabari chowk, easily accessible from Kakarbhitta and nearby areas." },
-      { question: "Do you help with border crossing documentation?", answer: "Yes, we assist students with all necessary documentation for traveling from Nepal for their studies abroad." },
-      { question: "What test preparation do you offer?", answer: "We offer IELTS, PTE, and Japanese language classes at our Dhulabari branch." },
-      { question: "Can I pay fees in installments?", answer: "Yes, we offer flexible payment options. Discuss with our counselors during your consultation." },
-      { question: "How experienced are your counselors?", answer: "Our counselors have years of experience and have successfully helped hundreds of students achieve their study abroad goals." }
-    ]
-  },
-  pokhara: {
-    name: "Pokhara Branch",
-    city: "Pokhara",
-    district: "Kaski",
-    address: "Lakeside, Pokhara",
-    phone: "+977-61-555555",
-    phone2: "+977-9856034567",
-    whatsapp: "+977-9856034567",
-    email: "pokhara@nexsuseducation.com",
-    hours: "Sunday - Friday: 10:00 AM to 6:00 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=28.2096,83.9568",
-    mapEmbedUrl: "https://maps.google.com/maps?q=28.2096,83.9568&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Serving the western region of Nepal with dedicated counselors for Australia, UK, and Canada programs.",
-    longDescription: [
-      "Nexsus Education Pokhara brings world-class study abroad consulting to the beautiful city of Pokhara. Serving students from Kaski, Syangja, Parbat, and the entire Gandaki region, we are committed to helping students achieve their international education dreams.",
-      "Our Pokhara branch is staffed with experienced counselors who specialize in various study destinations. We understand the unique needs of students from this region and provide personalized guidance tailored to each individual's goals.",
-      "From lakeside Pokhara, students can now access all our services including career counseling, test preparation, visa processing, and scholarship assistance without traveling to Kathmandu. We're here to make your study abroad journey smooth and successful."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 28.2096, lng: 83.9568 },
-    googleRating: 4.8,
-    googleReviews: 94,
-    stats: [
-      { label: "Students Assisted", value: "2,000+" },
-      { label: "University Partners", value: "150+" },
-      { label: "Visa Success Rate", value: "97%" },
-      { label: "Countries", value: "10+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Sita Gurung", country: "Australia", quote: "The Pokhara team is fantastic! They made my study abroad journey to Australia seamless and stress-free.", destination: "Australia" },
-      { id: 2, name: "Hari Thapa", country: "UK", quote: "Best education consultancy in Pokhara! Got my UK student visa approved with their expert guidance.", destination: "UK" },
-      { id: 3, name: "Maya Magar", country: "Canada", quote: "I highly recommend Nexsus Pokhara. They found me a perfect university program with scholarship in Canada.", destination: "Canada" }
-    ],
-    faqs: [
-      { question: "Where is the Pokhara branch located?", answer: "We are located at Lakeside, Pokhara, easily accessible from all parts of the city and Gandaki region." },
-      { question: "Do you offer IELTS coaching in Pokhara?", answer: "Yes, we offer comprehensive IELTS, PTE, and TOEFL coaching with experienced trainers." },
-      { question: "Which countries do you specialize in from Pokhara?", answer: "We specialize in Australia, UK, Canada, USA, and New Zealand, but assist with all major study destinations." },
-      { question: "Can students from Syangja and Parbat visit your office?", answer: "Absolutely! We serve students from the entire Gandaki region including Syangja, Parbat, Baglung, and beyond." },
-      { question: "Do you help with student accommodation abroad?", answer: "Yes, we provide guidance on finding safe and affordable accommodation in your destination country." }
-    ]
-  },
-  chitwan: {
-    name: "Chitwan Branch",
-    city: "Chitwan",
-    district: "Chitwan",
-    address: "Bharatpur, Chitwan",
-    phone: "+977-56-666666",
-    phone2: "+977-9855034567",
-    whatsapp: "+977-9855034567",
-    email: "chitwan@nexsuseducation.com",
-    hours: "Sunday - Friday: 10:00 AM to 5:30 PM",
-    saturdayHours: "Saturday: Closed",
-    mapUrl: "https://maps.google.com/?q=27.6766,84.4362",
-    mapEmbedUrl: "https://maps.google.com/maps?q=27.6766,84.4362&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    description: "Our Chitwan branch provides personalized guidance to students from the Terai region.",
-    longDescription: [
-      "Nexsus Education Chitwan is one of the leading study abroad consultants in Chitwan, Nepal. We have been helping students from Bharatpur and surrounding areas achieve their international education dreams with comprehensive guidance and support.",
-      "Established to bring quality overseas education consulting to the Terai region, our Chitwan branch has a proven track record of successful student placements in top universities across the UK, USA, Australia, Canada, and Europe.",
-      "We offer the best IELTS, PTE Academic, TOEFL iBT and SAT coaching in Chitwan, providing ample mock tests to ensure our students meet their visa and admission requirements. From counseling to pre-departure support, we're with you every step of the way."
-    ],
-    image: "/branches/branch.png",
-    coordinates: { lat: 27.6766, lng: 84.4362 },
-    googleRating: 4.8,
-    googleReviews: 111,
-    stats: [
-      { label: "Students Assisted", value: "3,000+" },
-      { label: "Institution Partners", value: "200+" },
-      { label: "Visa Success Rate", value: "98%" },
-      { label: "Destinations Served", value: "10+" }
-    ],
-    testimonials: [
-      { id: 1, name: "Sarina Shrestha", country: "Canada", quote: "I was looking for a top education consultant in Chitwan and luckily a friend recommended me to Nexsus. The consultancy assisted me from getting a letter of offer for my education to acquiring student insurance and finally arranging my visa.", destination: "Canada" },
-      { id: 2, name: "Shrawan Kumar Thapa", country: "Australia", quote: "Nexsus Nepal is the best overseas education consultant in Nepal. They provided great assistance with my student visa application to Melbourne, Australia. The team has been very approachable and always there to answer all my queries.", destination: "Australia" },
-      { id: 3, name: "Devnand Thapa", country: "Canada", quote: "I am ever grateful to the competent team for helping me attain my Canada student visa in no time. The consultation and customer services they provide are efficient and excellent. Nexsus is the best education consultancy in Chitwan.", destination: "Canada" }
-    ],
-    faqs: [
-      { question: "Is Nexsus one of the best study abroad consultants in Nepal?", answer: "Yes, Nexsus Education is recognized as one of the leading overseas education consultants in Nepal and Chitwan, with thousands of successful student placements across multiple countries." },
-      { question: "What services do study abroad consultants in Nepal provide?", answer: "We provide comprehensive services including career counseling, course and university selection, application processing, test preparation (IELTS, PTE, TOEFL, SAT), visa assistance, scholarship guidance, and pre-departure orientation." },
-      { question: "Does Nexsus offer free counseling for students in Chitwan?", answer: "Yes! We offer completely free initial counseling sessions. Visit our Bharatpur office or book an appointment to speak with our expert counselors." },
-      { question: "Which countries can I apply to through Nexsus Nepal?", answer: "Through Nexsus, you can apply to universities in the UK, USA, Australia, Canada, New Zealand, Germany, Cyprus, France, Japan, South Korea, and many other countries." },
-      { question: "Where is Nexsus located in Chitwan?", answer: "Our Chitwan office is located in Bharatpur, easily accessible from all parts of the district. We also have clients visiting from Narayanghat, Ratnanagar, and nearby areas." }
-    ]
-  },
-};
-
-// Extract branch id from slug (handles "find-us-at-{id}" format)
-function extractBranchId(slug: string): string {
-  const match = slug.match(/^find-us-at-(.+)$/);
-  return match ? match[1] : slug;
 }
 
 // Services data
@@ -447,14 +28,6 @@ const services = [
   { icon: "FileCheck", title: "Visa Applications", description: "Get expert support for documentation and interview prep to simplify your visa application process." },
   { icon: "Home", title: "Student Accommodation", description: "We find safe and comfortable student housing for you, ensuring a smooth and stress-free start." },
 ];
-
-// Get other branches (excluding current)
-function getOtherBranches(currentId: string) {
-  return Object.entries(branches)
-    .filter(([id]) => id !== currentId)
-    .slice(0, 4)
-    .map(([id, branch]) => ({ id, name: branch.city }));
-}
 
 // FAQ Accordion Component
 function FAQAccordion({ faqs, branchName }: { faqs: FAQ[]; branchName: string }) {
@@ -498,7 +71,7 @@ function FAQAccordion({ faqs, branchName }: { faqs: FAQ[]; branchName: string })
 
 export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
   const branchId = extractBranchId(slug.toLowerCase());
-  const branch = branches[branchId];
+  const branch = getBranchById(branchId);
   
   // Form state
   const [formData, setFormData] = useState({
@@ -557,6 +130,7 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
     }, 3000);
   };
 
+  // Early return for not found branches
   if (!branch) {
     return (
       <main className="min-h-screen bg-white pt-32 pb-20">
@@ -642,7 +216,7 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
                     <Icon name="Clock" size={18} className="text-brand-blue mt-1 flex-shrink-0" />
                     <div>
                       <p className="text-slate-700 font-medium">Office Timings:</p>
-                      <p className="text-slate-600">{branch.hours}</p>
+                      <p className="text-slate-600">{branch.openingHours}</p>
                       {branch.saturdayHours && <p className="text-slate-600">{branch.saturdayHours}</p>}
                     </div>
                   </div>
