@@ -22,7 +22,6 @@ const infiniteCategories = [...courseCategories, ...courseCategories];
 export default function CoursesPage() {
   const { setShowSidebar } = useHeader();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const isHovering = useRef(false);
@@ -34,10 +33,21 @@ export default function CoursesPage() {
   const dragScrollLeft = useRef(0);
   const hasDragged = useRef(false);
 
-  // Cursor tooltip state
+  // Cursor tooltip state - use refs for position to avoid re-renders
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const cursorPosRef = useRef({ x: 0, y: 0 });
+  const tooltipRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+      if (!tooltipRef.current) return;
+      tooltipRef.current.style.left = `${e.clientX + 16}px`;
+      tooltipRef.current.style.top = `${e.clientY + 16}px`;
+    };
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -55,24 +65,19 @@ export default function CoursesPage() {
     if (!scrollRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
     const max = scrollWidth - clientWidth;
-    setProgress(max > 0 ? (scrollLeft / max) * 100 : 0);
     setCanScrollLeft(scrollLeft > 0);
     setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  // Infinite auto-scroll functionality with delta-time for smooth animation
+  // Infinite auto-scroll functionality
   useEffect(() => {
     const scrollEl = scrollRef.current;
     if (!scrollEl) return;
 
     let animationId: number;
-    let lastTime = performance.now();
-    const scrollSpeed = 40; // pixels per second
+    const scrollSpeed = 1; // pixels per frame
 
-    const smoothScroll = (currentTime: number) => {
-      const deltaTime = (currentTime - lastTime) / 1000;
-      lastTime = currentTime;
-
+    const smoothScroll = () => {
       if (isPaused.current || isDragging.current || isHovering.current) {
         animationId = requestAnimationFrame(smoothScroll);
         return;
@@ -85,7 +90,7 @@ export default function CoursesPage() {
       if (scrollLeft >= singleSetWidth) {
         scrollEl.scrollLeft = scrollLeft - singleSetWidth;
       } else {
-        scrollEl.scrollLeft += scrollSpeed * deltaTime;
+        scrollEl.scrollLeft += scrollSpeed;
       }
 
       animationId = requestAnimationFrame(smoothScroll);
@@ -282,8 +287,6 @@ export default function CoursesPage() {
             WebkitOverflowScrolling: "touch",
             overscrollBehaviorX: "contain",
             touchAction: "pan-x pinch-zoom",
-            scrollBehavior: "auto",
-            willChange: "scroll-position",
           }}
         >
           {infiniteCategories.map((cat, idx) => (
@@ -308,11 +311,13 @@ export default function CoursesPage() {
                 className="block h-full"
                 onMouseEnter={() => !isMobile && setHoveredCourse(cat.title)}
                 onMouseLeave={() => !isMobile && setHoveredCourse(null)}
-                onMouseMove={(e) => {
-                  if (!isMobile) {
-                    setCursorPos({ x: e.clientX, y: e.clientY });
-                  }
-                }}
+                // onMouseMove={(e) => {
+                //   if (!isMobile && tooltipRef.current) {
+                //     cursorPosRef.current = { x: e.clientX, y: e.clientY };
+                //     tooltipRef.current.style.left = `${e.clientX + 16}px`;
+                //     tooltipRef.current.style.top = `${e.clientY + 16}px`;
+                //   }
+                // }}
               >
                 <div 
                   className="relative rounded-[28px] overflow-hidden cursor-none h-full group"
@@ -398,14 +403,15 @@ export default function CoursesPage() {
       <AnimatePresence>
         {hoveredCourse && !isDragging.current && (
           <motion.div
+            ref={tooltipRef}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.15 }}
             className="fixed pointer-events-none z-50 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-100 flex items-center gap-2 text-sm font-medium text-slate-800"
             style={{
-              left: cursorPos.x + 16,
-              top: cursorPos.y + 16,
+              left: cursorPosRef.current.x + 16,
+              top: cursorPosRef.current.y + 16,
             }}
           >
             Why {hoveredCourse} <ArrowRight size={14} />

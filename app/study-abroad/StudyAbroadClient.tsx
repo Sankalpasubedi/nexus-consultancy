@@ -83,19 +83,15 @@ export default function StudyAbroadPage() {
     setCanScrollRight(scrollLeft < max - 5);
   }, []);
 
-  // Infinite auto-scroll with delta-time for smooth animation
+  // Infinite auto-scroll
   useEffect(() => {
     const scrollEl = scrollRef.current;
     if (!scrollEl) return;
 
     let animationId: number;
-    let lastTime = performance.now();
-    const scrollSpeed = 40; // pixels per second
+    const scrollSpeed = 1; // pixels per frame
 
-    const smoothScroll = (currentTime: number) => {
-      const deltaTime = (currentTime - lastTime) / 1000;
-      lastTime = currentTime;
-
+    const smoothScroll = () => {
       if (isPaused.current || isDragging.current || isHovering.current) {
         animationId = requestAnimationFrame(smoothScroll);
         return;
@@ -108,7 +104,7 @@ export default function StudyAbroadPage() {
       if (scrollLeft >= singleSetWidth) {
         scrollEl.scrollLeft = scrollLeft - singleSetWidth;
       } else {
-        scrollEl.scrollLeft += scrollSpeed * deltaTime;
+        scrollEl.scrollLeft += scrollSpeed;
       }
 
       animationId = requestAnimationFrame(smoothScroll);
@@ -304,8 +300,6 @@ export default function StudyAbroadPage() {
                 WebkitOverflowScrolling: "touch",
                 overscrollBehaviorX: "contain",
                 touchAction: "pan-x pinch-zoom",
-                scrollBehavior: "auto",
-                willChange: "scroll-position",
               }}
             >
               {infiniteLinks.map((l, idx) => (
