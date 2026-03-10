@@ -15,19 +15,19 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 /* ─── Cities Carousel Constants ──────────────────── */
 const C_CARD_W = 340;
-const C_CARD_H = 153;
+const C_CARD_H = 380;
 const C_GAP = 24;
 const C_ITEM = C_CARD_W + C_GAP;
 const DRAG_THRESHOLD = 5;
 const MOBILE_BREAKPOINT = 768;
 
 const cities = [
-  { city: "Sydney", country: "Australia", avgRent: "$1,200/mo", logo: "🏞️", image: "/services/NEX-_-15.jpg", highlight: "Beach lifestyle" },
-  { city: "London", country: "UK", avgRent: "£900/mo", logo: "🏰", image: "/services/NEX-_-17.jpg", highlight: "Historic city" },
-  { city: "Toronto", country: "Canada", avgRent: "C$1,500/mo", logo: "🍁", image: "/services/NEX-_-19.jpg", highlight: "Multicultural" },
-  { city: "New York", country: "USA", avgRent: "$1,800/mo", logo: "🗽", image: "/services/NEX-_-21.jpg", highlight: "Vibrant hub" },
-  { city: "Melbourne", country: "Australia", avgRent: "$1,100/mo", logo: "🎯", image: "/services/NEX-_-23.jpg", highlight: "Cultural capital" },
-  { city: "Auckland", country: "New Zealand", avgRent: "NZ$1,000/mo", logo: "🌋", image: "/services/NEX-_-25.jpg", highlight: "Nature & city" },
+  { city: "Sydney", country: "Australia", avgRent: "$1,200/mo", logo: "🏞️", image: "/student/sydney.jpg", highlight: "Beach lifestyle" },
+  { city: "London", country: "UK", avgRent: "£900/mo", logo: "🏰", image: "/student/london.jpg", highlight: "Historic city" },
+  { city: "Toronto", country: "Canada", avgRent: "C$1,500/mo", logo: "🍁", image: "/student/toronto.jpg", highlight: "Multicultural" },
+  { city: "New York", country: "USA", avgRent: "$1,800/mo", logo: "🗽", image: "/student/new-york.jpg", highlight: "Vibrant hub" },
+  { city: "Melbourne", country: "Australia", avgRent: "$1,100/mo", logo: "🎯", image: "/student/melbourne.jpg", highlight: "Cultural capital" },
+  { city: "Auckland", country: "New Zealand", avgRent: "NZ$1,000/mo", logo: "🌋", image: "/student/auckland.jpg", highlight: "Nature & city" },
 ];
 
 /* ─── Cities Carousel Component ───────────────────── */
@@ -239,7 +239,7 @@ function CitiesCarousel() {
                   style={{ height: C_CARD_H }}
                 >
                   {/* Top visual area with image */}
-                  {/* <div className="relative h-[200px] overflow-hidden">
+                  <div className="relative h-[200px] overflow-hidden">
                     <Image
                       src={c.image}
                       alt={c.city}
@@ -258,7 +258,7 @@ function CitiesCarousel() {
                     <div className="absolute top-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-2xl shadow-lg">
                       {c.logo}
                     </div>
-                  </div> */}
+                  </div>
 
                   {/* Info area */}
                   <div className="p-6">

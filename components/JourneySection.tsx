@@ -14,7 +14,7 @@ const steps = [
       "We assess your profile, goals, and preferences to create a personalized education plan.",
     icon: "Search",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
-    image: "/services/leftimage1.jpg",
+    image: "/services/leftimage1.png",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const steps = [
       "Shortlist universities that match your aspirations, budget, and academic background.",
     icon: "ClipboardList",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
-    image: "/services/rightimage9.jpg",
+    image: "/services/rightimage9.png",
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const steps = [
       "Complete applications with expert guidance and navigate visa requirements seamlessly.",
     icon: "FileText",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
-    image: "/services/leftimage8.jpg",
+    image: "/services/leftimage8.png",
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const steps = [
       "Get ready with accommodation, travel bookings, and essential pre-departure briefings.",
     icon: "Plane",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
-    image: "/services/rightimage11.jpg",
+    image: "/services/rightimage11.png",
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ const steps = [
       "Arrive confident and prepared to excel in your new academic environment.",
     icon: "GraduationCap",
     gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
-    image: "/services/leftimage10.jpg",
+    image: "/services/leftimage10.png",
   },
 ];
 

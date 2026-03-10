@@ -111,32 +111,32 @@ export const branches: Branch[] = [
   {
     id: "baneshwor",
     slug: "find-us-at-baneshwor",
-    name: "Bharatpur - Chitwan",
-    shortName: "Bharatpur",
-    city: "Bharatpur",
-    district: "Chitwan",
-    address: "Bharatpur, Chitwan, Nepal",
+    name: "Kathmandu - Baneshwor",
+    shortName: "Baneshwor",
+    city: "Baneshwor",
+    district: "Kathmandu",
+    address: "Baneshwor, Kathmandu, Nepal",
     phone: "+977 56 666666",
     phone2: "+977 9855034567",
     whatsapp: "+977 9855034567",
-    email: "chitwan@nexsuseducation.com",
+    email: "baneshwor@nexsuseducation.com",
     mapUrl: "https://maps.google.com/?q=27.6915,85.3430",
     mapEmbedUrl: "https://maps.google.com/maps?q=27.6915,85.3430&t=&z=15&ie=UTF8&iwloc=&output=embed",
     coordinates: { lat: 27.6915, lng: 85.3430 },
     isHeadOffice: false,
     socialLinks: {
-      facebook: "https://facebook.com/nexsuseducation.chitwan",
+      facebook: "https://facebook.com/nexsuseducation.baneshwor",
       instagram: "https://instagram.com/nexsuseducation",
       linkedin: "https://linkedin.com/company/nexsuseducation",
       tiktok: "https://tiktok.com/@nexsuseducation",
     },
     openingHours: "Sun - Fri: 10:00 AM - 5:30 PM",
     saturdayHours: "Saturday: Closed",
-    description: "Our Chitwan branch provides personalized guidance to students from the Terai region.",
+    description: "Our Baneshwor branch provides personalized guidance to students from the Kathmandu region.",
     longDescription: [
-      "Nexsus Education Chitwan is one of the leading study abroad consultants in Chitwan, Nepal. We have been helping students from Bharatpur and surrounding areas achieve their international education dreams with comprehensive guidance and support.",
-      "Established to bring quality overseas education consulting to the Terai region, our Chitwan branch has a proven track record of successful student placements in top universities across the UK, USA, Australia, Canada, and Europe.",
-      "We offer the best IELTS, PTE Academic, TOEFL iBT and SAT coaching in Chitwan, providing ample mock tests to ensure our students meet their visa and admission requirements. From counseling to pre-departure support, we're with you every step of the way."
+      "Nexsus Education Baneshwor is one of the leading study abroad consultants in Kathmandu, Nepal. We have been helping students from Baneshwor and surrounding areas achieve their international education dreams with comprehensive guidance and support.",
+      "Established to bring quality overseas education consulting to the Kathmandu region, our Baneshwor branch has a proven track record of successful student placements in top universities across the UK, USA, Australia, Canada, and Europe.",
+      "We offer the best IELTS, PTE Academic, TOEFL iBT and SAT coaching in Kathmandu, providing ample mock tests to ensure our students meet their visa and admission requirements. From counseling to pre-departure support, we're with you every step of the way."
     ],
     image: "/branches/branch.png",
     googleRating: 4.8,
@@ -148,16 +148,16 @@ export const branches: Branch[] = [
       { label: "Destinations Served", value: "10+" }
     ],
     testimonials: [
-      { id: 1, name: "Sarina Shrestha", country: "Canada", quote: "I was looking for a top education consultant in Chitwan and luckily a friend recommended me to Nexsus. The consultancy assisted me from getting a letter of offer for my education to acquiring student insurance and finally arranging my visa.", destination: "Canada" },
+      { id: 1, name: "Sarina Shrestha", country: "Canada", quote: "I was looking for a top education consultant in Kathmandu and luckily a friend recommended me to Nexsus. The consultancy assisted me from getting a letter of offer for my education to acquiring student insurance and finally arranging my visa.", destination: "Canada" },
       { id: 2, name: "Shrawan Kumar Thapa", country: "Australia", quote: "Nexsus Nepal is the best overseas education consultant in Nepal. They provided great assistance with my student visa application to Melbourne, Australia. The team has been very approachable and always there to answer all my queries.", destination: "Australia" },
-      { id: 3, name: "Devnand Thapa", country: "Canada", quote: "I am ever grateful to the competent team for helping me attain my Canada student visa in no time. The consultation and customer services they provide are efficient and excellent. Nexsus is the best education consultancy in Chitwan.", destination: "Canada" }
+      { id: 3, name: "Devnand Thapa", country: "Canada", quote: "I am ever grateful to the competent team for helping me attain my Canada student visa in no time. The consultation and customer services they provide are efficient and excellent. Nexsus is the best education consultancy in Kathmandu.", destination: "Canada" }
     ],
     faqs: [
-      { question: "Is Nexsus one of the best study abroad consultants in Nepal?", answer: "Yes, Nexsus Education is recognized as one of the leading overseas education consultants in Nepal and Chitwan, with thousands of successful student placements across multiple countries." },
+      { question: "Is Nexsus one of the best study abroad consultants in Nepal?", answer: "Yes, Nexsus Education is recognized as one of the leading overseas education consultants in Nepal and Kathmandu, with thousands of successful student placements across multiple countries." },
       { question: "What services do study abroad consultants in Nepal provide?", answer: "We provide comprehensive services including career counseling, course and university selection, application processing, test preparation (IELTS, PTE, TOEFL, SAT), visa assistance, scholarship guidance, and pre-departure orientation." },
-      { question: "Does Nexsus offer free counseling for students in Chitwan?", answer: "Yes! We offer completely free initial counseling sessions. Visit our Bharatpur office or book an appointment to speak with our expert counselors." },
+      { question: "Does Nexsus offer free counseling for students in Kathmandu?", answer: "Yes! We offer completely free initial counseling sessions. Visit our Baneshwor office or book an appointment to speak with our expert counselors." },
       { question: "Which countries can I apply to through Nexsus Nepal?", answer: "Through Nexsus, you can apply to universities in the UK, USA, Australia, Canada, New Zealand, Germany, Cyprus, France, Japan, South Korea, and many other countries." },
-      { question: "Where is Nexsus located in Chitwan?", answer: "Our Chitwan office is located in Bharatpur, easily accessible from all parts of the district. We also have clients visiting from Narayanghat, Ratnanagar, and nearby areas." }
+      { question: "Where is Nexsus located in Kathmandu?", answer: "Our Kathmandu office is located in Baneshwor, easily accessible from all parts of the city. We also have clients visiting from other areas of Kathmandu." }
     ]
   },
   {

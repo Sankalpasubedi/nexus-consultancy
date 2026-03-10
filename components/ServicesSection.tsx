@@ -138,7 +138,7 @@ const services = [
     description:
       "Not sure where to start? Our experienced counselors sit down with you, understand your goals, budget, and academic background, then map out a personalized study plan that makes sense for your future.",
     icon: "Compass",
-    image: "/services/rightimage1.jpg",
+    image: "/services/rightimage1.png",
     features: ["1-on-1 sessions", "Career pathway mapping", "University shortlisting"],
   },
   {
@@ -148,7 +148,7 @@ const services = [
     description:
       "From crafting your Statement of Purpose to organizing transcripts and recommendation letters, we handle the paperwork so you can focus on preparing for your new chapter abroad.",
     icon: "PenLine",
-    image: "/services/rightimage2.jpg",
+    image: "/services/rightimage2.png",
     features: ["SOP & essay review", "Document checklist", "Application tracking"],
   },
   {
@@ -158,7 +158,7 @@ const services = [
     description:
       "With a 98% visa success rate, our visa team knows exactly what embassies look for. We prepare your documents, conduct mock interviews, and guide you every step of the way.",
     icon: "ShieldCheck",
-    image: "/services/rightimage3.jpg",
+    image: "/services/rightimage3.png",
     features: ["98% success rate", "Mock interviews", "File preparation"],
   },
   {
@@ -168,7 +168,7 @@ const services = [
     description:
       "Get exam-ready with our structured IELTS, PTE, TOEFL, and GRE/GMAT prep courses. Small batches, experienced instructors, and real practice tests to get the score you need.",
     icon: "BookOpen",
-    image: "/services/rightimage4.jpg",
+    image: "/services/rightimage4.png",
     features: ["IELTS & PTE", "GRE & GMAT", "Real practice tests"],
   },
   {
@@ -178,7 +178,7 @@ const services = [
     description:
       "Education abroad doesn't have to break the bank. We help you find and apply for scholarships that match your profile. Our students have secured over NPR 5 Billion in scholarships collectively.",
     icon: "Trophy",
-    image: "/services/rightimage5.jpg",
+    image: "/services/rightimage5.png",
     features: ["Scholarship matching", "Application support", "Financial planning"],
   },
   {
@@ -188,7 +188,7 @@ const services = [
     description:
       "You got your visa, now what? We help with accommodation bookings, airport pickup arrangements, cultural orientation, and everything you need to feel confident before you fly.",
     icon: "Plane",
-    image: "/services/rightimage6.jpg",
+    image: "/services/rightimage6.png",
     features: ["Accommodation help", "Airport pickup", "Cultural briefing"],
   },
 ];
@@ -403,9 +403,9 @@ export default function ServicesSection() {
                             </div>
 
                             {/* Right Visual */}
-                            <div className="hidden md:flex w-[320px] items-center justify-center border-l border-white/10 relative overflow-hidden">
+                            <div className="hidden md:flex w-[380px] items-center justify-center relative">
                               <div className="absolute inset-0 bg-gradient-to-l from-black/20 to-transparent z-10" />
-                              <div className="relative w-full h-full transform group-hover:scale-110 transition-transform duration-500 ease-out">
+                              <div className="relative w-full h-full transform group-hover:scale-125 group-hover:-translate-x-28 transition-transform duration-500 ease-out">
                                 <Image
                                   src={service.image}
                                   alt={service.title}

@@ -66,13 +66,13 @@ const timeline = [
 ];
 
 const team = [
-  { name: "Bishnu Khadka", role: "Managing Director", initial: "BK", linkedin: "#", email: "bishnu@nexsus.com.np" },
-  { name: "Sushmita Khatri", role: "Admission Officer/Counselor", initial: "SK", linkedin: "#", email: "sushmita@nexsus.com.np" },
-  { name: "Kasmira Rai", role: "Education Counselor", initial: "KR", linkedin: "#", email: "kasmira@nexsus.com.np" },
-  { name: "Alina Thapa", role: "Education Counselor", initial: "AT", linkedin: "#", email: "alina@nexsus.com.np" },
-  { name: "Jyoti Rajbanshi", role: "Education Counselor", initial: "JR", linkedin: "#", email: "jyoti@nexsus.com.np" },
-  { name: "Nisha Rai", role: "Education Counselor", initial: "NR", linkedin: "#", email: "nisha@nexsus.com.np" },
-  { name: "Prabin Raj Kharel", role: "Education Counselor", initial: "PK", linkedin: "#", email: "prabin@nexsus.com.np" },
+  { name: "Bishnu Khadka", role: "Managing Director", initial: "BK", linkedin: "#", email: "bishnu@nexsus.com.np", img: "/services/rightimage1.png", statement: "Every student deserves the best path to their global future." },
+  { name: "Sushmita Khatri", role: "Admission Officer/Counselor", initial: "SK", linkedin: "#", email: "sushmita@nexsus.com.np", img: "/services/rightimage10.png", statement: "I guide students to the right university, not just any university." },
+  { name: "Kasmira Rai", role: "Education Counselor", initial: "KR", linkedin: "#", email: "kasmira@nexsus.com.np", img: "/services/leftimage5.png", statement: "Your dream destination starts with the right counselor by your side." },
+  { name: "Alina Thapa", role: "Education Counselor", initial: "AT", linkedin: "#", email: "alina@nexsus.com.np", img: "/services/leftimage2.png", statement: "I turn visa worries into visa victories for every student." },
+  { name: "Jyoti Rajbanshi", role: "Education Counselor", initial: "JR", linkedin: "#", email: "jyoti@nexsus.com.np", img: "/services/leftimage11.png", statement: "Empowering students to unlock opportunities around the world." },
+  { name: "Nisha Rai", role: "Education Counselor", initial: "NR", linkedin: "#", email: "nisha@nexsus.com.np", img: "/services/leftimage6.png", statement: "Success abroad begins with honest, informed guidance at home." },
+  { name: "Prabin Raj Kharel", role: "Education Counselor", initial: "PK", linkedin: "#", email: "prabin@nexsus.com.np", img: "/services/leftimage1.png", statement: "Every application I handle carries a student's future — I take that seriously." },
 ];
 
 const testimonials = [
@@ -113,7 +113,7 @@ const CARD_DRAG_THRESHOLD = 5;
 function TeamSliderSection({
   team,
 }: {
-  team: { name: string; role: string; initial: string; linkedin?: string; email?: string }[];
+  team: { name: string; role: string; initial: string; img: string; statement: string; linkedin?: string; email?: string }[];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -326,15 +326,15 @@ function TeamSliderSection({
 
       {/* Main layout: Featured Image Left + Carousel Right */}
       <div className="max-w-[1440px] mx-auto px-6">
-        <div className="grid lg:grid-cols-[400px_1fr] gap-8 items-center">
+        <div className="grid lg:grid-cols-[400px_1fr] gap-20 items-center">
           {/* Featured Image - Left Side */}
           <div className="hidden lg:block relative h-[500px]">
             <div className="absolute -top-8 -left-8 w-40 h-40 rounded-full bg-[#003975]/[0.08] blur-2xl" />
             <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-[#00ab18]/[0.08] blur-2xl" />
             
             {/* Featured Image Container */}
-            <div className="relative h-full flex items-center justify-center z-20">
-              <AnimatePresence mode="wait" custom={swipeDirection}>
+            <div className="relative h-full flex items-start justify-start z-20 mb-20">
+              <AnimatePresence mode="popLayout" custom={swipeDirection}>
                 <motion.div
                   key={activeIndex}
                   custom={swipeDirection}
@@ -344,44 +344,39 @@ function TeamSliderSection({
                   exit="exit"
                   transition={{
                     type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                    duration: 0.5,
+                    stiffness: 500,
+                    damping: 35,
+                    duration: 0.25,
                   }}
                   className="relative"
                 >
                   {/* Large Featured Image */}
-                  <div className="relative w-72 h-72 rounded-full overflow-hidden shadow-2xl ring-8 ring-white">
+                  <div className="relative w-72 h-[420px]">
                     <Image
-                      src={`/services/NEX-_-${activeIndex + 1}.jpg`}
+                      src={activeMember.img}
                       alt={activeMember.name}
                       fill
                       className="object-cover"
                     />
                   </div>
-                  
-                  {/* Name badge below image */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.3 }}
-                    className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-6 py-3 text-center min-w-[200px]"
-                  >
-                    <h3 className="text-lg font-bold text-slate-900">{activeMember.name}</h3>
-                    <p className="text-[#003975] text-xs font-medium">{activeMember.role}</p>
-                  </motion.div>
-
-                  {/* Decorative ring */}
-                  <div className="absolute inset-0 w-72 h-72 rounded-full border-4 border-dashed border-[#003975]/20 animate-spin-slow" style={{ animationDuration: '20s' }} />
+                </motion.div>
+                {/* Name badge below image */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.3 }}
+                  className="absolute -bottom-0 left-40 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-5 py-4 min-w-[220px] max-w-[260px]"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-1 h-full min-h-[32px] rounded-full bg-linear-to-b from-[#003975] to-[#00ab18] self-stretch" />
+                    <div>
+                      <h3 className="text-sm font-bold text-slate-900 leading-tight">{activeMember.name}</h3>
+                      <span className="text-[10px] font-semibold tracking-wider uppercase text-[#003975]/70">{activeMember.role}</span>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-slate-500 italic leading-relaxed pl-3">&ldquo;{activeMember.statement}&rdquo;</p>
                 </motion.div>
               </AnimatePresence>
-            </div>
-
-            {/* Index indicator */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm">
-              <span className="text-2xl font-bold text-[#003975]">{String(activeIndex + 1).padStart(2, '0')}</span>
-              <span className="text-slate-400">/</span>
-              <span className="text-sm text-slate-500">{String(team.length).padStart(2, '0')}</span>
             </div>
           </div>
 
@@ -429,7 +424,7 @@ function TeamSliderSection({
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="w-28 h-28 rounded-full overflow-hidden shadow-2xl ring-4 ring-white group">
                               <Image
-                                src={`/services/NEX-_-${i + 1}.jpg`}
+                                src={m.img}
                                 alt={m.name}
                                 width={112}
                                 height={112}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -88,7 +88,24 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
   // Carousel state for testimonials
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
-  
+  const carouselWrapperRef = useRef<HTMLDivElement>(null);
+  const [slideOffset, setSlideOffset] = useState(0);
+
+  // Calculate pixel-precise slide offset on mount and resize
+  useEffect(() => {
+    const GAP = 24; // gap-6 = 1.5rem
+    const update = () => {
+      if (!carouselWrapperRef.current) return;
+      const w = carouselWrapperRef.current.offsetWidth;
+      const cols = w < 640 ? 1 : w < 1024 ? 2 : 3;
+      const cardW = (w - GAP * (cols - 1)) / cols;
+      setSlideOffset(cardW + GAP);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   // Auto-scroll effect for testimonials carousel
   useEffect(() => {
     if (!branch || carouselPaused) return;
@@ -510,18 +527,20 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
           </FadeUp>
           
           <div 
-            className="relative"
+            ref={carouselWrapperRef}
+            className="relative overflow-hidden"
             onMouseEnter={() => setCarouselPaused(true)}
             onMouseLeave={() => setCarouselPaused(false)}
           >
             <div 
               className="flex transition-transform duration-500 ease-out gap-6"
-              style={{ transform: `translateX(-${carouselIndex * (100 / 3)}%)` }}
+              style={{ transform: slideOffset ? `translateX(-${carouselIndex * slideOffset}px)` : undefined }}
             >
               {[...branch.testimonials, ...branch.testimonials].map((testimonial, idx) => (
                 <div 
                   key={`${testimonial.id}-${idx}`} 
-                  className="min-w-[calc(33.333%-1rem)] flex-shrink-0 md:min-w-[calc(33.333%-1rem)] sm:min-w-[calc(50%-0.75rem)] max-sm:min-w-full"
+                  className="shrink-0"
+                  style={{ width: slideOffset ? slideOffset - 24 : undefined }}
                 >
                   <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm h-full flex flex-col">
                     <div className="flex items-center gap-1 text-yellow-400 mb-4">

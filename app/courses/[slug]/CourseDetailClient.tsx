@@ -21,16 +21,6 @@ import { courseCategories } from "@/data/courses";
 const P_CARD_W = 400;
 const P_CARD_H = 480;
 const P_GAP = 28;
-
-/* --- Program images for carousel --- */
-const programImages = [
-  "/services/NEX-_-1.jpg",
-  "/services/NEX-_-3.jpg",
-  "/services/NEX-_-5.jpg",
-  "/services/NEX-_-7.jpg",
-  "/services/NEX-_-10.jpg",
-  "/services/NEX-_-12.jpg",
-];
 const P_ITEM = P_CARD_W + P_GAP;
 const DRAG_THRESHOLD = 5;
 const MOBILE_BREAKPOINT = 768;
@@ -39,7 +29,7 @@ const MOBILE_BREAKPOINT = 768;
 function ProgramsCarousel({
   programs,
 }: {
-  programs: { name: string; duration: string; tuition: string; description: string }[];
+  programs: { name: string; duration: string; tuition: string; description: string; img:string; }[];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -271,7 +261,7 @@ function ProgramsCarousel({
                   {/* Top visual area with image */}
                   <div className="relative h-[240px] overflow-hidden">
                     <Image
-                      src={programImages[i % programImages.length]}
+                      src={p.img}
                       alt={p.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"

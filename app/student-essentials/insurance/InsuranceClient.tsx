@@ -15,20 +15,19 @@ import { useEffect, useState, useRef, useCallback } from "react";
 
 /* ─── Partners Carousel Constants ─────────────────── */
 const P_CARD_W = 340;
-// const P_CARD_H = 380;
-const P_CARD_H = 153;
+const P_CARD_H = 380;
 const P_GAP = 24;
 const P_ITEM = P_CARD_W + P_GAP;
 const DRAG_THRESHOLD = 5;
 const MOBILE_BREAKPOINT = 768;
 
 const partners = [
-  { name: "Medibank", country: "Australia", logo: "🏥", image: "/services/NEX-_-15.jpg", specialty: "OSHC Provider" },
-  { name: "BUPA", country: "UK & Global", logo: "💙", image: "/services/NEX-_-17.jpg", specialty: "Health Cover" },
-  { name: "Allianz", country: "Worldwide", logo: "🛡️", image: "/services/NEX-_-19.jpg", specialty: "Travel Insurance" },
-  { name: "NIB", country: "Australia & NZ", logo: "🌏", image: "/services/NEX-_-21.jpg", specialty: "Student Health" },
-  { name: "Guard.me", country: "Canada", logo: "🍁", image: "/services/NEX-_-23.jpg", specialty: "International Cover" },
-  { name: "ISO", country: "USA", logo: "🇺🇸", image: "/services/NEX-_-25.jpg", specialty: "Student Insurance" },
+  { name: "Medibank", country: "Australia", logo: "🏥", image: "/student/medibank.png", specialty: "OSHC Provider" },
+  { name: "BUPA", country: "UK & Global", logo: "💙", image: "/student/bupa.png", specialty: "Health Cover" },
+  { name: "Allianz", country: "Worldwide", logo: "🛡️", image: "/student/allianz.jpg", specialty: "Travel Insurance" },
+  { name: "NIB", country: "Australia & NZ", logo: "🌏", image: "/student/nib.png", specialty: "Student Health" },
+  { name: "Guard.me", country: "Canada", logo: "🍁", image: "/student/guard-me.png", specialty: "International Cover" },
+  { name: "ISO", country: "USA", logo: "🇺🇸", image: "/student/iso.png", specialty: "Student Insurance" },
 ];
 
 /* ─── Partners Carousel Component ──────────────────── */
@@ -240,7 +239,7 @@ function PartnersCarousel() {
                   style={{ height: P_CARD_H }}
                 >
                   {/* Top visual area with image */}
-                  {/* <div className="relative h-[200px] overflow-hidden">
+                  <div className="relative h-[200px] overflow-hidden">
                     <Image
                       src={p.image}
                       alt={p.name}
@@ -259,7 +258,7 @@ function PartnersCarousel() {
                     <div className="absolute top-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center text-2xl shadow-lg">
                       {p.logo}
                     </div>
-                  </div> */}
+                  </div>
 
                   {/* Info area */}
                   <div className="p-6">

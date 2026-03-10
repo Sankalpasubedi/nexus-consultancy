@@ -249,17 +249,14 @@ export default function DestinationDetailClient() {
         
         {/* Floating Right Image */}
         <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden xl:block absolute top-24 right-12 z-0"
+          animate={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1.05 }}
+          viewport={{ once: false, amount: 0.15, margin: "0px 0px -150px 0px" }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden 2xl:block absolute top-24 right-12 z-0 pointer-events-none"
         >
-          <div className="relative">
-            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
-            <div className="relative w-72 h-96 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
-              <Image src="/services/rightimage3.jpg" alt="" fill className="object-cover" />
-            </div>
+          <div className="w-72 h-96 rounded-2xl overflow-hidden shadow-xl ring-2 ring-white/40">
+            <Image src="/services/rightimage3.png" alt="" fill className="object-cover object-top" />
           </div>
         </motion.div>
 
@@ -380,17 +377,14 @@ export default function DestinationDetailClient() {
       <section className="py-24 px-6 bg-[#fafaf8] relative overflow-hidden">
         {/* Floating Left Image */}
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden xl:block absolute bottom-16 left-12 z-0"
+          animate={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1.05 }}
+          viewport={{ once: false, amount: 0.15, margin: "0px 0px -150px 0px" }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden 2xl:block absolute bottom-16 left-12 z-0 pointer-events-none"
         >
-          <div className="relative">
-            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
-            <div className="relative w-72 h-96 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
-              <Image src="/services/leftimage5.jpg" alt="" fill className="object-cover" />
-            </div>
+          <div className="w-72 h-96 rounded-2xl overflow-hidden shadow-xl ring-2 ring-white/40">
+            <Image src="/services/leftimage5.png" alt="" fill className="object-cover object-top" />
           </div>
         </motion.div>
         
@@ -530,17 +524,14 @@ export default function DestinationDetailClient() {
         
         {/* Floating Right Image */}
         <motion.div
-          initial={{ opacity: 0, x: 120 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden xl:block absolute top-32 right-12 z-0"
+          animate={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1.05 }}
+          viewport={{ once: false, amount: 0.15, margin: "0px 0px -150px 0px" }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden 2xl:block absolute top-32 right-12 z-0 pointer-events-none"
         >
-          <div className="relative">
-            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
-            <div className="relative w-72 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
-              <Image src="/services/rightimage7.jpg" alt="" fill className="object-cover" />
-            </div>
+          <div className="w-72 h-80 rounded-2xl overflow-hidden shadow-xl ring-2 ring-white/40">
+            <Image src="/services/rightimage7.png" alt="" fill className="object-cover object-top" />
           </div>
         </motion.div>
 
@@ -657,17 +648,14 @@ export default function DestinationDetailClient() {
       <section className="py-24 px-6 bg-[#fafaf8] relative overflow-hidden">
         {/* Floating Right Image */}
         <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden xl:block absolute top-16 right-10 z-0"
+          animate={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1.05 }}
+          viewport={{ once: false, amount: 0.15, margin: "0px 0px -150px 0px" }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden 2xl:block absolute top-16 right-10 z-0 pointer-events-none"
         >
-          <div className="relative">
-            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
-            <div className="relative w-64 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
-              <Image src="/services/rightimage2.jpg" alt="" fill className="object-cover" />
-            </div>
+          <div className="w-64 h-80 rounded-2xl overflow-hidden shadow-xl ring-2 ring-white/40">
+            <Image src="/services/rightimage2.png" alt="" fill className="object-cover object-top" />
           </div>
         </motion.div>
         
@@ -718,17 +706,14 @@ export default function DestinationDetailClient() {
         
         {/* Floating Left Image */}
         <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden xl:block absolute bottom-20 left-10 z-0"
+          animate={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1.05 }}
+          viewport={{ once: false, amount: 0.15, margin: "0px 0px -150px 0px" }}
+          transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="hidden 2xl:block absolute top-20 left-10 z-0 pointer-events-none"
         >
-          <div className="relative">
-            <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
-            <div className="relative w-64 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
-              <Image src="/services/leftimage9.jpg" alt="" fill className="object-cover" />
-            </div>
+          <div className="w-64 h-80 rounded-2xl overflow-hidden shadow-xl ring-2 ring-white/40">
+            <Image src="/services/leftimage9.png" alt="" fill className="object-cover object-top" />
           </div>
         </motion.div>
 
@@ -851,17 +836,14 @@ export default function DestinationDetailClient() {
         <section className="py-24 px-6 bg-white relative overflow-hidden">
           {/* Floating Left Image */}
           <motion.div
-            initial={{ opacity: 0, x: -80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden xl:block absolute top-24 left-10 z-0"
+            animate={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1.05 }}
+            viewport={{ once: false, amount: 0.15, margin: "0px 0px -150px 0px" }}
+            transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden 2xl:block absolute top-24 left-10 z-0 pointer-events-none"
           >
-            <div className="relative">
-              <div className="absolute -inset-3 bg-white/40 rounded-[2rem] blur-xl" />
-              <div className="relative w-64 h-80 rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
-                <Image src="/services/leftimage2.jpg" alt="" fill className="object-cover" />
-              </div>
+            <div className="w-64 h-80 rounded-2xl overflow-hidden shadow-xl ring-2 ring-white/40">
+              <Image src="/services/leftimage2.png" alt="" fill className="object-cover object-top" />
             </div>
           </motion.div>
           <AnimatedBlob className="absolute -top-20 -left-20 w-72 h-72" color="purple" />
