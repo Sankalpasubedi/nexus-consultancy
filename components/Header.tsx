@@ -84,6 +84,9 @@ const quickLinks = [
 const studentEssentialsLinks = [
   { label: "Student Insurance", href: "/student-essentials/insurance", icon: "ShieldCheck", description: "Health & travel insurance plans" },
   { label: "Student Accommodation", href: "/student-essentials/accommodation", icon: "Home", description: "Find housing abroad" },
+  { label: "Student Banking", href: "/student-essentials/student-banking", icon: "Landmark", description: "Open and manage your student account" },
+  { label: "Guardianship", href: "/student-essentials/guardianship", icon: "HeartHandshake", description: "Welfare support for under-18 students" },
+  { label: "ISIC Card", href: "/student-essentials/isic-card", icon: "IdCard", description: "Global student ID discounts and benefits" },
   { label: "Student Dashboard", href: "/dashboard", icon: "LayoutDashboard", description: "Track your application" },
 ];
 

@@ -454,15 +454,26 @@ export default function AccommodationClient() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-32 pb-20">
       {/* ── Hero Section ── */}
-      <section className="px-6 mb-16">
+      <section className="px-6 mb-16 mt-10">
         <div className="max-w-[1200px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left Content */}
             <div className="text-center lg:text-left">
+              {/* Breadcrumb */}
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
-                  Student Housing Guide
+                <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
+                  <Link href="/" className="hover:text-[#003975]">Home</Link>
+                  <span>/</span>
+                  <span className="text-slate-900">Student Accommodation</span>
+                </nav>
+              </FadeUp>
+              
+              <FadeUp>
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-semibold tracking-wide border border-[#003975]/20">
+                  Student Essentials
                 </span>
+              </FadeUp>
+              <FadeUp>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
                   Student Accommodation
                 </h1>

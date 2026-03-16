@@ -447,7 +447,7 @@ export default function InsuranceClient() {
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#003975]/5 rounded-full blur-3xl" />
         
         <div className="relative z-10 max-w-[1200px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left Content */}
             <div>
               {/* Breadcrumb */}
