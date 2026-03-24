@@ -14,6 +14,7 @@ import { Phone, Mail, MessageCircle, MapPin, ChevronDown } from "lucide-react";
 /* ─── Navigation Data ─────────────────────────────────── */
 
 const servicesLinks = [
+  { label: "Find a University", href: "/services/find-a-university", icon: "GraduationCap", description: "Compare universities with filters and rankings" },
   { label: "Test Preparation", href: "/services/test-preparation", icon: "BookOpen", description: "IELTS, TOEFL, PTE, GRE & SAT coaching" },
   { label: "Counseling", href: "/services/career-counseling", icon: "Target", description: "Expert career & university guidance" },
   { label: "SOP & Application Support", href: "/services/sop-writing-assistance", icon: "PenLine", description: "Professional application writing" },
@@ -679,12 +680,22 @@ function TopBarDropdown({
 
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button
-        className="text-white/70 hover:text-white text-xs lg:text-[13px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5 flex items-center gap-1"
-      >
-        {label}
-        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-      </button>
+      {overviewHref ? (
+        <Link
+          href={overviewHref}
+          className="text-white/70 hover:text-white text-xs lg:text-[13px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5 flex items-center gap-1"
+        >
+          {label}
+          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+        </Link>
+      ) : (
+        <button
+          className="text-white/70 hover:text-white text-xs lg:text-[13px] font-medium transition-colors duration-200 px-2 py-1 rounded hover:bg-white/5 flex items-center gap-1"
+        >
+          {label}
+          <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+        </button>
+      )}
 
       <AnimatePresence>
         {open && (
@@ -703,26 +714,26 @@ function TopBarDropdown({
                   </Link>
                 </div>
               )}
-              <div className="p-2 space-y-0.5">
-                {items.map((item) => (
-                  <Link
-                    key={item.href + item.label}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-start gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-200 group"
-                  >
-                    <div className="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                      <Icon name={item.icon} size={13} className="text-slate-400 group-hover:text-[#003975]" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="text-[12px] font-medium block">{item.label}</span>
-                      {item.description && (
-                        <span className="text-[10px] text-slate-400 block mt-0.5">{item.description}</span>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                <div className="p-2 space-y-0.5">
+                  {items.map((item) => (
+                    <Link
+                      key={item.href + item.label}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-start gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-200 group"
+                    >
+                      <div className="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <Icon name={item.icon} size={13} className="text-slate-400 group-hover:text-[#003975]" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-[12px] font-medium block">{item.label}</span>
+                        {item.description && (
+                          <span className="text-[10px] text-slate-400 block mt-0.5">{item.description}</span>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
             </div>
           </motion.div>
         )}
@@ -974,6 +985,7 @@ export default function Header() {
               <TopBarDropdown
                 label="Student Essentials"
                 items={studentEssentialsLinks}
+                overviewHref="/student-essentials"
               />
             </div>
 
