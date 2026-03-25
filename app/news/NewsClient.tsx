@@ -176,7 +176,7 @@ export default function NewsPage() {
       </section>
 
       {/* ── Tabs ── */}
-      <section className="bg-white pt-4 pb-2 px-6 sticky top-[72px] z-20 border-b border-gray-100">
+      <section className="bg-white pt-4 pb-2 px-6 z-20 border-b border-gray-100">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex gap-2 overflow-x-auto no-scrollbar py-2">
             {tabs.map((tab, i) => (

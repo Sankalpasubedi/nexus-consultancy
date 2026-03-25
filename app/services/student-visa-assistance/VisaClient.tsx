@@ -167,53 +167,72 @@ export default function VisaPage() {
       </section>
 
       {/* ── Visa Types — Left-bordered Cards ── */}
-      <section id="types" className="py-20 px-6 bg-gray-50">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeUp>
-            <div className="mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
-                Visa Categories
-              </span>
-              <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
-                Visa Types We Handle
-              </h2>
-              <p className="text-slate-500 text-base max-w-lg">
-                Expert assistance across all major student and work visa categories
-              </p>
-            </div>
-          </FadeUp>
+      <section id="types" className="group/visa-types py-20 px-6 bg-gray-50">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/visa-types:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage11.png"
+                  alt="Student reviewing visa category options"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/visa-types:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
 
-          <StaggerContainer className="grid md:grid-cols-2 gap-5">
-            {visaTypes.map((vt) => (
-              <StaggerItem key={vt.title}>
-                <HoverCard>
-                  <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full flex group">
-                    {/* Left accent border */}
-                    <div className="w-1.5 bg-slate-800 flex-shrink-0 group-hover:bg-[#003975] transition-colors" />
-                    <div className="p-6 flex-1">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
-                          <Icon name={vt.icon} size={20} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#003975] transition-colors">{vt.title}</h3>
-                          <span className="text-[11px] text-slate-400 font-medium">{vt.countries}</span>
-                        </div>
-                      </div>
-                      <p className="text-sm text-slate-500 mb-4 leading-relaxed">{vt.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {vt.features.map((f) => (
-                          <span key={f} className="inline-flex items-center gap-1.5 text-[12px] text-slate-600 bg-gray-50 px-2.5 py-1 rounded-full">
-                            <span className="w-1 h-1 rounded-full bg-slate-700" /> {f}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <FadeUp>
+                  <div className="mb-14">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                      Visa Categories
+                    </span>
+                    <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
+                      Visa Types We Handle
+                    </h2>
+                    <p className="text-slate-500 text-base max-w-lg">
+                      Expert assistance across all major student and work visa categories
+                    </p>
                   </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </FadeUp>
+
+                <StaggerContainer className="grid md:grid-cols-2 gap-5">
+                  {visaTypes.map((vt) => (
+                    <StaggerItem key={vt.title}>
+                      <HoverCard>
+                        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full flex group">
+                          {/* Left accent border */}
+                          <div className="w-1.5 bg-slate-800 flex-shrink-0 group-hover:bg-[#003975] transition-colors" />
+                          <div className="p-6 flex-1">
+                            <div className="flex items-start gap-4 mb-4">
+                              <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
+                                <Icon name={vt.icon} size={20} />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#003975] transition-colors">{vt.title}</h3>
+                                <span className="text-[11px] text-slate-400 font-medium">{vt.countries}</span>
+                              </div>
+                            </div>
+                            <p className="text-sm text-slate-500 mb-4 leading-relaxed">{vt.description}</p>
+                            <div className="flex flex-wrap gap-2">
+                              {vt.features.map((f) => (
+                                <span key={f} className="inline-flex items-center gap-1.5 text-[12px] text-slate-600 bg-gray-50 px-2.5 py-1 rounded-full">
+                                  <span className="w-1 h-1 rounded-full bg-slate-700" /> {f}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </HoverCard>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -288,51 +307,70 @@ export default function VisaPage() {
       </section>
 
       {/* ── Why Trust Us — Split ── */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <FadeLeft>
-              <div>
-                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Trust & Expertise</span>
-                <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
-                  Why Trust NEXSUS<br />With Your Visa?
-                </h2>
-                <p className="text-slate-500 text-base leading-relaxed mb-6">
-                  With a 99.2% visa approval rate, our team has the expertise and track record to handle even the most complex visa cases with confidence.
-                </p>
-                <div className="space-y-4">
-                  {["Dedicated visa specialist assigned to your case", "Real-time application tracking and updates", "Embassy relationship for smooth processing", "Free reapplication support if needed"].map((item) => (
-                    <div key={item} className="flex items-center gap-3 text-sm text-slate-600">
-                      <div className="w-6 h-6 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
-                        <Icon name="Check" size={12} />
+      <section className="group/visa-trust py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pr-6 xl:pr-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                  <FadeLeft>
+                    <div>
+                      <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Trust & Expertise</span>
+                      <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
+                        Why Trust NEXSUS<br />With Your Visa?
+                      </h2>
+                      <p className="text-slate-500 text-base leading-relaxed mb-6">
+                        With a 99.2% visa approval rate, our team has the expertise and track record to handle even the most complex visa cases with confidence.
+                      </p>
+                      <div className="space-y-4">
+                        {["Dedicated visa specialist assigned to your case", "Real-time application tracking and updates", "Embassy relationship for smooth processing", "Free reapplication support if needed"].map((item) => (
+                          <div key={item} className="flex items-center gap-3 text-sm text-slate-600">
+                            <div className="w-6 h-6 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
+                              <Icon name="Check" size={12} />
+                            </div>
+                            {item}
+                          </div>
+                        ))}
                       </div>
-                      {item}
                     </div>
-                  ))}
-                </div>
-              </div>
-            </FadeLeft>
-            <FadeRight>
-              <div className="relative bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-2xl" />
-                <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-6">Our Visa Success</h3>
-                  <div className="grid grid-cols-2 gap-6">
-                    {[
-                      { num: "99.2%", label: "Approval Rate" },
-                      { num: "15,000+", label: "Visas Processed" },
-                      { num: "20+", label: "Countries" },
-                      { num: "0", label: "Hidden Fees" },
-                    ].map((s) => (
-                      <div key={s.label}>
-                        <div className="text-3xl font-bold text-white mb-1">{s.num}</div>
-                        <div className="text-sm text-blue-200">{s.label}</div>
+                  </FadeLeft>
+                  <FadeRight>
+                    <div className="relative bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden">
+                      <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-2xl" />
+                      <div className="relative z-10">
+                        <h3 className="text-2xl font-bold mb-6">Our Visa Success</h3>
+                        <div className="grid grid-cols-2 gap-6">
+                          {[
+                            { num: "99.2%", label: "Approval Rate" },
+                            { num: "15,000+", label: "Visas Processed" },
+                            { num: "20+", label: "Countries" },
+                            { num: "0", label: "Hidden Fees" },
+                          ].map((s) => (
+                            <div key={s.label}>
+                              <div className="text-3xl font-bold text-white mb-1">{s.num}</div>
+                              <div className="text-sm text-blue-200">{s.label}</div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  </FadeRight>
                 </div>
               </div>
-            </FadeRight>
+            </div>
+
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[500px] xl:translate-x-20 -translate-y-20 transform-gpu group-hover/visa-trust:translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/rightimage4.png"
+                  alt="Visa success guidance"
+                  fill
+                  className="object-contain object-center scale-[1.1] group-hover/visa-trust:scale-[1.24] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
           </div>
         </div>
       </section>

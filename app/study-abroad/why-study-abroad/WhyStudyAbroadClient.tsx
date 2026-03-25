@@ -269,130 +269,168 @@ export default function WhyStudyAbroadClient() {
       </section>
 
       {/* Work Rights Section */}
-      <section className="py-24 px-6 bg-[#fafaf8]">
-        <div className="max-w-[1440px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm border border-gray-100">
-                <Icon name="Briefcase" size={16} /> Post-Study Work Rights
+      <section className="group/work-rights py-24 px-6 bg-[#fafaf8]">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/work-rights:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage6.png"
+                  alt="Student planning post-study work opportunities"
+                  fill
+                  className="object-contain object-center scale-[1.32] group-hover/work-rights:scale-[1.4] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Build Your Career After Graduation
-              </h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Most popular destinations offer generous post-study work visas
-              </p>
-            </div>
-          </FadeUp>
+            </FadeUp>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {workRights.map((item, idx) => (
-              <motion.div
-                key={item.country}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08, duration: 0.5 }}
-                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 group"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-[#003975]/5 transition-colors">
-                    <FlagIcon code={item.icon} size={24} />
+            <div className="xl:w-[76%]">
+              <div className="max-w-5xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-16">
+                    <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm border border-gray-100">
+                      <Icon name="Briefcase" size={16} /> Post-Study Work Rights
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                      Build Your Career After Graduation
+                    </h2>
+                    <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                      Most popular destinations offer generous post-study work visas
+                    </p>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">{item.country}</h3>
-                    <p className="text-[#003975] font-bold text-lg">{item.duration}</p>
-                  </div>
+                </FadeUp>
+
+                <div className="grid md:grid-cols-2 gap-5">
+                  {workRights.map((item, idx) => (
+                    <motion.div
+                      key={item.country}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.08, duration: 0.5 }}
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 group"
+                    >
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-[#003975]/5 transition-colors">
+                          <FlagIcon code={item.icon} size={24} />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-slate-900">{item.country}</h3>
+                          <p className="text-[#003975] font-bold text-lg">{item.duration}</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-slate-500">{item.detail}</p>
+                    </motion.div>
+                  ))}
                 </div>
-                <p className="text-sm text-slate-500">{item.detail}</p>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Study In Countries Section */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-[1440px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-slate-100 text-slate-600 text-sm font-medium border border-gray-100">
-                <Icon name="MapPin" size={16} /> Popular Destinations
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Where Would You Like to Study?
-              </h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Choose from the world&apos;s top study destinations and start your international education journey
-              </p>
-            </div>
-          </FadeUp>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {studyInCountries.map((country, idx) => (
-              <motion.div
-                key={country.label}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: idx * 0.08,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
-              >
-                <Link href={country.href} className="block group">
-                  <motion.div
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="bg-[#fafaf8] rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-[#003975]/20 transition-all duration-300 h-full relative overflow-hidden"
-                  >
-                    {/* Gradient hover effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#003975]/5 to-[#00ab18]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
-                    {/* Content */}
-                    <div className="relative z-10">
-                      {/* Flag */}
-                      <motion.div
-                        initial={{ scale: 1 }}
-                        whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-                        transition={{ duration: 0.4 }}
-                        className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-4 group-hover:bg-[#003975]/5 transition-colors duration-300 shadow-sm"
-                      >
-                        <FlagIcon code={country.flagCode} size={28} />
-                      </motion.div>
-                      
-                      {/* Country Name */}
-                      <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors duration-300">
-                        {country.label}
-                      </h3>
-                      
-                      {/* Stats */}
-                      <div className="flex items-center gap-4 text-xs text-slate-500">
-                        <span className="flex items-center gap-1">
-                          <Icon name="Users" size={12} className="text-slate-400" />
-                          {country.students}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Icon name="Building" size={12} className="text-slate-400" />
-                          {country.universities}
-                        </span>
-                      </div>
-                      
-                      {/* Arrow indicator */}
-                      <motion.div 
-                        className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        initial={{ x: -5 }}
-                        whileHover={{ x: 0 }}
-                      >
-                        <Icon name="ArrowUpRight" size={18} className="text-[#003975]" />
-                      </motion.div>
+      <section className="group/destinations py-20 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pr-6 xl:pr-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <div className="xl:w-[76%]">
+              <div className="max-w-5xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-12">
+                    <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-slate-100 text-slate-600 text-sm font-medium border border-gray-100">
+                      <Icon name="MapPin" size={16} /> Popular Destinations
                     </div>
-                  </motion.div>
-                </Link>
-              </motion.div>
-            ))}
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                      Where Would You Like to Study?
+                    </h2>
+                    <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                      Choose from the world&apos;s top study destinations and start your international education journey
+                    </p>
+                  </div>
+                </FadeUp>
+
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
+                  {studyInCountries.slice(0, 6).map((country, idx) => (
+                    <motion.div
+                      key={country.label}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{
+                        duration: 0.5,
+                        delay: idx * 0.08,
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      }}
+                    >
+                      <Link href={country.href} className="block group">
+                        <motion.div
+                          whileHover={{ y: -8, scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
+                          className="bg-[#fafaf8] rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-[#003975]/20 transition-all duration-300 h-full relative overflow-hidden"
+                        >
+                          {/* Gradient hover effect */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#003975]/5 to-[#00ab18]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                          {/* Content */}
+                          <div className="relative z-10">
+                            {/* Flag */}
+                            <motion.div
+                              initial={{ scale: 1 }}
+                              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                              transition={{ duration: 0.4 }}
+                              className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-4 group-hover:bg-[#003975]/5 transition-colors duration-300 shadow-sm"
+                            >
+                              <FlagIcon code={country.flagCode} size={28} />
+                            </motion.div>
+
+                            {/* Country Name */}
+                            <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors duration-300">
+                              {country.label}
+                            </h3>
+
+                            {/* Stats */}
+                            <div className="flex items-center gap-4 text-xs text-slate-500">
+                              <span className="flex items-center gap-1">
+                                <Icon name="Users" size={12} className="text-slate-400" />
+                                {country.students}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Icon name="Building" size={12} className="text-slate-400" />
+                                {country.universities}
+                              </span>
+                            </div>
+
+                            {/* Arrow indicator */}
+                            <motion.div
+                              className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                              initial={{ x: -5 }}
+                              whileHover={{ x: 0 }}
+                            >
+                              <Icon name="ArrowUpRight" size={18} className="text-[#003975]" />
+                            </motion.div>
+                          </div>
+                        </motion.div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:translate-x-20 transform-gpu group-hover/destinations:translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/rightimage4.png"
+                  alt="Student selecting a study destination"
+                  fill
+                  className="object-contain object-center scale-[1.32] group-hover/destinations:scale-[1.4] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
           </div>
         </div>
       </section>

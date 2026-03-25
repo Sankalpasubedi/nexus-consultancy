@@ -471,67 +471,88 @@ export default function CoursesPage() {
       </div>
 
       {/* Entry Requirements */}
-      <div className="relative max-w-4xl mx-auto px-6 mt-24">
-        <FadeUp>
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm">
-              <Icon name="ClipboardList" size={16} /> General Requirements
+      <section className="group/requirements mt-24 px-6">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[320px] xl:-translate-x-20 -translate-y-15 transform-gpu group-hover/requirements:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage5.png"
+                  alt="Student preparing course admission documents"
+                  fill
+                  className="object-contain object-center scale-[1.18] group-hover/requirements:scale-[1.25] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 980px) 20vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
+
+            <div className="xl:w-[76%]">
+              <div className="relative max-w-4xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-12">
+                    <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm">
+                      <Icon name="ClipboardList" size={16} /> General Requirements
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Entry Requirements</h2>
+                    <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                      Common requirements across most international programs
+                    </p>
+                  </div>
+                </FadeUp>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <FadeUp delay={0.1}>
+                    <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full">
+                      <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
+                        <Icon name="GraduationCap" size={20} className="text-white" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-slate-900 mb-4">Undergraduate</h3>
+                      <ul className="space-y-3">
+                        {[
+                          "High school diploma or equivalent",
+                          "IELTS 6.0-7.0 or TOEFL equivalent",
+                          "SAT/ACT scores (for US universities)",
+                          "Field-specific prerequisites may apply",
+                        ].map((r) => (
+                          <li key={r} className="flex items-start gap-3 text-sm text-slate-600">
+                            <span className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
+                              <Icon name="Check" size={12} />
+                            </span>
+                            {r}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </FadeUp>
+                  <FadeUp delay={0.2}>
+                    <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full">
+                      <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
+                        <Icon name="Building" size={20} className="text-white" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-slate-900 mb-4">Postgraduate</h3>
+                      <ul className="space-y-3">
+                        {[
+                          "Bachelor's degree in relevant field",
+                          "IELTS 6.5-7.0 or TOEFL equivalent",
+                          "GRE/GMAT scores (varies by program)",
+                          "Work experience preferred for MBA/MS",
+                        ].map((r) => (
+                          <li key={r} className="flex items-start gap-3 text-sm text-slate-600">
+                            <span className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
+                              <Icon name="Check" size={12} />
+                            </span>
+                            {r}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </FadeUp>
+                </div>
+              </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Entry Requirements</h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              Common requirements across most international programs
-            </p>
           </div>
-        </FadeUp>
-        <div className="grid md:grid-cols-2 gap-6">
-          <FadeUp delay={0.1}>
-            <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full">
-              <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
-                <Icon name="GraduationCap" size={20} className="text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">Undergraduate</h3>
-              <ul className="space-y-3">
-                {[
-                  "High school diploma or equivalent",
-                  "IELTS 6.0-7.0 or TOEFL equivalent",
-                  "SAT/ACT scores (for US universities)",
-                  "Field-specific prerequisites may apply",
-                ].map((r) => (
-                  <li key={r} className="flex items-start gap-3 text-sm text-slate-600">
-                    <span className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
-                      <Icon name="Check" size={12} />
-                    </span>
-                    {r}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full">
-              <div className="w-11 h-11 rounded-xl bg-slate-800 flex items-center justify-center mb-4">
-                <Icon name="Building" size={20} className="text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">Postgraduate</h3>
-              <ul className="space-y-3">
-                {[
-                  "Bachelor's degree in relevant field",
-                  "IELTS 6.5-7.0 or TOEFL equivalent",
-                  "GRE/GMAT scores (varies by program)",
-                  "Work experience preferred for MBA/MS",
-                ].map((r) => (
-                  <li key={r} className="flex items-start gap-3 text-sm text-slate-600">
-                    <span className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">
-                      <Icon name="Check" size={12} />
-                    </span>
-                    {r}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeUp>
         </div>
-      </div>
+      </section>
 
       {/* CTA */}
       <div className="relative max-w-3xl mx-auto px-6 mt-24 text-center">

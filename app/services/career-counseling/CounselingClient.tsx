@@ -158,52 +158,71 @@ export default function CounselingPage() {
       </section>
 
       {/* ── Services — Numbered Feature Cards ── */}
-      <section id="services" className="py-20 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
-                Our Expertise
-              </span>
-              <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
-                Comprehensive Counseling Services
-              </h2>
-              <p className="text-slate-500 text-base max-w-lg mx-auto">
-                From course selection to financial planning — we guide you through every decision
-              </p>
-            </div>
-          </FadeUp>
+      <section id="services" className="group/services py-20 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/services:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage6.png"
+                  alt="Counselor guiding students"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/services:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
 
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {counselingTypes.map((ct, i) => (
-              <StaggerItem key={ct.title}>
-                <HoverCard>
-                  <div className="bg-white rounded-2xl border border-gray-100 hover:border-[#003975]/20 transition-all p-6 h-full group relative overflow-hidden">
-                    {/* Large number watermark */}
-                    <span className="absolute top-3 right-5 text-[72px] font-black text-slate-900/[0.03] leading-none select-none">
-                      {String(i + 1).padStart(2, "0")}
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-14">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                      Our Expertise
                     </span>
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="w-11 h-11 rounded-xl bg-[#003975] text-white flex items-center justify-center flex-shrink-0">
-                          <Icon name={ct.icon} size={20} />
-                        </div>
-                        <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#003975] transition-colors">{ct.title}</h3>
-                      </div>
-                      <p className="text-sm text-slate-500 mb-4 leading-relaxed">{ct.description}</p>
-                      <div className="space-y-2">
-                        {ct.features.map((f) => (
-                          <span key={f} className="flex items-center gap-2 text-[13px] text-slate-600">
-                            <Icon name="Check" size={13} className="text-[#00ab18] flex-shrink-0" /> {f}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                    <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
+                      Comprehensive Counseling Services
+                    </h2>
+                    <p className="text-slate-500 text-base max-w-lg mx-auto">
+                      From course selection to financial planning — we guide you through every decision
+                    </p>
                   </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </FadeUp>
+
+                <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {counselingTypes.map((ct, i) => (
+                    <StaggerItem key={ct.title}>
+                      <HoverCard>
+                        <div className="bg-white rounded-2xl border border-gray-100 hover:border-[#003975]/20 transition-all p-6 h-full group relative overflow-hidden">
+                          {/* Large number watermark */}
+                          <span className="absolute top-3 right-5 text-[72px] font-black text-slate-900/[0.03] leading-none select-none">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-3 mb-4">
+                              <div className="w-11 h-11 rounded-xl bg-[#003975] text-white flex items-center justify-center flex-shrink-0">
+                                <Icon name={ct.icon} size={20} />
+                              </div>
+                              <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#003975] transition-colors">{ct.title}</h3>
+                            </div>
+                            <p className="text-sm text-slate-500 mb-4 leading-relaxed">{ct.description}</p>
+                            <div className="space-y-2">
+                              {ct.features.map((f) => (
+                                <span key={f} className="flex items-center gap-2 text-[13px] text-slate-600">
+                                  <Icon name="Check" size={13} className="text-[#00ab18] flex-shrink-0" /> {f}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </HoverCard>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

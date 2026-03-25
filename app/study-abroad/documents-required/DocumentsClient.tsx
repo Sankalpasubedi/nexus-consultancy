@@ -366,146 +366,165 @@ export default function DocumentsPage() {
       {/* ───── Document Checklist ───── */}
       <section
         id="checklist"
-        className="py-20 px-6 bg-gradient-to-b from-gray-50/80 to-white"
+        className="group/checklist py-20 px-6 bg-gradient-to-b from-gray-50/80 to-white"
       >
-        <div className="max-w-4xl mx-auto">
-          {/* Header row */}
-          <FadeUp>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
-                  <Icon
-                    name="ClipboardList"
-                    size={18}
-                    className="text-white"
-                  />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-                  Document Checklist
-                </h2>
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 xl:-translate-y-30 transform-gpu group-hover/checklist:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage9.png"
+                  alt="Student preparing application documents"
+                  fill
+                  className="object-contain object-center scale-[1.32] group-hover/checklist:scale-[1.4] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
               </div>
-              <Link
-                href="#"
-                className="inline-flex items-center gap-2 border border-gray-300 text-slate-700 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-50 transition"
-              >
-                Download Checklist
-                <Icon name="ArrowRight" size={14} />
-              </Link>
-            </div>
-          </FadeUp>
-          <FadeUp delay={0.05}>
-            <p className="text-sm text-slate-400 mb-10">
-              A comprehensive checklist of all documents you&apos;ll need for
-              university applications and student visa
-            </p>
-          </FadeUp>
+            </FadeUp>
 
-          {/* Accordion */}
-          <div className="space-y-0 divide-y divide-gray-200 border-t border-gray-200">
-            {documentCategories.map((cat, i) => {
-              const isOpen = openCategory === i;
-              return (
-                <FadeUp key={cat.title} delay={i * 0.04}>
-                  <div>
-                    {/* Accordion header */}
-                    <button
-                      onClick={() =>
-                        setOpenCategory(isOpen ? null : i)
-                      }
-                      className="w-full flex items-center gap-4 py-5 text-left group"
-                    >
-                      <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
+            <div className="xl:w-[76%]">
+              <div className="max-w-4xl mx-auto">
+                {/* Header row */}
+                <FadeUp>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
                         <Icon
-                          name={cat.icon}
-                          size={16}
+                          name="ClipboardList"
+                          size={18}
                           className="text-white"
                         />
                       </div>
-                      <span className="flex-1 text-xs font-bold tracking-widest text-slate-800 uppercase">
-                        {cat.title}
-                      </span>
-                      <motion.span
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="text-slate-400"
-                      >
-                        <Icon name="ChevronDown" size={18} />
-                      </motion.span>
-                    </button>
-
-                    {/* Accordion content */}
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key="content"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: "easeInOut" }}
-                          className="overflow-hidden"
-                        >
-                          <div className="pb-8 pl-4 sm:pl-13">
-                            {/* Timeline-style cards */}
-                            <div className="relative">
-                              {/* Vertical line */}
-                              <div className="absolute left-3 top-4 bottom-4 w-px bg-gray-200" />
-
-                              <div className="space-y-6">
-                                {cat.docs.map((doc, di) => (
-                                  <div
-                                    key={doc.name}
-                                    className="relative flex items-start gap-5"
-                                  >
-                                    {/* Dot */}
-                                    <div className="relative z-10 mt-5 w-7 h-7 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center flex-shrink-0">
-                                      <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-                                    </div>
-
-                                    {/* Card */}
-                                    <motion.div
-                                      initial={{ opacity: 0, y: 12 }}
-                                      animate={{ opacity: 1, y: 0 }}
-                                      transition={{
-                                        delay: di * 0.08,
-                                        duration: 0.35,
-                                      }}
-                                      className="flex-1 bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:scale-[1.02] transition-all duration-300"
-                                    >
-                                      {doc.required && (
-                                        <span className="inline-block text-[10px] font-bold tracking-wide uppercase bg-orange-100 text-orange-600 px-2.5 py-0.5 rounded-full mb-2">
-                                          Required
-                                        </span>
-                                      )}
-                                      <h4 className="font-semibold text-slate-900 text-sm mb-1">
-                                        {doc.name}
-                                      </h4>
-                                      <p className="text-xs text-slate-400 mb-2.5">
-                                        {doc.description}
-                                      </p>
-                                      <ul className="space-y-1">
-                                        {doc.bullets.map((b) => (
-                                          <li
-                                            key={b}
-                                            className="flex items-start gap-2 text-xs text-slate-500"
-                                          >
-                                            <span className="mt-1.5 w-1 h-1 rounded-full bg-slate-400 flex-shrink-0" />
-                                            {b}
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </motion.div>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                      <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+                        Document Checklist
+                      </h2>
+                    </div>
+                    <Link
+                      href="#"
+                      className="inline-flex items-center gap-2 border border-gray-300 text-slate-700 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-50 transition"
+                    >
+                      Download Checklist
+                      <Icon name="ArrowRight" size={14} />
+                    </Link>
                   </div>
                 </FadeUp>
-              );
-            })}
+                <FadeUp delay={0.05}>
+                  <p className="text-sm text-slate-400 mb-10">
+                    A comprehensive checklist of all documents you&apos;ll need for
+                    university applications and student visa
+                  </p>
+                </FadeUp>
+
+                {/* Accordion */}
+                <div className="space-y-0 divide-y divide-gray-200 border-t border-gray-200">
+                  {documentCategories.map((cat, i) => {
+                    const isOpen = openCategory === i;
+                    return (
+                      <FadeUp key={cat.title} delay={i * 0.04}>
+                        <div>
+                          {/* Accordion header */}
+                          <button
+                            onClick={() =>
+                              setOpenCategory(isOpen ? null : i)
+                            }
+                            className="w-full flex items-center gap-4 py-5 text-left group"
+                          >
+                            <div className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
+                              <Icon
+                                name={cat.icon}
+                                size={16}
+                                className="text-white"
+                              />
+                            </div>
+                            <span className="flex-1 text-xs font-bold tracking-widest text-slate-800 uppercase">
+                              {cat.title}
+                            </span>
+                            <motion.span
+                              animate={{ rotate: isOpen ? 180 : 0 }}
+                              transition={{ duration: 0.25 }}
+                              className="text-slate-400"
+                            >
+                              <Icon name="ChevronDown" size={18} />
+                            </motion.span>
+                          </button>
+
+                          {/* Accordion content */}
+                          <AnimatePresence initial={false}>
+                            {isOpen && (
+                              <motion.div
+                                key="content"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.35, ease: "easeInOut" }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pb-8 pl-4 sm:pl-13">
+                                  {/* Timeline-style cards */}
+                                  <div className="relative">
+                                    {/* Vertical line */}
+                                    <div className="absolute left-3 top-4 bottom-4 w-px bg-gray-200" />
+
+                                    <div className="space-y-6">
+                                      {cat.docs.map((doc, di) => (
+                                        <div
+                                          key={doc.name}
+                                          className="relative flex items-start gap-5"
+                                        >
+                                          {/* Dot */}
+                                          <div className="relative z-10 mt-5 w-7 h-7 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center flex-shrink-0">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+                                          </div>
+
+                                          {/* Card */}
+                                          <motion.div
+                                            initial={{ opacity: 0, y: 12 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{
+                                              delay: di * 0.08,
+                                              duration: 0.35,
+                                            }}
+                                            className="flex-1 bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:scale-[1.02] transition-all duration-300"
+                                          >
+                                            {doc.required && (
+                                              <span className="inline-block text-[10px] font-bold tracking-wide uppercase bg-orange-100 text-orange-600 px-2.5 py-0.5 rounded-full mb-2">
+                                                Required
+                                              </span>
+                                            )}
+                                            <h4 className="font-semibold text-slate-900 text-sm mb-1">
+                                              {doc.name}
+                                            </h4>
+                                            <p className="text-xs text-slate-400 mb-2.5">
+                                              {doc.description}
+                                            </p>
+                                            <ul className="space-y-1">
+                                              {doc.bullets.map((b) => (
+                                                <li
+                                                  key={b}
+                                                  className="flex items-start gap-2 text-xs text-slate-500"
+                                                >
+                                                  <span className="mt-1.5 w-1 h-1 rounded-full bg-slate-400 flex-shrink-0" />
+                                                  {b}
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          </motion.div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      </FadeUp>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

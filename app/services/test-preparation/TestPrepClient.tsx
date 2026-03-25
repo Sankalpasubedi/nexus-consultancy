@@ -176,6 +176,20 @@ const whyChooseUs = [
     stat: "1.5+",
     statLabel: "Band Increase",
   },
+  {
+    icon: "Monitor",
+    title: "Smart Practice Platform",
+    description: "Access performance analytics, sectional insights, and adaptive practice modules that target your weak areas.",
+    stat: "24/7",
+    statLabel: "Access",
+  },
+  {
+    icon: "Sparkles",
+    title: "Personal Mentorship",
+    description: "Get one-on-one feedback sessions, doubt-clearing support, and exam-day strategy coaching from our experts.",
+    stat: "1:1",
+    statLabel: "Mentoring",
+  },
 ];
 
 const preparationProcess = [
@@ -381,37 +395,57 @@ export default function TestPreparationPage() {
         </div>
       </section>
 
-      {/* ── Why Choose Us — 4‑col ── */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Why NEXSUS</span>
-              <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Why Choose Our Test Prep?</h2>
-              <p className="text-slate-500 text-sm max-w-md mx-auto">Expert guidance backed by results — not just classes, but a complete preparation ecosystem</p>
-            </div>
-          </FadeUp>
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {whyChooseUs.map((f) => (
-              <StaggerItem key={f.title}>
-                <HoverCard>
-                  <div className="bg-white rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
-                        <Icon name={f.icon} size={20} />
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-[#003975]">{f.stat}</div>
-                        <div className="text-[10px] text-slate-400 uppercase tracking-wider">{f.statLabel}</div>
-                      </div>
-                    </div>
-                    <h4 className="text-[15px] font-semibold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors">{f.title}</h4>
-                    <p className="text-sm text-slate-500 leading-relaxed">{f.description}</p>
+      {/* ── Why Choose Us ── */}
+      <section className="group/why-nexsus py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/why-nexsus:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage10.png"
+                  alt="Students preparing with expert mentors"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/why-nexsus:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
+
+            <div className="xl:w-[76%]">
+              <div className="max-w-5xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-16">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Why NEXSUS</span>
+                    <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Why Choose Our Test Prep?</h2>
+                    <p className="text-slate-500 text-sm max-w-md mx-auto">Expert guidance backed by results, not just classes, but a complete preparation ecosystem</p>
                   </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </FadeUp>
+
+                <StaggerContainer className="grid md:grid-cols-2 gap-5">
+                  {whyChooseUs.slice(0, 6).map((f) => (
+                    <StaggerItem key={f.title}>
+                      <HoverCard>
+                        <div className="bg-white rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
+                          <div className="flex items-center justify-between mb-5">
+                            <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
+                              <Icon name={f.icon} size={20} />
+                            </div>
+                            <div className="text-right">
+                              <div className="text-2xl font-bold text-[#003975]">{f.stat}</div>
+                              <div className="text-[10px] text-slate-400 uppercase tracking-wider">{f.statLabel}</div>
+                            </div>
+                          </div>
+                          <h4 className="text-[15px] font-semibold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors">{f.title}</h4>
+                          <p className="text-sm text-slate-500 leading-relaxed">{f.description}</p>
+                        </div>
+                      </HoverCard>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

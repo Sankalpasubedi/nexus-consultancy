@@ -299,59 +299,78 @@ export default function SOPPage() {
       </section>
 
       {/* ── Our Writing Process ── */}
-      <section className="py-24 px-6 bg-gray-50">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeUp>
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-16">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Icon name="PenLine" size={22} className="text-slate-400" />
-                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-                    Our Writing Process
-                  </h2>
-                </div>
-                <p className="text-slate-500 text-sm mt-1">
-                  From your first conversation to final submission, we ensure every word counts
-                </p>
+      <section className="group/writing-process py-24 px-6 bg-gray-50">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/writing-process:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage1.png"
+                  alt="Student working on SOP drafts"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/writing-process:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
               </div>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium text-slate-700 hover:bg-white hover:shadow-sm transition self-start sm:self-auto"
-              >
-                Download Checklist <Icon name="ArrowRight" size={14} />
-              </Link>
-            </div>
-          </FadeUp>
+            </FadeUp>
 
-          {/* Timeline */}
-          <div className="relative">
-            <div className="absolute left-[29px] top-0 bottom-0 w-px bg-gray-200 hidden md:block" />
-
-            <div className="space-y-6">
-              {writingProcess.map((step, i) => (
-                <FadeUp key={step.step} delay={i * 0.08}>
-                  <div className="flex gap-6 md:gap-8 items-start">
-                    <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-slate-800 text-white flex items-center justify-center text-lg font-bold shadow-lg">
-                      {step.step}
-                    </div>
-                    <div className="bg-white rounded-2xl border border-gray-100 p-6 flex-1 shadow-sm">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <Icon
-                          name={step.icon}
-                          size={16}
-                          className="text-slate-400"
-                        />
-                        <h3 className="font-semibold text-slate-900">
-                          {step.title}
-                        </h3>
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <FadeUp>
+                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-16">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Icon name="PenLine" size={22} className="text-slate-400" />
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+                          Our Writing Process
+                        </h2>
                       </div>
-                      <p className="text-sm text-slate-500 leading-relaxed">
-                        {step.description}
+                      <p className="text-slate-500 text-sm mt-1">
+                        From your first conversation to final submission, we ensure every word counts
                       </p>
                     </div>
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium text-slate-700 hover:bg-white hover:shadow-sm transition self-start sm:self-auto"
+                    >
+                      Download Checklist <Icon name="ArrowRight" size={14} />
+                    </Link>
                   </div>
                 </FadeUp>
-              ))}
+
+                {/* Timeline */}
+                <div className="relative">
+                  <div className="absolute left-[29px] top-0 bottom-0 w-px bg-gray-200 hidden md:block" />
+
+                  <div className="space-y-6">
+                    {writingProcess.map((step, i) => (
+                      <FadeUp key={step.step} delay={i * 0.08}>
+                        <div className="flex gap-6 md:gap-8 items-start">
+                          <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-slate-800 text-white flex items-center justify-center text-lg font-bold shadow-lg">
+                            {step.step}
+                          </div>
+                          <div className="bg-white rounded-2xl border border-gray-100 p-6 flex-1 shadow-sm">
+                            <div className="flex items-center gap-2 mb-1.5">
+                              <Icon
+                                name={step.icon}
+                                size={16}
+                                className="text-slate-400"
+                              />
+                              <h3 className="font-semibold text-slate-900">
+                                {step.title}
+                              </h3>
+                            </div>
+                            <p className="text-sm text-slate-500 leading-relaxed">
+                              {step.description}
+                            </p>
+                          </div>
+                        </div>
+                      </FadeUp>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

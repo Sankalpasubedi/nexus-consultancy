@@ -705,164 +705,207 @@ export default function CourseDetailPage() {
       </section>
 
       {/* Career Outcomes */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-[1440px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
-                <Icon name="Briefcase" size={16} /> Career Outcomes
+      <section className="group/careers py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/careers:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage9.png"
+                  alt="Graduate exploring career opportunities"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/careers:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Where This Leads</h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                High-demand career paths for {course.title} graduates
-              </p>
-            </div>
-          </FadeUp>
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {course.careers.map((c) => (
-              <StaggerItem key={c.title}>
-                <HoverCard>
-                  <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full group">
-                    <div className="flex items-start justify-between mb-5">
-                      <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Icon name="TrendingUp" size={20} className="text-white" />
-                      </div>
-                      <span className="text-xs font-bold text-[#00ab18] bg-green-50 px-3 py-1.5 rounded-full">
-                        +{c.growth} growth
-                      </span>
+            </FadeUp>
+
+            <div className="xl:w-[76%]">
+              <div className="max-w-5xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-16">
+                    <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
+                      <Icon name="Briefcase" size={16} /> Career Outcomes
                     </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-4">{c.title}</h3>
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-500">Salary Range</span>
-                        <span className="text-sm font-semibold text-[#003975]">{c.salary}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-slate-500">Job Growth</span>
-                        <span className="text-sm font-semibold text-[#00ab18]">{c.growth}</span>
-                      </div>
-                    </div>
-                    <div className="mt-5 w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: c.growth }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                        className="h-full rounded-full bg-slate-900"
-                      />
-                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Where This Leads</h2>
+                    <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                      High-demand career paths for {course.title} graduates
+                    </p>
                   </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </FadeUp>
+                <StaggerContainer className="grid md:grid-cols-2 gap-6">
+                  {course.careers.slice(0, 6).map((c) => (
+                    <StaggerItem key={c.title}>
+                      <HoverCard>
+                        <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full group">
+                          <div className="flex items-start justify-between mb-5">
+                            <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center group-hover:scale-110 transition-transform">
+                              <Icon name="TrendingUp" size={20} className="text-white" />
+                            </div>
+                            <span className="text-xs font-bold text-[#00ab18] bg-green-50 px-3 py-1.5 rounded-full">
+                              +{c.growth} growth
+                            </span>
+                          </div>
+                          <h3 className="text-lg font-bold text-slate-900 mb-4">{c.title}</h3>
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm text-slate-500">Salary Range</span>
+                              <span className="text-sm font-semibold text-[#003975]">{c.salary}</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm text-slate-500">Job Growth</span>
+                              <span className="text-sm font-semibold text-[#00ab18]">{c.growth}</span>
+                            </div>
+                          </div>
+                          <div className="mt-5 w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: c.growth }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, delay: 0.3 }}
+                              className="h-full rounded-full bg-slate-900"
+                            />
+                          </div>
+                        </div>
+                      </HoverCard>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Top Destinations */}
-      <section className="py-24 px-6 bg-[#fafaf8]">
-        <div className="max-w-[1440px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm">
-                <Icon name="Globe" size={16} /> Top Destinations
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                Where to Study {course.title}
-              </h2>
-            </div>
-          </FadeUp>
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {course.destinations.map((d) => (
-              <StaggerItem key={d.country}>
-                <HoverCard>
-                  <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full group">
-                    <div className="flex items-center gap-3 mb-5">
-                      <FlagIcon code={d.flag} size={36} />
-                      <div>
-                        <h3 className="text-lg font-bold text-slate-900">{d.country}</h3>
-                        <p className="text-xs text-slate-400">{d.universities.length} Top Universities</p>
-                      </div>
+      <section className="group/destinations py-24 px-6 bg-[#fafaf8]">
+        <div className="max-w-[1520px] mx-auto lg:pr-6 xl:pr-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <div className="xl:w-[76%]">
+              <div className="max-w-5xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-16">
+                    <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium shadow-sm">
+                      <Icon name="Globe" size={16} /> Top Destinations
                     </div>
-                    <ul className="space-y-2.5">
-                      {d.universities.map((u) => (
-                        <li key={u} className="flex items-center gap-2.5 text-sm text-slate-600">
-                          <div className="w-5 h-5 rounded-md bg-slate-900 flex items-center justify-center flex-shrink-0">
-                            <Icon name="GraduationCap" size={10} className="text-white" />
-                          </div>
-                          {u}
-                        </li>
-                      ))}
-                    </ul>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                      Where to Study {course.title}
+                    </h2>
                   </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </FadeUp>
+                <StaggerContainer className="grid md:grid-cols-2 gap-6">
+                  {course.destinations.slice(0, 4).map((d) => (
+                    <StaggerItem key={d.country}>
+                      <HoverCard>
+                        <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full group">
+                          <div className="flex items-center gap-3 mb-5">
+                            <FlagIcon code={d.flag} size={36} />
+                            <div>
+                              <h3 className="text-lg font-bold text-slate-900">{d.country}</h3>
+                              <p className="text-xs text-slate-400">{d.universities.length} Top Universities</p>
+                            </div>
+                          </div>
+                          <ul className="space-y-2.5">
+                            {d.universities.map((u) => (
+                              <li key={u} className="flex items-center gap-2.5 text-sm text-slate-600">
+                                <div className="w-5 h-5 rounded-md bg-slate-900 flex items-center justify-center flex-shrink-0">
+                                  <Icon name="GraduationCap" size={10} className="text-white" />
+                                </div>
+                                {u}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </HoverCard>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:translate-x-20 transform-gpu group-hover/destinations:translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/rightimage8.png"
+                  alt="Student exploring top study destinations"
+                  fill
+                  className="object-contain object-center scale-[1.22] group-hover/destinations:scale-[1.3] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 
       {/* Entry Requirements */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
-                <Icon name="ClipboardList" size={16} /> Entry Requirements
+      <section className="group/requirements py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/requirements:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage5.png"
+                  alt="Student preparing admission documents"
+                  fill
+                  className="object-contain object-center scale-[1.18] group-hover/requirements:scale-[1.25] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What You Need</h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Admission requirements for {course.title} programs
-              </p>
+            </FadeUp>
+
+            <div className="xl:w-[76%]">
+              <div className="max-w-5xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-16">
+                    <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
+                      <Icon name="ClipboardList" size={16} /> Entry Requirements
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What You Need</h2>
+                    <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                      Admission requirements for {course.title} programs
+                    </p>
+                  </div>
+                </FadeUp>
+
+                <StaggerContainer className="grid md:grid-cols-2 gap-6">
+                  {[
+                    ...course.requirements.undergraduate.map((requirement) => ({
+                      track: "Undergraduate",
+                      icon: "GraduationCap",
+                      requirement,
+                    })),
+                    ...course.requirements.postgraduate.map((requirement) => ({
+                      track: "Postgraduate",
+                      icon: "Building",
+                      requirement,
+                    })),
+                  ]
+                    .slice(0, 6)
+                    .map((item) => (
+                      <StaggerItem key={`${item.track}-${item.requirement}`}>
+                        <HoverCard>
+                          <div className="bg-white rounded-2xl p-7 border border-gray-100 shadow-sm h-full group">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold">
+                                <Icon name={item.icon} size={12} />
+                                {item.track}
+                              </div>
+                              <div className="w-8 h-8 rounded-lg bg-green-100 text-green-600 flex items-center justify-center">
+                                <Icon name="Check" size={14} />
+                              </div>
+                            </div>
+                            <p className="text-sm text-slate-700 leading-relaxed">{item.requirement}</p>
+                          </div>
+                        </HoverCard>
+                      </StaggerItem>
+                    ))}
+                </StaggerContainer>
+              </div>
             </div>
-          </FadeUp>
-          <div className="grid md:grid-cols-2 gap-8">
-            <FadeLeft>
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center">
-                    <Icon name="GraduationCap" size={20} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900">Undergraduate</h3>
-                    <p className="text-xs text-slate-400">Bachelor&apos;s degree programs</p>
-                  </div>
-                </div>
-                <ul className="space-y-3">
-                  {course.requirements.undergraduate.map((r) => (
-                    <li key={r} className="flex items-start gap-3 text-sm text-slate-600">
-                      <div className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Icon name="Check" size={12} />
-                      </div>
-                      {r}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeLeft>
-            <FadeRight>
-              <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center">
-                    <Icon name="Building" size={20} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-slate-900">Postgraduate</h3>
-                    <p className="text-xs text-slate-400">Master&apos;s &amp; doctoral programs</p>
-                  </div>
-                </div>
-                <ul className="space-y-3">
-                  {course.requirements.postgraduate.map((r) => (
-                    <li key={r} className="flex items-start gap-3 text-sm text-slate-600">
-                      <div className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Icon name="Check" size={12} />
-                      </div>
-                      {r}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeRight>
           </div>
         </div>
       </section>

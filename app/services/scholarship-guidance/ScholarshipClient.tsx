@@ -166,53 +166,72 @@ export default function ScholarshipsPage() {
       </section>
 
       {/* ── Scholarship Types — Cards with Top Accent Stripe ── */}
-      <section id="types" className="py-20 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
-                Scholarship Types
-              </span>
-              <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
-                Types of Scholarships
-              </h2>
-              <p className="text-slate-500 text-base max-w-lg mx-auto">
-                From merit-based awards to diversity grants, we help you access every opportunity available
-              </p>
-            </div>
-          </FadeUp>
+      <section id="types" className="group/scholarship-types py-20 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/scholarship-types:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage2.png"
+                  alt="Student exploring scholarship options"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/scholarship-types:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
 
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {scholarshipTypes.map((st) => (
-              <StaggerItem key={st.title}>
-                <HoverCard>
-                  <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full group hover:shadow-md transition-shadow relative">
-                    {/* Top gradient accent */}
-                    <div className="h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
-                          <Icon name={st.icon} size={20} />
-                        </div>
-                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-bold">
-                          {st.coverage} Coverage
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors">{st.title}</h3>
-                      <p className="text-sm text-slate-500 mb-4 leading-relaxed">{st.description}</p>
-                      <div className="space-y-2">
-                        {st.features.map((f) => (
-                          <span key={f} className="flex items-center gap-2 text-[13px] text-slate-600">
-                            <span className="w-1.5 h-1.5 rounded-full bg-slate-700 flex-shrink-0" /> {f}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-14">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                      Scholarship Types
+                    </span>
+                    <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
+                      Types of Scholarships
+                    </h2>
+                    <p className="text-slate-500 text-base max-w-lg mx-auto">
+                      From merit-based awards to diversity grants, we help you access every opportunity available
+                    </p>
                   </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </FadeUp>
+
+                <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {scholarshipTypes.map((st) => (
+                    <StaggerItem key={st.title}>
+                      <HoverCard>
+                        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full group hover:shadow-md transition-shadow relative">
+                          {/* Top gradient accent */}
+                          <div className="h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
+                                <Icon name={st.icon} size={20} />
+                              </div>
+                              <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-bold">
+                                {st.coverage} Coverage
+                              </span>
+                            </div>
+                            <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors">{st.title}</h3>
+                            <p className="text-sm text-slate-500 mb-4 leading-relaxed">{st.description}</p>
+                            <div className="space-y-2">
+                              {st.features.map((f) => (
+                                <span key={f} className="flex items-center gap-2 text-[13px] text-slate-600">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-slate-700 flex-shrink-0" /> {f}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </HoverCard>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -257,39 +276,58 @@ export default function ScholarshipsPage() {
       </section>
 
       {/* ── Scholarships by Country — Flag Cards ── */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">By Destination</span>
-              <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Scholarships by Country</h2>
-              <p className="text-slate-500 text-sm max-w-md mx-auto">Top scholarship opportunities in the most popular study destinations</p>
-            </div>
-          </FadeUp>
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {destinationScholarships.map((ds) => (
-              <StaggerItem key={ds.country}>
-                <HoverCard>
-                  <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <span className="text-3xl">{ds.flag}</span>
-                        <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#003975] transition-colors">{ds.country}</h4>
-                      </div>
-                      <span className="text-xs font-semibold text-[#003975] bg-[#003975]/5 px-2.5 py-1 rounded-full">{ds.avgAmount}</span>
-                    </div>
-                    <div className="space-y-2">
-                      {ds.scholarships.map((s) => (
-                        <span key={s} className="flex items-center gap-2 text-[13px] text-slate-600">
-                          <Icon name="Award" size={12} className="text-slate-400 flex-shrink-0" /> {s}
-                        </span>
-                      ))}
-                    </div>
+      <section className="group/destination-scholarships py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pr-6 xl:pr-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-14">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">By Destination</span>
+                    <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Scholarships by Country</h2>
+                    <p className="text-slate-500 text-sm max-w-md mx-auto">Top scholarship opportunities in the most popular study destinations</p>
                   </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                </FadeUp>
+                <StaggerContainer className="grid md:grid-cols-2 gap-5">
+                  {destinationScholarships.map((ds) => (
+                    <StaggerItem key={ds.country}>
+                      <HoverCard>
+                        <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-3">
+                              <span className="text-3xl">{ds.flag}</span>
+                              <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#003975] transition-colors">{ds.country}</h4>
+                            </div>
+                            <span className="text-xs font-semibold text-[#003975] bg-[#003975]/5 px-2.5 py-1 rounded-full">{ds.avgAmount}</span>
+                          </div>
+                          <div className="space-y-2">
+                            {ds.scholarships.map((s) => (
+                              <span key={s} className="flex items-center gap-2 text-[13px] text-slate-600">
+                                <Icon name="Award" size={12} className="text-slate-400 flex-shrink-0" /> {s}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </HoverCard>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:translate-x-20 transform-gpu group-hover/destination-scholarships:translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/rightimage3.png"
+                  alt="Scholarship destinations overview"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/destination-scholarships:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 

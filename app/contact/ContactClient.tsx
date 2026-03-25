@@ -544,51 +544,70 @@ export default function ContactPage() {
       <ContactBranchExplorer />
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-3xl mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
-                <Icon name="HelpCircle" size={20} /> FAQ
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
-            </div>
-          </FadeUp>
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <FadeUp key={i} delay={i * 0.05}>
-                <div className="border border-gray-200 rounded-2xl overflow-hidden">
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition"
-                  >
-                    <span className="font-medium text-slate-900">{faq.q}</span>
-                    <motion.span
-                      animate={{ rotate: openFaq === i ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-slate-400 flex-shrink-0 ml-4"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </motion.span>
-                  </button>
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      height: openFaq === i ? "auto" : 0,
-                      opacity: openFaq === i ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 pb-6 text-slate-500 text-sm leading-relaxed">
-                      {faq.a}
+      <section className="group/faq py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pr-6 xl:pr-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <div className="xl:w-[76%]">
+              <div className="max-w-3xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-16">
+                    <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium">
+                      <Icon name="HelpCircle" size={20} /> FAQ
                     </div>
-                  </motion.div>
+                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Frequently Asked Questions</h2>
+                  </div>
+                </FadeUp>
+                <div className="space-y-4">
+                  {faqs.map((faq, i) => (
+                    <FadeUp key={i} delay={i * 0.05}>
+                      <div className="border border-gray-200 rounded-2xl overflow-hidden">
+                        <button
+                          onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                          className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition"
+                        >
+                          <span className="font-medium text-slate-900">{faq.q}</span>
+                          <motion.span
+                            animate={{ rotate: openFaq === i ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-slate-400 flex-shrink-0 ml-4"
+                          >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </motion.span>
+                        </button>
+                        <motion.div
+                          initial={false}
+                          animate={{
+                            height: openFaq === i ? "auto" : 0,
+                            opacity: openFaq === i ? 1 : 0,
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 text-slate-500 text-sm leading-relaxed">
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      </div>
+                    </FadeUp>
+                  ))}
                 </div>
-              </FadeUp>
-            ))}
+              </div>
+            </div>
+
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:translate-x-20 transform-gpu group-hover/faq:translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/rightimage9.png"
+                  alt="Student asking common study abroad questions"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/faq:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
           </div>
         </div>
       </section>

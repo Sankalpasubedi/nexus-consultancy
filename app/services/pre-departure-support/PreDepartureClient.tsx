@@ -221,41 +221,60 @@ export default function PreDeparturePage() {
         </div>
       </section>
 
-      {/* ── Timeline — Horizontal 4‑col ── */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <FadeUp>
-            <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Timeline</span>
-              <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Your Pre-Departure Timeline</h2>
-              <p className="text-slate-500 text-sm max-w-md mx-auto">A step-by-step guide from 3 months before departure to your first week abroad</p>
+      {/* ── Timeline — 2x2 Split Layout ── */}
+      <section className="group/timeline py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pr-6 xl:pr-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <FadeUp>
+                  <div className="text-center mb-16">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Timeline</span>
+                    <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Your Pre-Departure Timeline</h2>
+                    <p className="text-slate-500 text-sm max-w-md mx-auto">A step-by-step guide from 3 months before departure to your first week abroad</p>
+                  </div>
+                </FadeUp>
+                <StaggerContainer className="grid md:grid-cols-2 gap-5">
+                  {timeline.slice(0, 4).map((t) => (
+                    <StaggerItem key={t.period}>
+                      <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
+                        <div className="flex items-center gap-3 mb-4 mt-2">
+                          <div className="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center">
+                            <Icon name={t.icon} size={18} />
+                          </div>
+                          <div>
+                            <div className="text-[10px] text-[#003975] font-bold uppercase tracking-wider">{t.period}</div>
+                            <h4 className="font-semibold text-slate-900 text-[14px]">{t.title}</h4>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          {t.items.map((item) => (
+                            <span key={item} className="flex items-center gap-2 text-[13px] text-slate-500">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#003975] flex-shrink-0" /> {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
             </div>
-          </FadeUp>
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {timeline.map((t, i) => (
-              <StaggerItem key={t.period}>
-                <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
-                  <div className="flex items-center gap-3 mb-4 mt-2">
-                    <div className="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center">
-                      <Icon name={t.icon} size={18} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-[#003975] font-bold uppercase tracking-wider">{t.period}</div>
-                      <h4 className="font-semibold text-slate-900 text-[14px]">{t.title}</h4>
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    {t.items.map((item) => (
-                      <span key={item} className="flex items-center gap-2 text-[13px] text-slate-500">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#003975] flex-shrink-0" /> {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:translate-x-20 transform-gpu group-hover/timeline:translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/rightimage5.png"
+                  alt="Student preparing travel timeline"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/timeline:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
+          </div>
         </div>
       </section>
 
@@ -297,58 +316,77 @@ export default function PreDeparturePage() {
       </section>
 
       {/* ── Arrival Tips — Split ── */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <FadeLeft>
-              <div>
-                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
-                  First Week Abroad
-                </span>
-                <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
-                  Your First Week<br />Survival Guide
-                </h2>
-                <p className="text-slate-500 text-base mb-8 leading-relaxed max-w-md">
-                  The first week can be overwhelming. Here's how to hit the ground running and settle in with confidence.
-                </p>
-                <div className="space-y-3">
-                  {["Attend university orientation and register for courses", "Set up your bank account and local phone number", "Explore campus facilities — library, gym, cafeteria", "Join student clubs and attend welcome events", "Register with local GP or health service"].map((item) => (
-                    <div key={item} className="flex items-center gap-3 text-sm text-slate-600">
-                      <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
-                        <Icon name="Check" size={10} />
+      <section className="group/arrival py-24 px-6 bg-white">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[220px] xl:-translate-x-20 -translate-y-10 transform-gpu group-hover/arrival:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage5.png"
+                  alt="Student settling into first week abroad"
+                  fill
+                  className="object-contain object-center scale-[1.2] group-hover/arrival:scale-[1.28] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
+
+            <div className="xl:w-[76%]">
+              <div className="max-w-6xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                  <FadeLeft>
+                    <div>
+                      <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                        First Week Abroad
+                      </span>
+                      <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
+                        Your First Week<br />Survival Guide
+                      </h2>
+                      <p className="text-slate-500 text-base mb-8 leading-relaxed max-w-md">
+                        The first week can be overwhelming. Here's how to hit the ground running and settle in with confidence.
+                      </p>
+                      <div className="space-y-3">
+                        {["Attend university orientation and register for courses", "Set up your bank account and local phone number", "Explore campus facilities — library, gym, cafeteria", "Join student clubs and attend welcome events", "Register with local GP or health service"].map((item) => (
+                          <div key={item} className="flex items-center gap-3 text-sm text-slate-600">
+                            <div className="w-5 h-5 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
+                              <Icon name="Check" size={10} />
+                            </div>
+                            {item}
+                          </div>
+                        ))}
                       </div>
-                      {item}
                     </div>
-                  ))}
-                </div>
-              </div>
-            </FadeLeft>
-            <FadeRight>
-              <div className="bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-[#00ab18]/10 rounded-full blur-3xl" />
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold mb-2">24/7 Support Helpline</h3>
-                  <p className="text-blue-200 text-sm mb-6 leading-relaxed">
-                    Our support doesn't stop at departure. Reach our dedicated helpline anytime during your first month abroad for any assistance.
-                  </p>
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { icon: "Phone", label: "Emergency Support" },
-                      { icon: "MessageSquare", label: "WhatsApp Help" },
-                      { icon: "Mail", label: "Email Assistance" },
-                      { icon: "Users", label: "Alumni Connect" },
-                    ].map((ch) => (
-                      <div key={ch.label} className="flex items-center gap-2 text-sm">
-                        <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                          <Icon name={ch.icon} size={14} />
+                  </FadeLeft>
+                  <FadeRight>
+                    <div className="bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden relative">
+                      <div className="absolute top-0 right-0 w-48 h-48 bg-[#00ab18]/10 rounded-full blur-3xl" />
+                      <div className="relative z-10">
+                        <h3 className="text-xl font-bold mb-2">24/7 Support Helpline</h3>
+                        <p className="text-blue-200 text-sm mb-6 leading-relaxed">
+                          Our support doesn't stop at departure. Reach our dedicated helpline anytime during your first month abroad for any assistance.
+                        </p>
+                        <div className="grid grid-cols-2 gap-4">
+                          {[
+                            { icon: "Phone", label: "Emergency Support" },
+                            { icon: "MessageSquare", label: "WhatsApp Help" },
+                            { icon: "Mail", label: "Email Assistance" },
+                            { icon: "Users", label: "Alumni Connect" },
+                          ].map((ch) => (
+                            <div key={ch.label} className="flex items-center gap-2 text-sm">
+                              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                                <Icon name={ch.icon} size={14} />
+                              </div>
+                              {ch.label}
+                            </div>
+                          ))}
                         </div>
-                        {ch.label}
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  </FadeRight>
                 </div>
               </div>
-            </FadeRight>
+            </div>
           </div>
         </div>
       </section>

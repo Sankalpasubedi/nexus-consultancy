@@ -695,80 +695,97 @@ export default function DestinationsComparePage() {
       </section>
 
       {/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 RANKING OVERVIEW \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */}
-      <section className="py-16 px-6 bg-gradient-to-b from-white to-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <FadeUp>
-            <div className="text-center mb-14">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
-                {compareCategories.find((c) => c.key === activeCategory)?.label} Rankings
-              </h2>
-              <p className="text-slate-500 max-w-2xl mx-auto">
-                Based on QS World University Rankings 2026, government data, immigration statistics &amp; cost-of-living indices.
-              </p>
-            </div>
-          </FadeUp>
+      <section className="group/rankings py-16 px-6 bg-gradient-to-b from-white to-slate-50">
+        <div className="max-w-[1520px] mx-auto lg:pl-6 xl:pl-10">
+          <div className="flex flex-col xl:flex-row gap-8 xl:gap-10 items-stretch">
+            <FadeUp className="hidden xl:flex xl:w-[24%]" delay={0.05}>
+              <div className="relative w-full rounded-3xl min-h-[620px] xl:-translate-x-20 transform-gpu group-hover/rankings:-translate-x-10 transition-transform duration-500 ease-out">
+                <Image
+                  src="/services/leftimage7.png"
+                  alt="Students exploring top study destinations"
+                  fill
+                  className="object-contain object-center scale-[1.32] group-hover/rankings:scale-[1.4] transition-transform duration-500 ease-out"
+                  sizes="(min-width: 1280px) 24vw, 0px"
+                  priority={false}
+                />
+              </div>
+            </FadeUp>
 
-          {/* Top 3 Podium */}
-          <div className="flex flex-col md:flex-row items-end justify-center gap-4 mb-16 max-w-4xl mx-auto">
-            {[1, 0, 2].map((pos) => {
-              const country = sorted[pos];
-              if (!country) return null;
-              const podiumH = ["h-56", "h-72", "h-48"][pos];
-              const medal = ["\ud83e\udd48", "\ud83e\udd47", "\ud83e\udd49"][pos];
-              const borderColors = ["border-slate-300", "border-yellow-400", "border-amber-600"];
-
-              return (
-                <FadeUp key={country.slug} delay={pos * 0.15} className="flex-1 w-full md:max-w-[280px]">
-                  <div className="flex flex-col items-center">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + pos * 0.15, type: "spring" }}
-                      className={`relative mb-4 p-1 rounded-full border-2 ${borderColors[pos]}`}
-                    >
-                      <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
-                        <FlagIcon code={country.flag} size={36} />
-                      </div>
-                      <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-lg">{medal}</span>
-                    </motion.div>
-                    <h3 className="font-bold text-slate-900 text-lg mb-1">{country.name}</h3>
-                    <div className="text-3xl font-extrabold text-[#003975] mb-3">{country.scores[activeCategory]}</div>
-                    <div className={`w-full ${podiumH} rounded-t-2xl bg-gradient-to-t from-[#003975] to-[#003975]/70 flex items-start justify-center pt-6`}>
-                      <span className="text-white font-bold text-2xl">#{pos + 1}</span>
-                    </div>
-                  </div>
-                </FadeUp>
-              );
-            })}
-          </div>
-
-          {/* Full Rankings List (4\u20138) */}
-          <div className="space-y-3 max-w-3xl mx-auto">
-            {sorted.slice(3).map((c, i) => (
-              <FadeUp key={c.slug} delay={i * 0.08}>
-                <div className="flex items-center gap-4 bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition">
-                  <span className="text-lg font-bold text-slate-300 w-8 text-center">#{i + 4}</span>
-                  <FlagIcon code={c.flag} size={28} />
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-slate-900">{c.name}</h4>
-                    <p className="text-xs text-slate-400">{c.tagline}</p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-32 bg-gray-100 rounded-full h-2 overflow-hidden hidden sm:block">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${c.scores[activeCategory]}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1 }}
-                        className="h-full rounded-full bg-gradient-to-r from-[#003975] to-[#00ab18]"
-                      />
-                    </div>
-                    <span className="text-xl font-bold text-[#003975] w-10 text-right">{c.scores[activeCategory]}</span>
-                  </div>
+            <div className="xl:w-[76%]">
+              <FadeUp>
+                <div className="text-center mb-14">
+                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
+                    {compareCategories.find((c) => c.key === activeCategory)?.label} Rankings
+                  </h2>
+                  <p className="text-slate-500 max-w-2xl mx-auto">
+                    Based on QS World University Rankings 2026, government data, immigration statistics &amp; cost-of-living indices.
+                  </p>
                 </div>
               </FadeUp>
-            ))}
+
+              {/* Top 3 Podium */}
+              <div className="flex flex-col md:flex-row items-end justify-center gap-4 mb-16 max-w-4xl mx-auto">
+                {[1, 0, 2].map((pos) => {
+                  const country = sorted[pos];
+                  if (!country) return null;
+                  const podiumH = ["h-56", "h-72", "h-48"][pos];
+                  const medal = ["\ud83e\udd48", "\ud83e\udd47", "\ud83e\udd49"][pos];
+                  const borderColors = ["border-slate-300", "border-yellow-400", "border-amber-600"];
+
+                  return (
+                    <FadeUp key={country.slug} delay={pos * 0.15} className="flex-1 w-full md:max-w-[280px]">
+                      <div className="flex flex-col items-center">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.3 + pos * 0.15, type: "spring" }}
+                          className={`relative mb-4 p-1 rounded-full border-2 ${borderColors[pos]}`}
+                        >
+                          <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+                            <FlagIcon code={country.flag} size={36} />
+                          </div>
+                          <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-lg">{medal}</span>
+                        </motion.div>
+                        <h3 className="font-bold text-slate-900 text-lg mb-1">{country.name}</h3>
+                        <div className="text-3xl font-extrabold text-[#003975] mb-3">{country.scores[activeCategory]}</div>
+                        <div className={`w-full ${podiumH} rounded-t-2xl bg-gradient-to-t from-[#003975] to-[#003975]/70 flex items-start justify-center pt-6`}>
+                          <span className="text-white font-bold text-2xl">#{pos + 1}</span>
+                        </div>
+                      </div>
+                    </FadeUp>
+                  );
+                })}
+              </div>
+
+              {/* Full Rankings List (4\u20138) */}
+              <div className="space-y-3 max-w-3xl mx-auto">
+                {sorted.slice(3).map((c, i) => (
+                  <FadeUp key={c.slug} delay={i * 0.08}>
+                    <div className="flex items-center gap-4 bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition">
+                      <span className="text-lg font-bold text-slate-300 w-8 text-center">#{i + 4}</span>
+                      <FlagIcon code={c.flag} size={28} />
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-slate-900">{c.name}</h4>
+                        <p className="text-xs text-slate-400">{c.tagline}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-32 bg-gray-100 rounded-full h-2 overflow-hidden hidden sm:block">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${c.scores[activeCategory]}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1 }}
+                            className="h-full rounded-full bg-gradient-to-r from-[#003975] to-[#00ab18]"
+                          />
+                        </div>
+                        <span className="text-xl font-bold text-[#003975] w-10 text-right">{c.scores[activeCategory]}</span>
+                      </div>
+                    </div>
+                  </FadeUp>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
