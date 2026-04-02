@@ -462,9 +462,9 @@ export default function ExamDetailClient({ slug }: ExamDetailClientProps) {
       </section>
 
       {/* Enrollment Form */}
-      <section id="enroll" className="py-20 px-6 bg-white">
+      <section id="enroll" className="pt-16 pb-24 md:py-20 px-4 sm:px-6 bg-white">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <FadeUp>
               <span className="text-brand-blue font-semibold text-sm tracking-wide uppercase mb-3 block">Get Started</span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
@@ -492,10 +492,10 @@ export default function ExamDetailClient({ slug }: ExamDetailClientProps) {
               <div className="bg-slate-50 rounded-xl p-6">
                 <p className="text-slate-900 font-semibold mb-2">Have questions?</p>
                 <p className="text-slate-600 text-sm mb-4">Call us or WhatsApp for instant support</p>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <a
                     href="tel:+9771234567890"
-                    className="inline-flex items-center gap-2 bg-brand-blue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-900 transition"
+                    className="inline-flex items-center justify-center gap-2 bg-brand-blue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-900 transition w-full sm:w-auto"
                   >
                     <Icon name="Phone" size={14} />
                     Call Now
@@ -504,7 +504,7 @@ export default function ExamDetailClient({ slug }: ExamDetailClientProps) {
                     href="https://wa.me/9771234567890"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-green-600 transition"
+                    className="inline-flex items-center justify-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-green-600 transition w-full sm:w-auto"
                   >
                     <Icon name="MessageCircle" size={14} />
                     WhatsApp
@@ -514,8 +514,8 @@ export default function ExamDetailClient({ slug }: ExamDetailClientProps) {
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
-                <h3 className="text-xl font-bold text-slate-900 mb-6">
+              <div className="bg-white rounded-2xl p-5 sm:p-8 border border-gray-200 shadow-lg">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-5 sm:mb-6">
                   Start Your {exam.title} Journey
                 </h3>
                 
@@ -570,7 +570,7 @@ export default function ExamDetailClient({ slug }: ExamDetailClientProps) {
                           value={formData.phone}
                           onChange={handleInputChange}
                           placeholder="98XXXXXXXX"
-                          className="flex-1 px-4 py-3 rounded-lg border border-gray-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
+                          className="min-w-0 flex-1 px-4 py-3 rounded-lg border border-gray-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
                         />
                       </div>
                     </div>

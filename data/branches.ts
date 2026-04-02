@@ -109,6 +109,58 @@ export const branches: Branch[] = [
     ]
   },
   {
+    id: "australia",
+    slug: "find-us-at-australia",
+    name: "Australia - Sydney",
+    shortName: "Australia",
+    city: "Sydney",
+    district: "New South Wales",
+    address: "Sydney, NSW, Australia",
+    phone: "+61 2 8000 0000",
+    phone2: "+61 4 0000 0000",
+    whatsapp: "+61 4 0000 0000",
+    email: "australia@nexsuseducation.com",
+    mapUrl: "https://maps.google.com/?q=Sydney+Australia",
+    mapEmbedUrl: "https://maps.google.com/maps?q=Sydney+Australia&t=&z=12&ie=UTF8&iwloc=&output=embed",
+    coordinates: { lat: -33.8688, lng: 151.2093 },
+    isHeadOffice: false,
+    socialLinks: {
+      facebook: "https://facebook.com/nexsuseducation",
+      instagram: "https://instagram.com/nexsuseducation",
+      linkedin: "https://linkedin.com/company/nexsuseducation",
+      tiktok: "https://tiktok.com/@nexsuseducation",
+    },
+    openingHours: "Mon - Fri: 9:00 AM - 5:30 PM",
+    saturdayHours: "Saturday: By appointment",
+    description: "Our Australia office supports students already in Sydney and those planning to study in Australia.",
+    longDescription: [
+      "Nexsus Australia extends our student support network beyond Nepal, giving students a direct point of contact in Sydney. The office helps with course guidance, university follow-up, and post-arrival support for students already in Australia.",
+      "From resolving initial settlement questions to connecting students with local resources, our Australia branch is designed to make the transition smoother for students pursuing their education in Sydney and across New South Wales.",
+      "We also coordinate closely with our Nepal offices so students can receive continuous support before departure and after arrival without losing contact with our counseling team."
+    ],
+    image: "/branches/branch.png",
+    googleRating: 4.9,
+    googleReviews: 18,
+    stats: [
+      { label: "Students Assisted", value: "300+" },
+      { label: "Local Partners", value: "40+" },
+      { label: "Support Rating", value: "5★" },
+      { label: "Coverage", value: "Sydney" }
+    ],
+    testimonials: [
+      { id: 1, name: "Nabin Sharma", country: "Australia", quote: "Having a local Nexsus contact in Sydney made the settlement process much easier for me.", destination: "Australia" },
+      { id: 2, name: "Sujata Gurung", country: "Australia", quote: "The Australia team stayed in touch after I arrived and helped me with the next steps.", destination: "Australia" },
+      { id: 3, name: "Aakash Rai", country: "Australia", quote: "Great post-arrival support and quick responses whenever I had questions.", destination: "Australia" }
+    ],
+    faqs: [
+      { question: "Is the Australia office open to walk-ins?", answer: "Yes, but we recommend booking an appointment so our team can prepare for your visit." },
+      { question: "Can students in Nepal contact the Australia branch?", answer: "Absolutely. The office coordinates with our Nepal team to provide end-to-end support before and after departure." },
+      { question: "What services are offered in Sydney?", answer: "We provide post-arrival guidance, course support, local coordination, and student assistance for Australia-based students." },
+      { question: "Do you only support Sydney?", answer: "Sydney is our primary Australia office, and we support students across New South Wales as needed." },
+      { question: "How do I get in touch?", answer: "Use the phone, WhatsApp, email, or the map link listed on the branch card." }
+    ]
+  },
+  {
     id: "baneshwor",
     slug: "find-us-at-baneshwor",
     name: "Kathmandu - Baneshwor",

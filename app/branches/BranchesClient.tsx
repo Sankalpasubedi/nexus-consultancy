@@ -139,6 +139,18 @@ const branches = [
     mapUrl: "https://maps.google.com/?q=Dhulabari+Nepal",
     services: ["Counseling"],
   },
+  {
+    id: "australia",
+    name: "Australia - Sydney",
+    city: "Sydney",
+    type: "International Office",
+    address: "Sydney, NSW, Australia",
+    phone: "+61 2 8000 0000",
+    email: "australia@nexsus.com.np",
+    hours: "Mon-Fri: 9AM-5PM",
+    mapUrl: "https://maps.google.com/?q=Sydney+Australia",
+    services: ["Student Support", "Post-Arrival Help"],
+  },
 ];
 
 export default function BranchesClient() {
@@ -158,7 +170,7 @@ export default function BranchesClient() {
                   Our Branch Locations
                 </h1>
                 <p className="text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0">
-                  Visit any of our offices across Nepal for personalized guidance on your study abroad journey.
+                  Visit any of our offices across Nepal and Australia for personalized guidance on your study abroad journey.
                 </p>
               </FadeUp>
             </div>
@@ -187,7 +199,7 @@ export default function BranchesClient() {
                       <Icon name="MapPin" size={24} className="text-[#00ab18]" />
                     </div>
                     <div>
-                      <p className="text-slate-900 font-bold text-lg">6+</p>
+                      <p className="text-slate-900 font-bold text-lg">7+</p>
                       <p className="text-slate-500 text-xs">Branch Offices</p>
                     </div>
                   </div>
@@ -203,8 +215,8 @@ export default function BranchesClient() {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: "Offices", value: "6+", icon: "Building2" },
-              { label: "Cities", value: "4", icon: "MapPin" },
+              { label: "Offices", value: "7+", icon: "Building2" },
+              { label: "Cities", value: "5", icon: "MapPin" },
               { label: "Counselors", value: "50+", icon: "Users" },
               { label: "Students Helped", value: "10K+", icon: "GraduationCap" },
             ].map((stat) => (

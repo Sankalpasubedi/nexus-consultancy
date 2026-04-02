@@ -6,6 +6,9 @@ import newZealandData from "./newzealand";
 import japanData from "./japan";
 import southKoreaData from "./southkorea";
 import europeData from "./europe";
+import georgiaData from "./georgia";
+import philippinesData from "./philippines";
+import belarusData from "./belarus";
 import { CountryDataType } from "@/types/country";
 
 export const countryDataMap: Record<string, CountryDataType> = {
@@ -17,6 +20,9 @@ export const countryDataMap: Record<string, CountryDataType> = {
   "study-in-japan": japanData,
   "study-in-south-korea": southKoreaData,
   "study-in-europe": europeData,
+  "study-in-georgia": georgiaData,
+  "study-in-philippines": philippinesData,
+  "study-in-belarus": belarusData,
 };
 
 export const destinations = [
@@ -28,6 +34,9 @@ export const destinations = [
   { id: "study-in-europe", name: "Europe", slug: "study-in-europe", image: "/destinations/europe.png", description: "Diverse cultures and world-renowned academic institutions", flagCode: "eu" },
   { id: "study-in-uk", name: "United Kingdom", slug: "study-in-uk", image: "/destinations/uk.png", description: "Study at prestigious institutions with centuries of academic excellence", flagCode: "gb" },
   { id: "study-in-japan", name: "Japan", slug: "study-in-japan", image: "/destinations/japan.png", description: "Blend of tradition and innovation in world-class universities", flagCode: "jp" },
+  { id: "study-in-georgia", name: "Georgia", slug: "study-in-georgia", image: "/destinations/Georgia.jpg", description: "Affordable European-style study with simple admissions and welcoming campuses", flagCode: "ge" },
+  { id: "study-in-philippines", name: "Philippines", slug: "study-in-philippines", image: "/destinations/Philippines.jpg", description: "English-friendly education and popular health science programs", flagCode: "ph" },
+  { id: "study-in-belarus", name: "Belarus", slug: "study-in-belarus", image: "/destinations/Belarus.jpg", description: "Affordable medical and technical study options in Europe", flagCode: "by" },
 ];
 
 export {

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useHeader } from "@/app/contexts/HeaderContext";
 import { useBranch } from "@/app/contexts/BranchContext";
 import { branches, getBranchLinks, Branch, formatDistance } from "@/data/branches";
+import { exams } from "@/app/services/test-preparation/examData";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Icon, FlagIcon } from "@/lib/icons";
@@ -16,12 +17,20 @@ import { Phone, Mail, MessageCircle, MapPin, ChevronDown } from "lucide-react";
 const servicesLinks = [
   { label: "Find a University", href: "/services/find-a-university", icon: "GraduationCap", description: "Compare universities with filters and rankings" },
   { label: "Test Preparation", href: "/services/test-preparation", icon: "BookOpen", description: "IELTS, TOEFL, PTE, GRE & SAT coaching" },
+  { label: "GPA Calculator", href: "/services/gpa-calculator", icon: "Calculator", description: "Convert percentage into GPA" },
   { label: "Counseling", href: "/services/career-counseling", icon: "Target", description: "Expert career & university guidance" },
   { label: "SOP & Application Support", href: "/services/sop-writing-assistance", icon: "PenLine", description: "Professional application writing" },
   { label: "Student Visa Assistance", href: "/services/student-visa-assistance", icon: "ShieldCheck", description: "End-to-end visa support" },
   { label: "Pre-Departure Support", href: "/services/pre-departure-support", icon: "Plane", description: "Prepare for life abroad" },
   { label: "Scholarship Guidance", href: "/services/scholarship-guidance", icon: "DollarSign", description: "Find & win scholarships" },
 ];
+
+const examsLinks = exams.map((exam) => ({
+  label: exam.title,
+  href: `/services/test-preparation/${exam.slug}`,
+  icon: exam.icon,
+  description: exam.subtitle,
+}));
 
 const studyAbroadLinks = [
   { label: "Compare Destinations", href: "/study-abroad/compare-destinations", icon: "Globe", description: "Find your ideal country" },
@@ -63,6 +72,12 @@ const destinationsLinks = [
   { label: "Europe", href: "/destinations/study-in-europe", flagCode: "eu" },
 ];
 
+const moreDestinationsLinks = [
+  { label: "Georgia", href: "/destinations/study-in-georgia", flagCode: "ge", description: "Affordable European-style education" },
+  { label: "Philippines", href: "/destinations/study-in-philippines", flagCode: "ph", description: "English-friendly and health-science focused" },
+  { label: "Belarus", href: "/destinations/study-in-belarus", flagCode: "by", description: "Budget-friendly medical and technical study" },
+];
+
 const destinationSubPages = [
   { label: "Why Study Here", slug: "why-study-here" },
   { label: "Universities", slug: "universities" },
@@ -78,6 +93,7 @@ const quickLinks = [
   { label: "About Us", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "News & Events", href: "/news" },
+  { label: "Health Insurance", href: "/student-essentials/health-insurance" },
 ];
 
 // branchesLinks moved to data/branches.ts and imported via getBranchLinks()
@@ -86,6 +102,8 @@ const studentEssentialsLinks = [
   { label: "Student Insurance", href: "/student-essentials/insurance", icon: "ShieldCheck", description: "Health & travel insurance plans" },
   { label: "Student Accommodation", href: "/student-essentials/accommodation", icon: "Home", description: "Find housing abroad" },
   { label: "Student Banking", href: "/student-essentials/student-banking", icon: "Landmark", description: "Open and manage your student account" },
+  { label: "Student Benefits", href: "/student-essentials/student-benefits", icon: "CreditCard", description: "Country-specific cards & SIM perks" },
+  { label: "Payment Used", href: "/student-essentials/payment-used", icon: "Send", description: "How we accept tuition payments" },
   { label: "Guardianship", href: "/student-essentials/guardianship", icon: "HeartHandshake", description: "Welfare support for under-18 students" },
   { label: "ISIC Card", href: "/student-essentials/isic-card", icon: "IdCard", description: "Global student ID discounts and benefits" },
   { label: "Student Dashboard", href: "/dashboard", icon: "LayoutDashboard", description: "Track your application" },
@@ -329,7 +347,14 @@ function DestinationsDropdown({
     }
   };
 
+  const handleMoreCountriesEnter = () => {
+    clearTimeout(hoverTimeout.current);
+    lockedDest.current = "__more_countries__";
+    setHoveredDest("__more_countries__");
+  };
+
   const activeDest = destinationsLinks.find((d) => d.href === hoveredDest);
+  const showMoreCountries = hoveredDest === "__more_countries__";
 
   return (
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
@@ -382,11 +407,46 @@ function DestinationsDropdown({
                       </Link>
                     </div>
                   ))}
+
+                  <div className="px-2 pt-2 pb-1">
+                    <button
+                      type="button"
+                      onMouseEnter={handleMoreCountriesEnter}
+                      onFocus={handleMoreCountriesEnter}
+                      className="w-full rounded-xl border border-dashed border-[#c8d7ea] bg-[#f8fbff] px-4 py-3 text-left text-[13px] font-semibold text-[#003975] hover:bg-[#003975]/5 transition-colors"
+                    >
+                      Show more countries →
+                    </button>
+                  </div>
                 </div>
               </div>
               {/* Right: Sub-pages */}
               <div className="flex-1 border-l border-gray-100 bg-gray-50/30" onMouseEnter={() => clearTimeout(hoverTimeout.current)}>
-                {activeDest ? (
+                {showMoreCountries ? (
+                  <motion.div key="more-countries" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }}>
+                    <div className="px-5 pt-4 pb-2">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">More countries</span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-2 px-3 pb-3">
+                      {moreDestinationsLinks.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          className="flex items-start gap-3 rounded-xl px-3 py-3 text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-150 group"
+                        >
+                          <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center shrink-0 transition-colors">
+                            <FlagIcon code={item.flagCode} size={16} />
+                          </div>
+                          <div className="min-w-0">
+                            <span className="text-[13px] font-medium block">{item.label}</span>
+                            <span className="text-[11px] text-slate-400 block mt-0.5">{item.description}</span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                ) : activeDest ? (
                   <motion.div key={hoveredDest} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15 }}>
                     <div className="px-5 pt-4 pb-2">
                       <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Explore {activeDest.label}</span>
@@ -1048,7 +1108,7 @@ export default function Header() {
                   className="h-14 w-auto"
                   priority
                 />
-                <div className="hidden min-[700px]:block min-[1025px]:hidden min-[1112px]:block">
+                <div className="hidden min-[700px]:block min-[1025px]:hidden min-[1260px]:block">
                   <span className="font-bold text-xl text-[#003975]">Nexsus</span>
                   <span className="text-[#5a6a7a] text-xs block leading-tight">Educational Consultancy &amp; Immigration Services</span>
                 </div>
@@ -1072,6 +1132,13 @@ export default function Header() {
                   isTransparent={isTransparent}
                   scrolled={scrolled}
                   overviewHref="/services"
+                />
+                <MegaDropdown
+                  label="Exams"
+                  items={examsLinks}
+                  isTransparent={isTransparent}
+                  scrolled={scrolled}
+                  overviewHref="/services/test-preparation"
                 />
                 <Link
                   href="/contact"
@@ -1144,6 +1211,7 @@ export default function Header() {
                   <Link href="/about" onClick={closeMobile} className="block py-4 text-slate-900 font-medium text-[15px] border-b border-gray-100">About</Link>
                   <MobileStudyAbroadAccordion onClose={closeMobile} />
                   <MobileAccordion label="Services" items={servicesLinks} overviewHref="/services" onClose={closeMobile} />
+                  <MobileAccordion label="Exams" items={examsLinks} overviewHref="/services/test-preparation" onClose={closeMobile} />
                   <MobileAccordion label="Courses" items={coursesLinks} overviewHref="/courses" onClose={closeMobile} />
                   <MobileDestinationsAccordion onClose={closeMobile} />
                   <Link href="/blog" onClick={closeMobile} className="block py-4 text-slate-900 font-medium text-[15px] border-b border-gray-100">Blog</Link>

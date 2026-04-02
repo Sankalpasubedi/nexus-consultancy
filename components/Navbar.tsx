@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X, ArrowRight } from "lucide-react";
+import { exams } from "@/app/services/test-preparation/examData";
 
 interface NavItem {
   title: string;
@@ -11,6 +12,12 @@ interface NavItem {
   hasDropdown?: boolean;
   children?: { title: string; url: string; description?: string }[];
 }
+
+const examNavItems = exams.map((exam) => ({
+  title: exam.title,
+  url: `/services/test-preparation/${exam.slug}`,
+  description: exam.subtitle,
+}));
 
 const navData: NavItem[] = [
   { title: "About", url: "/about" },
@@ -55,6 +62,12 @@ const navData: NavItem[] = [
       { title: "South Korea", url: "/destinations/study-in-south-korea", description: "K-wave & tech" },
       { title: "Europe", url: "/destinations/study-in-europe", description: "Diverse cultures" },
     ],
+  },
+  {
+    title: "Exams",
+    url: "/services/test-preparation",
+    hasDropdown: true,
+    children: examNavItems,
   },
   { title: "Contact", url: "/contact" },
 ];

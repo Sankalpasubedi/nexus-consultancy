@@ -25,6 +25,12 @@ const essentials = [
     icon: "ShieldCheck",
   },
   {
+    title: "Health Insurance",
+    description: "Compare student health cover providers and plan types by destination.",
+    href: "/student-essentials/health-insurance",
+    icon: "HeartPulse",
+  },
+  {
     title: "Accommodation Support",
     description: "Find safe housing options near campus with budget and contract guidance.",
     href: "/student-essentials/accommodation",
@@ -35,6 +41,18 @@ const essentials = [
     description: "Open the right account, understand fees, and manage international transfers.",
     href: "/student-essentials/student-banking",
     icon: "Landmark",
+  },
+  {
+    title: "Student Benefits by Country",
+    description: "Compare popular student cards, SIM deals, and local perks by destination.",
+    href: "/student-essentials/student-benefits",
+    icon: "CreditCard",
+  },
+  {
+    title: "Payment Used",
+    description: "See the payment methods we use for simple, secure tuition processing.",
+    href: "/student-essentials/payment-used",
+    icon: "Send",
   },
   {
     title: "Guardianship for Minors",
@@ -278,6 +296,8 @@ export default function StudentEssentialsClient() {
                 <option>Insurance and health cover</option>
                 <option>Accommodation support</option>
                 <option>Banking and transfers</option>
+                <option>Student benefits by country</option>
+                <option>Payment methods used</option>
                 <option>ISIC card application</option>
               </select>
               <label className="flex items-start gap-3 text-sm text-slate-700">

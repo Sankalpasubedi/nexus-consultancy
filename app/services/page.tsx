@@ -49,6 +49,7 @@ function ServicesJsonLd() {
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Student Visa Assistance" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Scholarship Guidance" } },
         { "@type": "Offer", itemOffered: { "@type": "Service", name: "Pre-Departure Support" } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "GPA Calculator" } },
       ],
     },
     url: "https://nexsuseducation.com/services",

@@ -129,6 +129,39 @@ const seoData: Record<string, { title: string; description: string; keywords: st
       "europe education consultancy kathmandu", "masters in europe",
     ],
   },
+  "study-in-georgia": {
+    title: "Study in Georgia from Nepal | Affordable Universities, Visa & Admissions",
+    description:
+      "Complete guide to studying in Georgia from Nepal. Explore affordable universities, admission steps, visa requirements, living costs, and student life for international applicants.",
+    keywords: [
+      "study in georgia", "study in georgia from nepal", "georgia student visa",
+      "georgia university admission", "georgia education consultancy nepal",
+      "study medicine in georgia", "study business in georgia", "study abroad georgia",
+      "georgia tuition fees", "georgia scholarships for international students",
+    ],
+  },
+  "study-in-philippines": {
+    title: "Study in the Philippines from Nepal | Universities, Visa & Health Sciences",
+    description:
+      "Complete guide to studying in the Philippines from Nepal. Explore English-medium universities, medical and business programs, visa guidance, living costs, and student support.",
+    keywords: [
+      "study in philippines", "study in philippines from nepal", "philippines student visa",
+      "philippines university admission", "philippines education consultancy nepal",
+      "study medicine in philippines", "study nursing in philippines", "study abroad philippines",
+      "philippines tuition fees", "philippines scholarships for international students",
+    ],
+  },
+  "study-in-belarus": {
+    title: "Study in Belarus from Nepal | Affordable Medical and Technical Education",
+    description:
+      "Complete guide to studying in Belarus from Nepal. Explore affordable medical and engineering universities, student visa requirements, tuition costs, and life in Belarus.",
+    keywords: [
+      "study in belarus", "study in belarus from nepal", "belarus student visa",
+      "belarus university admission", "belarus education consultancy nepal",
+      "study medicine in belarus", "study engineering in belarus", "study abroad belarus",
+      "belarus tuition fees", "belarus scholarships for international students",
+    ],
+  },
 };
 
 /* ─── Static Params ───────────────────────────────── */

@@ -26,6 +26,15 @@ const services = [
     color: "#6366f1",
   },
   {
+    icon: "Calculator",
+    title: "GPA Calculator",
+    description:
+      "Convert your percentage into GPA on the 4.0, 7.0, and 10.0 scales used by international universities.",
+    features: ["4.0 Scale", "7.0 Scale", "10.0 Formula"],
+    link: "/services/gpa-calculator",
+    color: "#1f4f8b",
+  },
+  {
     icon: "Target",
     title: "Counseling",
     description:
@@ -155,7 +164,7 @@ export default function ServicesPage() {
                   <div className="w-8 h-8 rounded-lg bg-[#00ab18]/10 flex items-center justify-center">
                     <Icon name="CheckCircle" size={16} className="text-[#00ab18]" />
                   </div>
-                  <span className="text-sm font-semibold text-slate-900">6 Expert Services</span>
+                  <span className="text-sm font-semibold text-slate-900">7 Expert Services</span>
                 </div>
               </motion.div>
             </div>

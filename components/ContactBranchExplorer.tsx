@@ -18,6 +18,7 @@ interface Branch {
   phone1: string;
   phone2: string;
   isHead: boolean;
+  isInternational?: boolean;
   embedUrl: string;
   directionsUrl: string;
 }
@@ -106,6 +107,21 @@ const branches: Branch[] = [
       "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d14262.17696591396!2d88.08856907803856!3d26.663071144558987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDM5JzM1LjciTiA4OMKwMDYnMDMuNCJF!5e0!3m2!1sen!2snp!4v1771541952343!5m2!1sen!2snp",
     directionsUrl:
       "https://www.google.com/maps/@26.659912,88.100947,17z/",
+  },
+  {
+    id: 7,
+    name: "Australia Branch",
+    label: "Australia",
+    city: "Sydney, Australia",
+    address: "Sydney, NSW, Australia",
+    phone1: "+61 2 8000 0000",
+    phone2: "+61 4 0000 0000",
+    isHead: false,
+    isInternational: true,
+    embedUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52996.67345889295!2d151.1957367!3d-33.8688197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12ae3b8b3b0c1f%3A0x5017d6816326f30!2sSydney%20NSW%2C%20Australia!5e0!3m2!1sen!2snp!4v1771542000000!5m2!1sen!2snp",
+    directionsUrl:
+      "https://www.google.com/maps/place/Sydney+NSW+Australia/@-33.8688197,151.2092955,13z/",
   },
 ];
 
@@ -314,7 +330,7 @@ export default function ContactBranchExplorer() {
         <FadeUp delay={0.2}>
           <div className="grid grid-cols-3 gap-3 md:gap-4 mt-10 md:mt-14">
             {[
-              { num: "6", label: "Branches", icon: "Building" },
+              { num: "7", label: "Branches", icon: "Building" },
               { num: "4", label: "Cities", icon: "MapPin" },
               { num: "3", label: "Districts", icon: "Globe" },
             ].map((s) => (

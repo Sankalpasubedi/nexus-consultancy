@@ -163,7 +163,7 @@ export default function Destinations() {
   const handleTouchMove = useCallback(
     (e: React.TouchEvent) => {
       if (!isDragging.current) return;
-      
+      F
       // Throttle updates on mobile to every ~16ms (60fps) 
       const now = Date.now();
       if (now - lastTouchUpdate.current < 16) return;

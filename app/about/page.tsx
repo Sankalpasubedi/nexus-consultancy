@@ -4,7 +4,7 @@ import AboutClient from "./AboutClient";
 export const metadata: Metadata = {
   title: "About Nexsus Educational Consultancy | Leading Study Abroad Agency in Nepal",
   description:
-    "Nexsus Educational Consultancy is Nepal's leading study abroad agency with 15+ years of experience. 10,000+ students placed at top universities across 8 countries. Multiple branches across Nepal.",
+    "Nexsus Educational Consultancy is Nepal's leading study abroad agency with 15+ years of experience. 10,000+ students placed at top universities across 8 countries. Multiple branches across Nepal and Australia.",
   keywords: [
     "about Nexsus education",
     "Nexsus educational consultancy",

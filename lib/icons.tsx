@@ -55,6 +55,7 @@ import {
   Flag,
   Table,
   Percent,
+  Calculator,
   Image,
   IdCard,
   Landmark,
@@ -82,6 +83,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   MessageCircle, Save, FolderOpen, CreditCard, Home, User, Send,
   ArrowRight, ChevronDown, ChevronRight, ChevronLeft, HelpCircle, Flag,
   Table, Percent, Image, IdCard, Landmark, HeartPulse, Cog,
+  Calculator,
   Linkedin, HeartHandshake, Pencil, Shield, Lock, AlertTriangle,
   Microscope, MessageSquare,
   ArrowUp, LayoutDashboard,
@@ -112,6 +114,9 @@ const FLAG_CODES: Record<string, string> = {
   jp: "jp", japan: "jp",
   kr: "kr", "south-korea": "kr",
   eu: "eu", europe: "eu",
+  ge: "ge", georgia: "ge",
+  ph: "ph", philippines: "ph",
+  by: "by", belarus: "by",
 };
 
 export function FlagIcon({

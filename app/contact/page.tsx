@@ -4,7 +4,7 @@ import ContactClient from "./ContactClient";
 export const metadata: Metadata = {
   title: "Contact Nexsus Educational Consultancy | Free Consultation | Study Abroad Nepal",
   description:
-    "Contact Nexsus Educational Consultancy for a free study abroad consultation. Visit our branches in Kathmandu, Pokhara, Chitwan & across Nepal. Call, email or visit us today.",
+    "Contact Nexsus Educational Consultancy for a free study abroad consultation. Visit our branches in Nepal and Australia. Call, email or visit us today.",
   keywords: [
     "contact Nexsus education",
     "study abroad consultation Nepal",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Contact Us | Nexsus Educational Consultancy Nepal",
-    description: "Get a free study abroad consultation. Visit our branches across Nepal.",
+    description: "Get a free study abroad consultation. Visit our branches across Nepal and Australia.",
     type: "website",
   },
   alternates: {

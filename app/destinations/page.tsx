@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import DestinationsClient from "./DestinationsClient";
 
 export const metadata: Metadata = {
-  title: "Study Abroad Destinations | Top 8 Countries for Nepali Students | Nexsus Education",
+  title: "Study Abroad Destinations | Top 11 Countries for Nepali Students | Nexsus Education",
   description:
-    "Explore 8 top study abroad destinations: Australia, Canada, USA, UK, New Zealand, Japan, South Korea & Europe. Universities, costs, visa info & admission requirements for Nepali students.",
+    "Explore 11 study abroad destinations: Australia, Canada, USA, UK, New Zealand, Japan, South Korea, Europe, Georgia, the Philippines & Belarus. Universities, costs, visa info & admission requirements for Nepali students.",
   keywords: [
     "study abroad destinations",
     "best countries to study abroad from Nepal",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Study Abroad Destinations | Nexsus Education Nepal",
-    description: "Explore 8 top study abroad destinations for Nepali students.",
+    description: "Explore 11 study abroad destinations for Nepali students.",
     type: "website",
   },
   alternates: {
@@ -33,9 +33,9 @@ function DestinationsJsonLd() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Study Abroad Destinations",
-    description: "Top 8 study abroad destinations for Nepali students",
+    description: "Top 11 study abroad destinations for Nepali students",
     url: "https://nexsuseducation.com/destinations",
-    numberOfItems: 8,
+    numberOfItems: 11,
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Study in Australia", url: "https://nexsuseducation.com/destinations/study-in-australia" },
       { "@type": "ListItem", position: 2, name: "Study in Canada", url: "https://nexsuseducation.com/destinations/study-in-canada" },
@@ -45,6 +45,9 @@ function DestinationsJsonLd() {
       { "@type": "ListItem", position: 6, name: "Study in Japan", url: "https://nexsuseducation.com/destinations/study-in-japan" },
       { "@type": "ListItem", position: 7, name: "Study in South Korea", url: "https://nexsuseducation.com/destinations/study-in-south-korea" },
       { "@type": "ListItem", position: 8, name: "Study in Europe", url: "https://nexsuseducation.com/destinations/study-in-europe" },
+      { "@type": "ListItem", position: 9, name: "Study in Georgia", url: "https://nexsuseducation.com/destinations/study-in-georgia" },
+      { "@type": "ListItem", position: 10, name: "Study in the Philippines", url: "https://nexsuseducation.com/destinations/study-in-philippines" },
+      { "@type": "ListItem", position: 11, name: "Study in Belarus", url: "https://nexsuseducation.com/destinations/study-in-belarus" },
     ],
   };
 

@@ -54,7 +54,7 @@ export default function FloatingActions() {
   }, []);
 
   return (
-    <>
+    <div className="hidden md:block">
     {/* ═══ LEFT SIDE — Service shortcuts ═══ */}
     <div className="fixed bottom-6 left-5 z-50 flex flex-col items-center gap-3">
       {/* ── Free Consultation ── */}
@@ -171,6 +171,6 @@ export default function FloatingActions() {
         </ActionButton>
       </div>
     </div>
-    </>
+    </div>
   );
 }

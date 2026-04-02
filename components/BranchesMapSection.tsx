@@ -17,6 +17,7 @@ interface Branch {
   phone1: string;
   phone2: string;
   isHead: boolean;
+  isInternational?: boolean;
   /** Approximate SVG coordinates on the nepal.svg map */
   x: number;
   y: number;
@@ -89,12 +90,25 @@ const branches: Branch[] = [
     x: 775,
     y: 408,
   },
+  {
+    id: 7,
+    name: "Australia Branch",
+    city: "Sydney",
+    address: "Sydney, NSW, Australia",
+    phone1: "+61 2 8000 0000",
+    phone2: "+61 4 0000 0000",
+    isHead: false,
+    isInternational: true,
+    x: 400,
+    y: 520,
+  },
 ];
 
 /* Kathmandu cluster: ids 1, 2, 3 share one pin */
 const KTM_IDS = new Set([1, 2, 3]);
 const kathmanduBranches = branches.filter((b) => KTM_IDS.has(b.id));
-const outerBranches = branches.filter((b) => !KTM_IDS.has(b.id));
+const outerBranches = branches.filter((b) => !KTM_IDS.has(b.id) && !b.isInternational);
+const internationalBranches = branches.filter((b) => b.isInternational);
 
 /* Cluster pin position = head office */
 const KTM_PIN = { x: 540, y: 318 };
@@ -607,8 +621,8 @@ export default function BranchesMapSection() {
             </span>
           </h2>
           <p className="text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
-            6 offices across Nepal, making quality education consultancy
-            accessible from every corner
+            6 offices across Nepal and 1 international branch in Australia,
+            making quality education consultancy accessible from every corner
           </p>
         </div>
       </FadeUp>
@@ -617,10 +631,10 @@ export default function BranchesMapSection() {
       <div className="hidden md:block max-w-5xl mx-auto px-6 lg:px-8">
         <FadeUp delay={0.15}>
           <div
-            className="relative w-full overflow-visible"
-            style={{ aspectRatio: "800 / 454" }}
+            className="relative w-full"
+            style={{ aspectRatio: "800 / 620", overflow: "visible" }}
           >
-            <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0 overflow-visible">
               {/* Subtle radial overlay */}
               <div
                 className="absolute inset-0 pointer-events-none"
@@ -631,7 +645,7 @@ export default function BranchesMapSection() {
               />
 
               <svg
-                viewBox="0 0 800 454"
+                viewBox="0 0 800 620"
                 className="w-full h-full"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -698,6 +712,57 @@ export default function BranchesMapSection() {
                   onHover={() => handleHover("ktm")}
                   onLeave={handleLeave}
                 />
+                {/* Australia International Branch */}
+                <motion.g
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.5, delay: 1.4, type: "spring", stiffness: 200 }}
+                  style={{ transformOrigin: `650px 530px` }}
+                >
+                  <motion.path
+                    d="M 540 318 Q 700 400, 650 530"
+                    fill="none"
+                    stroke="url(#routeGradient)"
+                    strokeWidth={1.5}
+                    strokeDasharray="5 5"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={isInView ? { pathLength: 1, opacity: 0.5 } : { pathLength: 0, opacity: 0 }}
+                    transition={{ pathLength: { duration: 1.4, delay: 1.0 }, opacity: { duration: 0.4, delay: 1.0 } }}
+                  />
+                  <circle cx={650} cy={530} r={14} fill="#f59e0b" opacity={0.12} />
+                  <circle
+                    cx={650} cy={530}
+                    r={hoveredItem === "au" ? 12 : 10}
+                    fill="#f59e0b" stroke="#ffffff" strokeWidth={2.5}
+                    style={{ cursor: "pointer", transition: "all 0.3s ease" }}
+                  />
+                  <text x={650} y={534} textAnchor="middle" fill="#ffffff" fontSize={9} fontWeight={800} fontFamily="system-ui, sans-serif" style={{ pointerEvents: "none", userSelect: "none" }}>
+                    AU
+                  </text>
+                  <circle cx={650} cy={530} r={6} fill="none" stroke="#f59e0b" strokeWidth={1.5} opacity={0.4}>
+                    <animate attributeName="r" from="10" to="28" dur="2.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite" />
+                  </circle>
+                  {/* Invisible hover target */}
+                  <circle
+                    cx={650} cy={530} r={28}
+                    fill="transparent"
+                    style={{ cursor: "pointer" }}
+                    onMouseEnter={() => handleHover("au")}
+                    onMouseLeave={handleLeave}
+                  />
+                  <text x={650} y={555} textAnchor="middle" fill="#92400e" fontSize={10} fontWeight={700} fontFamily="system-ui, sans-serif" style={{ pointerEvents: "none", userSelect: "none" }}>
+                    Australia
+                  </text>
+                  <text x={650} y={567} textAnchor="middle" fill="#b45309" fontSize={8} fontWeight={500} fontFamily="system-ui, sans-serif" style={{ pointerEvents: "none", userSelect: "none" }}>
+                    Sydney, NSW
+                  </text>
+                  <rect x={610} y={571} width={80} height={14} rx={7} fill="#fef3c7" stroke="#f59e0b" strokeWidth={0.8} />
+                  <text x={650} y={581} textAnchor="middle" fill="#92400e" fontSize={7} fontWeight={700} fontFamily="system-ui, sans-serif" letterSpacing="0.5" style={{ pointerEvents: "none", userSelect: "none" }}>
+                    INTERNATIONAL
+                  </text>
+                </motion.g>
               </svg>
             </div>
 
@@ -715,6 +780,52 @@ export default function BranchesMapSection() {
               onMouseEnter={handleTooltipEnter}
               onMouseLeave={handleTooltipLeave}
             />
+            {/* Tooltip: Australia */}
+            <AnimatePresence>
+              {hoveredItem === "au" && (
+                <motion.div
+                  key="au-tooltip"
+                  initial={{ opacity: 0, scale: 0.88, y: 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute z-50"
+                  style={{
+                    left: `${(650 / 800) * 100}%`,
+                    top: `${(530 / 580) * 100 - 3}%`,
+                    transform: "translateX(-50%) translateY(-100%)",
+                  }}
+                  onMouseEnter={handleTooltipEnter}
+                  onMouseLeave={handleTooltipLeave}
+                >
+                  <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-amber-100 p-5 w-[260px]">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-amber-50">
+                        <Icon name="Globe" size={18} className="text-amber-500" />
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-slate-900 text-sm leading-tight">Australia Branch</h4>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">International</span>
+                      </div>
+                    </div>
+                    <div className="space-y-2 text-xs text-slate-500">
+                      <div className="flex items-start gap-2">
+                        <Icon name="MapPin" size={12} className="mt-0.5 shrink-0 text-amber-500" />
+                        <span>Sydney, NSW, Australia</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="Phone" size={12} className="shrink-0 text-amber-500" />
+                        <span>+61 2 8000 0000</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="Smartphone" size={12} className="shrink-0 text-amber-500" />
+                        <span>+61 4 0000 0000</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </FadeUp>
 
@@ -806,6 +917,58 @@ export default function BranchesMapSection() {
               </motion.div>
             ))}
           </div>
+
+          {/* International branches */}
+          {internationalBranches.length > 0 && (
+            <div className="rounded-2xl border border-amber-200 bg-linear-to-r from-amber-50 to-white p-5">
+              <div className="flex items-center gap-3 mb-4 pb-3 border-b border-amber-100">
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-amber-100">
+                  <Icon name="Globe" size={16} className="text-amber-700" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">International Branch</h4>
+                  <p className="text-[10px] text-slate-500 font-medium">
+                    {internationalBranches.length} office
+                    {internationalBranches.length > 1 ? "s" : ""}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                {internationalBranches.map((branch) => (
+                  <motion.div
+                    key={branch.id}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.45 }}
+                    className="rounded-xl border border-amber-200 bg-white p-4"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <h5 className="text-base font-bold text-slate-900">{branch.name}</h5>
+                        <p className="text-sm text-slate-500">{branch.address}</p>
+                      </div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-1 rounded-full">
+                        International
+                      </span>
+                    </div>
+
+                    <div className="mt-3 grid sm:grid-cols-2 gap-2 text-sm text-slate-600">
+                      <div className="flex items-center gap-2">
+                        <Icon name="Phone" size={12} className="text-amber-600" />
+                        {branch.phone1}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Icon name="Smartphone" size={12} className="text-amber-600" />
+                        {branch.phone2}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -851,6 +1014,49 @@ export default function BranchesMapSection() {
             ))}
           </div>
         </div>
+
+        {/* International branch */}
+        {internationalBranches.length > 0 && (
+          <div className="mt-6">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-7 h-7 rounded-md flex items-center justify-center bg-amber-100">
+                <Icon name="Globe" size={13} className="text-amber-700" />
+              </div>
+              <span className="text-sm font-bold text-slate-900">International Branch</span>
+            </div>
+
+            <div className="space-y-3">
+              {internationalBranches.map((branch, idx) => (
+                <motion.div
+                  key={branch.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.08, duration: 0.5 }}
+                  className="rounded-2xl border border-amber-200 bg-amber-50/40 p-4"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <h4 className="text-sm font-semibold text-slate-900">{branch.name}</h4>
+                    <span className="text-[9px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                      International
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">{branch.address}</p>
+                  <div className="space-y-1 text-xs text-slate-600 mt-2">
+                    <div className="flex items-center gap-1.5">
+                      <Icon name="Phone" size={10} className="text-amber-600" />
+                      {branch.phone1}
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Icon name="Smartphone" size={10} className="text-amber-600" />
+                      {branch.phone2}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
