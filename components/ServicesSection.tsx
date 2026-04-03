@@ -73,7 +73,7 @@ function AnimatedPlaneOnPath({
       <g transform="scale(0.5) translate(-12, -12)">
         <path
           d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
-          fill="#003975"
+          fill="#0066a6"
         />
       </g>
     </g>
@@ -110,7 +110,7 @@ function FlightLinesBackground() {
             id={path.id}
             d={path.d}
             fill="none"
-            stroke="#003975"
+            stroke="#0066a6"
             strokeWidth={1.5}
             strokeDasharray="10 8"
             opacity={0.15}
@@ -277,7 +277,7 @@ export default function ServicesSection() {
         <FadeUp>
           <div className="text-center mb-16 md:mb-24">
             <div className="inline-flex items-center gap-2 px-4 md:px-5 py-2 mb-4 md:mb-6 rounded-full bg-slate-50 text-slate-600 text-xs md:text-sm font-medium border border-gray-200/80 shadow-sm">
-              <Icon name="Zap" size={14} className="text-[#003975]" />
+              <Icon name="Zap" size={14} className="text-[#0066a6]" />
               Our Services
             </div>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 md:mb-6 tracking-tight">
@@ -438,7 +438,7 @@ export default function ServicesSection() {
             >
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 md:gap-3 bg-[#003975] text-white px-6 md:px-10 py-3 md:py-4 rounded-full font-medium text-sm md:text-base hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-800/20"
+                className="inline-flex items-center gap-2 md:gap-3 bg-[#0066a6] text-white px-6 md:px-10 py-3 md:py-4 rounded-full font-medium text-sm md:text-base hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-800/20"
               >
                 Explore All Services
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

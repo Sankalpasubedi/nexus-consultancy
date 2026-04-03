@@ -151,14 +151,14 @@ export default function HeroSearchSection() {
                   onChange={(e) => setSubject(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Enter course subject e.g. Law"
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all"
                 />
               </div>
               <div className="relative">
                 <select
                   value={studyLevel}
                   onChange={(e) => setStudyLevel(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   {studyLevels.map((level) => (
                     <option key={level.value} value={level.value}>
@@ -172,7 +172,7 @@ export default function HeroSearchSection() {
                 <select
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   {destinations.map((dest) => (
                     <option key={dest.value} value={dest.value}>
@@ -190,7 +190,7 @@ export default function HeroSearchSection() {
                   <button
                     key={idx}
                     onClick={() => handleTrendingClick(item.query)}
-                    className="text-sm text-[#003975] hover:text-[#0052a3] hover:underline transition-colors"
+                    className="text-sm text-[#0066a6] hover:text-[#0052a3] hover:underline transition-colors"
                   >
                     {item.label}
                   </button>
@@ -200,7 +200,7 @@ export default function HeroSearchSection() {
                 onClick={handleSearch}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20"
+                className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20"
               >
                 <Search className="w-4 h-4" />
                 Search
@@ -223,7 +223,7 @@ export default function HeroSearchSection() {
                 <select
                   value={studyLevel}
                   onChange={(e) => setStudyLevel(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   {studyLevels.map((level) => (
                     <option key={level.value} value={level.value}>
@@ -237,7 +237,7 @@ export default function HeroSearchSection() {
                 <select
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   {destinations.map((dest) => (
                     <option key={dest.value} value={dest.value}>
@@ -251,7 +251,7 @@ export default function HeroSearchSection() {
                 onClick={handleSearch}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto justify-center"
+                className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto justify-center"
               >
                 <Search className="w-4 h-4" />
                 Search
@@ -277,7 +277,7 @@ export default function HeroSearchSection() {
                   onChange={(e) => setUniversityName(e.target.value)}
                   onKeyDown={handleKeyDown}
                   placeholder="Search by university name"
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all"
                 />
               </div>
               <span className="text-sm text-slate-400 font-medium hidden sm:block">or</span>
@@ -285,7 +285,7 @@ export default function HeroSearchSection() {
                 <select
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   {destinations.map((dest) => (
                     <option key={dest.value} value={dest.value}>
@@ -299,7 +299,7 @@ export default function HeroSearchSection() {
                 onClick={handleSearch}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto justify-center"
+                className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto justify-center"
               >
                 <Search className="w-4 h-4" />
                 Search
@@ -322,7 +322,7 @@ export default function HeroSearchSection() {
                 <select
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   {cities.map((c) => (
                     <option key={c.value} value={c.value}>
@@ -336,7 +336,7 @@ export default function HeroSearchSection() {
                 <select
                   value={month}
                   onChange={(e) => setMonth(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   {months.map((m) => (
                     <option key={m.value} value={m.value}>
@@ -350,7 +350,7 @@ export default function HeroSearchSection() {
                 <select
                   value={destination}
                   onChange={(e) => setDestination(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all appearance-none cursor-pointer bg-white"
+                  className="w-full px-4 py-3 sm:py-3.5 text-sm text-slate-800 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all appearance-none cursor-pointer bg-white"
                 >
                   <option value="">Study destinations</option>
                   {destinations.slice(1).map((dest) => (
@@ -365,7 +365,7 @@ export default function HeroSearchSection() {
                 onClick={handleSearch}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto justify-center"
+                className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto justify-center"
               >
                 <Search className="w-4 h-4" />
                 Search
@@ -386,11 +386,11 @@ export default function HeroSearchSection() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-start gap-4">
                 <motion.div 
-                  className="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#003975]/10 to-[#00ab18]/10"
+                  className="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#0066a6]/10 to-[#00ab18]/10"
                   animate={{ rotate: [0, 10, -10, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <Sparkles className="w-6 h-6 text-[#003975]" />
+                  <Sparkles className="w-6 h-6 text-[#0066a6]" />
                 </motion.div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900">Let us help you with your search</h3>
@@ -402,7 +402,7 @@ export default function HeroSearchSection() {
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/search?tab=guide"
-                  className="inline-flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 whitespace-nowrap"
+                  className="inline-flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 whitespace-nowrap"
                 >
                   Start here
                   <ArrowRight className="w-4 h-4" />
@@ -448,7 +448,7 @@ export default function HeroSearchSection() {
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Link
                     href="/search?tab=instant-offer"
-                    className="inline-flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 whitespace-nowrap"
+                    className="inline-flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 sm:px-8 py-3 rounded-full font-semibold text-sm transition-all shadow-lg shadow-blue-900/20 whitespace-nowrap"
                   >
                     Get started
                     <ArrowRight className="w-4 h-4" />
@@ -482,7 +482,7 @@ export default function HeroSearchSection() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`relative whitespace-nowrap px-3 sm:px-4 py-2.5 text-sm font-medium transition-colors ${
                     activeTab === tab.id
-                      ? "text-[#003975]"
+                      ? "text-[#0066a6]"
                       : "text-slate-500 hover:text-slate-700"
                   }`}
                 >
@@ -490,7 +490,7 @@ export default function HeroSearchSection() {
                   {activeTab === tab.id && (
                     <motion.div
                       layoutId="activeSearchTab"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#003975]"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0066a6]"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}

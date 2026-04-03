@@ -147,7 +147,7 @@ export default function ContactBranchExplorer() {
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
             Locate Our{" "}
-            <span className="bg-gradient-to-r from-[#003975] to-[#00ab18] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0066a6] to-[#00ab18] bg-clip-text text-transparent">
               Nearest Branch
             </span>
           </h2>
@@ -171,8 +171,8 @@ export default function ContactBranchExplorer() {
                   onClick={() => setSelectedId(b.id)}
                   className={`relative px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     active
-                      ? "bg-[#003975] text-white shadow-lg shadow-[#003975]/20"
-                      : "bg-white text-slate-600 border border-gray-200 hover:border-[#003975]/30 hover:text-[#003975]"
+                      ? "bg-[#0066a6] text-white shadow-lg shadow-[#0066a6]/20"
+                      : "bg-white text-slate-600 border border-gray-200 hover:border-[#0066a6]/30 hover:text-[#0066a6]"
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -186,7 +186,7 @@ export default function ContactBranchExplorer() {
                   {active && (
                     <motion.div
                       layoutId="branch-tab-indicator"
-                      className="absolute inset-0 rounded-full bg-[#003975] -z-10"
+                      className="absolute inset-0 rounded-full bg-[#0066a6] -z-10"
                       transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     />
                   )}
@@ -227,20 +227,20 @@ export default function ContactBranchExplorer() {
                 <div className="flex items-start gap-3 mb-6">
                   <div
                     className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                      selected.isHead ? "bg-[#003975]" : "bg-[#003975]/10"
+                      selected.isHead ? "bg-[#0066a6]" : "bg-[#0066a6]/10"
                     }`}
                   >
                     <Icon
                       name={selected.isHead ? "Building" : "MapPin"}
                       size={20}
-                      className={selected.isHead ? "text-white" : "text-[#003975]"}
+                      className={selected.isHead ? "text-white" : "text-[#0066a6]"}
                     />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <h3 className="text-slate-900 font-bold text-lg leading-tight">{selected.name}</h3>
                       {selected.isHead && (
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#003975] bg-[#003975]/10 px-2 py-0.5 rounded-full border border-[#003975]/15">
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#0066a6] bg-[#0066a6]/10 px-2 py-0.5 rounded-full border border-[#0066a6]/15">
                           HQ
                         </span>
                       )}
@@ -265,17 +265,17 @@ export default function ContactBranchExplorer() {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center flex-shrink-0">
-                      <Icon name="Phone" size={14} className="text-[#003975]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center flex-shrink-0">
+                      <Icon name="Phone" size={14} className="text-[#0066a6]" />
                     </div>
                     <div>
                       <p className="text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-0.5">Phone</p>
                       <div className="flex items-center gap-3 text-sm text-slate-700">
-                        <a href={`tel:${selected.phone1.replace(/-/g, "")}`} className="hover:text-[#003975] transition">
+                        <a href={`tel:${selected.phone1.replace(/-/g, "")}`} className="hover:text-[#0066a6] transition">
                           {selected.phone1}
                         </a>
                         <span className="text-gray-300">|</span>
-                        <a href={`tel:${selected.phone2}`} className="hover:text-[#003975] transition">
+                        <a href={`tel:${selected.phone2}`} className="hover:text-[#0066a6] transition">
                           {selected.phone2}
                         </a>
                       </div>
@@ -300,7 +300,7 @@ export default function ContactBranchExplorer() {
                     href={selected.directionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#003975] text-white text-sm font-semibold hover:bg-[#002d5e] transition shadow-sm"
+                    className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#0066a6] text-white text-sm font-semibold hover:bg-[#002d5e] transition shadow-sm"
                   >
                     <Icon name="Compass" size={16} /> Get Directions
                   </a>
@@ -338,7 +338,7 @@ export default function ContactBranchExplorer() {
                 key={s.label}
                 className="text-center py-4 md:py-5 rounded-xl bg-white border border-gray-200 shadow-sm"
               >
-                <Icon name={s.icon} size={16} className="text-[#003975]/40 mx-auto mb-2" />
+                <Icon name={s.icon} size={16} className="text-[#0066a6]/40 mx-auto mb-2" />
                 <div className="text-xl md:text-2xl font-bold text-slate-900">{s.num}</div>
                 <div className="text-[11px] text-slate-500 mt-0.5">{s.label}</div>
               </div>

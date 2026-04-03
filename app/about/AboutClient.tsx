@@ -32,28 +32,28 @@ const coreValues = [
     title: "Excellence",
     description:
       "We maintain the highest standards in every service we provide, ensuring exceptional outcomes for our students.",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     icon: "Handshake",
     title: "Integrity",
     description:
       "Transparency and honesty guide every interaction. We build trust through ethical practices and honest advice.",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     icon: "Target",
     title: "Student Centric",
     description:
       "Your goals are our priority. We tailor every recommendation to match your unique aspirations and background.",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     icon: "Lightbulb",
     title: "Innovation",
     description:
       "We leverage the latest tools, data, and AI-driven insights to provide the most effective guidance available.",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
 ];
 
@@ -329,7 +329,7 @@ function TeamSliderSection({
         <div className="grid lg:grid-cols-[540px_1fr] gap-20 items-center">
           {/* Featured Image - Left Side */}
           <div className="hidden lg:block relative h-[680px]">
-            <div className="absolute -top-8 -left-8 w-40 h-40 rounded-full bg-[#003975]/[0.08] blur-2xl" />
+            <div className="absolute -top-8 -left-8 w-40 h-40 rounded-full bg-[#0066a6]/[0.08] blur-2xl" />
             <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-[#00ab18]/[0.08] blur-2xl" />
             
             {/* Featured Image Container */}
@@ -368,10 +368,10 @@ function TeamSliderSection({
                   className="absolute -bottom-0 left-60 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-5 py-4 min-w-[420px] max-w-[460px]"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="w-1 h-full min-h-[32px] rounded-full bg-linear-to-b from-[#003975] to-[#00ab18] self-stretch" />
+                    <div className="w-1 h-full min-h-[32px] rounded-full bg-linear-to-b from-[#0066a6] to-[#00ab18] self-stretch" />
                     <div>
                       <h3 className="text-sm font-bold text-slate-900 leading-tight">{activeMember.name}</h3>
-                      <span className="text-[10px] font-semibold tracking-wider uppercase text-[#003975]/70">{activeMember.role}</span>
+                      <span className="text-[10px] font-semibold tracking-wider uppercase text-[#0066a6]/70">{activeMember.role}</span>
                     </div>
                   </div>
                   <p className="text-[11px] text-slate-500 italic leading-relaxed pl-3">&ldquo;{activeMember.statement}&rdquo;</p>
@@ -417,8 +417,8 @@ function TeamSliderSection({
                         style={{ height: CARD_H }}
                       >
                         {/* Photo area */}
-                        <div className="relative h-[260px] overflow-hidden bg-gradient-to-br from-[#003975]/5 via-slate-50 to-[#00ab18]/5">
-                          <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[#003975]/[0.06]" />
+                        <div className="relative h-[260px] overflow-hidden bg-gradient-to-br from-[#0066a6]/5 via-slate-50 to-[#00ab18]/5">
+                          <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-[#0066a6]/[0.06]" />
                           <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-[#00ab18]/[0.06]" />
 
                           <div className="absolute inset-0 flex items-center justify-center">
@@ -434,7 +434,7 @@ function TeamSliderSection({
                           </div>
 
                           <div className="absolute top-4 left-4">
-                            <span className="text-[10px] font-bold tracking-widest uppercase text-[#003975] bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
+                            <span className="text-[10px] font-bold tracking-widest uppercase text-[#0066a6] bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
                               {m.role.split("/")[0].trim()}
                             </span>
                           </div>
@@ -443,14 +443,14 @@ function TeamSliderSection({
                         {/* Info */}
                         <div className="p-6 text-center">
                           <h3 className="text-lg font-bold text-slate-900">{m.name}</h3>
-                          <p className="text-[#003975] text-xs font-medium mt-1">{m.role}</p>
+                          <p className="text-[#0066a6] text-xs font-medium mt-1">{m.role}</p>
 
                           <div className="flex items-center justify-center gap-3 mt-4">
                             {m.linkedin && (
                               <a
                                 href={m.linkedin}
                                 onClick={(e) => { if (hasDragged.current) { e.preventDefault(); e.stopPropagation(); } }}
-                                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#0066a6] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
                                 aria-label={`${m.name} LinkedIn`}
                               >
                                 <Icon name="Linkedin" size={14} />
@@ -460,7 +460,7 @@ function TeamSliderSection({
                               <a
                                 href={`mailto:${m.email}`}
                                 onClick={(e) => { if (hasDragged.current) { e.preventDefault(); e.stopPropagation(); } }}
-                                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#0066a6] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
                                 aria-label={`Email ${m.name}`}
                               >
                                 <Icon name="Mail" size={14} />
@@ -469,7 +469,7 @@ function TeamSliderSection({
                             <a
                               href="#"
                               onClick={(e) => { e.preventDefault(); if (hasDragged.current) e.stopPropagation(); }}
-                              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#003975] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
+                              className="w-8 h-8 rounded-full bg-slate-100 hover:bg-[#0066a6] hover:text-white text-slate-500 flex items-center justify-center transition-colors"
                               aria-label={`${m.name} Phone`}
                             >
                               <Icon name="Phone" size={14} />
@@ -499,7 +499,7 @@ function TeamSliderSection({
                     onClick={() => goTo(i)}
                     className={`rounded-full transition-all duration-300 ${
                       i === activeIndex
-                        ? "w-8 h-2.5 bg-[#003975]"
+                        ? "w-8 h-2.5 bg-[#0066a6]"
                         : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
                     }`}
                   />
@@ -595,7 +595,7 @@ function OurStoryCoreValues() {
     <section ref={containerRef} className="relative py-28 px-6 bg-gray-50 overflow-hidden">
       {/* Decorative grain */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-32 right-[20%] w-[400px] h-[400px] rounded-full bg-[#003975]/[0.03] blur-[120px]" />
+        <div className="absolute -top-32 right-[20%] w-[400px] h-[400px] rounded-full bg-[#0066a6]/[0.03] blur-[120px]" />
         <div className="absolute -bottom-32 left-[10%] w-[350px] h-[350px] rounded-full bg-[#00ab18]/[0.03] blur-[100px]" />
       </div>
 
@@ -614,7 +614,7 @@ function OurStoryCoreValues() {
             <FadeUp delay={0.05}>
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-10 leading-tight">
                 From a Vision to Nepal&apos;s{" "}
-                <span className="text-[#003975]">Leading</span>{" "}
+                <span className="text-[#0066a6]">Leading</span>{" "}
                 <span className="text-[#00ab18]">Consultancy</span>
               </h2>
             </FadeUp>
@@ -657,8 +657,8 @@ function OurStoryCoreValues() {
         <div>
           <FadeUp>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-0.5 bg-[#003975]" />
-              <span className="text-xs font-bold tracking-widest text-[#003975] uppercase">
+              <div className="w-10 h-0.5 bg-[#0066a6]" />
+              <span className="text-xs font-bold tracking-widest text-[#0066a6] uppercase">
                 Core Values
               </span>
             </div>
@@ -710,7 +710,7 @@ export default function AboutPage() {
       <section className="relative pt-28 pb-20 px-6 bg-white overflow-hidden">
         {/* Subtle decorative mesh */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#003975]/[0.03] blur-3xl" />
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#0066a6]/[0.03] blur-3xl" />
           <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#00ab18]/[0.03] blur-3xl" />
         </div>
 
@@ -719,14 +719,14 @@ export default function AboutPage() {
             {/* Left — Text */}
             <div>
               <FadeUp>
-                <span className="text-xs font-bold tracking-widest text-[#003975] uppercase">
+                <span className="text-xs font-bold tracking-widest text-[#0066a6] uppercase">
                   About Nexsus
                 </span>
               </FadeUp>
               <FadeUp delay={0.08}>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mt-4 mb-6 leading-tight">
                   Empowering Students to{" "}
-                  <span className="text-[#003975]">Achieve Global</span>{" "}
+                  <span className="text-[#0066a6]">Achieve Global</span>{" "}
                   <span className="text-[#00ab18]">Dreams</span>
                 </h1>
               </FadeUp>
@@ -794,7 +794,7 @@ export default function AboutPage() {
                   className="absolute -top-6 -right-4 md:right-4 bg-white rounded-2xl shadow-xl border border-gray-100 p-5 z-10"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#003975] flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-[#0066a6] flex items-center justify-center">
                       <Icon name="Award" size={18} className="text-white" />
                     </div>
                     <div>
@@ -823,7 +823,7 @@ export default function AboutPage() {
                 </motion.div>
 
                 {/* Tagline badge */}
-                <div className="absolute bottom-4 right-6 bg-[#003975]/90 backdrop-blur-sm text-white text-xs font-medium px-4 py-2 rounded-full z-10">
+                <div className="absolute bottom-4 right-6 bg-[#0066a6]/90 backdrop-blur-sm text-white text-xs font-medium px-4 py-2 rounded-full z-10">
                   &ldquo;Pathway to Your Success&rdquo;
                 </div>
               </div>
@@ -847,7 +847,7 @@ export default function AboutPage() {
             </div>
           </FadeUp>
           <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#003975] to-[#00ab18]" />
+            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-[#0066a6] to-[#00ab18]" />
             <div className="space-y-12">
               {timeline.map((t, i) => (
                 <FadeUp key={t.year} delay={i * 0.1}>
@@ -857,9 +857,9 @@ export default function AboutPage() {
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.15, type: "spring" }}
-                      className="relative z-10 w-16 h-16 rounded-full bg-white border-4 border-[#003975] flex items-center justify-center flex-shrink-0 shadow-md"
+                      className="relative z-10 w-16 h-16 rounded-full bg-white border-4 border-[#0066a6] flex items-center justify-center flex-shrink-0 shadow-md"
                     >
-                      <span className="text-xs font-bold text-[#003975]">{t.year}</span>
+                      <span className="text-xs font-bold text-[#0066a6]">{t.year}</span>
                     </motion.div>
                     <div className="pt-3">
                       <h3 className="text-xl font-semibold text-slate-900 mb-1">{t.title}</h3>
@@ -881,7 +881,7 @@ export default function AboutPage() {
             <FadeLeft>
               <div className="relative">
                 {/* "10+ Years" badge */}
-                <div className="absolute -top-3 -left-3 z-20 bg-[#003975] text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                <div className="absolute -top-3 -left-3 z-20 bg-[#0066a6] text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
                   10+ Years
                 </div>
 
@@ -912,8 +912,8 @@ export default function AboutPage() {
             <FadeRight>
               <div>
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-1 h-8 bg-[#003975] rounded-full" />
-                  <span className="text-xs font-bold tracking-widest text-[#003975] uppercase">
+                  <div className="w-1 h-8 bg-[#0066a6] rounded-full" />
+                  <span className="text-xs font-bold tracking-widest text-[#0066a6] uppercase">
                     Managing Director&apos;s Message
                   </span>
                 </div>
@@ -924,7 +924,7 @@ export default function AboutPage() {
 
                 {/* Quote block */}
                 <div className="relative mb-6">
-                  <span className="text-5xl leading-none text-[#003975] font-serif absolute -top-2 -left-1 select-none">
+                  <span className="text-5xl leading-none text-[#0066a6] font-serif absolute -top-2 -left-1 select-none">
                     &ldquo;
                   </span>
                   <p className="pl-7 text-slate-500 italic leading-relaxed">
@@ -951,7 +951,7 @@ export default function AboutPage() {
 
                 {/* Signature line */}
                 <div className="mt-8 flex items-center gap-4">
-                  <div className="w-12 h-0.5 bg-[#003975]" />
+                  <div className="w-12 h-0.5 bg-[#0066a6]" />
                   <div className="w-8 h-0.5 bg-[#00ab18]" />
                 </div>
                 <p className="mt-3 font-semibold text-slate-900 italic text-sm">
@@ -988,7 +988,7 @@ export default function AboutPage() {
               <StaggerItem key={t.name}>
                 <HoverCard>
                   <div className="bg-gray-50 rounded-3xl p-8 h-full border border-gray-100">
-                    <div className="text-4xl text-[#003975] opacity-20 mb-4">&ldquo;</div>
+                    <div className="text-4xl text-[#0066a6] opacity-20 mb-4">&ldquo;</div>
                     <p className="text-slate-600 mb-6 leading-relaxed">{t.quote}</p>
                     <div className="flex items-center gap-4">
                       <Image
@@ -1001,7 +1001,7 @@ export default function AboutPage() {
                       <div>
                         <p className="font-semibold text-slate-900 text-sm">{t.name}</p>
                         <p className="text-xs text-slate-500">{t.course}</p>
-                        <p className="text-xs text-[#003975]">{t.country}</p>
+                        <p className="text-xs text-[#0066a6]">{t.country}</p>
                       </div>
                     </div>
                   </div>
@@ -1024,7 +1024,7 @@ export default function AboutPage() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
+                  className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
                 >
                   Book Free Consultation
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>

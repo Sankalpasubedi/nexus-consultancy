@@ -81,7 +81,7 @@ function AnimatedPlaneOnPath({
       <g transform="scale(0.5) translate(-12, -12)">
         <path
           d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
-          fill="#003975"
+          fill="#0066a6"
         />
       </g>
     </g>
@@ -124,7 +124,7 @@ function FlightLinesBackground() {
             id={path.id}
             d={path.d}
             fill="none"
-            stroke="#003975"
+            stroke="#0066a6"
             strokeWidth={1.5}
             strokeDasharray="10 8"
             opacity={0.2}
@@ -217,7 +217,7 @@ export default function TestPreparationPage() {
       <section className="relative min-h-[440px] md:min-h-[500px] overflow-hidden">
         <Image src="/contact/image.png" alt="Students preparing for tests" fill className="object-cover object-top" priority />
         <div className="absolute inset-0 bg-gradient-to-r from-[#002550]/75 via-[#003a75]/60 to-[#004a8f]/35" />
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#003975] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0066a6] to-transparent" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-24">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -264,8 +264,8 @@ export default function TestPreparationPage() {
                   />
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
-                    <Icon name="Award" size={16} className="text-[#003975]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center">
+                    <Icon name="Award" size={16} className="text-[#0066a6]" />
                   </div>
                   <span className="text-sm font-semibold text-slate-900">95% Success Rate</span>
                 </div>
@@ -301,7 +301,7 @@ export default function TestPreparationPage() {
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                 Comprehensive Prep
               </span>
               <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
@@ -322,7 +322,7 @@ export default function TestPreparationPage() {
                     className="bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all overflow-hidden h-full flex w-full text-left cursor-pointer group"
                   >
                     {/* Left accent + icon */}
-                    <div className="w-[88px] md:w-[100px] bg-slate-800 group-hover:bg-[#003975] transition-colors flex flex-col items-center justify-center gap-2 flex-shrink-0 py-6 text-white">
+                    <div className="w-[88px] md:w-[100px] bg-slate-800 group-hover:bg-[#0066a6] transition-colors flex flex-col items-center justify-center gap-2 flex-shrink-0 py-6 text-white">
                       <Icon name={exam.icon} size={24} />
                       <div className="text-lg font-bold leading-none">{exam.stat}</div>
                       <div className="text-[9px] uppercase tracking-wider text-slate-300">{exam.statLabel}</div>
@@ -331,16 +331,16 @@ export default function TestPreparationPage() {
                     <div className="p-6 flex-1">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <h3 className="text-lg font-bold text-slate-900 mb-0.5 group-hover:text-[#003975] transition-colors">{exam.title}</h3>
+                          <h3 className="text-lg font-bold text-slate-900 mb-0.5 group-hover:text-[#0066a6] transition-colors">{exam.title}</h3>
                           <p className="text-[11px] text-slate-400 font-medium mb-2">{exam.subtitle}</p>
                         </div>
-                        <Icon name="ArrowUpRight" size={18} className="text-slate-300 group-hover:text-[#003975] transition-colors flex-shrink-0 mt-1" />
+                        <Icon name="ArrowUpRight" size={18} className="text-slate-300 group-hover:text-[#0066a6] transition-colors flex-shrink-0 mt-1" />
                       </div>
                       <p className="text-sm text-slate-500 mb-4 leading-relaxed">{exam.description}</p>
                       <div className="flex flex-wrap gap-x-4 gap-y-1.5">
                         {exam.features.map((f) => (
                           <span key={f} className="flex items-center gap-1.5 text-[13px] text-slate-500">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#003975] flex-shrink-0" /> {f}
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#0066a6] flex-shrink-0" /> {f}
                           </span>
                         ))}
                       </div>
@@ -377,12 +377,12 @@ export default function TestPreparationPage() {
               {preparationProcess.map((step, i) => (
                 <FadeUp key={step.step} delay={i * 0.08}>
                   <div className="flex gap-6 md:gap-8 items-start">
-                    <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-[#003975] text-white flex items-center justify-center text-lg font-bold shadow-lg">
+                    <div className="relative z-10 flex-shrink-0 w-[58px] h-[58px] rounded-2xl bg-[#0066a6] text-white flex items-center justify-center text-lg font-bold shadow-lg">
                       {step.step}
                     </div>
                     <div className="bg-white rounded-2xl border border-gray-100 p-6 flex-1 shadow-sm">
                       <div className="flex items-center gap-2 mb-1.5">
-                        <Icon name={step.icon} size={16} className="text-[#003975]" />
+                        <Icon name={step.icon} size={16} className="text-[#0066a6]" />
                         <h3 className="font-semibold text-slate-900 text-[15px]">{step.title}</h3>
                       </div>
                       <p className="text-sm text-slate-500 leading-relaxed">{step.description}</p>
@@ -416,7 +416,7 @@ export default function TestPreparationPage() {
               <div className="max-w-5xl mx-auto">
                 <FadeUp>
                   <div className="text-center mb-16">
-                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Why NEXSUS</span>
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Why NEXSUS</span>
                     <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Why Choose Our Test Prep?</h2>
                     <p className="text-slate-500 text-sm max-w-md mx-auto">Expert guidance backed by results, not just classes, but a complete preparation ecosystem</p>
                   </div>
@@ -426,17 +426,17 @@ export default function TestPreparationPage() {
                   {whyChooseUs.slice(0, 6).map((f) => (
                     <StaggerItem key={f.title}>
                       <HoverCard>
-                        <div className="bg-white rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
+                        <div className="bg-white rounded-2xl p-6 h-full border border-gray-100 hover:border-[#0066a6]/20 transition-colors group">
                           <div className="flex items-center justify-between mb-5">
                             <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
                               <Icon name={f.icon} size={20} />
                             </div>
                             <div className="text-right">
-                              <div className="text-2xl font-bold text-[#003975]">{f.stat}</div>
+                              <div className="text-2xl font-bold text-[#0066a6]">{f.stat}</div>
                               <div className="text-[10px] text-slate-400 uppercase tracking-wider">{f.statLabel}</div>
                             </div>
                           </div>
-                          <h4 className="text-[15px] font-semibold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors">{f.title}</h4>
+                          <h4 className="text-[15px] font-semibold text-slate-900 mb-2 group-hover:text-[#0066a6] transition-colors">{f.title}</h4>
                           <p className="text-sm text-slate-500 leading-relaxed">{f.description}</p>
                         </div>
                       </HoverCard>
@@ -464,7 +464,7 @@ export default function TestPreparationPage() {
               <FadeUp key={faq.q} delay={i * 0.06}>
                 <div className="bg-white rounded-2xl border border-gray-100 p-6">
                   <h3 className="font-semibold text-slate-900 mb-2 flex items-start gap-3 text-[15px]">
-                    <span className="w-7 h-7 rounded-full bg-[#003975] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">Q</span>
+                    <span className="w-7 h-7 rounded-full bg-[#0066a6] text-white flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">Q</span>
                     {faq.q}
                   </h3>
                   <p className="text-sm text-slate-500 leading-relaxed pl-10">{faq.a}</p>
@@ -478,7 +478,7 @@ export default function TestPreparationPage() {
       {/* ── CTA ── */}
       <section className="relative py-24 px-6 bg-white overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 left-0 w-64 h-64 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">
             <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">

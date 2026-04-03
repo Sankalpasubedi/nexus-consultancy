@@ -73,14 +73,14 @@ export default function StudentBankingClient() {
               {/* Breadcrumb */}
               <FadeUp>
                 <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-                  <Link href="/" className="hover:text-[#003975]">Home</Link>
+                  <Link href="/" className="hover:text-[#0066a6]">Home</Link>
                   <span>/</span>
                   <span className="text-slate-900">Student Banking</span>
                 </nav>
               </FadeUp>
               
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-semibold tracking-wide border border-[#003975]/20">
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#0066a6]/10 text-[#0066a6] text-xs font-semibold tracking-wide border border-[#0066a6]/20">
                   Student Essentials
                 </span>
               </FadeUp>
@@ -142,8 +142,8 @@ export default function StudentBankingClient() {
             {bankingSteps.map((step, idx) => (
               <FadeUp key={step.title} delay={idx * 0.08}>
                 <div className="bg-white rounded-2xl p-5 border border-gray-100 h-full">
-                  <div className="w-11 h-11 rounded-xl bg-[#003975]/10 flex items-center justify-center mb-4">
-                    <Icon name={step.icon} size={20} className="text-[#003975]" />
+                  <div className="w-11 h-11 rounded-xl bg-[#0066a6]/10 flex items-center justify-center mb-4">
+                    <Icon name={step.icon} size={20} className="text-[#0066a6]" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">{step.title}</h3>
                   <p className="text-sm text-slate-600 leading-relaxed">{step.description}</p>
@@ -202,7 +202,7 @@ export default function StudentBankingClient() {
                     <option>General banking advice</option>
                   </select>
                 </div>
-                <button type="button" className="inline-flex items-center gap-2 bg-[#003975] text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition">
+                <button type="button" className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition">
                   Send banking enquiry <Icon name="ArrowRight" size={14} />
                 </button>
               </form>

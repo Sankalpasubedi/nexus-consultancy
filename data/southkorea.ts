@@ -1,7 +1,7 @@
 import { CountryDataType } from "@/types/country";
 
 const southKoreaData: CountryDataType = {
-  country: "South Korea", currency: "KRW", flagCode: "kr", accentColor: "#003975",
+  country: "South Korea", currency: "KRW", flagCode: "kr", accentColor: "#0066a6",
   carouselData: {
     CountryImages: [
       { id: 1, url: "/destinations/skorea.png", location: "Seoul" },

@@ -193,7 +193,7 @@ export default function DestinationsComparePage() {
               onClick={() => setActiveCategory(cat.key)}
               className={`px-5 py-3 rounded-full text-sm font-medium transition-all ${
                 activeCategory === cat.key
-                  ? "bg-[#003975] text-white shadow-lg"
+                  ? "bg-[#0066a6] text-white shadow-lg"
                   : "bg-gray-100 text-slate-600 hover:bg-gray-200"
               }`}
             >
@@ -213,13 +213,13 @@ export default function DestinationsComparePage() {
                   <div className="flex-shrink-0"><FlagIcon code={country.flag} size={40} /></div>
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-1">
-                      <span className="text-sm font-bold text-[#003975] bg-blue-50 px-3 py-1 rounded-full">#{i + 1}</span>
+                      <span className="text-sm font-bold text-[#0066a6] bg-blue-50 px-3 py-1 rounded-full">#{i + 1}</span>
                       <h3 className="text-2xl font-bold text-slate-900">{country.name}</h3>
                     </div>
                     <p className="text-sm text-slate-500">{country.topUnis} globally ranked universities</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-[#003975]">{country[activeCategory]}</div>
+                    <div className="text-3xl font-bold text-[#0066a6]">{country[activeCategory]}</div>
                     <div className="text-xs text-slate-400">/ 100</div>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function DestinationsComparePage() {
                     whileInView={{ width: `${country[activeCategory]}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, delay: i * 0.15 }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#003975] to-[#00ab18]"
+                    className="h-full rounded-full bg-gradient-to-r from-[#0066a6] to-[#00ab18]"
                   />
                 </div>
                 {/* Details Grid */}
@@ -255,11 +255,11 @@ export default function DestinationsComparePage() {
                 {/* Highlights */}
                 <div className="flex flex-wrap gap-2 mt-4">
                   {country.highlights.map((h) => (
-                    <span key={h} className="px-3 py-1 rounded-full bg-blue-50 text-[#003975] text-xs font-medium">{h}</span>
+                    <span key={h} className="px-3 py-1 rounded-full bg-blue-50 text-[#0066a6] text-xs font-medium">{h}</span>
                   ))}
                 </div>
                 {/* Link */}
-                <Link href={`/destinations/${country.slug}`} className="inline-flex items-center gap-1 text-[#003975] text-sm font-medium mt-4 hover:gap-2 transition-all">
+                <Link href={`/destinations/${country.slug}`} className="inline-flex items-center gap-1 text-[#0066a6] text-sm font-medium mt-4 hover:gap-2 transition-all">
                   View Full Guide →
                 </Link>
               </div>
@@ -275,7 +275,7 @@ export default function DestinationsComparePage() {
             <h2 className="text-4xl font-bold mb-6">Can&apos;t Decide?</h2>
             <p className="text-blue-100 mb-8">Let our counselors help you pick the perfect destination.</p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold shadow-lg">
                 Get Expert Advice →
               </Link>
             </motion.div>

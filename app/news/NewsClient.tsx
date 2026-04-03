@@ -122,7 +122,7 @@ const newsItems = [
 ];
 
 const categoryColors: Record<string, string> = {
-  News: "#003975",
+  News: "#0066a6",
   Guides: "#00ab18",
   Updates: "#8b5cf6",
   Events: "#f59e0b",
@@ -225,7 +225,7 @@ export default function NewsPage() {
                             className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider"
                             style={{
                               backgroundColor:
-                                categoryColors[item.category] || "#003975",
+                                categoryColors[item.category] || "#0066a6",
                             }}
                           >
                             {item.category}
@@ -233,7 +233,7 @@ export default function NewsPage() {
                         </div>
                       </div>
                       <div className="p-7 flex flex-col flex-1">
-                        <h3 className="text-xl font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-[#003975] transition-colors leading-snug">
+                        <h3 className="text-xl font-bold text-slate-900 mb-2 line-clamp-2 group-hover:text-[#0066a6] transition-colors leading-snug">
                           {item.title}
                         </h3>
                         <p className="text-sm text-slate-500 leading-relaxed mb-5 line-clamp-3 flex-1">
@@ -250,7 +250,7 @@ export default function NewsPage() {
                               {item.readTime}
                             </span>
                           </div>
-                          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#003975] group-hover:gap-2.5 transition-all">
+                          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066a6] group-hover:gap-2.5 transition-all">
                             Read <Icon name="ArrowRight" size={14} />
                           </span>
                         </div>
@@ -296,7 +296,7 @@ export default function NewsPage() {
                           className="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider"
                           style={{
                             backgroundColor:
-                              categoryColors[item.category] || "#003975",
+                              categoryColors[item.category] || "#0066a6",
                           }}
                         >
                           {item.category}
@@ -305,7 +305,7 @@ export default function NewsPage() {
                           {item.date}
                         </span>
                       </div>
-                      <h3 className="text-lg font-semibold text-slate-900 mb-1.5 line-clamp-2 group-hover:text-[#003975] transition-colors leading-snug">
+                      <h3 className="text-lg font-semibold text-slate-900 mb-1.5 line-clamp-2 group-hover:text-[#0066a6] transition-colors leading-snug">
                         {item.title}
                       </h3>
                       <p className="text-sm text-slate-500 leading-relaxed line-clamp-2 mb-3">
@@ -316,7 +316,7 @@ export default function NewsPage() {
                           <Icon name="Clock" size={12} />
                           {item.readTime}
                         </span>
-                        <span className="inline-flex items-center gap-1 text-[#003975] font-semibold group-hover:gap-2 transition-all">
+                        <span className="inline-flex items-center gap-1 text-[#0066a6] font-semibold group-hover:gap-2 transition-all">
                           Read More <Icon name="ArrowRight" size={12} />
                         </span>
                       </div>
@@ -346,7 +346,7 @@ export default function NewsPage() {
       {/* ── Newsletter CTA ── */}
       <section className="relative py-24 px-6 bg-[#fafaf8] overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 left-0 w-64 h-64 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
 
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">
@@ -364,7 +364,7 @@ export default function NewsPage() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-5 py-3.5 rounded-full border border-gray-200 bg-white text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975]"
+                className="flex-1 px-5 py-3.5 rounded-full border border-gray-200 bg-white text-sm text-slate-700 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6]"
               />
               <motion.button
                 whileHover={{ scale: 1.03 }}

@@ -271,7 +271,7 @@ function ProgramsCarousel({
                       <span className="text-xs font-bold tracking-widest uppercase text-white/80 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         Program
                       </span>
-                      <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      <span className="text-xs font-semibold text-white bg-[#0066a6]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         {p.duration}
                       </span>
                     </div>
@@ -286,7 +286,7 @@ function ProgramsCarousel({
                         <Icon name="Clock" size={16} className="text-slate-400" />
                         {p.duration}
                       </div>
-                      <div className="flex items-center gap-2 text-sm font-semibold text-[#003975]">
+                      <div className="flex items-center gap-2 text-sm font-semibold text-[#0066a6]">
                         <Icon name="DollarSign" size={16} />
                         {p.tuition}
                       </div>
@@ -331,7 +331,7 @@ function ProgramsCarousel({
                 onClick={() => goTo(i)}
                 className={`rounded-full transition-all duration-300 ${
                   i === activeIndex
-                    ? "w-8 h-2.5 bg-[#003975]"
+                    ? "w-8 h-2.5 bg-[#0066a6]"
                     : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
                 }`}
               />
@@ -678,8 +678,8 @@ export default function CourseDetailPage() {
                     />
                   </div>
                   <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
-                      <Icon name={course.icon} size={16} className="text-[#003975]" />
+                    <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center">
+                      <Icon name={course.icon} size={16} className="text-[#0066a6]" />
                     </div>
                     <span className="text-sm font-semibold text-slate-900">{course.programs}</span>
                   </div>
@@ -751,7 +751,7 @@ export default function CourseDetailPage() {
                           <div className="space-y-3">
                             <div className="flex items-center justify-between">
                               <span className="text-sm text-slate-500">Salary Range</span>
-                              <span className="text-sm font-semibold text-[#003975]">{c.salary}</span>
+                              <span className="text-sm font-semibold text-[#0066a6]">{c.salary}</span>
                             </div>
                             <div className="flex items-center justify-between">
                               <span className="text-sm text-slate-500">Job Growth</span>
@@ -929,7 +929,7 @@ export default function CourseDetailPage() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
+                  className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
                 >
                   Get Expert Guidance <Icon name="ArrowRight" size={16} />
                 </Link>

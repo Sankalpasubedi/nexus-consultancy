@@ -278,7 +278,7 @@ export default function DocumentsPage() {
               <FadeUp delay={0.2}>
                 <Link
                   href="#checklist"
-                  className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
+                  className="inline-flex items-center gap-2.5 bg-[#0066a6] text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
                 >
                   Download Checklist
                   <Icon name="ArrowRight" size={16} />
@@ -305,8 +305,8 @@ export default function DocumentsPage() {
                   className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                      <Icon name="FileText" size={24} className="text-[#003975]" />
+                    <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                      <Icon name="FileText" size={24} className="text-[#0066a6]" />
                     </div>
                     <div>
                       <p className="text-slate-900 font-bold text-lg">Complete</p>
@@ -349,7 +349,7 @@ export default function DocumentsPage() {
                         className="text-white"
                       />
                     </div>
-                    <h3 className="font-semibold text-[#003975] mb-2 text-sm">
+                    <h3 className="font-semibold text-[#0066a6] mb-2 text-sm">
                       {tip.title}
                     </h3>
                     <p className="text-slate-400 text-xs leading-relaxed">
@@ -550,7 +550,7 @@ export default function DocumentsPage() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 bg-[#003975] text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
+                className="inline-flex items-center gap-2.5 bg-[#0066a6] text-white px-8 py-3.5 rounded-full font-semibold text-sm hover:bg-[#002d5e] transition shadow-lg shadow-blue-800/20"
               >
                 Get Document Support
                 <Icon name="ArrowRight" size={16} />

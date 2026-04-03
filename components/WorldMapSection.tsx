@@ -36,7 +36,7 @@ const destinations: DestinationData[] = [
     flagCode: "au",
     x: 858,
     y: 386,
-    color: "#003975",
+    color: "#0066a6",
     glowColor: "rgba(0, 57, 117, 0.4)",
     universities: "200+",
     studentsSent: "5,000+",
@@ -68,7 +68,7 @@ const destinations: DestinationData[] = [
     flagCode: "us",
     x: 246,
     y: 154,
-    color: "#003975",
+    color: "#0066a6",
     glowColor: "rgba(0, 57, 117, 0.4)",
     universities: "300+",
     studentsSent: "2,500+",
@@ -100,7 +100,7 @@ const destinations: DestinationData[] = [
     flagCode: "nz",
     x: 956,
     y: 435,
-    color: "#003975",
+    color: "#0066a6",
     glowColor: "rgba(0, 57, 117, 0.4)",
     universities: "30+",
     studentsSent: "1,500+",
@@ -132,7 +132,7 @@ const destinations: DestinationData[] = [
     flagCode: "kr",
     x: 830,
     y: 151,
-    color: "#003975",
+    color: "#0066a6",
     glowColor: "rgba(0, 57, 117, 0.4)",
     universities: "50+",
     studentsSent: "600+",
@@ -179,7 +179,7 @@ const destinations: DestinationData[] = [
     flagCode: "ph",
     x: 835,
     y: 235,
-    color: "#003975",
+    color: "#0066a6",
     glowColor: "rgba(0, 57, 117, 0.4)",
     universities: "40+",
     studentsSent: "300+",
@@ -271,7 +271,7 @@ function NepalMarker() {
         cy={NEPAL.y}
         r={6}
         fill="none"
-        stroke="#003975"
+        stroke="#0066a6"
         strokeWidth={1.5}
         opacity={0.4}
       >
@@ -295,7 +295,7 @@ function NepalMarker() {
         cy={NEPAL.y}
         r={6}
         fill="none"
-        stroke="#003975"
+        stroke="#0066a6"
         strokeWidth={1.5}
         opacity={0.4}
       >
@@ -316,13 +316,13 @@ function NepalMarker() {
           repeatCount="indefinite"
         />
       </circle>
-      <circle cx={NEPAL.x} cy={NEPAL.y} r={6} fill="#003975" />
+      <circle cx={NEPAL.x} cy={NEPAL.y} r={6} fill="#0066a6" />
       <circle cx={NEPAL.x} cy={NEPAL.y} r={3} fill="#ffffff" />
       <text
         x={NEPAL.x}
         y={NEPAL.y - 16}
         textAnchor="middle"
-        fill="#003975"
+        fill="#0066a6"
         fontSize={11}
         fontWeight={700}
         fontFamily="system-ui, sans-serif"
@@ -426,10 +426,10 @@ function AnimatedAirplane({
       <g transform="scale(0.7) translate(-12, -12)">
         <path
           d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
-          fill="#003975"
+          fill="#0066a6"
         />
       </g>
-      <circle r={2} fill="#003975" opacity={0.15}>
+      <circle r={2} fill="#0066a6" opacity={0.15}>
         <animate
           attributeName="r"
           from="2"
@@ -585,7 +585,7 @@ function DestinationTooltip({
             {/* Header */}
             <div className="flex items-center gap-3 mb-3.5">
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-[#003975]/10"
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-[#0066a6]/10"
               >
                 <FlagIcon code={dest.flagCode} size={22} />
               </div>
@@ -630,7 +630,7 @@ function DestinationTooltip({
             {/* Learn More CTA */}
             <Link
               href={`/destinations/${dest.slug}`}
-              className="inline-flex items-center gap-1.5 mt-3.5 text-xs font-semibold text-[#003975] hover:text-[#002d5e] hover:gap-2.5 transition-all duration-200"
+              className="inline-flex items-center gap-1.5 mt-3.5 text-xs font-semibold text-[#0066a6] hover:text-[#002d5e] hover:gap-2.5 transition-all duration-200"
             >
               Learn More
               <svg
@@ -677,7 +677,7 @@ function MobileDestinationCard({
         <div className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-lg hover:border-gray-200 transition-all duration-300 group">
           <div className="flex items-center gap-3.5 mb-4">
             <div
-              className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-[#003975]/10"
+              className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 bg-[#0066a6]/10"
             >
               <FlagIcon code={dest.flagCode} size={22} />
             </div>
@@ -719,11 +719,11 @@ function MobileDestinationCard({
             </div>
           </div>
           <div className="mt-4 flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#003975] group-hover:underline underline-offset-2">
+            <span className="text-xs font-semibold text-[#0066a6] group-hover:underline underline-offset-2">
               Learn More
             </span>
             <svg
-              className="w-4 h-4 text-slate-400 group-hover:text-[#003975] group-hover:translate-x-1 transition-all duration-300"
+              className="w-4 h-4 text-slate-400 group-hover:text-[#0066a6] group-hover:translate-x-1 transition-all duration-300"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -813,7 +813,7 @@ export default function WorldMapSection() {
         <div className="text-center max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 mb-12 md:mb-20">
           <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200/80 shadow-sm">
             <svg
-              className="w-4 h-4 text-[#003975]"
+              className="w-4 h-4 text-[#0066a6]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -941,8 +941,8 @@ export default function WorldMapSection() {
         {/* <div className="flex items-center justify-center gap-8 mt-8 text-xs text-slate-400 font-medium">
           <div className="flex items-center gap-2.5">
             <span className="relative flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#003975] opacity-40" />
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-[#003975]" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0066a6] opacity-40" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-[#0066a6]" />
             </span>
             Nepal (Origin)
           </div>

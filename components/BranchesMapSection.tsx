@@ -180,11 +180,11 @@ function KathmanduClusterMarker({
       style={{ transformOrigin: `${cx}px ${cy}px` }}
     >
       {/* Pulse rings */}
-      <circle cx={cx} cy={cy} r={6} fill="none" stroke="#003975" strokeWidth={1.5} opacity={0.4}>
+      <circle cx={cx} cy={cy} r={6} fill="none" stroke="#0066a6" strokeWidth={1.5} opacity={0.4}>
         <animate attributeName="r" from="6" to="26" dur="2.5s" repeatCount="indefinite" />
         <animate attributeName="opacity" from="0.5" to="0" dur="2.5s" repeatCount="indefinite" />
       </circle>
-      <circle cx={cx} cy={cy} r={6} fill="none" stroke="#003975" strokeWidth={1.5} opacity={0.4}>
+      <circle cx={cx} cy={cy} r={6} fill="none" stroke="#0066a6" strokeWidth={1.5} opacity={0.4}>
         <animate attributeName="r" from="6" to="26" dur="2.5s" begin="1.25s" repeatCount="indefinite" />
         <animate attributeName="opacity" from="0.5" to="0" dur="2.5s" begin="1.25s" repeatCount="indefinite" />
       </circle>
@@ -202,7 +202,7 @@ function KathmanduClusterMarker({
         cx={cx}
         cy={cy}
         r={isHovered ? 14 : 10}
-        fill="#003975"
+        fill="#0066a6"
         opacity={0.12}
         style={{ transition: "r 0.3s ease" }}
       />
@@ -212,7 +212,7 @@ function KathmanduClusterMarker({
         cx={cx}
         cy={cy}
         r={isHovered ? 10 : 9}
-        fill="#003975"
+        fill="#0066a6"
         stroke="#ffffff"
         strokeWidth={2.5}
         style={{ cursor: "pointer", transition: "all 0.3s ease" }}
@@ -248,7 +248,7 @@ function KathmanduClusterMarker({
         x={cx}
         y={cy - 18}
         textAnchor="middle"
-        fill="#003975"
+        fill="#0066a6"
         fontSize={11}
         fontWeight={700}
         fontFamily="system-ui, sans-serif"
@@ -396,14 +396,14 @@ function KathmanduClusterTooltip({
             <div className="space-y-3">
               {kathmanduBranches.map((b) => (
                 <div key={b.id} className="flex items-start gap-2.5">
-                  <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${b.isHead ? "bg-[#003975]" : "bg-[#003975]/10"}`}>
-                    <Icon name={b.isHead ? "Building2" : "MapPin"} size={11} className={b.isHead ? "text-white" : "text-[#003975]"} />
+                  <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${b.isHead ? "bg-[#0066a6]" : "bg-[#0066a6]/10"}`}>
+                    <Icon name={b.isHead ? "Building2" : "MapPin"} size={11} className={b.isHead ? "text-white" : "text-[#0066a6]"} />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       <span className="font-semibold text-slate-800 text-xs">{b.city}</span>
                       {b.isHead && (
-                        <span className="text-[8px] font-bold uppercase tracking-wider text-[#003975] bg-blue-50 px-1.5 py-0.5 rounded-full">HQ</span>
+                        <span className="text-[8px] font-bold uppercase tracking-wider text-[#0066a6] bg-blue-50 px-1.5 py-0.5 rounded-full">HQ</span>
                       )}
                     </div>
                     <div className="flex items-center gap-3 mt-0.5 text-[10px] text-slate-400">
@@ -466,8 +466,8 @@ function OuterBranchTooltip({
       >
         <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-100/80 p-5 w-[260px]">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-[#003975]/10">
-              <Icon name="MapPin" size={18} className="text-[#003975]" />
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-[#0066a6]/10">
+              <Icon name="MapPin" size={18} className="text-[#0066a6]" />
             </div>
             <div className="min-w-0">
               <h4 className="font-bold text-slate-900 text-sm leading-tight">{branch.name}</h4>
@@ -517,7 +517,7 @@ function MobileBranchCard({
       <div
         className={`bg-white rounded-2xl border ${
           branch.isHead
-            ? "border-[#003975]/20 shadow-lg shadow-blue-500/10"
+            ? "border-[#0066a6]/20 shadow-lg shadow-blue-500/10"
             : "border-gray-100"
         } p-5 hover:shadow-lg transition-all duration-300 group`}
       >
@@ -526,13 +526,13 @@ function MobileBranchCard({
             className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
               branch.isHead
                 ? "bg-slate-800"
-                : "bg-[#003975]/10"
+                : "bg-[#0066a6]/10"
             }`}
           >
             <Icon
               name={branch.isHead ? "Building2" : "MapPin"}
               size={18}
-              className={branch.isHead ? "text-white" : "text-[#003975]"}
+              className={branch.isHead ? "text-white" : "text-[#0066a6]"}
             />
           </div>
           <div className="min-w-0">
@@ -541,7 +541,7 @@ function MobileBranchCard({
                 {branch.city}
               </h4>
               {branch.isHead && (
-                <span className="text-[9px] font-bold uppercase tracking-wider text-[#003975] bg-blue-50 px-2 py-0.5 rounded-full">
+                <span className="text-[9px] font-bold uppercase tracking-wider text-[#0066a6] bg-blue-50 px-2 py-0.5 rounded-full">
                   HQ
                 </span>
               )}
@@ -554,14 +554,14 @@ function MobileBranchCard({
         <div className="flex items-center gap-4 text-sm text-slate-600 pt-3 border-t border-gray-50">
           <a
             href={`tel:${branch.phone1.replace(/-/g, "")}`}
-            className="flex items-center gap-1.5 hover:text-[#003975] transition"
+            className="flex items-center gap-1.5 hover:text-[#0066a6] transition"
           >
             <Icon name="Phone" size={14} />
             {branch.phone1}
           </a>
           <a
             href={`tel:${branch.phone2}`}
-            className="flex items-center gap-1.5 hover:text-[#003975] transition"
+            className="flex items-center gap-1.5 hover:text-[#0066a6] transition"
           >
             <Icon name="Smartphone" size={14} />
             {branch.phone2}
@@ -611,12 +611,12 @@ export default function BranchesMapSection() {
       <FadeUp>
         <div className="text-center max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 mb-12 md:mb-20">
           <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-100 text-slate-600 text-sm font-medium border border-gray-200/80 shadow-sm">
-            <Icon name="Building2" size={16} className="text-[#003975]" />
+            <Icon name="Building2" size={16} className="text-[#0066a6]" />
             Our Branches
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-6">
             Nationwide{" "}
-            <span className="bg-gradient-to-r from-[#003975] via-[#003975] to-[#00ab18] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0066a6] via-[#0066a6] to-[#00ab18] bg-clip-text text-transparent">
               Presence
             </span>
           </h2>
@@ -667,7 +667,7 @@ export default function BranchesMapSection() {
                     x2="100%"
                     y2="0%"
                   >
-                    <stop offset="0%" stopColor="#003975" />
+                    <stop offset="0%" stopColor="#0066a6" />
                     <stop offset="100%" stopColor="#00ab18" />
                   </linearGradient>
                 </defs>
@@ -832,7 +832,7 @@ export default function BranchesMapSection() {
         {/* Branch summary cards below map */}
         <div className="mt-10 space-y-4">
           {/* Kathmandu Valley group */}
-          <div className="rounded-2xl border border-[#003975]/15 bg-gradient-to-br from-white to-blue-50/30 p-5">
+          <div className="rounded-2xl border border-[#0066a6]/15 bg-gradient-to-br from-white to-blue-50/30 p-5">
             <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100/80">
               <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-800">
                 <Icon name="Building2" size={16} className="text-white" />
@@ -859,7 +859,7 @@ export default function BranchesMapSection() {
                       {b.city}
                     </h5>
                     {b.isHead && (
-                      <span className="text-[8px] font-bold uppercase tracking-wider text-[#003975] bg-blue-50 border border-[#003975]/10 px-1.5 py-0.5 rounded-full">
+                      <span className="text-[8px] font-bold uppercase tracking-wider text-[#0066a6] bg-blue-50 border border-[#0066a6]/10 px-1.5 py-0.5 rounded-full">
                         HQ
                       </span>
                     )}
@@ -890,15 +890,15 @@ export default function BranchesMapSection() {
                 transition={{ delay: idx * 0.08, duration: 0.5 }}
                 className={`rounded-2xl border p-5 transition-all duration-300 cursor-pointer hover:shadow-md ${
                   hoveredItem === String(branch.id)
-                    ? "border-[#003975]/30 bg-blue-50/50 shadow-md"
+                    ? "border-[#0066a6]/30 bg-blue-50/50 shadow-md"
                     : "border-gray-100 bg-white"
                 }`}
                 onMouseEnter={() => handleHover(String(branch.id))}
                 onMouseLeave={handleLeave}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#003975]/10">
-                    <Icon name="MapPin" size={14} className="text-[#003975]" />
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-[#0066a6]/10">
+                    <Icon name="MapPin" size={14} className="text-[#0066a6]" />
                   </div>
                   <h4 className="text-sm font-semibold text-slate-900">
                     {branch.city}
@@ -997,8 +997,8 @@ export default function BranchesMapSection() {
         {/* Other branches */}
         <div className="mt-6">
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-7 h-7 rounded-md flex items-center justify-center bg-[#003975]/10">
-              <Icon name="MapPin" size={13} className="text-[#003975]" />
+            <div className="w-7 h-7 rounded-md flex items-center justify-center bg-[#0066a6]/10">
+              <Icon name="MapPin" size={13} className="text-[#0066a6]" />
             </div>
             <span className="text-sm font-bold text-slate-900">
               Other Branches

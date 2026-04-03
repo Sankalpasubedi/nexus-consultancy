@@ -1,7 +1,7 @@
 import { CountryDataType } from "@/types/country";
 
 const europeData: CountryDataType = {
-  country: "Europe", currency: "EUR", flagCode: "eu", accentColor: "#003975",
+  country: "Europe", currency: "EUR", flagCode: "eu", accentColor: "#0066a6",
   carouselData: {
     CountryImages: [
       { id: 1, url: "/destinations/europe.png", location: "Paris" },

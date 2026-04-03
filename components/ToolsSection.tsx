@@ -12,7 +12,7 @@ const tools = [
       "Discover scholarships you\u2019re eligible for based on your profile and destination",
     icon: "Trophy",
     href: "/services",
-    color: "from-[#003975] via-[#003975] to-[#00ab18]",
+    color: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     title: "Cost Calculator",
@@ -20,7 +20,7 @@ const tools = [
       "Estimate tuition fees, living costs, and total expenses for your study destination",
     icon: "DollarSign",
     href: "/services",
-    color: "from-[#003975] via-[#003975] to-[#00ab18]",
+    color: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     title: "Course Explorer",
@@ -28,7 +28,7 @@ const tools = [
       "Browse and compare courses across universities and countries",
     icon: "Search",
     href: "/courses",
-    color: "from-[#003975] via-[#003975] to-[#00ab18]",
+    color: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     title: "Eligibility Check",
@@ -36,7 +36,7 @@ const tools = [
       "Find out which universities and programs match your qualifications",
     icon: "ClipboardList",
     href: "/services",
-    color: "from-[#003975] via-[#003975] to-[#00ab18]",
+    color: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     title: "Visa Guide",
@@ -44,7 +44,7 @@ const tools = [
       "Step-by-step visa application guides for every destination country",
     icon: "FileText",
     href: "/services",
-    color: "from-[#003975] via-[#003975] to-[#00ab18]",
+    color: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
   {
     title: "IELTS Prep Hub",
@@ -52,7 +52,7 @@ const tools = [
       "Free practice tests, tips, and resources for IELTS preparation",
     icon: "BookOpen",
     href: "/services",
-    color: "from-[#003975] via-[#003975] to-[#00ab18]",
+    color: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
   },
 ];
 
@@ -83,7 +83,7 @@ export default function ToolsSection() {
               <Link href={tool.href} className="block h-full">
                 <div className="bg-white border border-gray-100 rounded-3xl p-8 md:p-10 premium-card hover:shadow-xl transition-all duration-300 h-full group flex flex-col">
                   <div
-                    className={`w-14 h-14 rounded-2xl bg-[#003975] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
+                    className={`w-14 h-14 rounded-2xl bg-[#0066a6] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
                   >
                     <Icon
                       name={tool.icon}
@@ -91,13 +91,13 @@ export default function ToolsSection() {
                       className="text-white"
                     />
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3 group-hover:text-[#003975] transition-colors">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-3 group-hover:text-[#0066a6] transition-colors">
                     {tool.title}
                   </h3>
                   <p className="text-slate-500 leading-relaxed mb-6 flex-1">
                     {tool.description}
                   </p>
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-[#003975] group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-[#0066a6] group-hover:gap-3 transition-all">
                     Try Now
                     <svg
                       className="w-4 h-4"
@@ -129,7 +129,7 @@ export default function ToolsSection() {
             >
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 bg-[#003975] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
+                className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
               >
                 Explore All Tools
                 <svg

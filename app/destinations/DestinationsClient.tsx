@@ -243,11 +243,11 @@ export default function Destinations() {
     <div className="min-h-screen bg-[#fafaf8] pt-28 md:pt-32 pb-32 md:pb-48 overflow-hidden relative z-0">
       {/* Subtle decorative bubbles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-[#003975]/[0.03] rounded-full blur-[100px]" />
+        <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-[#0066a6]/[0.03] rounded-full blur-[100px]" />
         <div className="absolute top-[40%] right-[5%] w-[350px] h-[350px] bg-[#00ab18]/[0.03] rounded-full blur-[100px]" />
-        <div className="absolute bottom-[20%] left-[20%] w-[300px] h-[300px] bg-[#003975]/[0.02] rounded-full blur-[80px]" />
+        <div className="absolute bottom-[20%] left-[20%] w-[300px] h-[300px] bg-[#0066a6]/[0.02] rounded-full blur-[80px]" />
         <div className="absolute top-[60%] right-[30%] w-[250px] h-[250px] bg-[#00ab18]/[0.02] rounded-full blur-[80px]" />
-        <div className="absolute bottom-40 right-[10%] w-[200px] h-[200px] bg-[#003975]/[0.03] rounded-full blur-[60px]" />
+        <div className="absolute bottom-40 right-[10%] w-[200px] h-[200px] bg-[#0066a6]/[0.03] rounded-full blur-[60px]" />
       </div>
 
       {/* Header */}
@@ -287,8 +287,8 @@ export default function Destinations() {
                 className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                    <Icon name="Globe" size={24} className="text-[#003975]" />
+                  <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                    <Icon name="Globe" size={24} className="text-[#0066a6]" />
                   </div>
                   <div>
                     <p className="text-slate-900 font-bold text-lg">8</p>
@@ -437,7 +437,7 @@ export default function Destinations() {
             </div>
             <button
               onClick={() => dest && router.push(`/destinations/${dest.slug}`)}
-              className="inline-flex items-center gap-2 bg-[#003975] text-white px-7 py-3.5 rounded-full font-semibold hover:bg-[#002d5e] transition shrink-0 text-sm shadow-lg shadow-[#003975]/20"
+              className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-7 py-3.5 rounded-full font-semibold hover:bg-[#002d5e] transition shrink-0 text-sm shadow-lg shadow-[#0066a6]/20"
             >
               Explore {dest?.name} <ArrowRight size={16} />
             </button>
@@ -451,7 +451,7 @@ export default function Destinations() {
               key={d.id}
               onClick={() => goTo(i)}
               className={`relative p-2 rounded-full transition-all ${
-                i === activeIndex ? "ring-2 ring-[#003975] bg-[#003975]/10 scale-110" : "opacity-40 hover:opacity-70"
+                i === activeIndex ? "ring-2 ring-[#0066a6] bg-[#0066a6]/10 scale-110" : "opacity-40 hover:opacity-70"
               }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}

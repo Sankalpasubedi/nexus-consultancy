@@ -218,7 +218,7 @@ export default function DocumentsPage() {
             <h2 className="text-4xl font-bold mb-6">Need Help With Documents?</h2>
             <p className="text-blue-100 mb-8">Our team will review your documents and ensure everything is in order.</p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold shadow-lg">
                 Get Document Support →
               </Link>
             </motion.div>

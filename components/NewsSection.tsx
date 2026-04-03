@@ -62,7 +62,7 @@ export default function NewsSection() {
               <div className="text-center mb-12 md:mb-20">
                 <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200">
                   <svg
-                    className="w-4 h-4 text-[#003975]"
+                    className="w-4 h-4 text-[#0066a6]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -105,13 +105,13 @@ export default function NewsSection() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                       <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-xs font-semibold text-[#003975]">
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-xs font-semibold text-[#0066a6]">
                           {featured.category}
                         </span>
                       </div>
                     </div>
                     <div className="p-8">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#003975] transition-colors">
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#0066a6] transition-colors">
                         {featured.title}
                       </h3>
                       <p className="text-slate-500 leading-relaxed mb-6 line-clamp-3">
@@ -134,7 +134,7 @@ export default function NewsSection() {
                           </svg>
                           {featured.readTime}
                         </span>
-                        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#003975] group-hover:gap-2.5 transition-all">
+                        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066a6] group-hover:gap-2.5 transition-all">
                           Read More
                           <svg
                             className="w-4 h-4"
@@ -177,7 +177,7 @@ export default function NewsSection() {
                         <span className="inline-flex self-start items-center px-2.5 py-1 rounded-full bg-slate-100 text-[10px] font-semibold text-slate-600 uppercase tracking-wider mb-2">
                           {article.category}
                         </span>
-                        <h3 className="text-lg font-semibold text-slate-900 mb-1.5 line-clamp-2 group-hover:text-[#003975] transition-colors leading-snug">
+                        <h3 className="text-lg font-semibold text-slate-900 mb-1.5 line-clamp-2 group-hover:text-[#0066a6] transition-colors leading-snug">
                           {article.title}
                         </h3>
                         <span className="text-xs text-slate-400 flex items-center gap-1">
@@ -213,7 +213,7 @@ export default function NewsSection() {
                 >
                   <Link
                     href="/news"
-                    className="inline-flex items-center gap-2 bg-[#003975] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
+                    className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
                   >
                     View All Articles
                     <svg

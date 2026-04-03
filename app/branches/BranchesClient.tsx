@@ -163,7 +163,7 @@ export default function BranchesClient() {
             {/* Left Content */}
             <div className="text-center lg:text-left">
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
+                <span className="inline-block px-4 py-1.5 bg-[#0066a6]/10 text-[#0066a6] text-sm font-medium rounded-full mb-4">
                   Find Us Near You
                 </span>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4">
@@ -185,7 +185,7 @@ export default function BranchesClient() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0066a6]/20 to-transparent" />
                 </div>
                 {/* Floating accent */}
                 <motion.div
@@ -221,9 +221,9 @@ export default function BranchesClient() {
               { label: "Students Helped", value: "10K+", icon: "GraduationCap" },
             ].map((stat) => (
               <FadeUp key={stat.label}>
-                <div className="bg-gradient-to-br from-[#003975]/5 to-[#00ab18]/5 rounded-2xl p-6 text-center">
+                <div className="bg-gradient-to-br from-[#0066a6]/5 to-[#00ab18]/5 rounded-2xl p-6 text-center">
                   <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-white shadow-sm flex items-center justify-center">
-                    <Icon name={stat.icon} size={20} className="text-[#003975]" />
+                    <Icon name={stat.icon} size={20} className="text-[#0066a6]" />
                   </div>
                   <div className="text-2xl font-bold text-slate-900">{stat.value}</div>
                   <div className="text-sm text-slate-500">{stat.label}</div>
@@ -257,8 +257,8 @@ export default function BranchesClient() {
                         <h3 className="font-bold text-slate-900 text-lg">{branch.name}</h3>
                         <p className="text-sm text-slate-500">{branch.city}</p>
                       </div>
-                      <div className="w-10 h-10 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                        <Icon name="Building2" size={18} className="text-[#003975]" />
+                      <div className="w-10 h-10 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                        <Icon name="Building2" size={18} className="text-[#0066a6]" />
                       </div>
                     </div>
 
@@ -270,13 +270,13 @@ export default function BranchesClient() {
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Icon name="Phone" size={14} className="text-slate-400" />
-                        <a href={`tel:${branch.phone}`} className="text-slate-600 hover:text-[#003975]">
+                        <a href={`tel:${branch.phone}`} className="text-slate-600 hover:text-[#0066a6]">
                           {branch.phone}
                         </a>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <Icon name="Mail" size={14} className="text-slate-400" />
-                        <a href={`mailto:${branch.email}`} className="text-slate-600 hover:text-[#003975]">
+                        <a href={`mailto:${branch.email}`} className="text-slate-600 hover:text-[#0066a6]">
                           {branch.email}
                         </a>
                       </div>
@@ -324,7 +324,7 @@ export default function BranchesClient() {
       </section>
 
       {/* ── Why Visit Us ── */}
-      <section className="py-16 px-6 bg-[#003975]/5">
+      <section className="py-16 px-6 bg-[#0066a6]/5">
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-12">
@@ -346,8 +346,8 @@ export default function BranchesClient() {
             ].map((item, i) => (
               <FadeUp key={item.title} delay={i * 0.1}>
                 <div className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100">
-                  <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center mx-auto mb-4">
-                    <Icon name={item.icon} size={20} className="text-[#003975]" />
+                  <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center mx-auto mb-4">
+                    <Icon name={item.icon} size={20} className="text-[#0066a6]" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-slate-500">{item.desc}</p>
@@ -378,7 +378,7 @@ export default function BranchesClient() {
           <TrackpadCarousel className="mt-8">
             {testimonials.map((testimonial) => (
               <CarouselCard key={testimonial.id} className="min-w-[300px] sm:min-w-[350px]">
-                <div className="bg-gradient-to-br from-[#003975]/5 to-[#00ab18]/5 rounded-2xl p-6 h-full border border-gray-100">
+                <div className="bg-gradient-to-br from-[#0066a6]/5 to-[#00ab18]/5 rounded-2xl p-6 h-full border border-gray-100">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-14 h-14 rounded-full overflow-hidden group">
                       <Image
@@ -395,13 +395,13 @@ export default function BranchesClient() {
                     </div>
                   </div>
                   <div className="mb-4">
-                    <Icon name="Quote" size={24} className="text-[#003975]/30" />
+                    <Icon name="Quote" size={24} className="text-[#0066a6]/30" />
                     <p className="text-slate-600 text-sm mt-2 leading-relaxed">
                       "{testimonial.quote}"
                     </p>
                   </div>
                   <div className="pt-4 border-t border-gray-200 flex items-center gap-2">
-                    <span className="text-xs px-2 py-1 bg-[#003975]/10 text-[#003975] rounded-full font-medium">
+                    <span className="text-xs px-2 py-1 bg-[#0066a6]/10 text-[#0066a6] rounded-full font-medium">
                       {testimonial.country}
                     </span>
                     <span className="text-xs text-slate-500">{testimonial.university}</span>

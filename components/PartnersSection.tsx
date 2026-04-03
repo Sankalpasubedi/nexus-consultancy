@@ -49,7 +49,7 @@ export default function PartnersSection() {
         <FadeUp>
           <div className="text-center mb-12 md:mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-white text-slate-600 text-sm font-medium border border-gray-200/80">
-              <Users size={14} className="text-[#003975]" />
+              <Users size={14} className="text-[#0066a6]" />
               Trusted Partners
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight">

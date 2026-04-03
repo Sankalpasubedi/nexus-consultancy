@@ -177,7 +177,7 @@ export default function PreDeparturePage() {
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                 Complete Support
               </span>
               <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
@@ -229,7 +229,7 @@ export default function PreDeparturePage() {
               <div className="max-w-6xl mx-auto">
                 <FadeUp>
                   <div className="text-center mb-16">
-                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Timeline</span>
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Timeline</span>
                     <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Your Pre-Departure Timeline</h2>
                     <p className="text-slate-500 text-sm max-w-md mx-auto">A step-by-step guide from 3 months before departure to your first week abroad</p>
                   </div>
@@ -238,20 +238,20 @@ export default function PreDeparturePage() {
                   {timeline.slice(0, 4).map((t) => (
                     <StaggerItem key={t.period}>
                       <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-800 to-[#0066a6]" />
                         <div className="flex items-center gap-3 mb-4 mt-2">
                           <div className="w-10 h-10 rounded-lg bg-slate-800 text-white flex items-center justify-center">
                             <Icon name={t.icon} size={18} />
                           </div>
                           <div>
-                            <div className="text-[10px] text-[#003975] font-bold uppercase tracking-wider">{t.period}</div>
+                            <div className="text-[10px] text-[#0066a6] font-bold uppercase tracking-wider">{t.period}</div>
                             <h4 className="font-semibold text-slate-900 text-[14px]">{t.title}</h4>
                           </div>
                         </div>
                         <div className="space-y-2">
                           {t.items.map((item) => (
                             <span key={item} className="flex items-center gap-2 text-[13px] text-slate-500">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#003975] flex-shrink-0" /> {item}
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#0066a6] flex-shrink-0" /> {item}
                             </span>
                           ))}
                         </div>
@@ -284,7 +284,7 @@ export default function PreDeparturePage() {
           <FadeUp>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14">
               <div>
-                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Checklist</span>
+                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Checklist</span>
                 <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-2">Packing Essentials</h2>
                 <p className="text-slate-500 text-sm">Don't forget these must-haves when packing for your journey</p>
               </div>
@@ -296,8 +296,8 @@ export default function PreDeparturePage() {
           <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {packingEssentials.map((cat) => (
               <StaggerItem key={cat.title}>
-                <div className="bg-white rounded-2xl p-5 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-[#003975] text-white flex items-center justify-center mb-4">
+                <div className="bg-white rounded-2xl p-5 h-full border border-gray-100 hover:border-[#0066a6]/20 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#0066a6] text-white flex items-center justify-center mb-4">
                     <Icon name={cat.icon} size={18} />
                   </div>
                   <h4 className="font-semibold text-slate-900 text-[15px] mb-3">{cat.title}</h4>
@@ -337,7 +337,7 @@ export default function PreDeparturePage() {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   <FadeLeft>
                     <div>
-                      <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                      <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                         First Week Abroad
                       </span>
                       <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
@@ -359,7 +359,7 @@ export default function PreDeparturePage() {
                     </div>
                   </FadeLeft>
                   <FadeRight>
-                    <div className="bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden relative">
+                    <div className="bg-gradient-to-br from-[#0066a6] to-slate-800 rounded-3xl p-8 text-white overflow-hidden relative">
                       <div className="absolute top-0 right-0 w-48 h-48 bg-[#00ab18]/10 rounded-full blur-3xl" />
                       <div className="relative z-10">
                         <h3 className="text-xl font-bold mb-2">24/7 Support Helpline</h3>

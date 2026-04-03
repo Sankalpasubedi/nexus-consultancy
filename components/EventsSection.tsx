@@ -47,11 +47,11 @@ const events = [
 function getTypeBadgeColor(type: string) {
   switch (type) {
     case "Education Fair":
-      return "bg-[#003975]/10 text-[#003975] border-[#003975]/20";
+      return "bg-[#0066a6]/10 text-[#0066a6] border-[#0066a6]/20";
     case "Workshop":
       return "bg-[#00ab18]/10 text-[#00ab18] border-[#00ab18]/20";
     case "Seminar":
-      return "bg-[#003975]/10 text-[#003975] border-[#003975]/20";
+      return "bg-[#0066a6]/10 text-[#0066a6] border-[#0066a6]/20";
     case "Virtual Event":
       return "bg-[#00ab18]/10 text-[#00ab18] border-[#00ab18]/20";
     default:
@@ -110,11 +110,11 @@ export default function EventsSection() {
                       </h3>
                       <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-slate-500">
                         <div className="flex items-center gap-2">
-                          <div className="w-9 h-9 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                          <div className="w-9 h-9 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
                             <Icon
                               name="Calendar"
                               size={16}
-                              className="text-[#003975]"
+                              className="text-[#0066a6]"
                             />
                           </div>
                           <span className="text-sm font-medium">
@@ -134,11 +134,11 @@ export default function EventsSection() {
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <div className="w-9 h-9 rounded-xl bg-[#003975]/10 flex items-center justify-center">
+                          <div className="w-9 h-9 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
                             <Icon
                               name="Users"
                               size={16}
-                              className="text-[#003975]"
+                              className="text-[#0066a6]"
                             />
                           </div>
                           <span className="text-sm font-medium">
@@ -157,7 +157,7 @@ export default function EventsSection() {
                       >
                         <Link
                           href="/contact"
-                          className="inline-flex items-center gap-2 bg-[#003975] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
+                          className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
                         >
                           Register Now
                           <svg
@@ -197,16 +197,16 @@ export default function EventsSection() {
                     {event.type}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-4 group-hover:text-[#003975] transition-colors">
+                <h3 className="text-lg font-semibold text-slate-900 mb-4 group-hover:text-[#0066a6] transition-colors">
                   {event.title}
                 </h3>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center gap-3 text-slate-500">
-                    <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center flex-shrink-0">
                       <Icon
                         name="Calendar"
                         size={14}
-                        className="text-[#003975]"
+                        className="text-[#0066a6]"
                       />
                     </div>
                     <span className="text-sm">{event.date}</span>
@@ -222,11 +222,11 @@ export default function EventsSection() {
                     <span className="text-sm">{event.location}</span>
                   </div>
                   <div className="flex items-center gap-3 text-slate-500">
-                    <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center flex-shrink-0">
                       <Icon
                         name="Users"
                         size={14}
-                        className="text-[#003975]"
+                        className="text-[#0066a6]"
                       />
                     </div>
                     <span className="text-sm">{event.spots}</span>
@@ -234,7 +234,7 @@ export default function EventsSection() {
                 </div>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-[#003975] group-hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#0066a6] group-hover:gap-3 transition-all"
                 >
                   Register
                   <svg
@@ -266,7 +266,7 @@ export default function EventsSection() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 border-2 border-[#003975] text-[#003975] px-8 py-4 rounded-full font-medium hover:bg-[#003975] hover:text-white transition-all"
+                className="inline-flex items-center gap-2 border-2 border-[#0066a6] text-[#0066a6] px-8 py-4 rounded-full font-medium hover:bg-[#0066a6] hover:text-white transition-all"
               >
                 View All Events
                 <svg

@@ -121,7 +121,7 @@ export default function StudentBenefitsClient() {
 
   return (
     <main className="min-h-screen bg-[#f6f8fa] pt-24 lg:pt-28">
-      <section className="bg-[#003975] text-white overflow-hidden">
+      <section className="bg-[#0066a6] text-white overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-12 md:py-16 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-center">
           <FadeUp>
             <span className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold tracking-wide">
@@ -136,7 +136,7 @@ export default function StudentBenefitsClient() {
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/student-essentials"
-                className="inline-flex items-center gap-2 rounded-full bg-white text-[#003975] px-6 py-3 text-sm font-semibold hover:bg-slate-100 transition"
+                className="inline-flex items-center gap-2 rounded-full bg-white text-[#0066a6] px-6 py-3 text-sm font-semibold hover:bg-slate-100 transition"
               >
                 Back to essentials <Icon name="ArrowLeft" size={14} />
               </Link>
@@ -153,11 +153,11 @@ export default function StudentBenefitsClient() {
             <div className="rounded-[36px] border border-white/15 bg-white/10 backdrop-blur-md p-4 sm:p-6 shadow-2xl">
               <div className="rounded-[28px] bg-white text-slate-900 p-5 sm:p-6">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-[#003975]/10 flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#0066a6]/10 flex items-center justify-center shrink-0">
                     <FlagIcon code={selectedDestination.flagCode} size={18} />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-[#003975]">Selected destination</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#0066a6]">Selected destination</p>
                     <h2 className="text-xl font-bold">{selectedDestination.name}</h2>
                   </div>
                 </div>
@@ -175,11 +175,11 @@ export default function StudentBenefitsClient() {
           <div className="grid lg:grid-cols-[0.38fr_0.62fr] gap-6 lg:gap-8 items-start">
             <FadeUp>
               <div className="rounded-3xl border border-[#d4e0ec] bg-white p-5 sm:p-6 shadow-sm sticky top-28">
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#003975] mb-3">Choose a country</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#0066a6] mb-3">Choose a country</p>
                 <select
                   value={selectedSlug}
                   onChange={(event) => setSelectedSlug(event.target.value)}
-                  className="w-full rounded-2xl border border-[#c9d6e4] bg-white px-4 py-3.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#003975]/15 focus:border-[#003975]"
+                  className="w-full rounded-2xl border border-[#c9d6e4] bg-white px-4 py-3.5 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#0066a6]/15 focus:border-[#0066a6]"
                 >
                   {destinations.map((destination) => (
                     <option key={destination.slug} value={destination.slug}>
@@ -191,7 +191,7 @@ export default function StudentBenefitsClient() {
                 <div className="mt-5 rounded-2xl bg-[#f3f7fb] border border-[#dbe7f2] p-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-[#dbe7f2]">
-                      <Icon name="Sparkles" size={18} className="text-[#003975]" />
+                      <Icon name="Sparkles" size={18} className="text-[#0066a6]" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-slate-900">Note</p>
@@ -208,12 +208,12 @@ export default function StudentBenefitsClient() {
                   <div className="h-full rounded-3xl border border-[#dce7f1] bg-white p-5 sm:p-6 shadow-sm">
                     <div className="flex items-center justify-between gap-3 mb-4">
                       <h3 className="text-lg font-bold text-slate-900">{benefitSet.bankingTitle}</h3>
-                      <Icon name="CreditCard" size={18} className="text-[#003975] shrink-0" />
+                      <Icon name="CreditCard" size={18} className="text-[#0066a6] shrink-0" />
                     </div>
                     <ul className="space-y-2.5">
                       {benefitSet.bankingOptions.map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                          <Icon name="CheckCircle" size={14} className="text-[#003975] mt-0.5 shrink-0" />
+                          <Icon name="CheckCircle" size={14} className="text-[#0066a6] mt-0.5 shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -225,12 +225,12 @@ export default function StudentBenefitsClient() {
                   <div className="h-full rounded-3xl border border-[#dce7f1] bg-white p-5 sm:p-6 shadow-sm">
                     <div className="flex items-center justify-between gap-3 mb-4">
                       <h3 className="text-lg font-bold text-slate-900">{benefitSet.simTitle}</h3>
-                      <Icon name="Phone" size={18} className="text-[#003975] shrink-0" />
+                      <Icon name="Phone" size={18} className="text-[#0066a6] shrink-0" />
                     </div>
                     <ul className="space-y-2.5">
                       {benefitSet.simOptions.map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                          <Icon name="CheckCircle" size={14} className="text-[#003975] mt-0.5 shrink-0" />
+                          <Icon name="CheckCircle" size={14} className="text-[#0066a6] mt-0.5 shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -241,8 +241,8 @@ export default function StudentBenefitsClient() {
 
               <div className="rounded-3xl border border-[#dbe7f2] bg-white p-5 sm:p-6 shadow-sm">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-11 h-11 rounded-2xl bg-[#003975]/10 flex items-center justify-center shrink-0">
-                    <Icon name="ShieldCheck" size={18} className="text-[#003975]" />
+                  <div className="w-11 h-11 rounded-2xl bg-[#0066a6]/10 flex items-center justify-center shrink-0">
+                    <Icon name="ShieldCheck" size={18} className="text-[#0066a6]" />
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-slate-900">Other common student benefits</h3>
@@ -267,7 +267,7 @@ export default function StudentBenefitsClient() {
                   </div>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#003975] px-6 py-3 text-sm font-semibold text-white hover:bg-[#002a5c] transition whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0066a6] px-6 py-3 text-sm font-semibold text-white hover:bg-[#002a5c] transition whitespace-nowrap"
                   >
                     Talk to us <Icon name="ArrowRight" size={14} />
                   </Link>

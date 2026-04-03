@@ -69,7 +69,7 @@ export default function PaymentUsedClient() {
 
   return (
     <main className="min-h-screen bg-[#f6f8fa] pt-24 lg:pt-28">
-      <section className="bg-[#003975] text-white overflow-hidden">
+      <section className="bg-[#0066a6] text-white overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-12 md:py-16 grid lg:grid-cols-[1.05fr_0.95fr] gap-8 items-center">
           <FadeUp>
             <span className="inline-flex items-center rounded-full bg-white/10 border border-white/15 px-4 py-1.5 text-xs font-semibold tracking-wide">
@@ -84,7 +84,7 @@ export default function PaymentUsedClient() {
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/student-essentials"
-                className="inline-flex items-center gap-2 rounded-full bg-white text-[#003975] px-6 py-3 text-sm font-semibold hover:bg-slate-100 transition"
+                className="inline-flex items-center gap-2 rounded-full bg-white text-[#0066a6] px-6 py-3 text-sm font-semibold hover:bg-slate-100 transition"
               >
                 Back to essentials <Icon name="ArrowLeft" size={14} />
               </Link>
@@ -101,18 +101,18 @@ export default function PaymentUsedClient() {
             <div className="rounded-[36px] border border-white/15 bg-white/10 backdrop-blur-md p-4 sm:p-6 shadow-2xl">
               <div className="rounded-[28px] bg-white text-slate-900 p-5 sm:p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#003975]/10 flex items-center justify-center shrink-0">
-                    <Icon name="CreditCard" size={18} className="text-[#003975]" />
+                  <div className="w-12 h-12 rounded-2xl bg-[#0066a6]/10 flex items-center justify-center shrink-0">
+                    <Icon name="CreditCard" size={18} className="text-[#0066a6]" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-[#003975]">Payment overview</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-[#0066a6]">Payment overview</p>
                     <h2 className="text-xl font-bold">Reliable and easy to follow</h2>
                   </div>
                 </div>
                 <ul className="space-y-2.5 text-sm text-slate-600">
                   {advantages.map((item) => (
                     <li key={item} className="flex items-start gap-2">
-                      <Icon name="CheckCircle" size={14} className="text-[#003975] mt-0.5 shrink-0" />
+                      <Icon name="CheckCircle" size={14} className="text-[#0066a6] mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -128,11 +128,11 @@ export default function PaymentUsedClient() {
           <div className="grid lg:grid-cols-[0.36fr_0.64fr] gap-6 lg:gap-8 items-start">
             <FadeUp>
               <div className="rounded-3xl border border-[#d4e0ec] bg-white p-5 sm:p-6 shadow-sm sticky top-28">
-                <p className="text-xs font-semibold uppercase tracking-widest text-[#003975] mb-3">How it works</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-[#0066a6] mb-3">How it works</p>
                 <div className="space-y-3">
                   {steps.map((step, index) => (
                     <div key={step} className="flex items-start gap-3 rounded-2xl bg-[#f3f7fb] border border-[#dbe7f2] p-3.5">
-                      <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center border border-[#dbe7f2] text-[#003975] font-bold text-sm shrink-0">
+                      <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center border border-[#dbe7f2] text-[#0066a6] font-bold text-sm shrink-0">
                         {index + 1}
                       </div>
                       <p className="text-sm text-slate-600 leading-relaxed">{step}</p>
@@ -151,10 +151,10 @@ export default function PaymentUsedClient() {
                       className="h-full rounded-3xl border border-[#dce7f1] bg-white p-5 sm:p-6 shadow-sm"
                     >
                       <div className="flex items-start justify-between gap-3 mb-4">
-                        <div className="w-11 h-11 rounded-2xl bg-[#003975]/10 flex items-center justify-center shrink-0">
-                          <Icon name={method.icon} size={18} className="text-[#003975]" />
+                        <div className="w-11 h-11 rounded-2xl bg-[#0066a6]/10 flex items-center justify-center shrink-0">
+                          <Icon name={method.icon} size={18} className="text-[#0066a6]" />
                         </div>
-                        <span className="rounded-full bg-[#003975]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#003975]">
+                        <span className="rounded-full bg-[#0066a6]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#0066a6]">
                           {method.badge}
                         </span>
                       </div>
@@ -173,7 +173,7 @@ export default function PaymentUsedClient() {
                   </div>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#003975] px-6 py-3 text-sm font-semibold text-white hover:bg-[#002a5c] transition whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0066a6] px-6 py-3 text-sm font-semibold text-white hover:bg-[#002a5c] transition whitespace-nowrap"
                   >
                     Contact support <Icon name="ArrowRight" size={14} />
                   </Link>

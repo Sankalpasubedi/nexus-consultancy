@@ -126,7 +126,7 @@ export default function ShowcaseSection() {
                 "{testimonial.quote}"
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#003975] flex items-center justify-center text-white font-semibold text-lg">
+                <div className="w-12 h-12 rounded-full bg-[#0066a6] flex items-center justify-center text-white font-semibold text-lg">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>

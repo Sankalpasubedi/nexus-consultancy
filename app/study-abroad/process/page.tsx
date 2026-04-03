@@ -20,7 +20,7 @@ const steps = [
     title: "Research & Shortlist",
     timeline: "2-3 months before",
     icon: "Search",
-    gradient: "from-[#003975] to-[#006BDB]",
+    gradient: "from-[#0066a6] to-[#006BDB]",
     tasks: [
       "Free counselling session with our experts",
       "Profile assessment and goal alignment",
@@ -234,8 +234,8 @@ function ProcessSlider() {
               </div>
 
               {/* Timeline */}
-              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-50 text-[#003975] text-xs font-medium mb-5">
-                <Icon name="Clock" size={12} className="text-[#003975]" /> {s.timeline}
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-50 text-[#0066a6] text-xs font-medium mb-5">
+                <Icon name="Clock" size={12} className="text-[#0066a6]" /> {s.timeline}
               </div>
 
               {/* Tasks */}
@@ -260,7 +260,7 @@ function ProcessSlider() {
       <div className="max-w-[1440px] mx-auto px-6 mt-6">
         <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"
+            className="h-full bg-gradient-to-r from-[#0066a6] to-[#00ab18] rounded-full"
             style={{ width: `${Math.max(5, progress)}%` }}
           />
         </div>
@@ -342,7 +342,7 @@ export default function ProcessPage() {
                 <HoverCard>
                   <div className="bg-gray-50 rounded-3xl p-8 text-center border border-gray-100 h-full">
                     <div className="flex justify-center mb-4">
-                      <Icon name={tip.icon} size={40} className="text-[#003975]" />
+                      <Icon name={tip.icon} size={40} className="text-[#0066a6]" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 mb-2">{tip.title}</h3>
                     <p className="text-slate-500 text-sm">{tip.description}</p>
@@ -361,7 +361,7 @@ export default function ProcessPage() {
             <h2 className="text-4xl font-bold mb-6">Ready to Begin?</h2>
             <p className="text-blue-100 mb-8">Contact us for a free consultation and we&apos;ll create your personalized application timeline.</p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold shadow-lg">
                 Start My Application →
               </Link>
             </motion.div>

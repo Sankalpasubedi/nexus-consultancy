@@ -186,7 +186,7 @@ export default function ScholarshipsPage() {
               <div className="max-w-6xl mx-auto">
                 <FadeUp>
                   <div className="text-center mb-14">
-                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                       Scholarship Types
                     </span>
                     <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
@@ -204,17 +204,17 @@ export default function ScholarshipsPage() {
                       <HoverCard>
                         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full group hover:shadow-md transition-shadow relative">
                           {/* Top gradient accent */}
-                          <div className="h-1 bg-gradient-to-r from-slate-800 to-[#003975]" />
+                          <div className="h-1 bg-gradient-to-r from-slate-800 to-[#0066a6]" />
                           <div className="p-6">
                             <div className="flex items-center justify-between mb-4">
                               <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center">
                                 <Icon name={st.icon} size={20} />
                               </div>
-                              <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-bold">
+                              <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-bold">
                                 {st.coverage} Coverage
                               </span>
                             </div>
-                            <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors">{st.title}</h3>
+                            <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#0066a6] transition-colors">{st.title}</h3>
                             <p className="text-sm text-slate-500 mb-4 leading-relaxed">{st.description}</p>
                             <div className="space-y-2">
                               {st.features.map((f) => (
@@ -241,7 +241,7 @@ export default function ScholarshipsPage() {
           <FadeUp>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-16">
               <div>
-                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Our Process</span>
+                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Our Process</span>
                 <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-2">How We Help You Win</h2>
                 <p className="text-slate-500 text-sm">Our 5-step approach to maximizing your scholarship success</p>
               </div>
@@ -262,7 +262,7 @@ export default function ScholarshipsPage() {
                     </div>
                     <div className="bg-white rounded-2xl border border-gray-100 p-6 flex-1 shadow-sm">
                       <div className="flex items-center gap-2 mb-1.5">
-                        <Icon name={step.icon} size={16} className="text-[#003975]" />
+                        <Icon name={step.icon} size={16} className="text-[#0066a6]" />
                         <h3 className="font-semibold text-slate-900 text-[15px]">{step.title}</h3>
                       </div>
                       <p className="text-sm text-slate-500 leading-relaxed">{step.description}</p>
@@ -283,7 +283,7 @@ export default function ScholarshipsPage() {
               <div className="max-w-6xl mx-auto">
                 <FadeUp>
                   <div className="text-center mb-14">
-                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">By Destination</span>
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">By Destination</span>
                     <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Scholarships by Country</h2>
                     <p className="text-slate-500 text-sm max-w-md mx-auto">Top scholarship opportunities in the most popular study destinations</p>
                   </div>
@@ -292,13 +292,13 @@ export default function ScholarshipsPage() {
                   {destinationScholarships.map((ds) => (
                     <StaggerItem key={ds.country}>
                       <HoverCard>
-                        <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
+                        <div className="bg-gray-50 rounded-2xl p-6 h-full border border-gray-100 hover:border-[#0066a6]/20 transition-colors group">
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex items-center gap-3">
                               <span className="text-3xl">{ds.flag}</span>
-                              <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#003975] transition-colors">{ds.country}</h4>
+                              <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#0066a6] transition-colors">{ds.country}</h4>
                             </div>
-                            <span className="text-xs font-semibold text-[#003975] bg-[#003975]/5 px-2.5 py-1 rounded-full">{ds.avgAmount}</span>
+                            <span className="text-xs font-semibold text-[#0066a6] bg-[#0066a6]/5 px-2.5 py-1 rounded-full">{ds.avgAmount}</span>
                           </div>
                           <div className="space-y-2">
                             {ds.scholarships.map((s) => (
@@ -337,7 +337,7 @@ export default function ScholarshipsPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeLeft>
               <div>
-                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                   Pro Tips
                 </span>
                 <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
@@ -346,7 +346,7 @@ export default function ScholarshipsPage() {
                 <p className="text-slate-500 text-base mb-8 leading-relaxed max-w-md">
                   Winning scholarships requires more than just good grades. Here are proven strategies our scholarship advisors recommend.
                 </p>
-                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#003975] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002d5e] transition">
+                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002d5e] transition">
                   Get Scholarship Advice <Icon name="ArrowRight" size={14} />
                 </Link>
               </div>
@@ -360,7 +360,7 @@ export default function ScholarshipsPage() {
                   { title: "Show Impact", desc: "Highlight community service, leadership, and real-world impact beyond just academic achievements.", icon: "TrendingUp" },
                 ].map((tip) => (
                   <div key={tip.title} className="bg-white rounded-xl border border-gray-100 p-5 flex gap-4 items-start">
-                    <div className="w-10 h-10 rounded-lg bg-[#003975] text-white flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-[#0066a6] text-white flex items-center justify-center flex-shrink-0">
                       <Icon name={tip.icon} size={16} />
                     </div>
                     <div>
@@ -377,7 +377,7 @@ export default function ScholarshipsPage() {
 
       {/* ── CTA ── */}
       <section className="relative py-24 px-6 bg-white overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-0 left-0 w-64 h-64 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">

@@ -154,7 +154,7 @@ export default function FooterSection() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#003975]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0066a6]">
                 <span className="text-xs font-extrabold text-white">N</span>
               </div>
               <span className="text-lg font-bold text-white">Nexsus</span>

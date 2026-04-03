@@ -222,7 +222,7 @@ export default function HeroSection() {
                   >
                     <Link
                       href={slide.href}
-                      className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#003975] to-[#0052a3] text-white px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base hover:from-[#004a99] hover:to-[#0066cc] transition-all shadow-lg shadow-blue-900/30"
+                      className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0066a6] to-[#0052a3] text-white px-7 py-3.5 rounded-full font-semibold text-sm sm:text-base hover:from-[#004a99] hover:to-[#0066cc] transition-all shadow-lg shadow-blue-900/30"
                     >
                       {slide.cta}
                       <svg

@@ -35,7 +35,7 @@ export default function UniversityDetailClient({ university }: UniversityDetailC
         <Image src={university.image} alt={university.name} fill className="object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10" />
 
-        <div className="absolute top-20 right-10 w-72 h-72 bg-[#003975]/20 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-[#0066a6]/20 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-40 left-10 w-56 h-56 bg-[#00ab18]/15 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="absolute inset-0 flex flex-col justify-end pb-16 px-6 md:px-12 lg:px-20">
@@ -137,7 +137,7 @@ export default function UniversityDetailClient({ university }: UniversityDetailC
           <FadeUp>
             <div className="text-center mb-12">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-slate-500 text-xs font-semibold border border-gray-200 mb-5">
-                <Icon name="Compass" size={14} className="text-[#003975]" /> University Details
+                <Icon name="Compass" size={14} className="text-[#0066a6]" /> University Details
               </span>
               <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">What to Know Before You Apply</h2>
               <p className="text-base text-slate-500 max-w-2xl mx-auto">

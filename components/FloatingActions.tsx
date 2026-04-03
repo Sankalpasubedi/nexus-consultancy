@@ -43,11 +43,11 @@ export default function FloatingActions() {
     hover: { scale: 1.08 },
   };
   const primaryActionClass =
-    "w-12 h-12 rounded-full bg-[#003975] text-white shadow-lg shadow-[#003975]/20 flex items-center justify-center hover:bg-[#002d5e] hover:shadow-xl transition-all";
+    "w-12 h-12 rounded-full bg-[#0066a6] text-white shadow-lg shadow-[#0066a6]/20 flex items-center justify-center hover:bg-[#002d5e] hover:shadow-xl transition-all";
   const secondaryActionClass =
     "w-12 h-12 rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/20 flex items-center justify-center hover:bg-[#36c76c] hover:shadow-xl transition-all";
   const primaryLabelClass =
-    "py-1.5 -ml-1 rounded-r-lg bg-[#003975] text-white text-xs font-medium whitespace-nowrap";
+    "py-1.5 -ml-1 rounded-r-lg bg-[#0066a6] text-white text-xs font-medium whitespace-nowrap";
   const secondaryLabelClass =
     "py-1.5 -ml-1 rounded-r-lg bg-[#25D366] text-white text-xs font-medium whitespace-nowrap";
   const whatsappText =

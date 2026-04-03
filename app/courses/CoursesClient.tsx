@@ -203,9 +203,9 @@ export default function CoursesPage() {
     <main className="min-h-screen bg-[#fafaf8] pt-28 md:pt-32 pb-32 md:pb-48 overflow-hidden relative z-0">
       {/* Decorative blurs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-[#003975]/[0.03] rounded-full blur-[100px]" />
+        <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-[#0066a6]/[0.03] rounded-full blur-[100px]" />
         <div className="absolute top-[40%] right-[5%] w-[350px] h-[350px] bg-[#00ab18]/[0.03] rounded-full blur-[100px]" />
-        <div className="absolute bottom-[20%] left-[20%] w-[300px] h-[300px] bg-[#003975]/[0.02] rounded-full blur-[80px]" />
+        <div className="absolute bottom-[20%] left-[20%] w-[300px] h-[300px] bg-[#0066a6]/[0.02] rounded-full blur-[80px]" />
       </div>
 
       {/* Header */}
@@ -261,8 +261,8 @@ export default function CoursesPage() {
                 className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                    <Icon name="BookOpen" size={24} className="text-[#003975]" />
+                  <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                    <Icon name="BookOpen" size={24} className="text-[#0066a6]" />
                   </div>
                   <div>
                     <p className="text-slate-900 font-bold text-lg">1,000+</p>
@@ -341,7 +341,7 @@ export default function CoursesPage() {
                   
                   {/* Programs badge */}
                   <div className="absolute top-5 right-5 z-10">
-                    <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                    <span className="text-xs font-semibold text-white bg-[#0066a6]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
                       {cat.programs}+ Programs
                     </span>
                   </div>
@@ -458,7 +458,7 @@ export default function CoursesPage() {
                     <div className="p-5">
                       <h3 className="text-base font-semibold text-slate-900 mb-1.5">{cat.title}</h3>
                       <p className="text-slate-500 text-xs line-clamp-2 leading-relaxed">{cat.description}</p>
-                      <div className="mt-3 flex items-center gap-1 text-[#003975] text-xs font-medium group-hover:gap-2 transition-all">
+                      <div className="mt-3 flex items-center gap-1 text-[#0066a6] text-xs font-medium group-hover:gap-2 transition-all">
                         Explore Programs <Icon name="ArrowRight" size={12} />
                       </div>
                     </div>
@@ -568,7 +568,7 @@ export default function CoursesPage() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
+                  className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
                 >
                   Get Free Course Guidance <Icon name="ArrowRight" size={16} />
                 </Link>

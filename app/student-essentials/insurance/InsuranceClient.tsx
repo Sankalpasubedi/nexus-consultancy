@@ -251,7 +251,7 @@ function PartnersCarousel() {
                       <span className="text-xs font-bold tracking-widest uppercase text-white/80 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         Partner
                       </span>
-                      <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      <span className="text-xs font-semibold text-white bg-[#0066a6]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         {p.specialty}
                       </span>
                     </div>
@@ -269,7 +269,7 @@ function PartnersCarousel() {
                         <Icon name="Star" size={16} className="text-amber-400" />
                         Verified Partner
                       </div>
-                      <div className="flex items-center gap-2 text-sm font-semibold text-[#003975]">
+                      <div className="flex items-center gap-2 text-sm font-semibold text-[#0066a6]">
                         <Icon name="Shield" size={16} />
                         Trusted
                       </div>
@@ -313,7 +313,7 @@ function PartnersCarousel() {
                 key={i}
                 onClick={() => goTo(i)}
                 className={`h-2 rounded-full transition-all ${
-                  i === activeIndex ? "w-6 bg-[#003975]" : "w-2 bg-gray-300 hover:bg-gray-400"
+                  i === activeIndex ? "w-6 bg-[#0066a6]" : "w-2 bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}
@@ -442,9 +442,9 @@ export default function InsuranceClient() {
     <main className="bg-gradient-to-b from-slate-50 to-white min-h-screen">
       {/* ── Hero Section ── */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#003975]/6 via-transparent to-[#003975]/3" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-[#003975]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#003975]/5 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0066a6]/6 via-transparent to-[#0066a6]/3" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-[#0066a6]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#0066a6]/5 rounded-full blur-3xl" />
         
         <div className="relative z-10 max-w-[1200px] mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -453,14 +453,14 @@ export default function InsuranceClient() {
               {/* Breadcrumb */}
               <FadeUp>
                 <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-                  <Link href="/" className="hover:text-[#003975]">Home</Link>
+                  <Link href="/" className="hover:text-[#0066a6]">Home</Link>
                   <span>/</span>
                   <span className="text-slate-900">Student Insurance</span>
                 </nav>
               </FadeUp>
               
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-semibold tracking-wide border border-[#003975]/20">
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#0066a6]/10 text-[#0066a6] text-xs font-semibold tracking-wide border border-[#0066a6]/20">
                   Student Essentials
                 </span>
               </FadeUp>
@@ -479,13 +479,13 @@ export default function InsuranceClient() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 bg-[#003975] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] hover:shadow-lg transition"
+                    className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] hover:shadow-lg transition"
                   >
                     Get Insurance Quote <Icon name="ArrowRight" size={14} />
                   </Link>
                   <a
                     href="tel:+97714519495"
-                    className="inline-flex items-center gap-2 bg-white text-[#003975] border border-[#003975]/20 px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#003975]/5 transition"
+                    className="inline-flex items-center gap-2 bg-white text-[#0066a6] border border-[#0066a6]/20 px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#0066a6]/5 transition"
                   >
                     <Icon name="Phone" size={14} />
                     Talk to Advisor
@@ -504,7 +504,7 @@ export default function InsuranceClient() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0066a6]/20 to-transparent" />
                 </div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -513,8 +513,8 @@ export default function InsuranceClient() {
                   className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                      <Icon name="ShieldCheck" size={24} className="text-[#003975]" />
+                    <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                      <Icon name="ShieldCheck" size={24} className="text-[#0066a6]" />
                     </div>
                     <div>
                       <p className="text-slate-900 font-bold text-lg">100%</p>
@@ -531,7 +531,7 @@ export default function InsuranceClient() {
       {/* ── Why Insurance Matters ── */}
       <section className="py-16 px-6">
         <div className="max-w-[1200px] mx-auto">
-          <div className="bg-gradient-to-r from-[#003975] to-[#0052a3] rounded-2xl p-8 md:p-12 text-white">
+          <div className="bg-gradient-to-r from-[#0066a6] to-[#0052a3] rounded-2xl p-8 md:p-12 text-white">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -684,8 +684,8 @@ export default function InsuranceClient() {
               <FadeUp key={item.title} delay={i * 0.1}>
                 <div className="bg-white rounded-xl p-6 border border-gray-100 relative overflow-hidden">
                   <span className="absolute top-4 right-4 text-4xl font-bold text-slate-100">{item.step}</span>
-                  <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center mb-4">
-                    <Icon name={item.icon} size={20} className="text-[#003975]" />
+                  <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center mb-4">
+                    <Icon name={item.icon} size={20} className="text-[#0066a6]" />
                   </div>
                   <h3 className="font-semibold text-slate-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-slate-500">{item.desc}</p>
@@ -748,7 +748,7 @@ export default function InsuranceClient() {
         <div className="max-w-[1200px] mx-auto px-6 mb-10">
           <FadeUp>
             <div className="text-center">
-              <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
+              <span className="inline-block px-4 py-1.5 bg-[#0066a6]/10 text-[#0066a6] text-sm font-medium rounded-full mb-4">
                 Trusted Partners
               </span>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
@@ -764,7 +764,7 @@ export default function InsuranceClient() {
       </section>
 
       {/* ── CTA Section ── */}
-      <section className="py-20 px-6 bg-gradient-to-r from-[#003975] to-[#0052a3]">
+      <section className="py-20 px-6 bg-gradient-to-r from-[#0066a6] to-[#0052a3]">
         <div className="max-w-[800px] mx-auto text-center text-white">
           <FadeUp>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -777,7 +777,7 @@ export default function InsuranceClient() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
+                className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
               >
                 Get Free Quote <Icon name="ArrowRight" size={14} />
               </Link>

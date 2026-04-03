@@ -91,7 +91,7 @@ export default function DestinationSectionClient() {
       <main className="min-h-screen flex items-center justify-center pt-20">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-slate-900 mb-4">Page Not Found</h1>
-          <Link href={`/destinations/${country}`} className="text-[#003975] font-medium hover:underline">
+          <Link href={`/destinations/${country}`} className="text-[#0066a6] font-medium hover:underline">
             Back to {country}
           </Link>
         </div>
@@ -112,7 +112,7 @@ export default function DestinationSectionClient() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-800/50 to-slate-800" />
-        <div className="absolute top-10 right-10 w-72 h-72 bg-[#003975]/30 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-10 right-10 w-72 h-72 bg-[#0066a6]/30 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -165,8 +165,8 @@ export default function DestinationSectionClient() {
                   />
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
-                    <Icon name={meta.icon} size={16} className="text-[#003975]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center">
+                    <Icon name={meta.icon} size={16} className="text-[#0066a6]" />
                   </div>
                   <span className="text-sm font-semibold text-slate-900">{meta.navTitle}</span>
                 </div>
@@ -214,16 +214,16 @@ export default function DestinationSectionClient() {
                   href={`/destinations/${country}/${s}`}
                   className={`relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium whitespace-nowrap transition-all duration-200 flex-shrink-0 ${
                     isActive
-                      ? "text-[#003975] bg-[#003975]/5"
+                      ? "text-[#0066a6] bg-[#0066a6]/5"
                       : "text-slate-500 hover:text-slate-800 hover:bg-gray-50"
                   }`}
                 >
-                  <Icon name={sectionMeta[s]?.icon} size={13} className={isActive ? "text-[#003975]" : "text-slate-400"} />
+                  <Icon name={sectionMeta[s]?.icon} size={13} className={isActive ? "text-[#0066a6]" : "text-slate-400"} />
                   {sectionMeta[s]?.navTitle}
                   {isActive && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#003975] rounded-full"
+                      className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#0066a6] rounded-full"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -257,7 +257,7 @@ export default function DestinationSectionClient() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-800/65 to-slate-800" />
-        <div className="absolute top-10 right-10 w-72 h-72 bg-[#003975]/30 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-10 right-10 w-72 h-72 bg-[#0066a6]/30 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative z-10">
           <FadeUp>
@@ -336,7 +336,7 @@ function WhyStudyHere({ data, country }: { data: CountryDataType; country: strin
                   { label: "Safety & Lifestyle", icon: "ShieldCheck", desc: "High quality of life" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                    <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0">
                       <Icon name={item.icon} size={14} className="text-white" />
                     </div>
                     <div>
@@ -441,7 +441,7 @@ function WhyStudyHere({ data, country }: { data: CountryDataType; country: strin
       {/* How Nexsus Helps */}
       <FadeUp>
         <div className="bg-slate-800 rounded-3xl p-8 md:p-12 text-white overflow-hidden relative">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#003975]/40 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#0066a6]/40 rounded-full blur-[100px] pointer-events-none" />
           <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-xs font-medium text-white/70 mb-4 border border-white/5">
@@ -473,7 +473,7 @@ function WhyStudyHere({ data, country }: { data: CountryDataType; country: strin
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="flex items-start gap-3 bg-white/5 rounded-xl px-5 py-4 border border-white/10"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0 text-white text-xs font-bold mt-0.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0 text-white text-xs font-bold mt-0.5">
                     {i + 1}
                   </div>
                   <div>
@@ -523,7 +523,7 @@ function Universities({ data, country }: { data: CountryDataType; country: strin
                 { label: "Nexsus Placement Rate", value: "95%+ success", icon: "TrendingUp" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0">
                     <Icon name={item.icon} size={14} className="text-white" />
                   </div>
                   <div>
@@ -608,13 +608,13 @@ function Universities({ data, country }: { data: CountryDataType; country: strin
                     </td>
                     <td className="px-6 py-4 text-sm text-slate-500">{uni.location.city}, {uni.location.state}</td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#003975]">
+                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#0066a6]">
                         #{uni.ranking.position} <span className="text-xs text-slate-400 font-normal">{uni.ranking.type}</span>
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-slate-500">{uni.scholarship.accreditedBy}</td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#003975] bg-blue-50 px-2.5 py-1 rounded-full">
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#0066a6] bg-blue-50 px-2.5 py-1 rounded-full">
                         Up to {uni.scholarship.percentage}%
                       </span>
                     </td>
@@ -655,21 +655,21 @@ function Universities({ data, country }: { data: CountryDataType; country: strin
 
                   <div className="space-y-3 mt-4 mb-5">
                     <div className="flex items-center gap-3 text-sm">
-                      <Icon name="Award" size={14} className="text-[#003975]" />
+                      <Icon name="Award" size={14} className="text-[#0066a6]" />
                       <span className="text-slate-600">Ranking: <span className="font-medium text-slate-900">#{uni.ranking.position} {uni.ranking.type}</span></span>
                     </div>
                     <div className="flex items-center gap-3 text-sm">
-                      <Icon name="ShieldCheck" size={14} className="text-[#003975]" />
+                      <Icon name="ShieldCheck" size={14} className="text-[#0066a6]" />
                       <span className="text-slate-600">Accredited by: <span className="font-medium text-slate-900">{uni.scholarship.accreditedBy}</span></span>
                     </div>
                     <div className="flex items-center gap-3 text-sm">
-                      <Icon name="DollarSign" size={14} className="text-[#003975]" />
+                      <Icon name="DollarSign" size={14} className="text-[#0066a6]" />
                       <span className="text-slate-600">{uni.scholarship.description}</span>
                     </div>
                   </div>
 
                   <div className="pt-4 border-t border-gray-100">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#003975] bg-blue-50 px-3 py-1.5 rounded-full">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066a6] bg-blue-50 px-3 py-1.5 rounded-full">
                       <Icon name="Percent" size={12} />
                       Up to {uni.scholarship.percentage}% scholarship available
                     </span>
@@ -748,7 +748,7 @@ function Admission({ data, country }: { data: CountryDataType; country: string }
                 { label: "Intakes", value: "Feb/Mar & Jul/Sep (varies)", icon: "Calendar" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0">
                     <Icon name={item.icon} size={14} className="text-white" />
                   </div>
                   <div>
@@ -788,7 +788,7 @@ function Admission({ data, country }: { data: CountryDataType; country: string }
               <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mx-auto mb-3">
                 <Icon name={item.icon} size={18} className="text-white" />
               </div>
-              <div className="text-xs text-[#003975] font-bold mb-1">Step {i + 1}</div>
+              <div className="text-xs text-[#0066a6] font-bold mb-1">Step {i + 1}</div>
               <h4 className="text-sm font-semibold text-slate-900 mb-1">{item.step}</h4>
               <p className="text-xs text-slate-500">{item.desc}</p>
             </motion.div>
@@ -855,7 +855,7 @@ function Admission({ data, country }: { data: CountryDataType; country: string }
                     </td>
                     <td className="px-6 py-4 text-sm text-slate-700 leading-relaxed">{req.text}</td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#003975]">
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-[#0066a6]">
                         <Icon name="CheckCircle" size={14} /> Required
                       </span>
                     </td>
@@ -884,7 +884,7 @@ function Admission({ data, country }: { data: CountryDataType; country: string }
             ].map((test, i) => (
               <div key={i} className="bg-[#fafaf8] rounded-xl p-5 border border-gray-100">
                 <p className="text-sm font-bold text-slate-900 mb-1">{test.test}</p>
-                <p className="text-lg font-bold text-[#003975] mb-2">{test.scores}</p>
+                <p className="text-lg font-bold text-[#0066a6] mb-2">{test.scores}</p>
                 <p className="text-xs text-slate-500 leading-relaxed">{test.desc}</p>
               </div>
             ))}
@@ -959,7 +959,7 @@ function StudentVisa({ data, country }: { data: CountryDataType; country: string
                 { label: "Nexsus Success Rate", value: "98%+ approval", icon: "ShieldCheck" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0">
                     <Icon name={item.icon} size={14} className="text-white" />
                   </div>
                   <div>
@@ -1000,7 +1000,7 @@ function StudentVisa({ data, country }: { data: CountryDataType; country: string
               <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mx-auto mb-3">
                 <Icon name={item.icon} size={18} className="text-white" />
               </div>
-              <div className="text-xs text-[#003975] font-bold mb-1">Step {i + 1}</div>
+              <div className="text-xs text-[#0066a6] font-bold mb-1">Step {i + 1}</div>
               <h4 className="text-sm font-semibold text-slate-900 mb-1">{item.step}</h4>
               <p className="text-xs text-slate-500">{item.desc}</p>
             </motion.div>
@@ -1054,7 +1054,7 @@ function StudentVisa({ data, country }: { data: CountryDataType; country: string
                       <ul className="space-y-2">
                         {card.items.map((item, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                            <Icon name="CheckCircle" size={14} className="text-[#003975] flex-shrink-0 mt-0.5" />
+                            <Icon name="CheckCircle" size={14} className="text-[#0066a6] flex-shrink-0 mt-0.5" />
                             {item}
                           </li>
                         ))}
@@ -1092,7 +1092,7 @@ function StudentVisa({ data, country }: { data: CountryDataType; country: string
                   <ul className="space-y-2.5">
                     {card.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-slate-600">
-                        <Icon name="CheckCircle" size={14} className="text-[#003975] flex-shrink-0 mt-0.5" />
+                        <Icon name="CheckCircle" size={14} className="text-[#0066a6] flex-shrink-0 mt-0.5" />
                         {item}
                       </li>
                     ))}
@@ -1213,7 +1213,7 @@ function LivingCost({ data, country }: { data: CountryDataType; country: string 
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm font-semibold text-slate-900">{cost.category}</span>
-                  <span className="text-sm font-bold text-[#003975]">
+                  <span className="text-sm font-bold text-[#0066a6]">
                     {data.currency} {cost.minCost} – {cost.maxCost}
                   </span>
                 </div>
@@ -1314,7 +1314,7 @@ function LivingCost({ data, country }: { data: CountryDataType; country: string 
                   <td className="px-6 py-4" />
                   <td className="px-6 py-4 text-sm font-bold text-slate-900">Estimated Total</td>
                   <td className="px-6 py-4 text-sm font-bold text-slate-900 text-right">{data.currency} {totalMin}</td>
-                  <td className="px-6 py-4 text-sm font-bold text-[#003975] text-right">{data.currency} {totalMax}</td>
+                  <td className="px-6 py-4 text-sm font-bold text-[#0066a6] text-right">{data.currency} {totalMax}</td>
                   <td className="px-6 py-4 text-center text-xs text-slate-500">per month</td>
                 </tr>
               </tfoot>
@@ -1343,7 +1343,7 @@ function LivingCost({ data, country }: { data: CountryDataType; country: string 
                   <Icon name={item.icon} size={18} className="text-white" />
                 </div>
                 <h4 className="text-sm font-bold text-slate-900 mb-1">{item.type}</h4>
-                <span className="inline-block text-xs font-semibold text-[#003975] bg-blue-50 px-2 py-0.5 rounded-full mb-2">{item.range}</span>
+                <span className="inline-block text-xs font-semibold text-[#0066a6] bg-blue-50 px-2 py-0.5 rounded-full mb-2">{item.range}</span>
                 <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
               </div>
             ))}
@@ -1418,7 +1418,7 @@ function WorkAndJobs({ data, country }: { data: CountryDataType; country: string
                 { label: "In-demand Fields", value: "IT, Healthcare, Engineering", icon: "TrendingUp" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0">
                     <Icon name={item.icon} size={14} className="text-white" />
                   </div>
                   <div>
@@ -1606,7 +1606,7 @@ function Scholarships({ data, country }: { data: CountryDataType; country: strin
                 { label: "Nexsus Assistance", value: "Free scholarship matching", icon: "Search" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0">
                     <Icon name={item.icon} size={14} className="text-white" />
                   </div>
                   <div>
@@ -1646,7 +1646,7 @@ function Scholarships({ data, country }: { data: CountryDataType; country: strin
               <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mx-auto mb-3">
                 <Icon name={item.icon} size={18} className="text-white" />
               </div>
-              <div className="text-xs text-[#003975] font-bold mb-1">Step {i + 1}</div>
+              <div className="text-xs text-[#0066a6] font-bold mb-1">Step {i + 1}</div>
               <h4 className="text-sm font-semibold text-slate-900 mb-1">{item.step}</h4>
               <p className="text-xs text-slate-500">{item.desc}</p>
             </motion.div>
@@ -1694,12 +1694,12 @@ function Scholarships({ data, country }: { data: CountryDataType; country: strin
                       <span className="font-semibold text-slate-900 text-sm">{sch.name}</span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-sm font-semibold text-[#003975]">{sch.amount}</span>
+                      <span className="text-sm font-semibold text-[#0066a6]">{sch.amount}</span>
                     </td>
                     <td className="px-6 py-4 text-sm text-slate-600">{sch.eligibility}</td>
                     <td className="px-6 py-4">
                       <span className="inline-flex items-center gap-1 text-sm text-slate-700">
-                        <Icon name="Calendar" size={12} className="text-[#003975]" />
+                        <Icon name="Calendar" size={12} className="text-[#0066a6]" />
                         {sch.deadline}
                       </span>
                     </td>
@@ -1732,15 +1732,15 @@ function Scholarships({ data, country }: { data: CountryDataType; country: strin
                   <h4 className="text-base font-bold text-slate-900 mb-4">{sch.name}</h4>
                   <div className="space-y-3 flex-1">
                     <div className="flex items-center gap-2.5 text-sm">
-                      <Icon name="DollarSign" size={14} className="text-[#003975]" />
+                      <Icon name="DollarSign" size={14} className="text-[#0066a6]" />
                       <span className="text-slate-600">{sch.amount}</span>
                     </div>
                     <div className="flex items-center gap-2.5 text-sm">
-                      <Icon name="User" size={14} className="text-[#003975]" />
+                      <Icon name="User" size={14} className="text-[#0066a6]" />
                       <span className="text-slate-600">{sch.eligibility}</span>
                     </div>
                     <div className="flex items-center gap-2.5 text-sm">
-                      <Icon name="Calendar" size={14} className="text-[#003975]" />
+                      <Icon name="Calendar" size={14} className="text-[#0066a6]" />
                       <span className="text-slate-600">Deadline: {sch.deadline}</span>
                     </div>
                   </div>
@@ -1848,7 +1848,7 @@ function Culture({ data, country }: { data: CountryDataType; country: string }) 
                 { label: "Support Services", value: "Counseling & mentoring", icon: "HeartPulse" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975] flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6] flex items-center justify-center flex-shrink-0">
                     <Icon name={item.icon} size={14} className="text-white" />
                   </div>
                   <div>
@@ -1939,7 +1939,7 @@ function Culture({ data, country }: { data: CountryDataType; country: string }) 
                 <ClipReveal>
                   <div className="bg-[#fafaf8] rounded-2xl p-7 border border-gray-100 h-full flex flex-col">
                     <div className="mb-4">
-                      <svg className="w-7 h-7 text-[#003975]/20" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-7 h-7 text-[#0066a6]/20" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
                       </svg>
                     </div>

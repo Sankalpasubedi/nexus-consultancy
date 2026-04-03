@@ -251,7 +251,7 @@ function CitiesCarousel() {
                       <span className="text-xs font-bold tracking-widest uppercase text-white/80 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         City
                       </span>
-                      <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      <span className="text-xs font-semibold text-white bg-[#0066a6]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
                         {c.highlight}
                       </span>
                     </div>
@@ -266,10 +266,10 @@ function CitiesCarousel() {
                     <p className="text-sm text-slate-500 mb-4">{c.country}</p>
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                       <div className="flex items-center gap-2 text-sm text-slate-600">
-                        <Icon name="Home" size={16} className="text-[#003975]" />
+                        <Icon name="Home" size={16} className="text-[#0066a6]" />
                         Avg: {c.avgRent}
                       </div>
-                      <div className="flex items-center gap-2 text-sm font-semibold text-[#003975]">
+                      <div className="flex items-center gap-2 text-sm font-semibold text-[#0066a6]">
                         <Icon name="MapPin" size={16} />
                         {c.highlight}
                       </div>
@@ -313,7 +313,7 @@ function CitiesCarousel() {
                 key={i}
                 onClick={() => goTo(i)}
                 className={`h-2 rounded-full transition-all ${
-                  i === activeIndex ? "w-6 bg-[#003975]" : "w-2 bg-gray-300 hover:bg-gray-400"
+                  i === activeIndex ? "w-6 bg-[#0066a6]" : "w-2 bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}
@@ -462,14 +462,14 @@ export default function AccommodationClient() {
               {/* Breadcrumb */}
               <FadeUp>
                 <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-                  <Link href="/" className="hover:text-[#003975]">Home</Link>
+                  <Link href="/" className="hover:text-[#0066a6]">Home</Link>
                   <span>/</span>
                   <span className="text-slate-900">Student Accommodation</span>
                 </nav>
               </FadeUp>
               
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-semibold tracking-wide border border-[#003975]/20">
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#0066a6]/10 text-[#0066a6] text-xs font-semibold tracking-wide border border-[#0066a6]/20">
                   Student Essentials
                 </span>
               </FadeUp>
@@ -493,7 +493,7 @@ export default function AccommodationClient() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0066a6]/20 to-transparent" />
                 </div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -502,8 +502,8 @@ export default function AccommodationClient() {
                   className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                      <Icon name="Home" size={24} className="text-[#003975]" />
+                    <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                      <Icon name="Home" size={24} className="text-[#0066a6]" />
                     </div>
                     <div>
                       <p className="text-slate-900 font-bold text-lg">Find</p>
@@ -547,11 +547,11 @@ export default function AccommodationClient() {
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <span className="text-xs font-medium text-[#003975] uppercase mb-2 block">Pros</span>
+                      <span className="text-xs font-medium text-[#0066a6] uppercase mb-2 block">Pros</span>
                       <ul className="space-y-1">
                         {type.pros.map((pro) => (
                           <li key={pro} className="flex items-center gap-2 text-sm text-slate-600">
-                            <Icon name="Check" size={12} className="text-[#003975]" />
+                            <Icon name="Check" size={12} className="text-[#0066a6]" />
                             {pro}
                           </li>
                         ))}
@@ -572,7 +572,7 @@ export default function AccommodationClient() {
 
                   <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                     <span className="text-sm text-slate-500">Typical cost:</span>
-                    <span className="font-semibold text-[#003975]">{type.priceRange}</span>
+                    <span className="font-semibold text-[#0066a6]">{type.priceRange}</span>
                   </div>
                 </div>
               </FadeUp>
@@ -607,14 +607,14 @@ export default function AccommodationClient() {
                     
                     <div className="mb-4">
                       <span className="text-xs text-slate-500 uppercase">Avg Cost</span>
-                      <p className="font-semibold text-[#003975]">{country.avgCost}</p>
+                      <p className="font-semibold text-[#0066a6]">{country.avgCost}</p>
                     </div>
 
                     <div className="mb-4">
                       <span className="text-xs text-slate-500 uppercase">Popular Options</span>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {country.popular.map((opt) => (
-                          <span key={opt} className="text-xs px-2 py-0.5 bg-[#003975]/10 text-[#003975] rounded-full">
+                          <span key={opt} className="text-xs px-2 py-0.5 bg-[#0066a6]/10 text-[#0066a6] rounded-full">
                             {opt}
                           </span>
                         ))}
@@ -638,7 +638,7 @@ export default function AccommodationClient() {
         <div className="max-w-[1200px] mx-auto px-6 mb-10">
           <FadeUp>
             <div className="text-center">
-              <span className="inline-block px-4 py-1.5 bg-[#003975]/10 text-[#003975] text-sm font-medium rounded-full mb-4">
+              <span className="inline-block px-4 py-1.5 bg-[#0066a6]/10 text-[#0066a6] text-sm font-medium rounded-full mb-4">
                 Popular Destinations
               </span>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
@@ -671,8 +671,8 @@ export default function AccommodationClient() {
             {checklist.map((item, i) => (
               <FadeUp key={item.item} delay={i * 0.05}>
                 <div className="bg-white rounded-xl p-4 border border-gray-100 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#003975]/10 flex items-center justify-center shrink-0">
-                    <Icon name={item.icon} size={18} className="text-[#003975]" />
+                  <div className="w-10 h-10 rounded-lg bg-[#0066a6]/10 flex items-center justify-center shrink-0">
+                    <Icon name={item.icon} size={18} className="text-[#0066a6]" />
                   </div>
                   <span className="text-sm text-slate-700 font-medium">{item.item}</span>
                 </div>
@@ -727,7 +727,7 @@ export default function AccommodationClient() {
       </section>
 
       {/* ── CTA Section ── */}
-      <section className="py-20 px-6 bg-gradient-to-r from-[#003975] to-[#0052a3]">
+      <section className="py-20 px-6 bg-gradient-to-r from-[#0066a6] to-[#0052a3]">
         <div className="max-w-[800px] mx-auto text-center text-white">
           <FadeUp>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
@@ -740,7 +740,7 @@ export default function AccommodationClient() {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
+                className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full text-sm font-semibold hover:shadow-lg transition"
               >
                 Get Housing Help <Icon name="ArrowRight" size={14} />
               </Link>

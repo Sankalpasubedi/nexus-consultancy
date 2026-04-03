@@ -17,7 +17,7 @@ function ScrollProgressBar() {
       className="fixed left-0 right-0 top-0 z-[100] h-[3px] origin-left pointer-events-none"
       style={{
         scaleX,
-        background: "linear-gradient(to right, #003975, #00ab18)",
+        background: "linear-gradient(to right, #0066a6, #00ab18)",
       }}
     />
   );

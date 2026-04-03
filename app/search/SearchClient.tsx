@@ -260,7 +260,7 @@ export default function SearchClient() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-8 sm:pt-36 sm:pb-12 bg-gradient-to-br from-[#001830] via-[#002a52] to-[#003975] overflow-hidden">
+      <section className="relative pt-32 pb-8 sm:pt-36 sm:pb-12 bg-gradient-to-br from-[#001830] via-[#002a52] to-[#0066a6] overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -293,7 +293,7 @@ export default function SearchClient() {
                         onClick={() => setActiveTab(tab.id)}
                         className={`relative whitespace-nowrap flex items-center gap-2 px-3 sm:px-4 py-2.5 text-sm font-medium transition-colors ${
                           activeTab === tab.id
-                            ? "text-[#003975]"
+                            ? "text-[#0066a6]"
                             : "text-slate-500 hover:text-slate-700"
                         }`}
                       >
@@ -302,7 +302,7 @@ export default function SearchClient() {
                         {activeTab === tab.id && (
                           <motion.div
                             layoutId="activeTab"
-                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#003975]"
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0066a6]"
                             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                           />
                         )}
@@ -332,14 +332,14 @@ export default function SearchClient() {
                               onChange={(e) => setSearchQuery(e.target.value)}
                               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                               placeholder="Enter course subject e.g. Law"
-                              className="w-full pl-10 pr-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all"
+                              className="w-full pl-10 pr-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all"
                             />
                           </div>
                           <div className="relative">
                             <select
                               value={studyLevel}
                               onChange={(e) => setStudyLevel(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               {studyLevels.map((level) => (
                                 <option key={level.value} value={level.value}>{level.label}</option>
@@ -351,7 +351,7 @@ export default function SearchClient() {
                             <select
                               value={destination}
                               onChange={(e) => setDestination(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               {searchDestinations.map((dest) => (
                                 <option key={dest.value} value={dest.value}>{dest.label}</option>
@@ -367,7 +367,7 @@ export default function SearchClient() {
                               <button
                                 key={idx}
                                 onClick={() => setSearchQuery(item.query)}
-                                className="text-sm text-[#003975] hover:text-[#0052a3] hover:underline transition-colors"
+                                className="text-sm text-[#0066a6] hover:text-[#0052a3] hover:underline transition-colors"
                               >
                                 {item.label}
                               </button>
@@ -377,7 +377,7 @@ export default function SearchClient() {
                             onClick={handleSearch}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all"
+                            className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all"
                           >
                             <Search className="w-4 h-4" />
                             Search
@@ -400,7 +400,7 @@ export default function SearchClient() {
                             <select
                               value={studyLevel}
                               onChange={(e) => setStudyLevel(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               {studyLevels.map((level) => (
                                 <option key={level.value} value={level.value}>{level.label}</option>
@@ -412,7 +412,7 @@ export default function SearchClient() {
                             <select
                               value={destination}
                               onChange={(e) => setDestination(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               {searchDestinations.map((dest) => (
                                 <option key={dest.value} value={dest.value}>{dest.label}</option>
@@ -424,7 +424,7 @@ export default function SearchClient() {
                             onClick={handleSearch}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all w-full sm:w-auto justify-center"
+                            className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all w-full sm:w-auto justify-center"
                           >
                             <Search className="w-4 h-4" />
                             Search
@@ -451,7 +451,7 @@ export default function SearchClient() {
                               onChange={(e) => setSearchQuery(e.target.value)}
                               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                               placeholder="Search by university name"
-                              className="w-full pl-10 pr-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all"
+                              className="w-full pl-10 pr-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all"
                             />
                           </div>
                           <span className="text-sm text-slate-400 font-medium hidden sm:block">or</span>
@@ -459,7 +459,7 @@ export default function SearchClient() {
                             <select
                               value={destination}
                               onChange={(e) => setDestination(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               {searchDestinations.map((dest) => (
                                 <option key={dest.value} value={dest.value}>{dest.label}</option>
@@ -471,7 +471,7 @@ export default function SearchClient() {
                             onClick={handleSearch}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all w-full sm:w-auto justify-center"
+                            className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all w-full sm:w-auto justify-center"
                           >
                             <Search className="w-4 h-4" />
                             Search
@@ -494,7 +494,7 @@ export default function SearchClient() {
                             <select
                               value={city}
                               onChange={(e) => setCity(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               {cities.map((c) => (
                                 <option key={c.value} value={c.value}>{c.label}</option>
@@ -506,7 +506,7 @@ export default function SearchClient() {
                             <select
                               value={month}
                               onChange={(e) => setMonth(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               {months.map((m) => (
                                 <option key={m.value} value={m.value}>{m.label}</option>
@@ -518,7 +518,7 @@ export default function SearchClient() {
                             <select
                               value={destination}
                               onChange={(e) => setDestination(e.target.value)}
-                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#003975]/20 focus:border-[#003975] transition-all cursor-pointer bg-white"
+                              className="w-full appearance-none px-4 pr-10 py-3 text-sm text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0066a6]/20 focus:border-[#0066a6] transition-all cursor-pointer bg-white"
                             >
                               <option value="">Study destinations</option>
                               {searchDestinations.slice(1).map((dest) => (
@@ -531,7 +531,7 @@ export default function SearchClient() {
                             onClick={handleSearch}
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            className="flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all w-full sm:w-auto justify-center"
+                            className="flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all w-full sm:w-auto justify-center"
                           >
                             <Search className="w-4 h-4" />
                             Search
@@ -552,11 +552,11 @@ export default function SearchClient() {
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                           <div className="flex items-start gap-4">
                             <motion.div 
-                              className="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#003975]/10 to-[#00ab18]/10"
+                              className="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#0066a6]/10 to-[#00ab18]/10"
                               animate={{ rotate: [0, 10, -10, 0] }}
                               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                             >
-                              <Sparkles className="w-6 h-6 text-[#003975]" />
+                              <Sparkles className="w-6 h-6 text-[#0066a6]" />
                             </motion.div>
                             <div>
                               <h3 className="text-lg font-bold text-slate-900">Let us help you with your search</h3>
@@ -567,7 +567,7 @@ export default function SearchClient() {
                           </div>
                           <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap"
+                            className="inline-flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap"
                           >
                             Start here
                             <ArrowRight className="w-4 h-4" />
@@ -610,7 +610,7 @@ export default function SearchClient() {
                             </div>
                             <Link
                               href="/contact"
-                              className="inline-flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap"
+                              className="inline-flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap"
                             >
                               Get started
                               <ArrowRight className="w-4 h-4" />
@@ -678,7 +678,7 @@ export default function SearchClient() {
                           className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all p-5"
                         >
                           <div className="flex items-start justify-between mb-3">
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-medium">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0066a6]/10 text-[#0066a6] text-xs font-medium">
                               <BookOpen className="w-3.5 h-3.5" />
                               {course.category}
                             </span>
@@ -707,7 +707,7 @@ export default function SearchClient() {
                           </div>
                           <Link
                             href={`/courses/${course.slug}`}
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#003975] hover:text-[#0052a3] transition-colors"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#0066a6] hover:text-[#0052a3] transition-colors"
                           >
                             View Details
                             <ArrowRight className="w-4 h-4" />
@@ -760,7 +760,7 @@ export default function SearchClient() {
                             </p>
                             <Link
                               href={`/destinations/study-in-${uni.country.toLowerCase().replace(" ", "-")}`}
-                              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#003975] hover:text-[#0052a3] transition-colors"
+                              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#0066a6] hover:text-[#0052a3] transition-colors"
                             >
                               Explore University
                               <ArrowRight className="w-4 h-4" />
@@ -812,7 +812,7 @@ export default function SearchClient() {
                           </div>
                           <Link
                             href="/contact"
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#003975] hover:text-[#0052a3] transition-colors"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#0066a6] hover:text-[#0052a3] transition-colors"
                           >
                             Apply Now
                             <ArrowRight className="w-4 h-4" />
@@ -846,17 +846,17 @@ export default function SearchClient() {
                           </h3>
                           <div className="space-y-2 mb-4">
                             <div className="flex items-center gap-2 text-sm">
-                              <Calendar className="w-4 h-4 text-[#003975]" />
+                              <Calendar className="w-4 h-4 text-[#0066a6]" />
                               <span className="text-slate-600">{event.date}</span>
                             </div>
                             <div className="flex items-center gap-2 text-sm">
-                              <MapPin className="w-4 h-4 text-[#003975]" />
+                              <MapPin className="w-4 h-4 text-[#0066a6]" />
                               <span className="text-slate-600">{event.location}</span>
                             </div>
                           </div>
                           <Link
                             href="/contact"
-                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#003975] hover:text-[#0052a3] transition-colors"
+                            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#0066a6] hover:text-[#0052a3] transition-colors"
                           >
                             Register
                             <ArrowRight className="w-4 h-4" />
@@ -874,7 +874,7 @@ export default function SearchClient() {
             {/* Guide Me Section */}
             {activeTab === "guide" && (
               <div className="max-w-2xl mx-auto text-center py-12">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#003975] to-[#00ab18] flex items-center justify-center">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#0066a6] to-[#00ab18] flex items-center justify-center">
                   <Compass className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-4">
@@ -885,7 +885,7 @@ export default function SearchClient() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-[#003975] hover:bg-[#0052a3] text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg"
+                  className="inline-flex items-center gap-2 bg-[#0066a6] hover:bg-[#0052a3] text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg"
                 >
                   Get Free Counselling
                   <ArrowRight className="w-5 h-5" />
@@ -896,7 +896,7 @@ export default function SearchClient() {
             {/* Get Instant Offer Section */}
             {activeTab === "instant-offer" && (
               <div className="max-w-2xl mx-auto text-center py-12">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#00ab18] to-[#003975] flex items-center justify-center">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#00ab18] to-[#0066a6] flex items-center justify-center">
                   <Gift className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-4">
@@ -919,7 +919,7 @@ export default function SearchClient() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-[#001830] via-[#002a52] to-[#003975]">
+      <section className="py-16 bg-gradient-to-br from-[#001830] via-[#002a52] to-[#0066a6]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
             Can&apos;t Find What You&apos;re Looking For?
@@ -929,7 +929,7 @@ export default function SearchClient() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-[#003975] px-8 py-4 rounded-full font-semibold transition-all"
+            className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-[#0066a6] px-8 py-4 rounded-full font-semibold transition-all"
           >
             Talk to an Expert
             <ArrowRight className="w-5 h-5" />
@@ -956,7 +956,7 @@ function EmptyState({ type }: { type: string }) {
       </p>
       <Link
         href={type === "courses" ? "/courses" : "/destinations"}
-        className="inline-flex items-center gap-2 text-[#003975] hover:text-[#0052a3] font-medium transition-colors"
+        className="inline-flex items-center gap-2 text-[#0066a6] hover:text-[#0052a3] font-medium transition-colors"
       >
         Browse all {type}
         <ArrowRight className="w-4 h-4" />

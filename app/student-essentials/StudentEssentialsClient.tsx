@@ -142,7 +142,7 @@ export default function StudentEssentialsClient() {
       <section className="bg-[#eaf1f8] border-b border-[#d2deeb]">
         <div className="max-w-[1200px] mx-auto px-6 py-12 md:py-16 grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-center">
           <FadeUp>
-            <span className="inline-flex items-center rounded-full bg-white text-[#003975] border border-[#d6e2f0] px-4 py-1.5 text-xs font-semibold tracking-wide">
+            <span className="inline-flex items-center rounded-full bg-white text-[#0066a6] border border-[#d6e2f0] px-4 py-1.5 text-xs font-semibold tracking-wide">
               Student Essentials Hub
             </span>
             <h1 className="mt-4 text-4xl md:text-5xl font-bold leading-tight text-slate-900">
@@ -160,7 +160,7 @@ export default function StudentEssentialsClient() {
               </Link>
               <Link
                 href="/dashboard"
-                className="inline-flex items-center gap-2 rounded-full border border-[#b9cadf] bg-white px-6 py-3 text-sm font-semibold text-[#003975] hover:bg-[#f2f6fb] transition"
+                className="inline-flex items-center gap-2 rounded-full border border-[#b9cadf] bg-white px-6 py-3 text-sm font-semibold text-[#0066a6] hover:bg-[#f2f6fb] transition"
               >
                 Open dashboard
               </Link>

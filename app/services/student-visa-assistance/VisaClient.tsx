@@ -134,8 +134,8 @@ export default function VisaPage() {
                   />
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
-                    <Icon name="ShieldCheck" size={16} className="text-[#003975]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center">
+                    <Icon name="ShieldCheck" size={16} className="text-[#0066a6]" />
                   </div>
                   <span className="text-sm font-semibold text-slate-900">99.2% Approval</span>
                 </div>
@@ -157,7 +157,7 @@ export default function VisaPage() {
             ].map((s) => (
               <FadeUp key={s.label}>
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-[#003975]">{s.num}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-[#0066a6]">{s.num}</div>
                   <div className="text-sm text-slate-500 mt-1.5">{s.label}</div>
                 </div>
               </FadeUp>
@@ -187,7 +187,7 @@ export default function VisaPage() {
               <div className="max-w-6xl mx-auto">
                 <FadeUp>
                   <div className="mb-14">
-                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                       Visa Categories
                     </span>
                     <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
@@ -205,14 +205,14 @@ export default function VisaPage() {
                       <HoverCard>
                         <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden h-full flex group">
                           {/* Left accent border */}
-                          <div className="w-1.5 bg-slate-800 flex-shrink-0 group-hover:bg-[#003975] transition-colors" />
+                          <div className="w-1.5 bg-slate-800 flex-shrink-0 group-hover:bg-[#0066a6] transition-colors" />
                           <div className="p-6 flex-1">
                             <div className="flex items-start gap-4 mb-4">
                               <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
                                 <Icon name={vt.icon} size={20} />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#003975] transition-colors">{vt.title}</h3>
+                                <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-[#0066a6] transition-colors">{vt.title}</h3>
                                 <span className="text-[11px] text-slate-400 font-medium">{vt.countries}</span>
                               </div>
                             </div>
@@ -241,7 +241,7 @@ export default function VisaPage() {
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-14">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Checklist</span>
+              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Checklist</span>
               <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">Document Checklist</h2>
               <p className="text-slate-500 text-sm max-w-md mx-auto">Essential documents you'll need — we'll help you prepare every single one</p>
             </div>
@@ -249,8 +249,8 @@ export default function VisaPage() {
           <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {documentChecklist.map((cat) => (
               <StaggerItem key={cat.title}>
-                <div className="bg-gray-50 rounded-2xl p-5 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-[#003975] text-white flex items-center justify-center mb-4">
+                <div className="bg-gray-50 rounded-2xl p-5 h-full border border-gray-100 hover:border-[#0066a6]/20 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#0066a6] text-white flex items-center justify-center mb-4">
                     <Icon name={cat.icon} size={18} />
                   </div>
                   <h4 className="font-semibold text-slate-900 text-[15px] mb-3">{cat.title}</h4>
@@ -274,11 +274,11 @@ export default function VisaPage() {
           <FadeUp>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14">
               <div>
-                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Step by Step</span>
+                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Step by Step</span>
                 <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-2">Application Process</h2>
                 <p className="text-slate-500 text-sm">Our systematic 6-step process ensures nothing is missed</p>
               </div>
-              <Link href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#003975] text-white text-sm font-medium hover:bg-[#002d5e] transition self-start sm:self-auto">
+              <Link href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0066a6] text-white text-sm font-medium hover:bg-[#002d5e] transition self-start sm:self-auto">
                 Get Started <Icon name="ArrowRight" size={14} />
               </Link>
             </div>
@@ -289,11 +289,11 @@ export default function VisaPage() {
               <StaggerItem key={step.step}>
                 <div className="bg-white rounded-2xl border border-gray-100 p-6 h-full group hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:bg-[#003975] transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center font-bold text-lg flex-shrink-0 group-hover:bg-[#0066a6] transition-colors">
                       {step.step}
                     </div>
                     <div className="w-8 h-px bg-gray-200 flex-shrink-0" />
-                    <div className="w-9 h-9 rounded-lg bg-gray-50 text-slate-400 flex items-center justify-center group-hover:text-[#003975] transition-colors">
+                    <div className="w-9 h-9 rounded-lg bg-gray-50 text-slate-400 flex items-center justify-center group-hover:text-[#0066a6] transition-colors">
                       <Icon name={step.icon} size={16} />
                     </div>
                   </div>
@@ -315,7 +315,7 @@ export default function VisaPage() {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                   <FadeLeft>
                     <div>
-                      <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Trust & Expertise</span>
+                      <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Trust & Expertise</span>
                       <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
                         Why Trust NEXSUS<br />With Your Visa?
                       </h2>
@@ -335,7 +335,7 @@ export default function VisaPage() {
                     </div>
                   </FadeLeft>
                   <FadeRight>
-                    <div className="relative bg-gradient-to-br from-[#003975] to-slate-800 rounded-3xl p-8 text-white overflow-hidden">
+                    <div className="relative bg-gradient-to-br from-[#0066a6] to-slate-800 rounded-3xl p-8 text-white overflow-hidden">
                       <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full blur-2xl" />
                       <div className="relative z-10">
                         <h3 className="text-2xl font-bold mb-6">Our Visa Success</h3>
@@ -377,7 +377,7 @@ export default function VisaPage() {
 
       {/* ── CTA ── */}
       <section className="relative py-24 px-6 bg-gray-50 overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">
             <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">

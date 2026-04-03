@@ -270,7 +270,7 @@ function DestinationsDropdown({
                         onClick={() => setOpen(false)}
                         className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-[13px] transition-all duration-150 ${
                           hoveredDest === item.href
-                            ? "bg-[#003975] text-white"
+                            ? "bg-[#0066a6] text-white"
                             : "text-slate-600 hover:bg-gray-50"
                         }`}
                       >
@@ -316,7 +316,7 @@ function DestinationsDropdown({
                           key={sub.slug}
                           href={`${hoveredDest}/${sub.slug}`}
                           onClick={() => setOpen(false)}
-                          className="px-3 py-2.5 text-[12px] text-slate-500 hover:text-[#003975] hover:bg-blue-50/60 rounded-lg transition-colors duration-150 font-medium"
+                          className="px-3 py-2.5 text-[12px] text-slate-500 hover:text-[#0066a6] hover:bg-blue-50/60 rounded-lg transition-colors duration-150 font-medium"
                         >
                           {sub.label}
                         </Link>

@@ -126,7 +126,7 @@ export default function DestinationsSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 md:mb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gray-50 text-slate-600 text-sm font-medium border border-gray-200/80">
-              <Globe size={14} className="text-[#003975]" />
+              <Globe size={14} className="text-[#0066a6]" />
               Global Opportunities
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
@@ -225,7 +225,7 @@ export default function DestinationsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 mt-8 md:mt-12">
         <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#003975] to-[#00ab18] rounded-full"
+            className="h-full bg-gradient-to-r from-[#0066a6] to-[#00ab18] rounded-full"
             style={{ width: `${Math.max(5, progress)}%` }}
           />
         </div>

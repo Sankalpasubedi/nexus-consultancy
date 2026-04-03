@@ -228,8 +228,8 @@ export default function SOPPage() {
                   />
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-3 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#003975]/10 flex items-center justify-center">
-                    <Icon name="FileText" size={16} className="text-[#003975]" />
+                  <div className="w-8 h-8 rounded-lg bg-[#0066a6]/10 flex items-center justify-center">
+                    <Icon name="FileText" size={16} className="text-[#0066a6]" />
                   </div>
                   <span className="text-sm font-semibold text-slate-900">10,000+ SOPs</span>
                 </div>
@@ -267,7 +267,7 @@ export default function SOPPage() {
                     <div
                       className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 ${
                         doc.highlighted
-                          ? "bg-[#003975] text-white"
+                          ? "bg-[#0066a6] text-white"
                           : "bg-slate-100 text-slate-600"
                       }`}
                     >
@@ -285,7 +285,7 @@ export default function SOPPage() {
                           key={f}
                           className="flex items-center gap-2 text-sm text-slate-500"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#003975] flex-shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#0066a6] flex-shrink-0" />
                           {f}
                         </li>
                       ))}
@@ -382,7 +382,7 @@ export default function SOPPage() {
           {/* Section header */}
           <FadeUp>
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                 Your Pathway
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">
@@ -399,18 +399,18 @@ export default function SOPPage() {
             {whyChooseFeatures.map((f) => (
               <StaggerItem key={f.title}>
                 <HoverCard>
-                  <div className="bg-white rounded-2xl p-6 h-full border border-gray-100 hover:border-[#003975]/20 transition-colors group">
+                  <div className="bg-white rounded-2xl p-6 h-full border border-gray-100 hover:border-[#0066a6]/20 transition-colors group">
                     {/* Icon + stat row */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-11 h-11 rounded-xl bg-[#003975] text-white flex items-center justify-center">
+                      <div className="w-11 h-11 rounded-xl bg-[#0066a6] text-white flex items-center justify-center">
                         <Icon name={f.icon} size={18} />
                       </div>
                       <div className="text-right">
-                        <div className="text-xl font-bold text-[#003975]">{f.stat}</div>
+                        <div className="text-xl font-bold text-[#0066a6]">{f.stat}</div>
                         <div className="text-[10px] text-slate-400 uppercase tracking-wider">{f.statLabel}</div>
                       </div>
                     </div>
-                    <h4 className="text-sm font-semibold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors">
+                    <h4 className="text-sm font-semibold text-slate-900 mb-2 group-hover:text-[#0066a6] transition-colors">
                       {f.title}
                     </h4>
                     <p className="text-xs text-slate-500 leading-relaxed">
@@ -429,7 +429,7 @@ export default function SOPPage() {
               <FadeLeft>
                 <div className="p-8 md:p-10">
                   <div className="flex items-center gap-2 mb-6">
-                    <div className="w-8 h-8 rounded-lg bg-[#003975] text-white flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-[#0066a6] text-white flex items-center justify-center">
                       <Icon name="Settings" size={14} />
                     </div>
                     <h3 className="font-semibold text-slate-900">Our Process</h3>
@@ -437,7 +437,7 @@ export default function SOPPage() {
                   <div className="space-y-4">
                     {processLeft.map((item) => (
                       <div key={item} className="flex items-center gap-3">
-                        <div className="w-7 h-7 rounded-full bg-[#003975]/10 text-[#003975] flex items-center justify-center flex-shrink-0">
+                        <div className="w-7 h-7 rounded-full bg-[#0066a6]/10 text-[#0066a6] flex items-center justify-center flex-shrink-0">
                           <Icon name="Check" size={12} />
                         </div>
                         <span className="text-sm text-slate-700">{item}</span>
@@ -484,7 +484,7 @@ export default function SOPPage() {
       {/* ── CTA ── */}
       <section className="relative py-24 px-6 bg-gray-50 overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 left-0 w-64 h-64 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-tight">

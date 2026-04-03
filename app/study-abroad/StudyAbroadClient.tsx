@@ -249,7 +249,7 @@ export default function StudyAbroadPage() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0066a6]/30 to-transparent" />
                 </div>
                 {/* Floating accent */}
                 <motion.div
@@ -338,7 +338,7 @@ export default function StudyAbroadPage() {
 
                       {/* Programs badge */}
                       <div className="absolute top-5 right-5 z-10">
-                        <span className="text-xs font-semibold text-white bg-[#003975]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                        <span className="text-xs font-semibold text-white bg-[#0066a6]/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
                           {l.resources}+ Resource{l.resources > 1 ? "s" : ""}
                         </span>
                       </div>
@@ -409,7 +409,7 @@ export default function StudyAbroadPage() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
+                className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
               >
                 Book Free Consultation →
               </Link>

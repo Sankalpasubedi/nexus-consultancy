@@ -176,14 +176,14 @@ function MegaDropdown({
       {overviewHref ? (
         <Link
           href={overviewHref}
-          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}
+          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#0066a6]`}
         >
           {label}
           <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
         </Link>
       ) : (
         <button
-          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}
+          className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#0066a6]`}
         >
           {label}
           <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -199,11 +199,11 @@ function MegaDropdown({
             transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="absolute top-full left-1/2 -translate-x-1/2 pt-0 z-50"
           >
-            <div className="w-10 h-[3px] bg-[#003975] mx-auto rounded-full" />
+            <div className="w-10 h-[3px] bg-[#0066a6] mx-auto rounded-full" />
             <div className={`bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden mt-0.5 ${columns === 2 ? 'min-w-[520px]' : 'min-w-[280px]'}`}>
               {overviewHref && (
                 <div className="px-5 pt-4 pb-3 border-b border-gray-50 bg-gray-50/50">
-                  <Link href={overviewHref} onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                  <Link href={overviewHref} onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#0066a6] hover:underline">
                     View All {label} →
                   </Link>
                 </div>
@@ -214,10 +214,10 @@ function MegaDropdown({
                     key={item.href + item.label}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="flex items-start gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-200 group"
+                    className="flex items-start gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-[#0066a6]/5 hover:text-[#0066a6] transition-colors duration-200 group"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                      <Icon name={item.icon} size={15} className="text-slate-400 group-hover:text-[#003975]" />
+                    <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#0066a6]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                      <Icon name={item.icon} size={15} className="text-slate-400 group-hover:text-[#0066a6]" />
                     </div>
                     <div className="min-w-0">
                       <span className="text-[13px] font-medium block">{item.label}</span>
@@ -260,7 +260,7 @@ function StudyAbroadDropdown({
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
       <Link
         href="/study-abroad"
-        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}>
+        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#0066a6]`}>
         Study Abroad
         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </Link>
@@ -274,10 +274,10 @@ function StudyAbroadDropdown({
             transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="absolute top-full left-0 pt-0 z-50"
           >
-            <div className="w-10 h-[3px] bg-[#003975] rounded-full ml-6" />
+            <div className="w-10 h-[3px] bg-[#0066a6] rounded-full ml-6" />
             <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden w-[320px] mt-0.5">
               <div className="px-5 pt-4 pb-3 border-b border-gray-50 bg-gray-50/50">
-                <Link href="/study-abroad" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                <Link href="/study-abroad" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#0066a6] hover:underline">
                   View All Study Abroad →
                 </Link>
               </div>
@@ -287,10 +287,10 @@ function StudyAbroadDropdown({
                     key={item.href + item.label}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="flex items-start gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-200 group"
+                    className="flex items-start gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-[#0066a6]/5 hover:text-[#0066a6] transition-colors duration-200 group"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                      <Icon name={item.icon} size={15} className="text-slate-400 group-hover:text-[#003975]" />
+                    <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#0066a6]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                      <Icon name={item.icon} size={15} className="text-slate-400 group-hover:text-[#0066a6]" />
                     </div>
                     <div className="min-w-0">
                       <span className="text-[13px] font-medium block">{item.label}</span>
@@ -360,7 +360,7 @@ function DestinationsDropdown({
     <div className="relative" onMouseEnter={enter} onMouseLeave={leave}>
       <Link
         href="/destinations"
-        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#003975]`}
+        className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 flex items-center gap-1.5 py-5 text-slate-700 hover:text-[#0066a6]`}
       >
         Destinations
         <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -375,12 +375,12 @@ function DestinationsDropdown({
             transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="absolute top-full left-0 pt-0 z-50"
           >
-            <div className="w-10 h-[3px] bg-[#003975] rounded-full ml-6" />
+            <div className="w-10 h-[3px] bg-[#0066a6] rounded-full ml-6" />
             <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden flex w-[550px] mt-0.5">
               {/* Left: Countries */}
               <div className="flex-shrink-0 w-[300px]">
                 <div className="px-5 pt-4 pb-3 border-b border-gray-50 bg-gray-50/50">
-                  <Link href="/destinations" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                  <Link href="/destinations" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#0066a6] hover:underline">
                     All Destinations →
                   </Link>
                 </div>
@@ -392,7 +392,7 @@ function DestinationsDropdown({
                         onClick={() => setOpen(false)}
                         className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-[13px] transition-all duration-150 ${
                           hoveredDest === item.href
-                            ? "bg-[#003975] text-white"
+                            ? "bg-[#0066a6] text-white"
                             : "text-slate-600 hover:bg-gray-50"
                         }`}
                       >
@@ -413,7 +413,7 @@ function DestinationsDropdown({
                       type="button"
                       onMouseEnter={handleMoreCountriesEnter}
                       onFocus={handleMoreCountriesEnter}
-                      className="w-full rounded-xl border border-dashed border-[#c8d7ea] bg-[#f8fbff] px-4 py-3 text-left text-[13px] font-semibold text-[#003975] hover:bg-[#003975]/5 transition-colors"
+                      className="w-full rounded-xl border border-dashed border-[#c8d7ea] bg-[#f8fbff] px-4 py-3 text-left text-[13px] font-semibold text-[#0066a6] hover:bg-[#0066a6]/5 transition-colors"
                     >
                       Show more countries →
                     </button>
@@ -433,9 +433,9 @@ function DestinationsDropdown({
                           key={item.href}
                           href={item.href}
                           onClick={() => setOpen(false)}
-                          className="flex items-start gap-3 rounded-xl px-3 py-3 text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-150 group"
+                          className="flex items-start gap-3 rounded-xl px-3 py-3 text-slate-600 hover:bg-[#0066a6]/5 hover:text-[#0066a6] transition-colors duration-150 group"
                         >
-                          <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center shrink-0 transition-colors">
+                          <div className="w-8 h-8 rounded-lg bg-gray-100 group-hover:bg-[#0066a6]/10 flex items-center justify-center shrink-0 transition-colors">
                             <FlagIcon code={item.flagCode} size={16} />
                           </div>
                           <div className="min-w-0">
@@ -453,7 +453,7 @@ function DestinationsDropdown({
                     </div>
                     <div className="grid grid-cols-1 gap-0.5 px-3 pb-3">
                       {destinationSubPages.map((sub) => (
-                        <Link key={sub.slug} href={`${hoveredDest}/${sub.slug}`} onClick={() => setOpen(false)} className="px-3 py-2.5 text-[12px] text-slate-500 hover:text-[#003975] hover:bg-[#003975]/5 rounded-lg transition-colors duration-150 font-medium">
+                        <Link key={sub.slug} href={`${hoveredDest}/${sub.slug}`} onClick={() => setOpen(false)} className="px-3 py-2.5 text-[12px] text-slate-500 hover:text-[#0066a6] hover:bg-[#0066a6]/5 rounded-lg transition-colors duration-150 font-medium">
                           {sub.label}
                         </Link>
                       ))}
@@ -769,7 +769,7 @@ function TopBarDropdown({
             <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden min-w-[260px]">
               {overviewHref && (
                 <div className="px-4 pt-3 pb-2 border-b border-gray-50 bg-gray-50/50">
-                  <Link href={overviewHref} onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                  <Link href={overviewHref} onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#0066a6] hover:underline">
                     View All →
                   </Link>
                 </div>
@@ -780,10 +780,10 @@ function TopBarDropdown({
                       key={item.href + item.label}
                       href={item.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-start gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975] transition-colors duration-200 group"
+                      className="flex items-start gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-[#0066a6]/5 hover:text-[#0066a6] transition-colors duration-200 group"
                     >
-                      <div className="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-[#003975]/10 flex items-center justify-center flex-shrink-0 transition-colors">
-                        <Icon name={item.icon} size={13} className="text-slate-400 group-hover:text-[#003975]" />
+                      <div className="w-7 h-7 rounded-lg bg-gray-100 group-hover:bg-[#0066a6]/10 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <Icon name={item.icon} size={13} className="text-slate-400 group-hover:text-[#0066a6]" />
                       </div>
                       <div className="min-w-0">
                         <span className="text-[12px] font-medium block">{item.label}</span>
@@ -847,7 +847,7 @@ function FindUsBranchDropdown() {
       case 'loading':
         return (
           <>
-            <div className="w-4 h-4 border-2 border-[#003975]/30 border-t-[#003975] rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-[#0066a6]/30 border-t-[#0066a6] rounded-full animate-spin" />
             <span>Detecting location...</span>
           </>
         );
@@ -875,7 +875,7 @@ function FindUsBranchDropdown() {
       default:
         return (
           <>
-            <Icon name="Navigation" size={14} className="text-[#003975]" />
+            <Icon name="Navigation" size={14} className="text-[#0066a6]" />
             <span>Use My Location</span>
           </>
         );
@@ -902,7 +902,7 @@ function FindUsBranchDropdown() {
           >
             <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden min-w-[300px]">
               <div className="px-4 pt-3 pb-2 border-b border-gray-50 bg-gray-50/50 flex items-center justify-between">
-                <Link href="/branches" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#003975] hover:underline">
+                <Link href="/branches" onClick={() => setOpen(false)} className="text-[11px] font-bold uppercase tracking-wider text-[#0066a6] hover:underline">
                   View All →
                 </Link>
               </div>
@@ -917,7 +917,7 @@ function FindUsBranchDropdown() {
                       ? 'bg-slate-100 text-slate-500 cursor-wait'
                       : locationStatus === 'denied' || locationStatus === 'error'
                       ? 'bg-red-50 text-red-600 hover:bg-red-100'
-                      : 'bg-[#003975]/5 text-[#003975] hover:bg-[#003975]/10 border border-[#003975]/20'
+                      : 'bg-[#0066a6]/5 text-[#0066a6] hover:bg-[#0066a6]/10 border border-[#0066a6]/20'
                   }`}
                 >
                   {getLocationButtonContent()}
@@ -944,16 +944,16 @@ function FindUsBranchDropdown() {
                       onClick={() => handleBranchClick(item.slug)}
                       className={`w-full flex items-start gap-3 px-3 py-2.5 rounded-lg transition-colors duration-200 group text-left ${
                         isCurrentBranch 
-                          ? "bg-[#003975]/10 text-[#003975]" 
-                          : "text-slate-600 hover:bg-[#003975]/5 hover:text-[#003975]"
+                          ? "bg-[#0066a6]/10 text-[#0066a6]" 
+                          : "text-slate-600 hover:bg-[#0066a6]/5 hover:text-[#0066a6]"
                       }`}
                     >
                       <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
                         isCurrentBranch
-                          ? "bg-[#003975]/20"
-                          : "bg-gray-100 group-hover:bg-[#003975]/10"
+                          ? "bg-[#0066a6]/20"
+                          : "bg-gray-100 group-hover:bg-[#0066a6]/10"
                       }`}>
-                        <Icon name={item.icon} size={13} className={isCurrentBranch ? "text-[#003975]" : "text-slate-400 group-hover:text-[#003975]"} />
+                        <Icon name={item.icon} size={13} className={isCurrentBranch ? "text-[#0066a6]" : "text-slate-400 group-hover:text-[#0066a6]"} />
                       </div>
                       <div className="min-w-0 flex-1">
                         <span className="text-[12px] font-medium block">{item.label}</span>
@@ -966,7 +966,7 @@ function FindUsBranchDropdown() {
                         )}
                       </div>
                       {isCurrentBranch && (
-                        <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#003975] mt-1.5" />
+                        <div className="flex-shrink-0 w-2 h-2 rounded-full bg-[#0066a6] mt-1.5" />
                       )}
                     </button>
                   );
@@ -1109,7 +1109,7 @@ export default function Header() {
                   priority
                 />
                 <div className="hidden min-[700px]:block min-[1025px]:hidden min-[1260px]:block">
-                  <span className="font-bold text-xl text-[#003975]">Nexsus</span>
+                  <span className="font-bold text-xl text-[#0066a6]">Nexsus</span>
                   <span className="text-[#5a6a7a] text-xs block leading-tight">Educational Consultancy &amp; Immigration Services</span>
                 </div>
               </Link>
@@ -1142,7 +1142,7 @@ export default function Header() {
                 />
                 <Link
                   href="/contact"
-                  className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 py-5 text-slate-700 hover:text-[#003975]`}
+                  className={`text-sm lg:text-[15px] font-semibold tracking-wide transition-colors duration-300 py-5 text-slate-700 hover:text-[#0066a6]`}
                 >
                   Contact
                 </Link>
@@ -1152,7 +1152,7 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/contact"
-                  className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-bold tracking-wide transition-all duration-300 bg-[#003975] text-white hover:bg-[#002a5c] shadow-md shadow-[#003975]/15`}
+                  className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-bold tracking-wide transition-all duration-300 bg-[#0066a6] text-white hover:bg-[#002a5c] shadow-md shadow-[#0066a6]/15`}
                 >
                   Free Consultation
                   <Icon name="ArrowRight" size={13} />
@@ -1173,7 +1173,7 @@ export default function Header() {
 
             {/* Bottom accent line */}
             {!isTransparent || scrolled ? (
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#003975] via-[#0052a3] to-[#003975] opacity-80" />
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#0066a6] via-[#0052a3] to-[#0066a6] opacity-80" />
             ) : null}
         </div>
       </header>
@@ -1202,7 +1202,7 @@ export default function Header() {
                   <Link href="/" onClick={closeMobile} className="flex items-center gap-3">
                     <Image src="/logo.png" alt="Nexsus Educational Consultancy and Immigration Services" width={56} height={56} className="h-14 w-auto" />
                     <div>
-                      <span className="font-bold text-xl text-[#003975]">Nexsus</span>
+                      <span className="font-bold text-xl text-[#0066a6]">Nexsus</span>
                       <span className="text-[#5a6a7a] text-xs block leading-tight">Educational Consultancy &amp; Immigration Services</span>
                     </div>
                   </Link>
@@ -1221,7 +1221,7 @@ export default function Header() {
                   {/* More Options Toggle */}
                   <button
                     onClick={() => setMobileMoreOpen(!mobileMoreOpen)}
-                    className="flex items-center justify-between w-full py-4 text-[#003975] font-medium text-[15px] border-b border-gray-100"
+                    className="flex items-center justify-between w-full py-4 text-[#0066a6] font-medium text-[15px] border-b border-gray-100"
                   >
                     <span>{mobileMoreOpen ? "Hide more options" : "Show more options"}</span>
                     <motion.svg
@@ -1266,14 +1266,14 @@ export default function Header() {
                                 }}
                                 className={`w-full flex items-center gap-3 py-2.5 px-4 text-sm rounded-xl transition-colors duration-200 ${
                                   currentBranch.slug === item.slug 
-                                    ? "bg-[#003975]/10 text-[#003975]" 
+                                    ? "bg-[#0066a6]/10 text-[#0066a6]" 
                                     : "text-slate-600 hover:bg-gray-50"
                                 }`}
                               >
-                                <Icon name={item.icon} size={15} className={currentBranch.slug === item.slug ? "text-[#003975]" : "text-slate-400"} />
+                                <Icon name={item.icon} size={15} className={currentBranch.slug === item.slug ? "text-[#0066a6]" : "text-slate-400"} />
                                 <span className="flex-1 text-left">{item.label}</span>
                                 {currentBranch.slug === item.slug && (
-                                  <span className="w-2 h-2 rounded-full bg-[#003975]" />
+                                  <span className="w-2 h-2 rounded-full bg-[#0066a6]" />
                                 )}
                               </button>
                             ))}
@@ -1300,7 +1300,7 @@ export default function Header() {
                   </AnimatePresence>
                 </div>
                 <div className="mt-8 space-y-4">
-                  <Link href="/contact" onClick={closeMobile} className="block w-full text-center bg-[#003975] text-white py-3.5 rounded-full font-semibold text-[15px] hover:bg-[#002a5c] transition-all duration-300">
+                  <Link href="/contact" onClick={closeMobile} className="block w-full text-center bg-[#0066a6] text-white py-3.5 rounded-full font-semibold text-[15px] hover:bg-[#002a5c] transition-all duration-300">
                     Free Consultation
                   </Link>
                 </div>

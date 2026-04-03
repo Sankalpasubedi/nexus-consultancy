@@ -13,7 +13,7 @@ const steps = [
     description:
       "We assess your profile, goals, and preferences to create a personalized education plan.",
     icon: "Search",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
     image: "/services/leftimage1.png",
   },
   {
@@ -22,7 +22,7 @@ const steps = [
     description:
       "Shortlist universities that match your aspirations, budget, and academic background.",
     icon: "ClipboardList",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
     image: "/services/rightimage9.png",
   },
   {
@@ -31,7 +31,7 @@ const steps = [
     description:
       "Complete applications with expert guidance and navigate visa requirements seamlessly.",
     icon: "FileText",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
     image: "/services/leftimage8.png",
   },
   {
@@ -40,7 +40,7 @@ const steps = [
     description:
       "Get ready with accommodation, travel bookings, and essential pre-departure briefings.",
     icon: "Plane",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
     image: "/services/rightimage11.png",
   },
   {
@@ -49,7 +49,7 @@ const steps = [
     description:
       "Arrive confident and prepared to excel in your new academic environment.",
     icon: "GraduationCap",
-    gradient: "from-[#003975] via-[#003975] to-[#00ab18]",
+    gradient: "from-[#0066a6] via-[#0066a6] to-[#00ab18]",
     image: "/services/leftimage10.png",
   },
 ];
@@ -78,7 +78,7 @@ export default function JourneySection() {
         {/* ── DESKTOP TIMELINE ── */}
         <div className="hidden md:block relative">
           {/* Center vertical line */}
-          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-[#003975]/20" />
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-[#0066a6]/20" />
 
           <div className="space-y-0">
             {steps.map((step, idx) => {
@@ -108,7 +108,7 @@ export default function JourneySection() {
                               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                               {/* Step number overlay */}
                               <div className="absolute bottom-3 left-3">
-                                <div className="w-10 h-10 rounded-xl bg-[#003975] flex items-center justify-center shadow-lg">
+                                <div className="w-10 h-10 rounded-xl bg-[#0066a6] flex items-center justify-center shadow-lg">
                                   <span className="text-white text-sm font-bold">{step.id}</span>
                                 </div>
                               </div>
@@ -117,7 +117,7 @@ export default function JourneySection() {
                             {/* Content side */}
                             <div className="flex-1 p-6 flex flex-col justify-center">
                               {/* Icon badge */}
-                              <div className="w-12 h-12 rounded-xl bg-[#003975] flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                              <div className="w-12 h-12 rounded-xl bg-[#0066a6] flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
                                 <Icon name={step.icon} size={20} className="text-white" />
                               </div>
 
@@ -146,7 +146,7 @@ export default function JourneySection() {
                         className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center shadow-sm"
                       >
                         <div
-                          className={`w-8 h-8 rounded-full bg-[#003975] shadow-lg flex items-center justify-center`}
+                          className={`w-8 h-8 rounded-full bg-[#0066a6] shadow-lg flex items-center justify-center`}
                         >
                           <span className="text-white text-xs font-bold">
                             {step.id}
@@ -217,7 +217,7 @@ export default function JourneySection() {
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-[#003975] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
+                className="inline-flex items-center gap-3 bg-[#0066a6] text-white px-8 py-4 rounded-full font-medium hover:bg-[#002d5e] transition-colors shadow-lg shadow-blue-500/20"
               >
                 Start Your Journey Today
                 <svg

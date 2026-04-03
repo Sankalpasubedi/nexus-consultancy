@@ -22,7 +22,7 @@ const steps = [
     title: "Research & Shortlist",
     timeline: "2-3 months before",
     icon: "Search",
-    gradient: "from-[#003975] to-[#006BDB]",
+    gradient: "from-[#0066a6] to-[#006BDB]",
     tasks: [
       "Free counselling session with our experts",
       "Profile assessment and goal alignment",
@@ -181,7 +181,7 @@ function ProcessSlider() {
           >
             <div className="bg-white rounded-3xl p-8 border border-gray-100 h-full shadow-sm hover:shadow-lg transition-shadow relative overflow-hidden">
               {/* Accent line */}
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#003975]" />
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#0066a6]" />
 
               {/* Step number */}
               <div className="flex items-center gap-4 mb-6">
@@ -195,8 +195,8 @@ function ProcessSlider() {
               </div>
 
               {/* Timeline */}
-              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-50 text-[#003975] text-xs font-medium mb-5">
-                <Icon name="Clock" size={12} className="text-[#003975]" /> {s.timeline}
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-50 text-[#0066a6] text-xs font-medium mb-5">
+                <Icon name="Clock" size={12} className="text-[#0066a6]" /> {s.timeline}
               </div>
 
               {/* Tasks */}
@@ -286,8 +286,8 @@ export default function ProcessPage() {
                   className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                      <Icon name="CheckCircle" size={24} className="text-[#003975]" />
+                    <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                      <Icon name="CheckCircle" size={24} className="text-[#0066a6]" />
                     </div>
                     <div>
                       <p className="text-slate-900 font-bold text-lg">7 Steps</p>
@@ -337,7 +337,7 @@ export default function ProcessPage() {
                 <HoverCard>
                   <div className="bg-gray-50 rounded-3xl p-8 text-center border border-gray-100 h-full">
                     <div className="flex justify-center mb-4">
-                      <Icon name={tip.icon} size={40} className="text-[#003975]" />
+                      <Icon name={tip.icon} size={40} className="text-[#0066a6]" />
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 mb-2">{tip.title}</h3>
                     <p className="text-slate-500 text-sm">{tip.description}</p>
@@ -356,7 +356,7 @@ export default function ProcessPage() {
             <h2 className="text-4xl font-bold mb-6">Ready to Begin?</h2>
             <p className="text-blue-100 mb-8">Contact us for a free consultation and we&apos;ll create your personalized application timeline.</p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold shadow-lg">
                 Start My Application →
               </Link>
             </motion.div>

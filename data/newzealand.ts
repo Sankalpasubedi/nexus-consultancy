@@ -4,7 +4,7 @@ const newZealandData: CountryDataType = {
   country: "New Zealand",
   currency: "NZD",
   flagCode: "nz",
-  accentColor: "#003975",
+  accentColor: "#0066a6",
   carouselData: {
     CountryImages: [
       { id: 1, url: "/destinations/newzeland.png", location: "Auckland" },

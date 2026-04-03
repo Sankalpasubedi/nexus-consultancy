@@ -99,7 +99,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-[68px] max-w-[1440px] items-center justify-between px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#003975]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0066a6]">
             <span className="text-sm font-extrabold text-white">N</span>
           </div>
           <span className="text-base font-bold tracking-tight text-neutral-900">
@@ -124,7 +124,7 @@ export default function Navbar() {
                   href={item.url}
                   className={`flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-[#003975]"
+                      ? "text-[#0066a6]"
                       : "text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900"
                   }`}
                 >
@@ -165,7 +165,7 @@ export default function Navbar() {
           <Link
             href="/contact"
             className="hidden items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-lg lg:inline-flex"
-            style={{ backgroundColor: "#003975" }}
+            style={{ backgroundColor: "#0066a6" }}
           >
             Get Started
             <ArrowRight className="h-3.5 w-3.5" />
@@ -238,7 +238,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               className="flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white"
-              style={{ backgroundColor: "#003975" }}
+              style={{ backgroundColor: "#0066a6" }}
             >
               Get Started
               <ArrowRight className="h-3.5 w-3.5" />

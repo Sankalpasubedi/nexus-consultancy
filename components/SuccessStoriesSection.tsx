@@ -122,7 +122,7 @@ export default function SuccessStoriesSection() {
                 </blockquote>
 
                 <div className="flex items-center gap-4 mb-10">
-                  <div className="flex-1 h-px bg-gradient-to-r from-[#003975] to-[#00ab18]" />
+                  <div className="flex-1 h-px bg-gradient-to-r from-[#0066a6] to-[#00ab18]" />
                   <p className="text-sm font-medium text-white/60">{t.country}</p>
                 </div>
               </motion.div>

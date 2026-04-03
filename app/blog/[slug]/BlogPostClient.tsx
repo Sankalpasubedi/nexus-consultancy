@@ -288,13 +288,13 @@ export default function BlogDetailPage() {
                           className="object-cover transition-transform duration-700 group-hover:scale-105"
                         />
                         <div className="absolute top-3 left-3">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[10px] font-semibold text-[#003975] uppercase tracking-wider">
+                          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-[10px] font-semibold text-[#0066a6] uppercase tracking-wider">
                             {rp.category}
                           </span>
                         </div>
                       </div>
                       <div className="p-6 flex flex-col flex-1">
-                        <h3 className="text-lg font-semibold text-slate-900 mb-2 line-clamp-2 group-hover:text-[#003975] transition-colors leading-snug">
+                        <h3 className="text-lg font-semibold text-slate-900 mb-2 line-clamp-2 group-hover:text-[#0066a6] transition-colors leading-snug">
                           {rp.title}
                         </h3>
                         <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-auto">
@@ -305,7 +305,7 @@ export default function BlogDetailPage() {
                           <Icon
                             name="ArrowRight"
                             size={14}
-                            className="text-slate-400 group-hover:text-[#003975] transition-colors"
+                            className="text-slate-400 group-hover:text-[#0066a6] transition-colors"
                           />
                         </div>
                       </div>
@@ -321,7 +321,7 @@ export default function BlogDetailPage() {
       {/* ── CTA ── */}
       <section className="relative py-24 px-6 bg-gray-50 overflow-hidden">
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 left-0 w-64 h-64 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
 
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">

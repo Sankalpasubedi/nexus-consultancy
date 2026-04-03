@@ -73,14 +73,14 @@ export default function GuardianshipClient() {
               {/* Breadcrumb */}
               <FadeUp>
                 <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-                  <Link href="/" className="hover:text-[#003975]">Home</Link>
+                  <Link href="/" className="hover:text-[#0066a6]">Home</Link>
                   <span>/</span>
                   <span className="text-slate-900">Student Guardianship</span>
                 </nav>
               </FadeUp>
               
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-semibold tracking-wide border border-[#003975]/20">
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#0066a6]/10 text-[#0066a6] text-xs font-semibold tracking-wide border border-[#0066a6]/20">
                   Student Essentials
                 </span>
               </FadeUp>
@@ -132,8 +132,8 @@ export default function GuardianshipClient() {
               {guardianshipPoints.map((point, idx) => (
                 <FadeUp key={point.title} delay={idx * 0.08}>
                   <div className="bg-white rounded-2xl p-5 border border-gray-100 h-full">
-                    <div className="w-10 h-10 rounded-lg bg-[#003975]/10 flex items-center justify-center mb-3">
-                      <Icon name={point.icon} size={18} className="text-[#003975]" />
+                    <div className="w-10 h-10 rounded-lg bg-[#0066a6]/10 flex items-center justify-center mb-3">
+                      <Icon name={point.icon} size={18} className="text-[#0066a6]" />
                     </div>
                     <h4 className="font-semibold text-slate-900 mb-1.5">{point.title}</h4>
                     <p className="text-sm text-slate-600 leading-relaxed">{point.description}</p>
@@ -201,7 +201,7 @@ export default function GuardianshipClient() {
                     <option>General guidance</option>
                   </select>
                 </div>
-                <button type="button" className="inline-flex items-center gap-2 bg-[#003975] text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition">
+                <button type="button" className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition">
                   Send guardianship enquiry <Icon name="ArrowRight" size={14} />
                 </button>
               </form>

@@ -57,7 +57,7 @@ export default function WhyChooseSection() {
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-5 tracking-tight">
               Trusted by{" "}
-              <span className="bg-gradient-to-r from-[#003975] via-[#003975] to-[#00ab18] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#0066a6] via-[#0066a6] to-[#00ab18] bg-clip-text text-transparent">
                 15,000+
               </span>{" "}
               Students Worldwide
@@ -88,7 +88,7 @@ export default function WhyChooseSection() {
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch xl:w-[76%]">
             {/* LEFT: Stats card */}
             <FadeUp className="lg:w-[45%] flex" delay={0.1}>
-              <div className="relative w-full bg-[#003975] rounded-3xl p-10 lg:p-12 overflow-hidden flex flex-col justify-center">
+              <div className="relative w-full bg-[#0066a6] rounded-3xl p-10 lg:p-12 overflow-hidden flex flex-col justify-center">
                 <div className="relative z-10">
                   <p className="text-sm font-medium text-slate-400 uppercase tracking-widest mb-10">
                     Our Track Record
@@ -113,7 +113,7 @@ export default function WhyChooseSection() {
 
                   {/* Bottom subtle divider */}
                   <div className="mt-10 pt-8 border-t border-white/10">
-                    <p className="text-slate-500 text-sm leading-relaxed">
+                    <p className="text-white text-sm leading-relaxed">
                       Numbers that reflect our commitment to every student&apos;s
                       success and a journey built on trust.
                     </p>
@@ -138,11 +138,11 @@ export default function WhyChooseSection() {
                     >
                       <div className="flex items-start gap-5">
                         {/* Icon */}
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-50 to-gray-100 border border-gray-200/60 flex items-center justify-center flex-shrink-0 group-hover:from-[#003975]/10 group-hover:to-[#006BDB]/10 group-hover:border-blue-200/60 transition-all duration-300">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-50 to-gray-100 border border-gray-200/60 flex items-center justify-center flex-shrink-0 group-hover:from-[#0066a6]/10 group-hover:to-[#006BDB]/10 group-hover:border-blue-200/60 transition-all duration-300">
                           <Icon
                             name={card.icon}
                             size={22}
-                            className="text-slate-600 group-hover:text-[#003975] transition-colors duration-300"
+                            className="text-slate-600 group-hover:text-[#0066a6] transition-colors duration-300"
                           />
                         </div>
 

@@ -232,7 +232,7 @@ export default function ServicesPage() {
       <section className="relative py-24 px-6 bg-gray-50 overflow-hidden">
         {/* Decorative green glow */}
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#00ab18]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 left-0 w-64 h-64 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
 
         <FadeUp>
           <div className="max-w-2xl mx-auto text-center relative z-10">

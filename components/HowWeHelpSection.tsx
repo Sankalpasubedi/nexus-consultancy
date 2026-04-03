@@ -116,7 +116,7 @@ export default function HowWeHelpSection() {
             >
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-black/15"
+                className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors shadow-lg shadow-black/15"
               >
                 Start Your Journey
                 <svg

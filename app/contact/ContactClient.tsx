@@ -252,7 +252,7 @@ export default function ContactPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-[#003975] text-white py-3.5 rounded-xl font-semibold hover:bg-[#002d5e] transition flex items-center justify-center gap-2"
+                  className="w-full bg-[#0066a6] text-white py-3.5 rounded-xl font-semibold hover:bg-[#002d5e] transition flex items-center justify-center gap-2"
                 >
                   Send Message <Icon name="Send" size={16} />
                 </motion.button>
@@ -354,7 +354,7 @@ export default function ContactPage() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-white text-[#003975] py-3.5 rounded-xl font-semibold hover:bg-blue-50 transition flex items-center justify-center gap-2"
+                  className="w-full bg-white text-[#0066a6] py-3.5 rounded-xl font-semibold hover:bg-blue-50 transition flex items-center justify-center gap-2"
                 >
                   Book Your Consultation <Icon name="ArrowRight" size={16} />
                 </motion.button>
@@ -371,7 +371,7 @@ export default function ContactPage() {
         <div className="max-w-[1440px] mx-auto">
           <FadeUp>
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-[#003975]/10 text-[#003975] text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-[#0066a6]/10 text-[#0066a6] text-sm font-medium">
                 <Icon name="Building2" size={20} /> Currently Viewing
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">{currentBranch.name}</h2>
@@ -381,7 +381,7 @@ export default function ContactPage() {
           
           {/* Current Branch Card */}
           <FadeUp delay={0.1}>
-            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#003975] to-[#002550] rounded-3xl p-8 md:p-10 text-white shadow-2xl">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#0066a6] to-[#002550] rounded-3xl p-8 md:p-10 text-white shadow-2xl">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-6">
@@ -455,7 +455,7 @@ export default function ContactPage() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       href={`tel:${currentBranch.phone.replace(/\s/g, '')}`}
-                      className="inline-flex items-center gap-2 bg-white text-[#003975] px-6 py-3 rounded-xl font-semibold text-sm"
+                      className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-6 py-3 rounded-xl font-semibold text-sm"
                     >
                       <Icon name="Phone" size={16} /> Call Now
                     </motion.a>
@@ -506,18 +506,18 @@ export default function ContactPage() {
                     onClick={() => selectBranch(branch.slug)}
                     className={`w-full text-left rounded-2xl p-7 h-full border transition-all duration-200 ${
                       branch.isHeadOffice
-                        ? "bg-[#003975]/10 text-slate-900 border-[#003975]/20 hover:border-[#003975]/40"
-                        : "bg-white text-slate-900 border-gray-100 hover:border-[#003975]/30"
+                        ? "bg-[#0066a6]/10 text-slate-900 border-[#0066a6]/20 hover:border-[#0066a6]/40"
+                        : "bg-white text-slate-900 border-gray-100 hover:border-[#0066a6]/30"
                     }`}
                   >
                     <div className="flex items-start justify-between mb-3">
                       {branch.isHeadOffice && (
-                        <span className="inline-block px-3 py-1 rounded-full bg-[#003975]/20 text-[#003975] text-[11px] font-semibold tracking-wide uppercase">
+                        <span className="inline-block px-3 py-1 rounded-full bg-[#0066a6]/20 text-[#0066a6] text-[11px] font-semibold tracking-wide uppercase">
                           Head Office
                         </span>
                       )}
-                      <div className="ml-auto w-8 h-8 rounded-full bg-[#003975]/10 flex items-center justify-center">
-                        <Icon name="ArrowRight" size={14} className="text-[#003975]" />
+                      <div className="ml-auto w-8 h-8 rounded-full bg-[#0066a6]/10 flex items-center justify-center">
+                        <Icon name="ArrowRight" size={14} className="text-[#0066a6]" />
                       </div>
                     </div>
                     <h3 className="text-lg font-semibold mb-1">{branch.name}</h3>
@@ -624,7 +624,7 @@ export default function ContactPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href={`tel:${currentBranch.phone.replace(/\s/g, '')}`}
-              className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg"
+              className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold shadow-lg"
             >
               <Icon name="Phone" size={20} /> Call {currentBranch.shortName}
             </motion.a>

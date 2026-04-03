@@ -178,7 +178,7 @@ export default function CounselingPage() {
               <div className="max-w-6xl mx-auto">
                 <FadeUp>
                   <div className="text-center mb-14">
-                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                    <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                       Our Expertise
                     </span>
                     <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">
@@ -194,17 +194,17 @@ export default function CounselingPage() {
                   {counselingTypes.map((ct, i) => (
                     <StaggerItem key={ct.title}>
                       <HoverCard>
-                        <div className="bg-white rounded-2xl border border-gray-100 hover:border-[#003975]/20 transition-all p-6 h-full group relative overflow-hidden">
+                        <div className="bg-white rounded-2xl border border-gray-100 hover:border-[#0066a6]/20 transition-all p-6 h-full group relative overflow-hidden">
                           {/* Large number watermark */}
                           <span className="absolute top-3 right-5 text-[72px] font-black text-slate-900/[0.03] leading-none select-none">
                             {String(i + 1).padStart(2, "0")}
                           </span>
                           <div className="relative z-10">
                             <div className="flex items-center gap-3 mb-4">
-                              <div className="w-11 h-11 rounded-xl bg-[#003975] text-white flex items-center justify-center flex-shrink-0">
+                              <div className="w-11 h-11 rounded-xl bg-[#0066a6] text-white flex items-center justify-center flex-shrink-0">
                                 <Icon name={ct.icon} size={20} />
                               </div>
-                              <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#003975] transition-colors">{ct.title}</h3>
+                              <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#0066a6] transition-colors">{ct.title}</h3>
                             </div>
                             <p className="text-sm text-slate-500 mb-4 leading-relaxed">{ct.description}</p>
                             <div className="space-y-2">
@@ -231,7 +231,7 @@ export default function CounselingPage() {
         <div className="max-w-[1200px] mx-auto">
           <FadeUp>
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">Process</span>
+              <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">Process</span>
               <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-3">How It Works</h2>
               <p className="text-slate-500 text-sm max-w-md mx-auto">Five simple steps from your first consultation to your university admission</p>
             </div>
@@ -280,7 +280,7 @@ export default function CounselingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <FadeLeft>
               <div>
-                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#003975]/5 text-[#003975] text-xs font-semibold tracking-widest uppercase">
+                <span className="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#0066a6]/5 text-[#0066a6] text-xs font-semibold tracking-widest uppercase">
                   Our Promise
                 </span>
                 <h2 className="text-3xl md:text-[40px] font-bold text-slate-900 mb-4 leading-tight">
@@ -289,7 +289,7 @@ export default function CounselingPage() {
                 <p className="text-slate-500 text-base mb-8 max-w-md leading-relaxed">
                   Our counselors are certified professionals with deep expertise in global education systems. We provide honest, transparent guidance tailored to your unique profile.
                 </p>
-                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#003975] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002d5e] transition">
+                <Link href="/contact" className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002d5e] transition">
                   Talk to a Counselor <Icon name="ArrowRight" size={14} />
                 </Link>
               </div>
@@ -298,7 +298,7 @@ export default function CounselingPage() {
               <div className="grid grid-cols-2 gap-4">
                 {guarantees.map((g) => (
                   <div key={g.title} className="bg-gray-50 rounded-2xl p-5 border border-gray-100">
-                    <div className="w-10 h-10 rounded-xl bg-[#003975] text-white flex items-center justify-center mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#0066a6] text-white flex items-center justify-center mb-3">
                       <Icon name={g.icon} size={18} />
                     </div>
                     <h4 className="font-semibold text-slate-900 text-[14px] mb-1.5">{g.title}</h4>

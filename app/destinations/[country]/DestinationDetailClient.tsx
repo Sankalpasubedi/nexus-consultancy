@@ -79,7 +79,7 @@ export default function DestinationDetailClient() {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-slate-900 mb-4">Destination Not Found</h1>
           <p className="text-slate-500 mb-6">The destination you are looking for does not exist.</p>
-          <Link href="/destinations" className="text-[#003975] font-medium hover:underline">
+          <Link href="/destinations" className="text-[#0066a6] font-medium hover:underline">
             View all destinations
           </Link>
         </div>
@@ -112,7 +112,7 @@ export default function DestinationDetailClient() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/5" />
 
         {/* Animated decorative elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-[#003975]/20 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-[#0066a6]/20 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-40 left-10 w-56 h-56 bg-[#00ab18]/15 rounded-full blur-[100px] pointer-events-none" />
 
         <motion.div style={{ opacity: heroOpacity }} className="absolute inset-0 flex flex-col justify-end pb-20 px-6 md:px-12 lg:px-20">
@@ -264,7 +264,7 @@ export default function DestinationDetailClient() {
           <FadeUp>
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-slate-500 text-xs font-semibold border border-gray-200 mb-5">
-                <Icon name="Compass" size={14} className="text-[#003975]" /> Quick Navigation
+                <Icon name="Compass" size={14} className="text-[#0066a6]" /> Quick Navigation
               </span>
               <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
                 Everything About {data.country}
@@ -286,7 +286,7 @@ export default function DestinationDetailClient() {
                       </div>
                       <h3 className="text-base font-semibold text-slate-900 mb-2">{page.title}</h3>
                       <p className="text-sm text-slate-500 leading-relaxed flex-1">{page.description}</p>
-                      <div className="mt-5 pt-4 border-t border-gray-100 flex items-center gap-1.5 text-sm font-medium text-[#003975] group-hover:gap-3 transition-all">
+                      <div className="mt-5 pt-4 border-t border-gray-100 flex items-center gap-1.5 text-sm font-medium text-[#0066a6] group-hover:gap-3 transition-all">
                         Explore <Icon name="ArrowRight" size={14} />
                       </div>
                     </div>
@@ -300,14 +300,14 @@ export default function DestinationDetailClient() {
 
       {/* ═══════════ WHY STUDY HERE ═══════════ */}
       <section className="py-24 px-6 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-72 h-72 bg-[#003975]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-72 h-72 bg-[#0066a6]/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeLeft>
               <div>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                  <Icon name="Sparkles" size={14} className="text-[#003975]" /> Why Choose {data.country}
+                  <Icon name="Sparkles" size={14} className="text-[#0066a6]" /> Why Choose {data.country}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
                   Top Reasons to Study in {data.country}
@@ -356,7 +356,7 @@ export default function DestinationDetailClient() {
                 {/* Floating stat card */}
                 <Float duration={4} distance={10}>
                   <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl border border-gray-100 p-5 max-w-[200px]">
-                    <div className="text-3xl font-bold text-[#003975] mb-1">
+                    <div className="text-3xl font-bold text-[#0066a6] mb-1">
                       <AnimatedCounter value={data.universities.length} suffix="+" />
                     </div>
                     <p className="text-xs text-slate-500">Partner Universities</p>
@@ -393,7 +393,7 @@ export default function DestinationDetailClient() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
               <div>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-slate-500 text-xs font-semibold border border-gray-200 mb-4">
-                  <Icon name="Award" size={14} className="text-[#003975]" /> Rankings
+                  <Icon name="Award" size={14} className="text-[#0066a6]" /> Rankings
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
                   Top Universities in {data.country}
@@ -401,7 +401,7 @@ export default function DestinationDetailClient() {
               </div>
               <Link
                 href={`/destinations/${country}/universities`}
-                className="inline-flex items-center gap-2 text-[#003975] font-semibold text-sm hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 text-[#0066a6] font-semibold text-sm hover:gap-3 transition-all"
               >
                 View All Universities <Icon name="ArrowRight" size={14} />
               </Link>
@@ -452,7 +452,7 @@ export default function DestinationDetailClient() {
           <FadeUp>
             <div className="text-center mb-12">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                <Icon name="ClipboardList" size={14} className="text-[#003975]" /> Admissions
+                <Icon name="ClipboardList" size={14} className="text-[#0066a6]" /> Admissions
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                 Admission Requirements
@@ -509,7 +509,7 @@ export default function DestinationDetailClient() {
             <div className="mt-6 text-center">
               <Link
                 href={`/destinations/${country}/admission`}
-                className="inline-flex items-center gap-2 text-[#003975] font-semibold text-sm hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 text-[#0066a6] font-semibold text-sm hover:gap-3 transition-all"
               >
                 Full Admission Guide <Icon name="ArrowRight" size={14} />
               </Link>
@@ -520,7 +520,7 @@ export default function DestinationDetailClient() {
 
       {/* ═══════════ VISA & DOCUMENTS ═══════════ */}
       <section className="py-24 px-6 bg-[#fafaf8] relative overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#003975]/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0066a6]/5 rounded-full blur-[120px] pointer-events-none" />
         
         {/* Floating Right Image */}
         <motion.div
@@ -539,7 +539,7 @@ export default function DestinationDetailClient() {
           <FadeUp>
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                <Icon name="ShieldCheck" size={14} className="text-[#003975]" /> Visa Guide
+                <Icon name="ShieldCheck" size={14} className="text-[#0066a6]" /> Visa Guide
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                 Student Visa Requirements
@@ -562,7 +562,7 @@ export default function DestinationDetailClient() {
                     <ul className="space-y-2">
                       {card.items.map((item, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-slate-500">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#003975] mt-1.5 flex-shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#0066a6] mt-1.5 flex-shrink-0" />
                           {item}
                         </li>
                       ))}
@@ -593,7 +593,7 @@ export default function DestinationDetailClient() {
             <FadeLeft>
               <div>
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                  <Icon name="DollarSign" size={14} className="text-[#003975]" /> Living Costs
+                  <Icon name="DollarSign" size={14} className="text-[#0066a6]" /> Living Costs
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 leading-tight">
                   Monthly Cost of Living
@@ -603,7 +603,7 @@ export default function DestinationDetailClient() {
                 </p>
                 <Link
                   href={`/destinations/${country}/living-cost`}
-                  className="inline-flex items-center gap-2 text-[#003975] font-semibold text-sm hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-[#0066a6] font-semibold text-sm hover:gap-3 transition-all"
                 >
                   View Full Breakdown <Icon name="ArrowRight" size={14} />
                 </Link>
@@ -623,7 +623,7 @@ export default function DestinationDetailClient() {
                   >
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-sm font-semibold text-slate-700">{cost.category}</span>
-                      <span className="text-sm font-bold text-[#003975]">
+                      <span className="text-sm font-bold text-[#0066a6]">
                         {data.currency} {cost.minCost} – {cost.maxCost}/mo
                       </span>
                     </div>
@@ -663,7 +663,7 @@ export default function DestinationDetailClient() {
           <FadeUp>
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                <Icon name="Briefcase" size={14} className="text-[#003975]" /> Career
+                <Icon name="Briefcase" size={14} className="text-[#0066a6]" /> Career
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                 Work & Career Opportunities
@@ -691,7 +691,7 @@ export default function DestinationDetailClient() {
             <div className="text-center mt-10">
               <Link
                 href={`/destinations/${country}/work-and-jobs`}
-                className="inline-flex items-center gap-2 text-[#003975] font-semibold text-sm hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 text-[#0066a6] font-semibold text-sm hover:gap-3 transition-all"
               >
                 Explore Work Opportunities <Icon name="ArrowRight" size={14} />
               </Link>
@@ -702,7 +702,7 @@ export default function DestinationDetailClient() {
 
       {/* ═══════════ SCHOLARSHIPS ═══════════ */}
       <section className="py-24 px-6 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-72 h-72 bg-[#003975]/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 left-0 w-72 h-72 bg-[#0066a6]/5 rounded-full blur-[100px] pointer-events-none" />
         
         {/* Floating Left Image */}
         <motion.div
@@ -721,7 +721,7 @@ export default function DestinationDetailClient() {
           <FadeUp>
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                <Icon name="Trophy" size={14} className="text-[#003975]" /> Funding
+                <Icon name="Trophy" size={14} className="text-[#0066a6]" /> Funding
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                 Scholarship Opportunities
@@ -781,7 +781,7 @@ export default function DestinationDetailClient() {
           <FadeUp>
             <div className="text-center mb-14">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                <Icon name="Globe" size={14} className="text-[#003975]" /> Life & Culture
+                <Icon name="Globe" size={14} className="text-[#0066a6]" /> Life & Culture
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                 Life in {data.country}
@@ -822,7 +822,7 @@ export default function DestinationDetailClient() {
             <div className="text-center mt-10">
               <Link
                 href={`/destinations/${country}/culture`}
-                className="inline-flex items-center gap-2 text-[#003975] font-semibold text-sm hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 text-[#0066a6] font-semibold text-sm hover:gap-3 transition-all"
               >
                 Explore Culture & Lifestyle <Icon name="ArrowRight" size={14} />
               </Link>
@@ -852,7 +852,7 @@ export default function DestinationDetailClient() {
             <FadeUp>
               <div className="text-center mb-14">
                 <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-slate-900 text-xs font-semibold mb-5">
-                  <Icon name="MessageCircle" size={14} className="text-[#003975]" /> Success Stories
+                  <Icon name="MessageCircle" size={14} className="text-[#0066a6]" /> Success Stories
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
                   What Our Students Say
@@ -866,7 +866,7 @@ export default function DestinationDetailClient() {
                   <HoverCard>
                     <div className="bg-[#fafaf8] rounded-2xl p-7 border border-gray-100 h-full flex flex-col">
                       <div className="mb-5">
-                        <svg className="w-8 h-8 text-[#003975]/20" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-8 h-8 text-[#0066a6]/20" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
                         </svg>
                       </div>
@@ -902,7 +902,7 @@ export default function DestinationDetailClient() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-800/65 to-slate-800" />
-        <div className="absolute top-10 right-10 w-80 h-80 bg-[#003975]/30 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-10 right-10 w-80 h-80 bg-[#0066a6]/30 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-10 left-10 w-60 h-60 bg-[#00ab18]/20 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto text-center">

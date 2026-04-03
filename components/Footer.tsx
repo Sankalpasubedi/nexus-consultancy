@@ -70,7 +70,7 @@ export default function Footer() {
       <div className="relative z-10 px-4 sm:px-6 lg:px-12 xl:px-16 pt-20 pb-0">
       <div >
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl bg-[#003975] px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/15 border border-white/10">
+          <div className="rounded-3xl bg-[#0066a6] px-8 py-12 md:px-14 md:py-14 shadow-2xl shadow-black/15 border border-white/10">
             <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
               {/* Left content */}
               <div className="max-w-xl text-center lg:text-left">
@@ -105,7 +105,7 @@ export default function Footer() {
                   </div>
                   <button
                     type="submit"
-                    className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-[#003975] transition hover:bg-blue-50"
+                    className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-[#0066a6] transition hover:bg-blue-50"
                   >
                     Subscribe
                     <ArrowUpRight size={16} />

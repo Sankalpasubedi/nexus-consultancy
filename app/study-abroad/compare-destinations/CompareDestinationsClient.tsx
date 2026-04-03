@@ -320,7 +320,7 @@ const countries: Country[] = [
 ];
 
 const compareCategories = [
-  { key: "education" as const, label: "Education Quality", icon: "GraduationCap", color: "#003975" },
+  { key: "education" as const, label: "Education Quality", icon: "GraduationCap", color: "#0066a6" },
   { key: "affordability" as const, label: "Affordability", icon: "DollarSign", color: "#00ab18" },
   { key: "employability" as const, label: "Employability", icon: "Briefcase", color: "#6366f1" },
   { key: "quality" as const, label: "Quality of Life", icon: "Home", color: "#0ea5e9" },
@@ -342,7 +342,7 @@ const heroStats = [
    ═══════════════════════════════════════════════════════ */
 
 /* \u2500\u2500 Radial Score Ring \u2500\u2500 */
-function ScoreRing({ score, size = 52, stroke = 4, color = "#003975" }: { score: number; size?: number; stroke?: number; color?: string }) {
+function ScoreRing({ score, size = 52, stroke = 4, color = "#0066a6" }: { score: number; size?: number; stroke?: number; color?: string }) {
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
   return (
@@ -463,7 +463,7 @@ export default function DestinationsComparePage() {
                 <div className="flex flex-wrap gap-3">
                   <a
                     href="#rankings"
-                    className="inline-flex items-center gap-2 bg-white text-[#003975] px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-50 transition shadow-lg shadow-black/20"
+                    className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-6 py-3 rounded-full text-sm font-semibold hover:bg-blue-50 transition shadow-lg shadow-black/20"
                   >
                     <Icon name="BarChart3" size={16} /> View Rankings
                   </a>
@@ -488,7 +488,7 @@ export default function DestinationsComparePage() {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0066a6]/30 to-transparent" />
                 </div>
                 {/* Floating Stats Card */}
                 <motion.div
@@ -498,8 +498,8 @@ export default function DestinationsComparePage() {
                   className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 border border-gray-100"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-[#003975]/10 flex items-center justify-center">
-                      <Icon name="Globe" size={24} className="text-[#003975]" />
+                    <div className="w-12 h-12 rounded-xl bg-[#0066a6]/10 flex items-center justify-center">
+                      <Icon name="Globe" size={24} className="text-[#0066a6]" />
                     </div>
                     <div>
                       <div className="text-2xl font-bold text-slate-900">8 Countries</div>
@@ -580,8 +580,8 @@ export default function DestinationsComparePage() {
                       onClick={() => toggleCompare(c.slug)}
                       className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition border ${
                         sel
-                          ? "bg-[#003975] text-white border-[#003975]"
-                          : "bg-white text-slate-600 border-gray-200 hover:border-[#003975]"
+                          ? "bg-[#0066a6] text-white border-[#0066a6]"
+                          : "bg-white text-slate-600 border-gray-200 hover:border-[#0066a6]"
                       } ${!sel && selectedForCompare.length >= 3 ? "opacity-40 cursor-not-allowed" : ""}`}
                       disabled={!sel && selectedForCompare.length >= 3}
                     >
@@ -614,7 +614,7 @@ export default function DestinationsComparePage() {
                         <td className="py-3 px-4 font-medium text-slate-700">Overall Score</td>
                         {compareCountries.map((c) => (
                           <td key={c.slug} className="text-center py-3 px-4">
-                            <span className="text-2xl font-bold text-[#003975]">{overallScore(c)}</span>
+                            <span className="text-2xl font-bold text-[#0066a6]">{overallScore(c)}</span>
                             <span className="text-slate-400 text-xs">/100</span>
                           </td>
                         ))}
@@ -682,7 +682,7 @@ export default function DestinationsComparePage() {
                   onClick={() => setActiveCategory(cat.key)}
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all ${
                     activeCategory === cat.key
-                      ? "bg-[#003975] text-white shadow-lg shadow-[#003975]/20"
+                      ? "bg-[#0066a6] text-white shadow-lg shadow-[#0066a6]/20"
                       : "bg-gray-100 text-slate-600 hover:bg-gray-200"
                   }`}
                 >
@@ -748,8 +748,8 @@ export default function DestinationsComparePage() {
                           <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-lg">{medal}</span>
                         </motion.div>
                         <h3 className="font-bold text-slate-900 text-lg mb-1">{country.name}</h3>
-                        <div className="text-3xl font-extrabold text-[#003975] mb-3">{country.scores[activeCategory]}</div>
-                        <div className={`w-full ${podiumH} rounded-t-2xl bg-gradient-to-t from-[#003975] to-[#003975]/70 flex items-start justify-center pt-6`}>
+                        <div className="text-3xl font-extrabold text-[#0066a6] mb-3">{country.scores[activeCategory]}</div>
+                        <div className={`w-full ${podiumH} rounded-t-2xl bg-gradient-to-t from-[#0066a6] to-[#0066a6]/70 flex items-start justify-center pt-6`}>
                           <span className="text-white font-bold text-2xl">#{pos + 1}</span>
                         </div>
                       </div>
@@ -776,10 +776,10 @@ export default function DestinationsComparePage() {
                             whileInView={{ width: `${c.scores[activeCategory]}%` }}
                             viewport={{ once: true }}
                             transition={{ duration: 1 }}
-                            className="h-full rounded-full bg-gradient-to-r from-[#003975] to-[#00ab18]"
+                            className="h-full rounded-full bg-gradient-to-r from-[#0066a6] to-[#00ab18]"
                           />
                         </div>
-                        <span className="text-xl font-bold text-[#003975] w-10 text-right">{c.scores[activeCategory]}</span>
+                        <span className="text-xl font-bold text-[#0066a6] w-10 text-right">{c.scores[activeCategory]}</span>
                       </div>
                     </div>
                   </FadeUp>
@@ -827,7 +827,7 @@ export default function DestinationsComparePage() {
                             </div>
                             <div>
                               <div className="flex items-center gap-2 flex-wrap">
-                                <span className="text-xs font-bold text-white bg-[#003975] px-2.5 py-0.5 rounded-full">
+                                <span className="text-xs font-bold text-white bg-[#0066a6] px-2.5 py-0.5 rounded-full">
                                   #{idx + 1} Overall
                                 </span>
                                 <span className="text-xs font-medium text-slate-400">{country.qsRanking} QS ranked</span>
@@ -862,7 +862,7 @@ export default function DestinationsComparePage() {
                         <div className="flex-shrink-0 lg:w-72">
                           <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-2xl p-5 border border-gray-100">
                             <div className="text-center mb-4">
-                              <div className="text-4xl font-extrabold text-[#003975]">{overall}</div>
+                              <div className="text-4xl font-extrabold text-[#0066a6]">{overall}</div>
                               <div className="text-xs text-slate-400">Overall Score</div>
                             </div>
                             <div className="grid grid-cols-3 gap-3">
@@ -880,7 +880,7 @@ export default function DestinationsComparePage() {
                       {/* Expand Toggle */}
                       <button
                         onClick={() => setExpandedCountry(isExpanded ? null : country.slug)}
-                        className="mt-6 inline-flex items-center gap-2 text-[#003975] text-sm font-medium hover:gap-3 transition-all"
+                        className="mt-6 inline-flex items-center gap-2 text-[#0066a6] text-sm font-medium hover:gap-3 transition-all"
                       >
                         {isExpanded ? "Show Less" : "See Full Profile \u2014 Reasons, Programs, News & More"}
                         <motion.span animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
@@ -923,12 +923,12 @@ export default function DestinationsComparePage() {
                               {/* Top Programs */}
                               <div>
                                 <h4 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
-                                  <Icon name="GraduationCap" size={18} className="text-[#003975]" />
+                                  <Icon name="GraduationCap" size={18} className="text-[#0066a6]" />
                                   Top Programs
                                 </h4>
                                 <div className="flex flex-wrap gap-2">
                                   {country.topPrograms.map((p) => (
-                                    <span key={p} className="px-3 py-1.5 bg-blue-50 text-[#003975] text-xs font-medium rounded-full">
+                                    <span key={p} className="px-3 py-1.5 bg-blue-50 text-[#0066a6] text-xs font-medium rounded-full">
                                       {p}
                                     </span>
                                   ))}
@@ -965,7 +965,7 @@ export default function DestinationsComparePage() {
                           </div>
 
                           {/* Latest News Banner */}
-                          <div className="mx-6 md:mx-8 mb-6 md:mb-8 bg-gradient-to-r from-[#003975] to-[#004a8f] rounded-2xl p-5 text-white">
+                          <div className="mx-6 md:mx-8 mb-6 md:mb-8 bg-gradient-to-r from-[#0066a6] to-[#004a8f] rounded-2xl p-5 text-white">
                             <div className="flex items-start gap-4">
                               <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
                                 <Icon name="Zap" size={18} className="text-yellow-300" />
@@ -1030,7 +1030,7 @@ export default function DestinationsComparePage() {
                   <p className="text-xs text-slate-500 leading-relaxed flex-1">{c.latestNews.summary}</p>
                   <Link
                     href={`/destinations/${c.slug}`}
-                    className="mt-4 text-xs text-[#003975] font-medium hover:underline"
+                    className="mt-4 text-xs text-[#0066a6] font-medium hover:underline"
                   >
                     Read More \u2192
                   </Link>
@@ -1046,7 +1046,7 @@ export default function DestinationsComparePage() {
         <div className="max-w-7xl mx-auto">
           <FadeUp>
             <div className="text-center mb-14">
-              <span className="text-sm font-semibold text-[#003975] uppercase tracking-wider">At a Glance</span>
+              <span className="text-sm font-semibold text-[#0066a6] uppercase tracking-wider">At a Glance</span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-3">
                 Complete Comparison Table
               </h2>
@@ -1060,8 +1060,8 @@ export default function DestinationsComparePage() {
             <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="bg-[#003975] text-white">
-                    <th className="text-left py-4 px-5 font-semibold sticky left-0 bg-[#003975] z-10 min-w-[140px]">Country</th>
+                  <tr className="bg-[#0066a6] text-white">
+                    <th className="text-left py-4 px-5 font-semibold sticky left-0 bg-[#0066a6] z-10 min-w-[140px]">Country</th>
                     <th className="text-center py-4 px-4 font-semibold min-w-[100px]">Overall</th>
                     <th className="text-center py-4 px-4 font-semibold min-w-[130px]">Tuition/yr</th>
                     <th className="text-center py-4 px-4 font-semibold min-w-[130px]">Living Cost</th>
@@ -1084,7 +1084,7 @@ export default function DestinationsComparePage() {
                         </div>
                       </td>
                       <td className="text-center py-4 px-4">
-                        <span className="text-lg font-bold text-[#003975]">{overallScore(c)}</span>
+                        <span className="text-lg font-bold text-[#0066a6]">{overallScore(c)}</span>
                       </td>
                       <td className="text-center py-4 px-4 text-slate-600 text-xs">{c.tuitionRange}</td>
                       <td className="text-center py-4 px-4 text-slate-600 text-xs">{c.livingCost}</td>
@@ -1161,8 +1161,8 @@ export default function DestinationsComparePage() {
             ].map((item, i) => (
               <FadeUp key={item.title} delay={i * 0.08}>
                 <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 h-full">
-                  <div className="w-11 h-11 rounded-xl bg-[#003975]/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Icon name={item.icon} size={20} className="text-[#003975]" />
+                  <div className="w-11 h-11 rounded-xl bg-[#0066a6]/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Icon name={item.icon} size={20} className="text-[#0066a6]" />
                   </div>
                   <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
                   <p className="text-sm text-slate-500 leading-relaxed">{item.description}</p>
@@ -1201,7 +1201,7 @@ export default function DestinationsComparePage() {
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold shadow-lg shadow-black/20 hover:bg-blue-50 transition"
+                  className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold shadow-lg shadow-black/20 hover:bg-blue-50 transition"
                 >
                   Book Free Consultation <Icon name="ArrowRight" size={16} />
                 </Link>

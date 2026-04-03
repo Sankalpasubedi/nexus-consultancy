@@ -129,7 +129,7 @@ export default function GuidePage() {
       <section className="relative py-20 md:py-28 px-6 bg-white overflow-hidden">
         {/* Subtle background decoration */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00ab18]/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#003975]/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#0066a6]/5 rounded-full blur-[100px] pointer-events-none" />
 
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -334,7 +334,7 @@ function TimelineSection() {
   return (
     <section className="py-20 md:py-28 px-6 bg-white overflow-hidden relative">
       <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[#00ab18]/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] bg-[#003975]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] bg-[#0066a6]/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Section header */}

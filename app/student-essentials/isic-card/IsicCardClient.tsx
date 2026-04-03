@@ -76,14 +76,14 @@ export default function IsicCardClient() {
               {/* Breadcrumb */}
               <FadeUp>
                 <nav className="flex items-center gap-2 text-sm text-slate-500 mb-6">
-                  <Link href="/" className="hover:text-[#003975]">Home</Link>
+                  <Link href="/" className="hover:text-[#0066a6]">Home</Link>
                   <span>/</span>
                   <span className="text-slate-900">ISIC Card</span>
                 </nav>
               </FadeUp>
               
               <FadeUp>
-                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#003975]/10 text-[#003975] text-xs font-semibold tracking-wide border border-[#003975]/20">
+                <span className="inline-block px-4 py-1.5 mb-5 rounded-full bg-[#0066a6]/10 text-[#0066a6] text-xs font-semibold tracking-wide border border-[#0066a6]/20">
                   Student Essentials
                 </span>
               </FadeUp>
@@ -97,7 +97,7 @@ export default function IsicCardClient() {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 bg-[#003975] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition"
+                    className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-6 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition"
                   >
                     Enquire now <Icon name="ArrowRight" size={14} />
                   </Link>
@@ -139,7 +139,7 @@ export default function IsicCardClient() {
           <FadeUp delay={0.1}>
             <div className="relative rounded-3xl overflow-hidden border border-gray-100 shadow-xl min-h-[320px]">
               <Image src="/services/showcase2.jpg" alt="ISIC benefits" fill className="object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#003975]/80 to-[#0052a3]/60" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0066a6]/80 to-[#0052a3]/60" />
               <div className="absolute inset-0 p-8 text-white">
                 <h3 className="text-2xl font-bold mb-4">What ISIC offers</h3>
                 <ul className="space-y-2.5 text-sm md:text-base text-white/90">
@@ -167,8 +167,8 @@ export default function IsicCardClient() {
                 <FadeUp key={step.title} delay={idx * 0.08}>
                   <div className="bg-white rounded-2xl p-5 border border-black/5">
                     <div className="flex items-start gap-4">
-                      <div className="w-11 h-11 rounded-xl bg-[#003975]/10 flex items-center justify-center shrink-0">
-                        <Icon name={step.icon} size={20} className="text-[#003975]" />
+                      <div className="w-11 h-11 rounded-xl bg-[#0066a6]/10 flex items-center justify-center shrink-0">
+                        <Icon name={step.icon} size={20} className="text-[#0066a6]" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-slate-900 mb-1">{step.title}</h4>
@@ -235,7 +235,7 @@ export default function IsicCardClient() {
                     <option>Renewal support</option>
                   </select>
                 </div>
-                <button type="button" className="inline-flex items-center gap-2 bg-[#003975] text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition">
+                <button type="button" className="inline-flex items-center gap-2 bg-[#0066a6] text-white px-7 py-3 rounded-full text-sm font-semibold hover:bg-[#002a5c] transition">
                   Send ISIC enquiry <Icon name="ArrowRight" size={14} />
                 </button>
               </form>

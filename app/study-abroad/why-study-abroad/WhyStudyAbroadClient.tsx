@@ -21,37 +21,37 @@ const benefits = [
     icon: "GraduationCap",
     title: "World-Class Education",
     description: "Access top-ranked universities and cutting-edge research facilities that provide globally recognized qualifications.",
-    color: "bg-[#003975]",
+    color: "bg-[#0066a6]",
   },
   {
     icon: "Briefcase",
     title: "Enhanced Career Prospects",
     description: "International graduates are highly valued by employers. Gain skills and experiences that set you apart in the job market.",
-    color: "bg-[#003975]",
+    color: "bg-[#0066a6]",
   },
   {
     icon: "Globe",
     title: "Global Network",
     description: "Build lifelong connections with students and professionals from around the world, expanding your personal and career network.",
-    color: "bg-[#003975]",
+    color: "bg-[#0066a6]",
   },
   {
     icon: "Heart",
     title: "Personal Growth",
     description: "Develop independence, resilience, and adaptability. Living abroad challenges you to grow in ways you never imagined.",
-    color: "bg-[#003975]",
+    color: "bg-[#0066a6]",
   },
   {
     icon: "Compass",
     title: "Cultural Immersion",
     description: "Experience new cultures, traditions, and perspectives firsthand. Become a true global citizen with cross-cultural competence.",
-    color: "bg-[#003975]",
+    color: "bg-[#0066a6]",
   },
   {
     icon: "TrendingUp",
     title: "Higher Earning Potential",
     description: "Studies show international graduates earn 25-50% more than domestic-only educated peers over their careers.",
-    color: "bg-[#003975]",
+    color: "bg-[#0066a6]",
   },
 ];
 
@@ -123,7 +123,7 @@ export default function WhyStudyAbroadClient() {
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 bg-white text-[#003975] px-6 py-3.5 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
+                      className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-6 py-3.5 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
                     >
                       Get Free Consultation <Icon name="ArrowRight" size={16} />
                     </Link>
@@ -150,7 +150,7 @@ export default function WhyStudyAbroadClient() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#003975]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0066a6]/40 to-transparent" />
                 </div>
                 {/* Floating stats */}
                 <motion.div
@@ -312,12 +312,12 @@ export default function WhyStudyAbroadClient() {
                       className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 group"
                     >
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-[#003975]/5 transition-colors">
+                        <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center group-hover:bg-[#0066a6]/5 transition-colors">
                           <FlagIcon code={item.icon} size={24} />
                         </div>
                         <div>
                           <h3 className="font-semibold text-slate-900">{item.country}</h3>
-                          <p className="text-[#003975] font-bold text-lg">{item.duration}</p>
+                          <p className="text-[#0066a6] font-bold text-lg">{item.duration}</p>
                         </div>
                       </div>
                       <p className="text-sm text-slate-500">{item.detail}</p>
@@ -368,10 +368,10 @@ export default function WhyStudyAbroadClient() {
                           whileHover={{ y: -8, scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           transition={{ duration: 0.3, ease: "easeOut" }}
-                          className="bg-[#fafaf8] rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-[#003975]/20 transition-all duration-300 h-full relative overflow-hidden"
+                          className="bg-[#fafaf8] rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-[#0066a6]/20 transition-all duration-300 h-full relative overflow-hidden"
                         >
                           {/* Gradient hover effect */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#003975]/5 to-[#00ab18]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#0066a6]/5 to-[#00ab18]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                           {/* Content */}
                           <div className="relative z-10">
@@ -380,13 +380,13 @@ export default function WhyStudyAbroadClient() {
                               initial={{ scale: 1 }}
                               whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                               transition={{ duration: 0.4 }}
-                              className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-4 group-hover:bg-[#003975]/5 transition-colors duration-300 shadow-sm"
+                              className="w-14 h-14 rounded-2xl bg-white flex items-center justify-center mb-4 group-hover:bg-[#0066a6]/5 transition-colors duration-300 shadow-sm"
                             >
                               <FlagIcon code={country.flagCode} size={28} />
                             </motion.div>
 
                             {/* Country Name */}
-                            <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-[#003975] transition-colors duration-300">
+                            <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-[#0066a6] transition-colors duration-300">
                               {country.label}
                             </h3>
 
@@ -408,7 +408,7 @@ export default function WhyStudyAbroadClient() {
                               initial={{ x: -5 }}
                               whileHover={{ x: 0 }}
                             >
-                              <Icon name="ArrowUpRight" size={18} className="text-[#003975]" />
+                              <Icon name="ArrowUpRight" size={18} className="text-[#0066a6]" />
                             </motion.div>
                           </div>
                         </motion.div>
@@ -447,7 +447,7 @@ export default function WhyStudyAbroadClient() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-[#003975] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
+                  className="inline-flex items-center gap-2 bg-white text-[#0066a6] px-8 py-4 rounded-full font-semibold hover:bg-blue-50 transition shadow-lg"
                 >
                   Book Free Consultation <Icon name="ArrowRight" size={16} />
                 </Link>
