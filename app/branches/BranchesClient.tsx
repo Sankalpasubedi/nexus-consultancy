@@ -432,7 +432,7 @@ export default function BranchesClient() {
                 Book Free Consultation <Icon name="ArrowRight" size={14} />
               </Link>
               <a
-                href="https://wa.me/9779851032197"
+                href="https://wa.me/9779851163644"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-4 rounded-full text-sm font-semibold hover:bg-[#1fb855] hover:shadow-lg transition"

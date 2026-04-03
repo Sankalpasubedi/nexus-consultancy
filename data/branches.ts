@@ -21,6 +21,16 @@ export interface BranchStat {
   value: string;
 }
 
+export interface BranchContactNumber {
+  number: string;
+  label?: string;
+}
+
+export interface BranchContactActions {
+  callNow: string;
+  chatWithUs: BranchContactNumber[];
+}
+
 export interface Branch {
   id: string;
   slug: string;
@@ -53,6 +63,7 @@ export interface Branch {
   stats: BranchStat[];
   testimonials: Testimonial[];
   faqs: FAQ[];
+  contactActions?: BranchContactActions;
 }
 
 export const branches: Branch[] = [
@@ -64,9 +75,9 @@ export const branches: Branch[] = [
     city: "Kathmandu",
     district: "Kathmandu",
     address: "Dillibazar, Kathmandu-44600, Nepal",
-    phone: "+977 1 4519495",
-    phone2: "+977 9851032197",
-    whatsapp: "+977 9851032197",
+    phone: "014519495",
+    phone2: "+977 9851051495",
+    whatsapp: "+977 9851163644",
     email: "info@nexsuseducation.com",
     mapUrl: "https://maps.google.com/?q=27.7089,85.3239",
     mapEmbedUrl: "https://maps.google.com/maps?q=27.7089,85.3239&t=&z=15&ie=UTF8&iwloc=&output=embed",
@@ -95,6 +106,13 @@ export const branches: Branch[] = [
       { label: "Visa Success Rate", value: "99%" },
       { label: "Countries", value: "12+" }
     ],
+    contactActions: {
+      callNow: "01-4519495",
+      chatWithUs: [
+        { number: "9851051495", label: "Bishnu Khadka Sir" },
+        { number: "9851163644", label: "Office" },
+      ],
+    },
     testimonials: [
       { id: 1, name: "Anita Gurung", country: "UK", quote: "The team at Dillibazar branch made my UK study dream come true. From selecting the right university to visa approval, they were with me every step of the way. Highly recommended!", destination: "UK" },
       { id: 2, name: "Rajesh Karki", country: "Australia", quote: "I got my Australian student visa within 3 weeks thanks to Nexsus Dillibazar. Their documentation support and interview preparation were excellent.", destination: "Australia" },
@@ -147,6 +165,13 @@ export const branches: Branch[] = [
       { label: "Support Rating", value: "5★" },
       { label: "Coverage", value: "Sydney" }
     ],
+    contactActions: {
+      callNow: "+61 2 8000 0000",
+      chatWithUs: [
+        { number: "+61 4 0000 0000" },
+        { number: "+61 4 1111 1111" },
+      ],
+    },
     testimonials: [
       { id: 1, name: "Nabin Sharma", country: "Australia", quote: "Having a local Nexsus contact in Sydney made the settlement process much easier for me.", destination: "Australia" },
       { id: 2, name: "Sujata Gurung", country: "Australia", quote: "The Australia team stayed in touch after I arrived and helped me with the next steps.", destination: "Australia" },
@@ -168,9 +193,9 @@ export const branches: Branch[] = [
     city: "Baneshwor",
     district: "Kathmandu",
     address: "Baneshwor, Kathmandu, Nepal",
-    phone: "+977 56 666666",
-    phone2: "+977 9855034567",
-    whatsapp: "+977 9855034567",
+    phone: "015922227",
+    phone2: "+977 9841830127",
+    whatsapp: "+977 9743956286",
     email: "baneshwor@nexsuseducation.com",
     mapUrl: "https://maps.google.com/?q=27.6915,85.3430",
     mapEmbedUrl: "https://maps.google.com/maps?q=27.6915,85.3430&t=&z=15&ie=UTF8&iwloc=&output=embed",
@@ -199,6 +224,13 @@ export const branches: Branch[] = [
       { label: "Visa Success Rate", value: "98%" },
       { label: "Destinations Served", value: "10+" }
     ],
+    contactActions: {
+      callNow: "01-5922227",
+      chatWithUs: [
+        { number: "9841830127", label: "Sushmita maam" },
+        { number: "9743956286", label: "office WhatsApp" },
+      ],
+    },
     testimonials: [
       { id: 1, name: "Sarina Shrestha", country: "Canada", quote: "I was looking for a top education consultant in Kathmandu and luckily a friend recommended me to Nexsus. The consultancy assisted me from getting a letter of offer for my education to acquiring student insurance and finally arranging my visa.", destination: "Canada" },
       { id: 2, name: "Shrawan Kumar Thapa", country: "Australia", quote: "Nexsus Nepal is the best overseas education consultant in Nepal. They provided great assistance with my student visa application to Melbourne, Australia. The team has been very approachable and always there to answer all my queries.", destination: "Australia" },
@@ -220,8 +252,8 @@ export const branches: Branch[] = [
     city: "Kathmandu",
     district: "Kathmandu",
     address: "Samakhusi, Kathmandu, Nepal",
-    phone: "+977 1 4971971",
-    phone2: "+977 9820291960",
+    phone: "014971971",
+    phone2: "+977 9851413678",
     whatsapp: "+977 9820291960",
     email: "samakhusi@nexsuseducation.com",
     mapUrl: "https://maps.google.com/?q=27.7295,85.3115",
@@ -251,6 +283,13 @@ export const branches: Branch[] = [
       { label: "Visa Success Rate", value: "96%" },
       { label: "Countries", value: "8+" }
     ],
+    contactActions: {
+      callNow: "01-4971971",
+      chatWithUs: [
+        { number: "9851413678", label: "Ramesh sir/Office" },
+        { number: "9820291960", label: "Santosh sir" },
+      ],
+    },
     testimonials: [
       { id: 1, name: "Rajan Maharjan", country: "Japan", quote: "Nexsus Samakhusi helped me fulfill my dream of studying in Japan. Their guidance on language requirements and visa process was invaluable.", destination: "Japan" },
       { id: 2, name: "Sabina KC", country: "Australia", quote: "Very professional service! They helped me choose the right course and university in Australia. The entire process was hassle-free.", destination: "Australia" },
@@ -272,9 +311,9 @@ export const branches: Branch[] = [
     city: "Banepa",
     district: "Kavrepalanchok",
     address: "Banepa, Kavrepalanchok, Nepal",
-    phone: "+977 11 665859",
+    phone: "011665859",
     phone2: "+977 9860824272",
-    whatsapp: "+977 9860824272",
+    whatsapp: "+977 9767971543",
     email: "banepa@nexsuseducation.com",
     mapUrl: "https://maps.google.com/?q=27.6291,85.5219",
     mapEmbedUrl: "https://maps.google.com/maps?q=27.6291,85.5219&t=&z=15&ie=UTF8&iwloc=&output=embed",
@@ -303,6 +342,13 @@ export const branches: Branch[] = [
       { label: "Visa Success Rate", value: "95%" },
       { label: "Countries", value: "8+" }
     ],
+    contactActions: {
+      callNow: "01-1665859",
+      chatWithUs: [
+        { number: "9860824272", label: "Bikash Sir" },
+        { number: "9767971543", label: "Office WhatsApp" },
+      ],
+    },
     testimonials: [
       { id: 1, name: "Prem Tamang", country: "Australia", quote: "Having Nexsus in Banepa was a blessing. I didn't have to travel to Kathmandu for consultations. The team here is very capable and helpful.", destination: "Australia" },
       { id: 2, name: "Sunita Shrestha", country: "UK", quote: "Excellent service at the Banepa branch! They guided me through every step of my UK student visa application.", destination: "UK" },
@@ -324,9 +370,9 @@ export const branches: Branch[] = [
     city: "Birtamode",
     district: "Jhapa",
     address: "Birtamode, Jhapa, Nepal",
-    phone: "+977 23 591692",
+    phone: "023591692",
     phone2: "+977 9843649305",
-    whatsapp: "+977 9843649305",
+    whatsapp: "+977 9828375780",
     email: "birtamode@nexsuseducation.com",
     mapUrl: "https://maps.google.com/?q=26.6466,87.9893",
     mapEmbedUrl: "https://maps.google.com/maps?q=26.6466,87.9893&t=&z=15&ie=UTF8&iwloc=&output=embed",
@@ -355,6 +401,13 @@ export const branches: Branch[] = [
       { label: "Visa Success Rate", value: "96%" },
       { label: "Countries", value: "8+" }
     ],
+    contactActions: {
+      callNow: "02-3591692",
+      chatWithUs: [
+        { number: "9843649305", label: "Nischal Sir" },
+        { number: "9828375780", label: "Kritika maam" },
+      ],
+    },
     testimonials: [
       { id: 1, name: "Prakash Rai", country: "Australia", quote: "Nexsus Birtamode made my dream of studying in Australia come true. The team is very professional and supportive.", destination: "Australia" },
       { id: 2, name: "Kabita Limbu", country: "UK", quote: "I'm grateful to the Birtamode team for their excellent guidance. Got my UK visa approved without any hassle.", destination: "UK" },
@@ -376,9 +429,9 @@ export const branches: Branch[] = [
     city: "Dhulabari",
     district: "Jhapa",
     address: "Dhulabari, Jhapa, Nepal",
-    phone: "+977 23 591127",
-    phone2: "+977 9801455861",
-    whatsapp: "+977 9801455861",
+    phone: "023591127",
+    phone2: "+977 9842719869",
+    whatsapp: "+977 9844699246",
     email: "dhulabari@nexsuseducation.com",
     mapUrl: "https://maps.google.com/?q=26.6689,88.0412",
     mapEmbedUrl: "https://maps.google.com/maps?q=26.6689,88.0412&t=&z=15&ie=UTF8&iwloc=&output=embed",
@@ -407,6 +460,13 @@ export const branches: Branch[] = [
       { label: "Visa Success Rate", value: "95%" },
       { label: "Countries", value: "7+" }
     ],
+    contactActions: {
+      callNow: "02-3591127",
+      chatWithUs: [
+        { number: "9842719869", label: "Parash sir" },
+        { number: "9844699246", label: "Rohan Sir" },
+      ],
+    },
     testimonials: [
       { id: 1, name: "Raju Pradhan", country: "Japan", quote: "The Dhulabari team helped me with Japanese language preparation and visa processing. Very professional service!", destination: "Japan" },
       { id: 2, name: "Mina Thapa", country: "Australia", quote: "Got my Australian visa within a month! The team's expertise in documentation is impressive.", destination: "Australia" },

@@ -745,7 +745,7 @@ export default function AccommodationClient() {
                 Get Housing Help <Icon name="ArrowRight" size={14} />
               </Link>
               <a
-                href="https://wa.me/9779851032197"
+                href="https://wa.me/9779851163644"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full text-sm font-semibold hover:bg-white/20 transition"

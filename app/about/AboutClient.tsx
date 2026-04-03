@@ -326,9 +326,9 @@ function TeamSliderSection({
 
       {/* Main layout: Featured Image Left + Carousel Right */}
       <div className="max-w-[1440px] mx-auto px-6">
-        <div className="grid lg:grid-cols-[400px_1fr] gap-20 items-center">
+        <div className="grid lg:grid-cols-[540px_1fr] gap-20 items-center">
           {/* Featured Image - Left Side */}
-          <div className="hidden lg:block relative h-[500px]">
+          <div className="hidden lg:block relative h-[680px]">
             <div className="absolute -top-8 -left-8 w-40 h-40 rounded-full bg-[#003975]/[0.08] blur-2xl" />
             <div className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full bg-[#00ab18]/[0.08] blur-2xl" />
             
@@ -351,7 +351,7 @@ function TeamSliderSection({
                   className="relative"
                 >
                   {/* Large Featured Image */}
-                  <div className="relative w-72 h-[420px]">
+                  <div className="relative w-[460px] h-[620px]">
                     <Image
                       src={activeMember.img}
                       alt={activeMember.name}
@@ -365,7 +365,7 @@ function TeamSliderSection({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.3 }}
-                  className="absolute -bottom-0 left-40 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-5 py-4 min-w-[220px] max-w-[260px]"
+                  className="absolute -bottom-0 left-60 -translate-x-1/2 bg-white rounded-2xl shadow-lg px-5 py-4 min-w-[420px] max-w-[460px]"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-1 h-full min-h-[32px] rounded-full bg-linear-to-b from-[#003975] to-[#00ab18] self-stretch" />

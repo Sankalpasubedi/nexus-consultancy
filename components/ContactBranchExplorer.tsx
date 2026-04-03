@@ -31,7 +31,7 @@ const branches: Branch[] = [
     city: "Dillibazar, Kathmandu",
     address: "Dillibazar, Kathmandu-44600, Nepal",
     phone1: "01-4519495",
-    phone2: "9851032197",
+    phone2: "9851051495",
     isHead: true,
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17385.937813097844!2d85.3111465!3d27.7055199!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a7f7c4e0c1%3A0x247ec3573bef5a8c!2sNexsus%20Educational%20Consultancy%20And%20Immigration%20Services!5e1!3m2!1sen!2snp!4v1771541698463!5m2!1sen!2snp",
@@ -59,7 +59,7 @@ const branches: Branch[] = [
     city: "Samakhusi, Kathmandu",
     address: "Samakhusi, Kathmandu, Nepal",
     phone1: "01-4971971",
-    phone2: "9820291960",
+    phone2: "9851413678",
     isHead: false,
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14125.632189868003!2d85.31775951430153!3d27.73555758829925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1900126ce7f3%3A0x1a511b42f1597f6f!2sNexsus%20Educational%20Consultancy%20Samakhusi-IELTS%20%2FPTE%20Center!5e0!3m2!1sen!2snp!4v1771541831849!5m2!1sen!2snp",
@@ -101,7 +101,7 @@ const branches: Branch[] = [
     city: "Dhulabari, Jhapa",
     address: "Dhulabari, Jhapa, Nepal",
     phone1: "02-3591127",
-    phone2: "9801455861",
+    phone2: "9842719869",
     isHead: false,
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d14262.17696591396!2d88.08856907803856!3d26.663071144558987!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDM5JzM1LjciTiA4OMKwMDYnMDMuNCJF!5e0!3m2!1sen!2snp!4v1771541952343!5m2!1sen!2snp",

@@ -1025,7 +1025,7 @@ export default function Header() {
       <div
         className="fixed top-0 left-0 right-0 z-[100000] hidden lg:block w-full"
       >
-        <div className="bg-[#001d3d] border-b border-white/5 w-full">
+        <div className="bg-[#0066a6] border-b border-white/5 w-full">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-11 flex items-center justify-between">
             {/* Left: Quick Links */}
             <div className="flex items-center gap-1">

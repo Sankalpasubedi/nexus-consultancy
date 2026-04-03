@@ -25,11 +25,10 @@ export default function ThumbnailVideoSection() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative bg-[#f5f5f3] pt-10"
-      style={{ height: "180vh" }}
+      className="relative bg-[#f5f5f3] pt-10 h-[50vh] md:h-[75vh] lg:h-[100vh]"
     >
       {/* Sticky video container */}
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+      <div className="sticky top-0 h-full flex items-center justify-center overflow-hidden px-3 sm:px-5">
         <motion.div
           ref={videoContainerRef}
           style={{
@@ -37,8 +36,10 @@ export default function ThumbnailVideoSection() {
             borderRadius: smoothBorderRadius,
             opacity: smoothOpacity,
             transformOrigin: "center center",
+            width: "clamp(320px, 94vw, 1600px)",
+            height: "clamp(220px, 56vw, 900px)",
           }}
-          className="relative w-full h-full will-change-transform overflow-hidden flex items-center justify-center"
+          className="relative will-change-transform overflow-hidden flex items-center justify-center"
         >
           {/* Video element */}
           <video
@@ -46,7 +47,7 @@ export default function ThumbnailVideoSection() {
             muted
             loop
             playsInline
-            className="w-full h-full max-w-475 object-cover rounded-xl"
+            className="w-full h-full object-contain rounded-[clamp(12px,2vw,22px)]"
           >
             <source src="/videos/thumbnail video.mp4" type="video/mp4" />
             Your browser does not support the video tag.

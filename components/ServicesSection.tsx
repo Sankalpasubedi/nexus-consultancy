@@ -391,7 +391,7 @@ export default function ServicesSection() {
                                 {service.features.map((feature, i) => (
                                   <motion.span
                                     key={i}
-                                    className="text-[10px] md:text-xs font-medium px-3 md:px-4 py-2 md:py-2.5 rounded-full bg-white/10 text-white/90 border border-white/15 hover:bg-white/20 hover:border-white/25 transition-all duration-300"
+                                    className="inline-flex items-center text-[10px] md:text-xs font-medium px-3 md:px-4 py-2 md:py-2.5 rounded-full bg-white/10 text-white/90 border border-white/15 hover:bg-white/20 hover:border-white/25 hover:text-white hover:px-5 hover:py-3 md:hover:px-7 md:hover:py-4 hover:text-xs md:hover:text-base hover:shadow-xl hover:shadow-black/25 transition-all duration-300"
                                     initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 * i, duration: 0.4 }}

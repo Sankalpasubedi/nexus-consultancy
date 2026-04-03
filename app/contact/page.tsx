@@ -33,7 +33,7 @@ function ContactJsonLd() {
       "@type": "EducationalOrganization",
       name: "Nexsus Educational Consultancy",
       url: "https://nexsuseducation.com",
-      telephone: "+977-1-4444444",
+      telephone: "+977-1-4519495",
       email: "info@nexsuseducation.com",
       address: {
         "@type": "PostalAddress",
@@ -44,7 +44,7 @@ function ContactJsonLd() {
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer service",
-        telephone: "+977-1-4444444",
+        telephone: "+977-1-4519495",
         availableLanguage: ["English", "Nepali"],
       },
     },

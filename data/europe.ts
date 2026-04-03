@@ -21,11 +21,10 @@ const europeData: CountryDataType = {
     description: "Europe covers a wide range of opportunities, from tuition-free education in Germany to globally recognized art schools in Italy and cutting-edge tech programs across the Nordics.",
   },
   universities: [
-    { id: "1", name: "ETH Zurich", location: { city: "Zurich", state: "Zurich", country: "Switzerland" }, ranking: { position: 7, type: "Global" }, scholarship: { percentage: 35, accreditedBy: "Swiss Confederation", description: "Excellence Scholarships" } },
-    { id: "2", name: "Sorbonne University", location: { city: "Paris", state: "Île-de-France", country: "France" }, ranking: { position: 59, type: "Global" }, scholarship: { percentage: 30, accreditedBy: "HCERES", description: "Sorbonne Excellence Scholarships" } },
-    { id: "3", name: "Technical University of Munich", location: { city: "Munich", state: "Bavaria", country: "Germany" }, ranking: { position: 37, type: "Global" }, scholarship: { percentage: 40, accreditedBy: "German Accreditation", description: "TUM Scholarships" } },
-    { id: "4", name: "Delft University of Technology", location: { city: "Delft", state: "South Holland", country: "Netherlands" }, ranking: { position: 47, type: "Global" }, scholarship: { percentage: 35, accreditedBy: "NVAO", description: "Justus & Louise van Effen Scholarship" } },
-    { id: "5", name: "KTH Royal Institute of Technology", location: { city: "Stockholm", state: "Stockholm", country: "Sweden" }, ranking: { position: 73, type: "Global" }, scholarship: { percentage: 30, accreditedBy: "UKÄ", description: "KTH Scholarship" } },
+    { id: "1", name: "Business and Hotel Management School", location: { city: "Lucerne", state: "Lucerne", country: "Switzerland" }, ranking: { position: 720, type: "Regional" }, scholarship: { percentage: 25, accreditedBy: "EduQua", description: "International student tuition grant" } },
+    { id: "2", name: "Griffith College", location: { city: "Dublin", state: "Leinster", country: "Ireland" }, ranking: { position: 780, type: "Regional" }, scholarship: { percentage: 20, accreditedBy: "QQI", description: "International merit scholarship" } },
+    { id: "3", name: "UBIS Global", location: { city: "Geneva", state: "Geneva", country: "Switzerland" }, ranking: { position: 840, type: "Regional" }, scholarship: { percentage: 20, accreditedBy: "EduQua", description: "Global student scholarship" } },
+    { id: "4", name: "Universiteit Van Amsterdam", location: { city: "Amsterdam", state: "North Holland", country: "Netherlands" }, ranking: { position: 53, type: "Global" }, scholarship: { percentage: 30, accreditedBy: "NVAO", description: "Amsterdam merit scholarship" } },
   ],
   whyData: [
     "Tuition-free or low-cost education in Germany, Norway, Finland",

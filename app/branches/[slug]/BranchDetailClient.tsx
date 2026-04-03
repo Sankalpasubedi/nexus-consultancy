@@ -169,6 +169,13 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
   }
 
   const otherBranches = getOtherBranches(branchId);
+  const whatsappContacts =
+    branch.contactActions?.chatWithUs?.length
+      ? branch.contactActions.chatWithUs
+      : [
+          { number: branch.whatsapp },
+          ...(branch.phone2 ? [{ number: branch.phone2 }] : []),
+        ];
 
   return (
     <main className="min-h-screen bg-white pt-32 pb-20">
@@ -238,34 +245,26 @@ export default function BranchDetailClient({ slug }: BranchDetailClientProps) {
                     </div>
                   </div>
                   
-                  <div className="flex items-center gap-6 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <Icon name="Phone" size={16} className="text-brand-blue" />
-                      <a href={`tel:${branch.phone.replace(/\s/g, '')}`} className="text-slate-600 hover:text-brand-blue">
-                        {branch.phone}
-                      </a>
-                    </div>
-                    {branch.whatsapp && (
-                      <a 
-                        href={`https://wa.me/${branch.whatsapp.replace(/[^0-9]/g, '')}`}
+                  <div className="flex items-center gap-2">
+                    <Icon name="Phone" size={16} className="text-brand-blue" />
+                    <a href={`tel:${branch.phone.replace(/\s/g, '')}`} className="text-slate-600 hover:text-brand-blue">
+                      {branch.phone}
+                    </a>
+                  </div>
+
+                  {whatsappContacts.map((contact, index) => (
+                    <div key={`${contact.number}-${index}`} className="flex items-center gap-2">
+                      <Icon name="MessageCircle" size={16} className="text-green-600" />
+                      <a
+                        href={`https://wa.me/${contact.number.replace(/[^0-9]/g, '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-green-600 hover:text-green-700"
+                        className="text-slate-600 hover:text-green-700"
                       >
-                        <Icon name="MessageCircle" size={16} />
-                        WhatsApp
-                      </a>
-                    )}
-                  </div>
-                  
-                  {branch.phone2 && (
-                    <div className="flex items-center gap-2">
-                      <Icon name="Phone" size={16} className="text-brand-blue" />
-                      <a href={`tel:${branch.phone2.replace(/\s/g, '')}`} className="text-slate-600 hover:text-brand-blue">
-                        {branch.phone2}
+                        {contact.number}
                       </a>
                     </div>
-                  )}
+                  ))}
                   
                   <div className="flex items-center gap-2">
                     <Icon name="Mail" size={16} className="text-brand-blue" />
